@@ -4,8 +4,8 @@
 parameters:
     database_host:     ***REMOVED***
     database_port:     ~
-    database_name:     linkingcms
-    database_user:     linkingcms
+    database_name:     ***REMOVED***
+    database_user:     ***REMOVED***
     database_password: amaterasu800
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
