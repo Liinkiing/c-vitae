@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Omar Jbara | {{ title }}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{ asset('style/font-awesome.css') }}">
+        <link rel="stylesheet" href="{{ asset('style/app.css') }}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+        <nav class="nav fixed">
+            <div class="container">
+                <div class="brand">
+                    <a href="{{ path('homepage') }}">Omar Jbara</a>
+                </div>
+                <div class="nav-links">
+                    {{ render(controller('AppBundle:Default:dislayMenu'))}}
+                </div>
+            </div>
+        </nav>
+
+
+        {% block body %}
+
+        {% endblock %}
+        {% block customcss %}{% endblock %}
+        <script
+                src="https://code.jquery.com/jquery-2.2.2.min.js"
+                integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+                crossorigin="anonymous"></script>
+        {% block javascripts %}
+
+        {% endblock %}
+
+        <footer class="footer">
+            <div class="container">
+                &copy; {{ 'now'|date('Y') }} - Jbara Omar - Tous droits réservés
+            </div>
+        </footer>
+    </body>
+</html>
