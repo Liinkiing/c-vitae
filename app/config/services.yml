@@ -1,0 +1,23 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+    app.twig.extension:
+        class: AppBundle\Twig\AppExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+    twig.extension.pcr:
+        class: Jasny\Twig\PcreExtension
+        tags:
+            - { name: twig.extension }
+    twig.extension.date:
+        class: Jasny\Twig\DateExtension
+        tags:
+            - { name: twig.extension }
+    twig.extensions.text:
+        class: Jasny\Twig\TextExtension
+        tags:
+            - { name: twig.extension }
