@@ -2,10 +2,10 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_host:     db4free.net
+    database_host:     fdb13.biz.nf
     database_port:     ~
-    database_name:     linkingcms
-    database_user:     linkingcms
+    database_name:     1797364_site
+    database_user:     1797364_site
     database_password: ***REMOVED***
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
