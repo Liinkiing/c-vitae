@@ -1,8 +1,8 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "linking/le-plumeau-magique",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "Une applicationt réalisé pour notre projet tutoré de première année en MMI",
     "autoload": {
         "psr-4": { "": "src/" },
         "files": [ "app/AppKernel.php" ]
