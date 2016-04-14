@@ -21,14 +21,39 @@
                     {% endautoescape %}
                     <h3>Informations basiques</h3>
                     <p>Nom d'utilisateur : {{ app.user.username }}</p>
-                    <p>E-mail : {{ app.user.email }}</p>
+                    <p>E-mail : {{ app.user.professionalMail }}</p>
+                    <hr>
+                    <h3>Modifiez votre mot de passe</h3>
+                    <form action="" method="post">
+                        <div class="group">
+                            <input name="userCurrentPassword" type="password" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Mot de passe actuel<label>
+                        </div>
+                        <div class="group">
+                            <input name="userPasswordFirst" type="password" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Nouveau mot de passe<label>
+                        </div>
+                        <div class="group">
+                            <input name="userPasswordSecond" type="password" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Répéter le mot de passe<label>
+                        </div>
+                        <div class="buttons">
+                            <button class="btn btn-info btn-medium" type="submit">Valider</button>
+                        </div>
+                    </form>
                     <h3>Rôles utilisateur</h3>
                     <table>
                         <thead>
-                            <tr>
-                                <th>Rôle</th>
-                                <th>Description</th>
-                            </tr>
+                        <tr>
+                            <th>Rôle</th>
+                            <th>Description</th>
+                        </tr>
                         </thead>
                         <tbody>
                         {% for role in app.user.rolesObject %}

@@ -3,13 +3,13 @@
 security:
     always_authenticate_before_granting: true
     encoders:
-        AppBundle\Entity\User:
+        AppBundle\Entity\Student:
             algorithm: bcrypt
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         dbProvider:
             entity:
-                class: AppBundle\Entity\User
+                class: AppBundle\Entity\Student
                 property: username
 
     firewalls:

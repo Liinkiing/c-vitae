@@ -125,14 +125,14 @@ class BlogController extends Controller
     public function addPostAction(Request $request){
         $parsedown = new \Parsedown();
         if($request->getMethod() == 'POST'){
-            $user = $this->get('security.token_storage')->getToken()->getUser();
+            $student = $this->get('security.token_storage')->getToken()->getUser();
             $post = new Post();
             $post->setTitle($request->get('postTitle'));
             $post->setSubtitle($request->get('postSubtitle'));
             $post->setContent($parsedown->text($request->get('postContent')));
             $date = new \DateTime('now');
             $post->setCreatedAt($date);
-            $post->setAuthor($user);
+            $post->setAuthor($student);
             $post->setCategory($this->getDoctrine()->getRepository(Category::class)->find($request->get('postCategory')));
             $post->setEditedAt($date);
             $post->setSlug(self::slugify($post->getTitle()));

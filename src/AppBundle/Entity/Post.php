@@ -45,7 +45,7 @@ class Post
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Student", inversedBy="posts")
      */
     private $author;
 
@@ -270,29 +270,7 @@ class Post
         return $this->category;
     }
 
-    /**
-     * Set author
-     *
-     * @param \AppBundle\Entity\User $author
-     *
-     * @return Post
-     */
-    public function setAuthor(\AppBundle\Entity\User $author = null)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return \AppBundle\Entity\User
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
+  
 
     /**
      * Set slug
@@ -357,5 +335,29 @@ class Post
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \AppBundle\Entity\Student $author
+     *
+     * @return Post
+     */
+    public function setAuthor(\AppBundle\Entity\Student $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \AppBundle\Entity\Student
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }
