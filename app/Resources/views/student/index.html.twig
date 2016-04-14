@@ -1,0 +1,51 @@
+{% embed 'base.html.twig' with {'title': 'Listes des élèves', 'isFullscreen': '1', 'subtitle': "Bande de fils de putes d'élèves", "randomHeaderColors": '1', 'randomHeaderColors': '1'} %}
+
+
+    {% block body %}
+
+        <div class="container {% if isFullscreen %} fullscreen {% endif %}">
+
+            <div class="generic-card {% if isFullscreen %} fullscreen {% endif %}">
+                <header>
+                    <h2>{{ title }}</h2>
+                    <p class="subtitle">{{ subtitle }}</p>
+                </header>
+                <div class="content {% if isFullscreen %} fullscreen {% endif %}">
+                    {% autoescape false %}
+                        {% for message_danger in app.session.flashBag.get('danger') %}
+                            <div class="alert alert-danger">{{ message_danger }}</div>
+                        {% endfor %}
+                        {% for message_success in app.session.flashBag.get('success') %}
+                            <div class="alert alert-success">{{ message_success }}</div>
+                        {% endfor %}
+                    {% endautoescape %}
+
+                    {% for student in students %}
+                        <p>
+                            {{ student.lastName }} {{ student.firstName }} {% if student.firstName == "Garnet" or  student.lastName == "RICHARD" or
+                            student.firstName == "Omar" or student.firstName == "Baptiste" %} <span style="color: red;">(lui c un bg)</span>  {% endif %}
+                        </p>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+
+
+    {% endblock %}
+
+
+    {% block customcss %}
+
+        {% if randomHeaderColors %}
+            <style>
+                .generic-card header {
+                    background: url("{{ asset('img/overlay.png') }}"), url("{{ asset('img/svg/header-bg.svg') }}"), linear-gradient(45deg, {{ generateColor() }} 20%, {{ generateColor() }} 80%) center, center, center;
+                }
+
+            </style>
+        {% endif %}
+
+    {% endblock %}
+
+{% endembed %}
