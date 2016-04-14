@@ -386,9 +386,11 @@ th {
 
 footer.footer {
   height: 200px;
-  background-color: rgba(43, 48, 54, 0.8);
+  background-color: #2b3036;
   display: flex;
   align-content: center; }
+  footer.footer.footer-index {
+    background-color: rgba(43, 48, 54, 0.8); }
   footer.footer .container {
     display: flex;
     align-content: center;
