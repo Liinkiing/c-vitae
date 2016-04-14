@@ -22,28 +22,31 @@
                     <h3>Informations basiques</h3>
                     <p>Nom d'utilisateur : {{ user.username }}</p>
                     <p>E-mail : {{ user.professionalMail }}</p>
-                    <h3>Rôles utilisateur</h3>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Rôle</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for role in user.rolesObject %}
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MOD') %}
+                        <hr>
+                        <h3>Rôles utilisateur</h3>
+                        <table>
+                            <thead>
                             <tr>
-                                <td>
-                                    {{ role.name }}
-                                </td>
-                                <td class="third">
-                                    <span class="role-description">{{ role.description }}</span>
-                                </td>
+                                <th>Rôle</th>
+                                <th>Description</th>
                             </tr>
-                        {% endfor %}
-                        </tbody>
+                            </thead>
+                            <tbody>
+                            {% for role in user.rolesObject %}
+                                <tr>
+                                    <td>
+                                        {{ role.name }}
+                                    </td>
+                                    <td class="third">
+                                        <span class="role-description">{{ role.description }}</span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
 
-                    </table>
+                        </table>
+                    {% endif %}
                 </div>
 
 
