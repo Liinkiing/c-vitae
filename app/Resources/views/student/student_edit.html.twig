@@ -18,7 +18,7 @@
                             <div class="alert alert-success">{{ message_success }}</div>
                         {% endfor %}
                     {% endautoescape %}
-                    <h3>Rôles de l'utilisateur</h3>
+                    <h3>Permissions de l'élève</h3>
                     <form action="{{ path('edit_profile', {"username" : student.username}) }}" method="post">
 
                         <table>
