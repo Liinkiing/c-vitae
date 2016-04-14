@@ -231,7 +231,7 @@ p.subtitle {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: url('../img/banner.jpg') center no-repeat;
+    background: url('http://www.solodepot.fr/image/cache/data///plumeau_jaune2-600x600.jpg') center no-repeat;
     background-size: cover;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
 
@@ -278,6 +278,7 @@ p.subtitle {
         background-color: $dark-color;
         display: flex;
         & .feature {
+            width: 33.3333%;
             border-right: 1px lighten($dark-color, 10%) solid;
             padding: 40px;
             & p {
@@ -379,14 +380,6 @@ a {
 
 }
 
-.project-informations {
-    h3 {
-        margin-top: 56px;
-        &:first-child {
-            margin-top: 0;
-        }
-    }
-}
 
 .nav-links {
     display: flex;
@@ -702,9 +695,8 @@ a.portfolio-link:hover {
     }
 }
 
-/* $activeColor: #c0392b; //red */
-/* $background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/13460/dark_wall.png'); */
-/* .slideOne */
+//============= LE STYLE DES CHECKBOXS ONT ÉTÉ RÉCUPÉRÉS A PARTIR DE CE SITE : http://codepen.io/bbodine1/pen/novBm ================
+
 .slideOne {
     width: 50px;
     height: 10px;
@@ -740,8 +732,6 @@ a.portfolio-link:hover {
     left: 37px;
 }
 
-/* end .slideOne */
-/* .slideTwo */
 .slideTwo {
     width: 80px;
     height: 30px;
@@ -804,11 +794,8 @@ a.portfolio-link:hover {
 
 .slideTwo input[type=checkbox]:checked + label:after {
     background: #27ae60;
-    /*activeColor*/
 }
 
-/* end .slideTwo */
-/* .slideThree */
 .slideThree {
     width: 80px;
     height: 26px;
@@ -866,8 +853,6 @@ a.portfolio-link:hover {
     left: 43px;
 }
 
-/* end .slideThree */
-/* .roundedOne */
 .roundedOne {
     width: 28px;
     height: 28px;
@@ -920,8 +905,6 @@ a.portfolio-link:hover {
     opacity: 1;
 }
 
-/* end .roundedOne */
-/* .roundedTwo */
 .roundedTwo {
     width: 28px;
     height: 28px;
@@ -975,8 +958,6 @@ a.portfolio-link:hover {
     opacity: 1;
 }
 
-/* end .roundedTwo */
-/* .squaredOne */
 .squaredOne {
     width: 28px;
     height: 28px;
@@ -1026,8 +1007,6 @@ a.portfolio-link:hover {
     opacity: 1;
 }
 
-/* end .squaredOne */
-/* .squaredTwo */
 .squaredTwo {
     width: 28px;
     height: 28px;
@@ -1079,8 +1058,6 @@ a.portfolio-link:hover {
     opacity: 1;
 }
 
-/* end .squaredTwo */
-/* .squaredThree */
 .squaredThree {
     width: 20px;
     position: relative;
@@ -1128,8 +1105,6 @@ a.portfolio-link:hover {
     opacity: 1;
 }
 
-/* end .squaredThree */
-/* .squaredFour */
 .squaredFour {
     width: 20px;
     position: relative;
@@ -1210,7 +1185,6 @@ form {
         outline: none;
     }
 
-    /* LABEL ======================================= */
 
     & label {
         &.no-material {
@@ -1233,14 +1207,12 @@ form {
 
     }
 
-    /* active state */
     & input:focus ~ label, input[type="text"]:valid ~ label, input[type="email"]:valid ~ label, input[type="password"]:valid ~ label, textarea:focus ~ label, textarea:valid ~ label {
         top: -40px;
         font-size: 14px;
         color: #579d69;
     }
 
-    /* BOTTOM BARS ================================= */
     & .bar {
         position: relative;
         display: block;
@@ -1267,12 +1239,10 @@ form {
         right: 50%;
     }
 
-    /* active state */
     & input:focus ~ .bar:before, input:focus ~ .bar:after, textarea:focus ~ .bar:before, textarea:focus ~ .bar:after {
         width: 50%;
     }
 
-    /* HIGHLIGHTER ================================== */
     & .highlight {
         position: absolute;
         height: 60%;
@@ -1284,16 +1254,7 @@ form {
     }
 }
 
-/* form starting stylings ------------------------------- */
 
-/* active state */
-//input:focus ~ .highlight {
-//    -webkit-animation: inputHighlighter 0.3s ease;
-//    -moz-animation: inputHighlighter 0.3s ease;
-//    animation: inputHighlighter 0.3s ease;
-//}
-
-/* ANIMATIONS ================ */
 @-webkit-keyframes inputHighlighter {
     from {
         background: #579d69;
@@ -1328,43 +1289,3 @@ form {
     float: right;
 }
 
-h2.project-name {
-    background-color: rgba(0, 0, 0, 0.7);
-    display: inline-block;
-    padding: 40px;
-    &::after {
-        content: none;
-    }
-}
-
-.item-platforms {
-    position: absolute;
-    z-index: 3;
-    padding: 12px;
-    background: rgba(0, 0, 0, 0.6);
-    bottom: 15px;
-    right: 15px;
-}
-
-ul.platforms, ul.categories, ul.languages {
-    list-style: none;
-    padding: 0;
-    & li {
-        margin-bottom: 10px;
-    }
-}
-
-.project-content {
-    display: inline-block;
-    width: 66%;
-    vertical-align: top;
-}
-
-.project-informations {
-    display: inline-block;
-    border-left: 2px solid #434b55;
-    padding-left: 20px;
-    margin-left: 60px;
-    width: 300px;
-    text-align: left;
-}
