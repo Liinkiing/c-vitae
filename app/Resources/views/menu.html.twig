@@ -4,7 +4,6 @@
             <li><a href="{{ path('page', {'slug' : page.slug}) }}">{{ page.name }}</a></li>
         {% endfor %}
         <li><a href="{{ path('blog_index') }}">Blog</a></li>
-        <li><a href="{{ path('portfolio_index') }}">Portfolio</a></li>
         {%  if not app.user %}
             <li><a href="{{ path('login') }}">Se connecter</a></li>
             <li><a href="{{ path('register') }}">S'inscrire</a></li>
