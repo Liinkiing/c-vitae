@@ -22,8 +22,12 @@
 
                     {% for student in students %}
                         <p>
-                            {{ student.lastName }} {{ student.firstName }} {% if student.firstName == "Garnet" or  student.lastName == "RICHARD" or
-                            student.firstName == "Omar" or student.firstName == "Baptiste" %} <span style="color: red;">(lui c un bg)</span>  {% endif %}
+                            {% if app.user.username == student.username %}
+                                <span style="color: green;"><a href="{{ path('my_profile') }}">{{ student.firstName }} {{ student.lastName }} (Vous)</a></span>
+                            {% else %}
+                                <a href="{{ path('profile', {"username": student.username}) }}"> {{ student.lastName }} {{ student.firstName }} ({{ student.username }}){% if student.firstName == "Garnet" or  student.lastName == "RICHARD" or
+                                    student.firstName == "Omar" or student.firstName == "Baptiste" %} <span style="color: red;">(lui c un bg)</span>  {% endif %}</a>
+                            {% endif %}
                         </p>
                     {% endfor %}
                 </div>
