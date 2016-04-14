@@ -109,11 +109,11 @@ class Comment
     /**
      * Set author
      *
-     * @param \AppBundle\Entity\User $author
+     * @param \AppBundle\Entity\Student $author
      *
      * @return Comment
      */
-    public function setAuthor(\AppBundle\Entity\User $author = null)
+    public function setAuthor(\AppBundle\Entity\Student $author = null)
     {
         $this->author = $author;
 
@@ -123,7 +123,7 @@ class Comment
     /**
      * Get author
      *
-     * @return \AppBundle\Entity\User
+     * @return \AppBundle\Entity\Student
      */
     public function getAuthor()
     {
