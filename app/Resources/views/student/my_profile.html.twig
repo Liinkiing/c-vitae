@@ -19,10 +19,15 @@
                             <div class="alert alert-success">{{ message_success }}</div>
                         {% endfor %}
                     {% endautoescape %}
-                    <h3>Informations basiques</h3>
-                    <p>Nom d'utilisateur : {{ app.user.username }}</p>
-                    <p>E-mail : {{ app.user.professionalMail }}</p>
+                    {% embed 'templates/student/profile.html.twig' %} {% endembed %}
                     <hr>
+                    <h3>Modifiez votre photo</h3>
+
+                    <form action="{{ path('modify_student_image') }}" method="post" enctype="multipart/form-data">
+                        Choisissez une image à transférer
+                        <input accept="image/*" type="file" name="profilePictureFile" id="profilePictureFile">
+                        <button class="btn btn-info btn-medium" type="submit" name="submit">Valider</button>
+                    </form>
                     <h3>Modifiez votre mot de passe</h3>
                     <form action="" method="post">
                         <div class="group">
@@ -58,7 +63,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for role in app.user.rolesObject %}
+                        {% for role in user.rolesObject %}
                             <tr>
                                 <td>
                                     {{ role.name }}
