@@ -3,18 +3,24 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
+use Vich\UploaderBundle\Mapping\PropertyMapping;
+use Vich\UploaderBundle\Naming\NamerInterface;
 
 /**
  * Student
  *
  * @ORM\Table(name="student")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\StudentRepository")
+ * @Uploadable()
  */
-class Student implements UserInterface, \Serializable
+class Student implements UserInterface, \Serializable, NamerInterface
 {
 
 
@@ -38,6 +44,22 @@ class Student implements UserInterface, \Serializable
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(name="profile_picture", type="text", nullable=true)
+     *
+     */
+    private $profilePicture;
+
+    /**
+     * @UploadableField(mapping="student_image", fileNameProperty="profilePicture")
+     */
+    private $profilePictureFile;
+
+    /**
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * @Assert\NotBlank()
@@ -678,9 +700,18 @@ class Student implements UserInterface, \Serializable
     }
 
 
-    public function getImageUrl() {
+    public function getFacebookImageUrl() {
         if(!$this->fbid) return null;
-        return "https://graph.facebook.com/v2.5/" . explode('.', sprintf('%f', $this->fbid))[0] . '/picture?type=large&width=400&height=400';
+        return "https://graph.facebook.com/v2.6/" . explode('.', sprintf('%f', $this->fbid))[0] . '/picture?type=large&width=400&height=400';
+    }
+
+    // Impossibilité d'accéder à la photo de couverture Facebook d'un utilisateur sans ayant obtenu au préalable un token d'accès. Je laisse quand même la fonction présente, au cas où
+    public function getFacebookCoverUrl() {
+        if(!$this->fbid) return null;
+        $json = file_get_contents("https://graph.facebook.com/v2.6/" . explode('.', sprintf('%f', $this->fbid))[0] . '?fields=cover');
+        $object = json_decode($json);
+        return $object->cover->source;
+
     }
 
     /**
@@ -958,5 +989,113 @@ class Student implements UserInterface, \Serializable
     public function getPosts()
     {
         return $this->posts;
+    }
+
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return Student
+     */
+    public function setImageFile(File $image = null)
+    {
+        $this->profilePictureFile = $image;
+
+//        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+//        }
+
+        return $this;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->profilePictureFile;
+    }
+
+    /**
+     * Set profilePicture
+     *
+     * @param string $profilePicture
+     *
+     * @return Student
+     */
+    public function setProfilePicture($profilePicture)
+    {
+        $this->profilePicture = $profilePicture;
+
+        return $this;
+    }
+
+    /**
+     * Get profilePicture
+     *
+     * @return string
+     */
+    public function getProfilePicture()
+    {
+        return $this->profilePicture;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Student
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfilePictureFile()
+    {
+        return $this->profilePictureFile;
+    }
+
+    /**
+     * @param mixed $profilePictureFile
+     */
+    public function setProfilePictureFile($profilePictureFile)
+    {
+        $this->profilePictureFile = $profilePictureFile;
+    }
+
+    /**
+     * Creates a name for the file being uploaded.
+     *
+     * @param object $object The object the upload is attached to.
+     * @param PropertyMapping $mapping The mapping to use to manipulate the given object.
+     *
+     * @return string The file name.
+     */
+    public function name($object, PropertyMapping $mapping)
+    {
+        return strtolower(trim($this->getFullName())) . "." . $this->getImageFile()->guessExtension();
     }
 }
