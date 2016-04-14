@@ -512,7 +512,7 @@ p.subtitle {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url("../img/banner.jpg") center no-repeat;
+  background: url("http://www.solodepot.fr/image/cache/data///plumeau_jaune2-600x600.jpg") center no-repeat;
   background-size: cover;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.26); }
   .greetings footer, .greetings header {
@@ -561,6 +561,7 @@ p.subtitle {
     background-color: #32383f;
     display: flex; }
     .features .content .feature {
+      width: 33.3333%;
       border-right: 1px #49515b solid;
       padding: 40px; }
       .features .content .feature p {
@@ -625,11 +626,6 @@ a {
     display: inline-block;
     height: 100%;
     line-height: 70px; }
-
-.project-informations h3 {
-  margin-top: 56px; }
-  .project-informations h3:first-child {
-    margin-top: 0; }
 
 .nav-links {
   display: flex;
@@ -837,9 +833,6 @@ a.portfolio-link:hover {
     position: relative;
     z-index: 3; }
 
-/* $activeColor: #c0392b; //red */
-/* $background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/13460/dark_wall.png'); */
-/* .slideOne */
 .slideOne {
   width: 50px;
   height: 10px;
@@ -871,8 +864,6 @@ a.portfolio-link:hover {
 .slideOne input[type=checkbox]:checked + label {
   left: 37px; }
 
-/* end .slideOne */
-/* .slideTwo */
 .slideTwo {
   width: 80px;
   height: 30px;
@@ -928,11 +919,8 @@ a.portfolio-link:hover {
   left: 54px; }
 
 .slideTwo input[type=checkbox]:checked + label:after {
-  background: #27ae60;
-  /*activeColor*/ }
+  background: #27ae60; }
 
-/* end .slideTwo */
-/* .slideThree */
 .slideThree {
   width: 80px;
   height: 26px;
@@ -984,8 +972,6 @@ a.portfolio-link:hover {
 .slideThree input[type=checkbox]:checked + label {
   left: 43px; }
 
-/* end .slideThree */
-/* .roundedOne */
 .roundedOne {
   width: 28px;
   height: 28px;
@@ -1032,8 +1018,6 @@ a.portfolio-link:hover {
 .roundedOne input[type=checkbox]:checked + label:after {
   opacity: 1; }
 
-/* end .roundedOne */
-/* .roundedTwo */
 .roundedTwo {
   width: 28px;
   height: 28px;
@@ -1081,8 +1065,6 @@ a.portfolio-link:hover {
 .roundedTwo input[type=checkbox]:checked + label:after {
   opacity: 1; }
 
-/* end .roundedTwo */
-/* .squaredOne */
 .squaredOne {
   width: 28px;
   height: 28px;
@@ -1126,8 +1108,6 @@ a.portfolio-link:hover {
 .squaredOne input[type=checkbox]:checked + label:after {
   opacity: 1; }
 
-/* end .squaredOne */
-/* .squaredTwo */
 .squaredTwo {
   width: 28px;
   height: 28px;
@@ -1173,8 +1153,6 @@ a.portfolio-link:hover {
 .squaredTwo input[type=checkbox]:checked + label:after {
   opacity: 1; }
 
-/* end .squaredTwo */
-/* .squaredThree */
 .squaredThree {
   width: 20px;
   position: relative;
@@ -1216,8 +1194,6 @@ a.portfolio-link:hover {
 .squaredThree input[type=checkbox]:checked + label:after {
   opacity: 1; }
 
-/* end .squaredThree */
-/* .squaredFour */
 .squaredFour {
   width: 20px;
   position: relative;
@@ -1260,84 +1236,75 @@ a.portfolio-link:hover {
 .squaredFour input[type=checkbox]:checked + label:after {
   opacity: 1; }
 
-form {
-  /* LABEL ======================================= */
-  /* active state */
-  /* BOTTOM BARS ================================= */
-  /* active state */
-  /* HIGHLIGHTER ================================== */ }
-  form .group {
-    display: inline-block;
-    width: 100%;
-    position: relative;
-    margin-bottom: 65px; }
-  form.form-comment {
-    margin: 20px 0; }
-  form input, form select, form textarea {
-    color: white;
-    font-size: 18px;
-    padding: 10px 10px 10px 5px;
-    display: block;
-    width: 100%;
-    border: none;
-    background-color: transparent;
-    border-bottom: 1px solid #434b55; }
-  form textarea {
-    max-width: 100%;
-    min-width: 100%; }
-  form input:focus, form textarea:focus {
-    outline: none; }
-  form label.no-material {
-    color: #579d69;
-    font-size: 14px;
-    margin-bottom: 20px; }
-  form label.material {
-    color: #999;
-    font-size: 18px;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 5px;
-    top: 10px;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all; }
-  form input:focus ~ label, form input[type="text"]:valid ~ label, form input[type="email"]:valid ~ label, form input[type="password"]:valid ~ label, form textarea:focus ~ label, form textarea:valid ~ label {
-    top: -40px;
-    font-size: 14px;
-    color: #579d69; }
-  form .bar {
-    position: relative;
-    display: block;
-    width: 100%; }
-  form .bar:before, form .bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: #579d69;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all; }
-  form .bar:before {
-    left: 50%; }
-  form .bar:after {
-    right: 50%; }
-  form input:focus ~ .bar:before, form input:focus ~ .bar:after, form textarea:focus ~ .bar:before, form textarea:focus ~ .bar:after {
-    width: 50%; }
-  form .highlight {
-    position: absolute;
-    height: 60%;
-    width: 100%;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5; }
+form .group {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  margin-bottom: 65px; }
+form.form-comment {
+  margin: 20px 0; }
+form input, form select, form textarea {
+  color: white;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #434b55; }
+form textarea {
+  max-width: 100%;
+  min-width: 100%; }
+form input:focus, form textarea:focus {
+  outline: none; }
+form label.no-material {
+  color: #579d69;
+  font-size: 14px;
+  margin-bottom: 20px; }
+form label.material {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all; }
+form input:focus ~ label, form input[type="text"]:valid ~ label, form input[type="email"]:valid ~ label, form input[type="password"]:valid ~ label, form textarea:focus ~ label, form textarea:valid ~ label {
+  top: -40px;
+  font-size: 14px;
+  color: #579d69; }
+form .bar {
+  position: relative;
+  display: block;
+  width: 100%; }
+form .bar:before, form .bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #579d69;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all; }
+form .bar:before {
+  left: 50%; }
+form .bar:after {
+  right: 50%; }
+form input:focus ~ .bar:before, form input:focus ~ .bar:after, form textarea:focus ~ .bar:before, form textarea:focus ~ .bar:after {
+  width: 50%; }
+form .highlight {
+  position: absolute;
+  height: 60%;
+  width: 100%;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5; }
 
-/* form starting stylings ------------------------------- */
-/* active state */
-/* ANIMATIONS ================ */
 @-webkit-keyframes inputHighlighter {
   from {
     background: #579d69; }
@@ -1358,39 +1325,5 @@ form {
     background: transparent; } }
 .buttons {
   float: right; }
-
-h2.project-name {
-  background-color: rgba(0, 0, 0, 0.7);
-  display: inline-block;
-  padding: 40px; }
-  h2.project-name::after {
-    content: none; }
-
-.item-platforms {
-  position: absolute;
-  z-index: 3;
-  padding: 12px;
-  background: rgba(0, 0, 0, 0.6);
-  bottom: 15px;
-  right: 15px; }
-
-ul.platforms, ul.categories, ul.languages {
-  list-style: none;
-  padding: 0; }
-  ul.platforms li, ul.categories li, ul.languages li {
-    margin-bottom: 10px; }
-
-.project-content {
-  display: inline-block;
-  width: 66%;
-  vertical-align: top; }
-
-.project-informations {
-  display: inline-block;
-  border-left: 2px solid #434b55;
-  padding-left: 20px;
-  margin-left: 60px;
-  width: 300px;
-  text-align: left; }
 
 /*# sourceMappingURL=app.css.map */
