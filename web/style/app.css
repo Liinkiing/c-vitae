@@ -1254,6 +1254,8 @@ form input, form select, form textarea {
   border: none;
   background-color: transparent;
   border-bottom: 1px solid #434b55; }
+form input[type="file"] {
+  border-bottom: none; }
 form textarea {
   max-width: 100%;
   min-width: 100%; }
@@ -1327,5 +1329,49 @@ form .highlight {
     background: transparent; } }
 .buttons {
   float: right; }
+
+.profile-picture img {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%; }
+.profile-picture::after {
+  z-index: 3;
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 2px;
+  color: red;
+  top: 100px;
+  left: 50%; }
+
+.row-block {
+  display: block; }
+  .row-block .middle-column {
+    display: inline-block;
+    width: 49%; }
+
+span.bold {
+  font-weight: 500; }
+
+span.no-information {
+  font-weight: 300;
+  font-style: italic; }
+
+.row-flex {
+  display: flex;
+  flex-direction: row; }
+  .row-flex.space-around {
+    justify-content: space-around; }
+  .row-flex.space-between {
+    justify-content: space-between; }
+  .row-flex.center {
+    justify-content: center; }
+  .row-flex div {
+    margin-right: 100px; }
+    .row-flex div:last-child {
+      margin-right: 0; }
 
 /*# sourceMappingURL=app.css.map */

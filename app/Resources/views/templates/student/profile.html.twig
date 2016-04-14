@@ -1,0 +1,29 @@
+<div class="profile-picture">
+    <img class="" src="{% if vich_uploader_asset(user, 'profilePictureFile') is not null %}{{ vich_uploader_asset(user, 'profilePictureFile') }}{% elseif user.fbid is not null %}{{ user.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}" alt="">
+</div>
+<section>
+    <h3>Informations basiques</h3>
+    <div class="row-flex space-around">
+        <div>
+            <p><i class="fa fa-user">&nbsp;&nbsp;</i>Nom d'utilisateur : <span class="bold">{{ user.username }}</span></p>
+            <p><i class="fa fa-envelope-o">&nbsp;&nbsp;</i>E-mail :  <span class="bold">{% if user.professionalMail %}<a href="mailto:{{ user.professionalMail }}">{{ user.professionalMail }}</a></span>{% else %}<span class="no-information">Non renseigné</span>{% endif %}</p>
+        </div>
+        <div>
+            <p><i class="fa fa-globe">&nbsp;&nbsp;</i>Site web : <span class="bold">{% if user.website %}<a href="{{ user.website }}">{{ user.website }}</a></span>{% else %}<span class="no-information">Non renseigné</span>{% endif %}</p>
+            <p><i class="fa fa-mail-reply">&nbsp;&nbsp;</i>Rôle dans le projet : <span class="bold">{{ user.projectRole }}</span></p>
+        </div>
+    </div>
+    <div class="row-flex space-around">
+        <div>
+            <p><i class="fa fa-user">&nbsp;&nbsp;</i>Nom d'utilisateur : <span class="bold">{{ user.username }}</span></p>
+            <p><i class="fa fa-envelope-o">&nbsp;&nbsp;</i>E-mail :  <span class="bold">{% if user.professionalMail %}<a href="mailto:{{ user.professionalMail }}">{{ user.professionalMail }}</a></span>{% else %}<span class="no-information">Non renseigné</span>{% endif %}</p>
+        </div>
+        <div>
+            <p><i class="fa fa-globe">&nbsp;&nbsp;</i>Site web : <span class="bold">{% if user.website %}<a href="{{ user.website }}">{{ user.website }}</a></span>{% else %}<span class="no-information">Non renseigné</span>{% endif %}</p>
+            <p><i class="fa fa-mail-reply">&nbsp;&nbsp;</i>E-mail : <span class="bold">{{ user.professionalMail }}</span></p>
+        </div>
+    </div>
+</section>
+<section>
+
+</section>
