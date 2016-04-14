@@ -21,7 +21,6 @@
                     {% endautoescape %}
                     {% embed 'templates/student/profile.html.twig' %} {% endembed %}
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MOD') %}
-                        <hr>
                         <h3>Rôles utilisateur</h3>
                         <table>
                             <thead>
