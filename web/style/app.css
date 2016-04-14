@@ -1372,10 +1372,11 @@ span.no-information {
     justify-content: center; }
   .row-flex .user-description {
     margin: 30px 0 !important;
-    padding: 40px;
+    padding: 40px !important;
     width: 700px !important;
     background-color: #2b3036;
-    border: 1px solid #434b55; }
+    border: 1px solid #434b55;
+    text-align: center; }
   .row-flex div {
     width: 500px; }
     .row-flex div:first-child {
