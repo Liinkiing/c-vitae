@@ -1,4 +1,4 @@
-{% embed 'base.html.twig' with {'title': 'Éditer l\'utilisateur', 'subtitle': user.username, 'isFullscreen': '1', 'randomHeaderColors': '1'} %}
+{% embed 'base.html.twig' with {'title': 'Éditer l\'élève', 'subtitle': student.fullName , 'isFullscreen': '1', 'randomHeaderColors': '1'} %}
 
 
     {% block body %}
@@ -19,7 +19,7 @@
                         {% endfor %}
                     {% endautoescape %}
                     <h3>Rôles de l'utilisateur</h3>
-                    <form action="{{ path('edit_profile', {"username" : user.username}) }}" method="post">
+                    <form action="{{ path('edit_profile', {"username" : student.username}) }}" method="post">
 
                         <table>
                             <thead>
@@ -34,7 +34,7 @@
                                 <tr>
                                     <td>
                                         <div class="squaredThree">
-                                            <input id="role{{ loop.index }}" name="roles[]" type="checkbox" value="{{ role.id }}" {% if user.granted(role.role) %} checked="checked" {% endif %}">
+                                            <input id="role{{ loop.index }}" name="roles[]" type="checkbox" value="{{ role.id }}" {% if student.granted(role.role) %} checked="checked" {% endif %}">
                                             <label for="role{{ loop.index }}"></label>
                                         </div>
                                     </td>
