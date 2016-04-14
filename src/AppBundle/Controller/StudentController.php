@@ -7,6 +7,8 @@ use AppBundle\Entity\Student;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 class StudentController extends Controller
@@ -29,7 +31,7 @@ class StudentController extends Controller
         if($request->getMethod() == 'GET'){
 
             if($currentStudent != "anon."){
-                return $this->render('student/my_profile.html.twig', ['title' => 'Mon profil', 'subtitle' => '', 'isFullscreen' => true]);
+                return $this->render('student/my_profile.html.twig', ['user' => $this->get('security.token_storage')->getToken()->getUser(), 'title' => 'Mon profil', 'subtitle' => '', 'isFullscreen' => true]);
             }
             else {
                 $this->addFlash('danger', "Vous devez être connecté avant d'accéder à cette page !");
@@ -56,15 +58,41 @@ class StudentController extends Controller
         }
     }
 
-
     /**
      * @Route("/profile/{username}", name="profile")
      */
     public function showProfileAction(Student $student){
         if(!$student){
             throw $this->createNotFoundException("L'utilisateur n'a pas été trouvé");
-        }
+        } elseif ($student->getUsername() == $this->get('security.token_storage')->getToken()->getUsername()) return $this->redirectToRoute('my_profile');
         return $this->render('student/profile.html.twig', ['user' => $student, 'title' => $student->getFirstName() . ' ' . $student->getLastName(), 'subtitle' => 'Son profil', 'isFullscreen' => true]);
     }
+
+
+    /**
+     * @Route("/profile/me/modify-image", name="modify_student_image")
+     * @Method({"POST"})
+     */
+    public function modifyProfileImageAction(Request $request){
+        $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
+        if($currentStudent != "anon."){
+            $file = $request->files->get('profilePictureFile');
+            if($file == null || !$file->isValid() || !mb_ereg_match("image/.*", $file->getClientMimeType())) {
+                $this->addFlash("danger", "Veuillez choisir une image !");
+                return $this->redirectToRoute('my_profile');
+            }
+            $currentStudent->setImageFile($file);
+            $this->getDoctrine()->getManager()->persist($currentStudent);
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "La photo a bien été transféré");
+            return $this->redirectToRoute('my_profile');
+        }
+        else {
+            $this->addFlash('danger', "Vous devez être connecté avant d'accéder à cette page !");
+            return $this->redirectToRoute('login');
+        }
+
+    }
+
 
 }

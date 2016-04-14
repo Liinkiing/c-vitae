@@ -1179,6 +1179,10 @@ form {
         border-bottom: 1px solid #434b55;
     }
 
+    & input[type="file"] {
+        border-bottom: none;
+    }
+
     & textarea {
         max-width: 100%;
         min-width: 100%;
@@ -1292,3 +1296,67 @@ form {
     float: right;
 }
 
+.profile-picture {
+    & img {
+        position: relative;
+        display: block;
+        margin: 0 auto;
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+    }
+
+    &::after {
+        z-index: 3;
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 2px;
+        color: red;
+        top: 100px;
+        left: 50%;
+    }
+}
+
+.row-block {
+    display: block;
+    & .middle-column {
+        display: inline-block;
+        width: 49%;
+    }
+}
+
+span.bold {
+    font-weight: 500;
+}
+
+span.no-information {
+    font-weight: 300;
+    font-style: italic;
+}
+
+.row-flex {
+    display: flex;
+    flex-direction: row;
+
+    &.space-around {
+        justify-content: space-around;
+    }
+
+    &.space-between {
+        justify-content: space-between;
+    }
+
+    &.center {
+        justify-content: center;
+    }
+
+    & div {
+        margin-right: 100px;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+
+}
