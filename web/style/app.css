@@ -1371,7 +1371,7 @@ span.no-information {
   .row-flex.center {
     justify-content: center; }
   .row-flex .user-description {
-    margin: 60px !important;
+    margin: 40px 0 60px 0 !important;
     padding: 40px !important;
     width: 100% !important;
     background-color: #2b3036;
