@@ -20,6 +20,7 @@
                         {% endfor %}
                     {% endautoescape %}
                     {% embed 'templates/student/profile.html.twig' %} {% endembed %}
+
                     <hr>
                     <h3>Modifiez votre photo</h3>
 
@@ -27,6 +28,85 @@
                         Choisissez une image à transférer
                         <input accept="image/*" type="file" name="profilePictureFile" id="profilePictureFile">
                         <button class="btn btn-info btn-medium" type="submit" name="submit">Valider</button>
+                    </form>
+
+                    <h3>Modifiez vos informations</h3>
+                    <form action="{{ path('modify_student_informations') }}" method="post">
+                        <div class="group">
+                            <input name="description" type="text" value="{{ user.description }}">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Votre description</label>
+                        </div>
+                        <div class="group">
+                            <input name="website" type="text" value="{{ user.website }}">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Votre site web</label>
+                        </div>
+                        <div class="group">
+                            <input name="viadeo" type="text" value="{{ user.viadeo }}">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Votre Viadeo</label>
+                        </div>
+                        <div class="group">
+                            <input name="linkedin" type="text" value="{{ user.linkedin }}">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Votre LinkedIn</label>
+                        </div>
+                        <div class="group">
+                            <input name="mail" type="email" value="{{ user.professionalMail }}">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Votre mail</label>
+                        </div>
+                        <div class="group">
+                            <input name="email" type="text" value="{{ user.hobbies|default('')|join(', ') }}">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Vos hobbies (séparé par une virgule)</label>
+                        </div>
+                        <div class="group">
+                            <input name="softwares" type="text" value="{{ user.softwares|default('')|join(', ') }}">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Logiciels que vous maîtrisez (séparé par une virgule)</label>
+                        </div>
+                        <div class="group">
+                            <input name="languages" type="text" value="{{ user.languages|default('')|join(', ') }}">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Langues maîtrisés (séparé par une virgule)</label>
+                        </div>
+                        <div class="group">
+                            <input name="programmingLanguages" type="text" value="{{ user.programmingLanguages|default('')|join(', ') }}">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Langages de programmation maîtrisés (séparé par une virgule)</label>
+                        </div>
+                        <div class="group">
+                            <input name="favMusic" type="text" value="{{ user.favoriteMusic }}">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Musique préférée</label>
+                        </div>
+                        <div class="group">
+                            <input name="favQuote" type="text" value="{{ user.favoriteQuote }}">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Citation préférée</label>
+                        </div>
+                        <div class="group">
+                            <input name="projectRole" type="text" value="{{ user.projectRole }}">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Votre rôle dans le projet tutoré</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-info btn-medium">Enregistrer</button>
+
                     </form>
                     <h3>Modifiez votre mot de passe</h3>
                     <form action="" method="post">

@@ -127,6 +127,8 @@ table {
     }
 
     &.btn-alt {
+        margin-top: 20px;
+        border: white solid 1px;
         background-color: transparent;
 
     }
@@ -707,6 +709,95 @@ a.portfolio-link:hover {
         z-index: 3;
 
     }
+}
+
+
+.buttons {
+    float: right;
+}
+
+.profile-picture {
+    margin-bottom: 10px;
+    & img {
+        position: relative;
+        display: block;
+        margin: 0 auto;
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+    }
+
+}
+
+.row-block {
+    display: block;
+    & .middle-column {
+        display: inline-block;
+        width: 49%;
+    }
+}
+
+span.bold {
+    font-weight: 500;
+}
+
+span.no-information {
+    font-weight: 300;
+    font-style: italic;
+}
+
+.row-flex {
+    display: flex;
+    flex-direction: row;
+
+
+    &.space-around {
+
+        justify-content: space-around;
+    }
+
+    &.space-between {
+        justify-content: space-between;
+    }
+
+    &.center {
+        justify-content: center;
+    }
+
+    & .user-description {
+        margin: 40px 0 60px 0 !important;
+        padding: 40px !important;
+        width: 100% !important;
+        background-color: #2b3036;
+        border: 1px solid #434b55;
+        text-align: center;
+    }
+
+
+}
+
+div.information {
+    width: 500px;
+
+    &:first-child{
+        text-align: right;
+        padding-right: 60px;
+        border-right: 1px solid #434b55;
+    }
+    &:last-child{
+        text-align: left;
+        padding-left: 60px;
+    }
+    &.one-column {
+        border-right: none;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+section.information{
+    margin-bottom: 20px;
+
 }
 
 //============= LE STYLE DES CHECKBOXS ONT ÉTÉ RÉCUPÉRÉS A PARTIR DE CE SITE : http://codepen.io/bbodine1/pen/novBm ================
@@ -1300,82 +1391,5 @@ form {
     to {
         width: 0;
         background: transparent;
-    }
-}
-
-.buttons {
-    float: right;
-}
-
-.profile-picture {
-    margin-bottom: 10px;
-    & img {
-        position: relative;
-        display: block;
-        margin: 0 auto;
-        width: 200px;
-        height: 200px;
-        border-radius: 100%;
-    }
-
-}
-
-.row-block {
-    display: block;
-    & .middle-column {
-        display: inline-block;
-        width: 49%;
-    }
-}
-
-span.bold {
-    font-weight: 500;
-}
-
-span.no-information {
-    font-weight: 300;
-    font-style: italic;
-}
-
-.row-flex {
-    display: flex;
-    flex-direction: row;
-
-
-    &.space-around {
-
-        justify-content: space-around;
-    }
-
-    &.space-between {
-        justify-content: space-between;
-    }
-
-    &.center {
-        justify-content: center;
-    }
-
-    & .user-description {
-        margin: 40px 0 60px 0 !important;
-        padding: 40px !important;
-        width: 100% !important;
-        background-color: #2b3036;
-        border: 1px solid #434b55;
-        text-align: center;
-    }
-
-
-}
-
-div.information {
-    width: 500px;
-    &:first-child{
-        text-align: right;
-        padding-right: 60px;
-        border-right: 1px solid #434b55;
-    }
-    &:last-child{
-        text-align: left;
-        padding-left: 60px;
     }
 }

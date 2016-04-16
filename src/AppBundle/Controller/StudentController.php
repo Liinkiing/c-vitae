@@ -94,5 +94,47 @@ class StudentController extends Controller
 
     }
 
+    /**
+     * @Route("/profile/me/modify-informations", name="modify_student_informations")
+     * @Method({"POST"})
+     */
+    public function modifyInformations(Request $request){
+        $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
+        if($currentStudent != "anon."){
+            $currentStudent->setDescription(self::setNullIfStringEmpty($request->get('description')));
+            $currentStudent->setWebsite(self::setNullIfStringEmpty($request->get('website')));
+            $currentStudent->setLinkedin(self::setNullIfStringEmpty($request->get('linkedin')));
+            $currentStudent->setViadeo(self::setNullIfStringEmpty($request->get('viadeo')));
+            $currentStudent->setProfessionalMail(self::setNullIfStringEmpty($request->get('mail')));
+            if($request->get('hobbies') == '') $currentStudent->setHobbies(null); else $currentStudent->setHobbies(explode(',', self::removeWhitespace($request->get('hobbies'))));
+            if($request->get('softwares') == '') $currentStudent->setSoftwares(null); else $currentStudent->setSoftwares(explode(',', self::removeWhitespace($request->get('softwares'))));
+            if($request->get('languages') == '') $currentStudent->setLanguages(null); else $currentStudent->setLanguages(explode(',', self::removeWhitespace($request->get('languages'))));
+            if($request->get('programmingLanguages') == '') $currentStudent->setProgrammingLanguages(null); else $currentStudent->setProgrammingLanguages(explode(',', self::removeWhitespace($request->get('programmingLanguages'))));
+            $currentStudent->setFavoriteMusic(self::setNullIfStringEmpty($request->get('favMusic')));
+            $currentStudent->setFavoriteQuote(self::setNullIfStringEmpty($request->get('favQuote')));
+            $currentStudent->setProjectRole(self::setNullIfStringEmpty($request->get('projectRole')));
+            $this->getDoctrine()->getManager()->persist($currentStudent);
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "Vos informations ont bien été enregistrés");
+            return $this->redirectToRoute('my_profile');
+        }
+        else {
+            $this->addFlash('danger', "Vous devez être connecté avant d'accéder à cette page !");
+            return $this->redirectToRoute('login');
+        }
+    }
+
+    public static function removeWhitespace($string){
+        return preg_replace('/\s+/', ' ', $string);
+    }
+
+    public static function setNullIfStringEmpty($string){
+        return ($string == '') ? null : $string;
+    }
+
+    public function TestsListsEmpty(){
+
+    }
+
 
 }
