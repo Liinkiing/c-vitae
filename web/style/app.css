@@ -1377,10 +1377,15 @@ span.no-information {
     background-color: #2b3036;
     border: 1px solid #434b55;
     text-align: center; }
-  .row-flex div {
-    width: 500px; }
-    .row-flex div:first-child {
-      margin-left: 250px;
-      padding-right: 120px; }
+
+div.information {
+  width: 500px; }
+  div.information:first-child {
+    text-align: right;
+    padding-right: 60px;
+    border-right: 1px solid #434b55; }
+  div.information:last-child {
+    text-align: left;
+    padding-left: 60px; }
 
 /*# sourceMappingURL=app.css.map */
