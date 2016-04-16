@@ -1364,14 +1364,18 @@ span.no-information {
         text-align: center;
     }
 
-    & div {
-        width: 500px;
-        &:first-child {
-            margin-left: 250px;
-            padding-right: 120px;
-        }
-    }
-
 
 }
 
+div.information {
+    width: 500px;
+    &:first-child{
+        text-align: right;
+        padding-right: 60px;
+        border-right: 1px solid #434b55;
+    }
+    &:last-child{
+        text-align: left;
+        padding-left: 60px;
+    }
+}
