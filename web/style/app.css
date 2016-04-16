@@ -1373,7 +1373,7 @@ span.no-information {
   .row-flex .user-description {
     margin: 30px 0 !important;
     padding: 40px !important;
-    width: 700px !important;
+    width: 100% !important;
     background-color: #2b3036;
     border: 1px solid #434b55;
     text-align: center; }
