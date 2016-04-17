@@ -22,11 +22,17 @@
                     {% embed 'templates/student/profile.html.twig' %} {% endembed %}
 
                     <hr>
-                    <h3>Modifiez votre photo</h3>
+                    <h3>Ajouter des fichiers</h3>
 
                     <form action="{{ path('modify_student_image') }}" method="post" enctype="multipart/form-data">
-                        Choisissez une image à transférer
+                        Choisissez une photo de profil
                         <input accept="image/*" type="file" name="profilePictureFile" id="profilePictureFile">
+                        <button class="btn btn-info btn-medium" type="submit" name="submit">Valider</button>
+                    </form>
+
+                    <form action="{{ path('modify_student_cv') }}" method="post" enctype="multipart/form-data">
+                        Choisissez votre CV (au format PDF)
+                        <input accept="application/pdf" type="file" name="cv" id="cv">
                         <button class="btn btn-info btn-medium" type="submit" name="submit">Valider</button>
                     </form>
 
