@@ -130,7 +130,7 @@ class BlogController extends Controller
             $post->setTitle($request->get('postTitle'));
             $post->setSubtitle($request->get('postSubtitle'));
             $post->setContent($parsedown->text($request->get('postContent')));
-            $date = new \DateTime('now');
+            $date = new \DateTime('now', 'Europe/Paris');
             $post->setCreatedAt($date);
             $post->setAuthor($student);
             $post->setCategory($this->getDoctrine()->getRepository(Category::class)->find($request->get('postCategory')));
