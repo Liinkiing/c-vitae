@@ -7,6 +7,7 @@ use AppBundle\Entity\Student;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -125,11 +126,17 @@ class StudentController extends Controller
     public function modifyInformations(Request $request){
         $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
         if($currentStudent != "anon."){
+            $d = \DateTime::createFromFormat('d/m/Y', $request->get('birthday'));
+            if(($d && $d->format('d/m/Y') === $request->get('birthday')) == false){
+                $this->addFlash('danger', "Veuillez entrer une date correct !");
+                return $this->redirectToRoute('my_profile');
+            }
             $currentStudent->setDescription(self::setNullIfStringEmpty($request->get('description')));
             $currentStudent->setWebsite(self::setNullIfStringEmpty($request->get('website')));
             $currentStudent->setLinkedin(self::setNullIfStringEmpty($request->get('linkedin')));
             $currentStudent->setViadeo(self::setNullIfStringEmpty($request->get('viadeo')));
             $currentStudent->setProfessionalMail(self::setNullIfStringEmpty($request->get('mail')));
+            $currentStudent->setBirthday($d);
             if($request->get('hobbies') == '') $currentStudent->setHobbies(null); else $currentStudent->setHobbies(explode(',', self::removeWhitespace($request->get('hobbies'))));
             if($request->get('softwares') == '') $currentStudent->setSoftwares(null); else $currentStudent->setSoftwares(explode(',', self::removeWhitespace($request->get('softwares'))));
             if($request->get('languages') == '') $currentStudent->setLanguages(null); else $currentStudent->setLanguages(explode(',', self::removeWhitespace($request->get('languages'))));
@@ -148,6 +155,7 @@ class StudentController extends Controller
             return $this->redirectToRoute('login');
         }
     }
+
 
     public static function removeWhitespace($string){
         return preg_replace('/\s+/', ' ', $string);
