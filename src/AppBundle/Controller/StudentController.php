@@ -52,6 +52,7 @@ class StudentController extends Controller
             $currentStudent->setPlainPassword($newPassword);
             $hashedPassword = $this->get('security.password_encoder')->encodePassword($currentStudent, $currentStudent->getPlainPassword());
             $currentStudent->setPassword($hashedPassword);
+            $currentStudent->setUpdatedAt(new \DateTime('now'));
             $this->getDoctrine()->getManager()->persist($currentStudent);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', "Vos informations ont bien été modifiées !");
