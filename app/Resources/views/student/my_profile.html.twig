@@ -38,11 +38,17 @@
 
                     <h3>Modifiez vos informations</h3>
                     <form action="{{ path('modify_student_informations') }}" method="post">
-                        <div class="group">
+                        <div class="group" style="width: 48%">
                             <input name="description" type="text" value="{{ user.description }}">
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label class="material">Votre description</label>
+                        </div>
+                        <div class="group" style="width: 50%;">
+                            <input name="birthday" type="text" value="{{ user.birthday|date('d/m/Y') }}" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Votre date de naissance (Jour/Mois/Année)</label>
                         </div>
                         <div class="group" style="width: 30%">
                             <input name="website" type="text" value="{{ user.website }}">
