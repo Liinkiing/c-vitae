@@ -3,10 +3,8 @@
 </div>
 {% if user.description or user.cv %}<div class="row-flex center">
     <div class="user-description">
-        <p>{{ user.description|default('') }}</p>
-        {% if user.cv %}
-            <a href="{{ vich_uploader_asset(user, 'cvFile') }}" class="btn btn-alt btn-large"><i class="fa fa-download">&nbsp;&nbsp;</i>Télécharger mon CV</a>
-        {% endif %}
+        {% if user.description %}<p>{{ user.description }}</p>{% endif %}
+        {% if user.cv %}<a href="{{ vich_uploader_asset(user, 'cvFile') }}" class="btn btn-alt btn-large"><i class="fa fa-download">&nbsp;&nbsp;</i>Télécharger mon CV</a>{% endif %}
     </div>
 </div>
 {% endif %}
