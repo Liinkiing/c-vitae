@@ -127,7 +127,8 @@ class StudentController extends Controller
     public function modifyInformations(Request $request){
         $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
         if($currentStudent != "anon."){
-            $d = \DateTime::createFromFormat('d/m/Y', $request->get('birthday'));
+            $timezone = new \DateTimeZone('Europe/Paris');
+            $d = \DateTime::createFromFormat('d/m/Y', $request->get('birthday'), $timezone);
             if(($d && $d->format('d/m/Y') === $request->get('birthday')) == false){
                 $this->addFlash('danger', "Veuillez entrer une date correct !");
                 return $this->redirectToRoute('my_profile');
@@ -138,6 +139,7 @@ class StudentController extends Controller
             $currentStudent->setViadeo(self::setNullIfStringEmpty($request->get('viadeo')));
             $currentStudent->setProfessionalMail(self::setNullIfStringEmpty($request->get('mail')));
             $currentStudent->setBirthday($d);
+            $currentStudent->setAge($d->diff(new \DateTime('now', $timezone))->y);
             if($request->get('hobbies') == '') $currentStudent->setHobbies(null); else $currentStudent->setHobbies(explode(',', self::removeWhitespace($request->get('hobbies'))));
             if($request->get('softwares') == '') $currentStudent->setSoftwares(null); else $currentStudent->setSoftwares(explode(',', self::removeWhitespace($request->get('softwares'))));
             if($request->get('languages') == '') $currentStudent->setLanguages(null); else $currentStudent->setLanguages(explode(',', self::removeWhitespace($request->get('languages'))));
@@ -145,7 +147,7 @@ class StudentController extends Controller
             $currentStudent->setFavoriteMusic(self::setNullIfStringEmpty($request->get('favMusic')));
             $currentStudent->setFavoriteQuote(self::setNullIfStringEmpty($request->get('favQuote')));
             $currentStudent->setProjectRole(self::setNullIfStringEmpty($request->get('projectRole')));
-            $currentStudent->setUpdatedAt(new \DateTime('now'));
+            $currentStudent->setUpdatedAt(new \DateTime('now', $timezone));
             $this->getDoctrine()->getManager()->persist($currentStudent);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', "Vos informations ont bien été enregistrés");
