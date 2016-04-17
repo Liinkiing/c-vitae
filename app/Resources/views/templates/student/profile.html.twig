@@ -38,7 +38,7 @@
         <div class="information one-column">
             <p><i class="fa fa-language">&nbsp;&nbsp;</i>Langues : <span class="bold">{{ user.languages|default('<span class="no-information">Non renseigné</span>')|join(', ')|trim|raw }}</span></p>
             <p><i class="fa fa-wrench">&nbsp;&nbsp;</i>Langages de développement :  <span class="bold">{{ user.programmingLanguages|default('<span class="no-information">Non renseigné</span>')|join(',')|trim|raw }}</p>
-            <p><i class="fa fa-wrench">&nbsp;&nbsp;</i>Logiciels maîtrisés :  <span class="bold">{{ user.softwares|default('<span class="no-information">Non renseigné</span>')|join(',')|trim|raw }}</p>
+            <p><i class="fa fa-file">&nbsp;&nbsp;</i>Logiciels maîtrisés :  <span class="bold">{{ user.softwares|default('<span class="no-information">Non renseigné</span>')|join(',')|trim|raw }}</p>
         </div>
     </div>
 </section>
@@ -46,7 +46,7 @@
     <h3>A propos d{% if user.firstName|truncate(1, '')|preg_match('#a|e|é|è|i|o|u|y#i') %}'{% else %}e {% endif %}{{ user.firstName }}</h3>
     <div class="row-flex center">
         <div class="information">
-            <p><i class="fa fa-language">&nbsp;&nbsp;</i>Mes hobbies : <span class="bold">{{ user.hobbies|default('<span class="no-information">Non renseigné</span>')|join(', ')|trim|raw }}</span></p>
+            <p><i class="fa fa-gavel">&nbsp;&nbsp;</i>Mes hobbies : <span class="bold">{{ user.hobbies|default('<span class="no-information">Non renseigné</span>')|join(', ')|trim|raw }}</span></p>
             <p><i class="fa fa-quote-left">&nbsp;&nbsp;</i>Citation favorite :  <span class="bold">{% if user.favoriteQuote %}<i class="fa fa-angle-double-left">&nbsp;</i>{{ user.favoriteQuote }}&nbsp;<i class="fa fa-angle-double-right"></i>{% else %}<span class="no-information">Non renseigné</span>{% endif %}</p>
         </div>
         <div class="information">
