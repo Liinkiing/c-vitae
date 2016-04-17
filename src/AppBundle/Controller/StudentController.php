@@ -28,8 +28,6 @@ class StudentController extends Controller
      */
     public function showMyProfileAction(Request $request){
         $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
-        $this->getDoctrine()->getManager()->persist($currentStudent);
-        $this->getDoctrine()->getManager()->flush();
         if($request->getMethod() == 'GET'){
 
             if($currentStudent != "anon."){
