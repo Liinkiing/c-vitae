@@ -1346,7 +1346,7 @@ form label.material {
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all; }
-form input:focus ~ label, form input[type="text"]:valid ~ label, form input[type="email"]:valid ~ label, form input[type="password"]:valid ~ label, form textarea:focus ~ label, form textarea:valid ~ label {
+form input:focus ~ label, form input[type="text"]:valid ~ label, form input[type="email"]:valid ~ label, form input[type="password"]:valid ~ label, form input[type="date"]:valid ~ label, form textarea:focus ~ label, form textarea:valid ~ label {
   top: -40px;
   font-size: 14px;
   color: #579d69; }
