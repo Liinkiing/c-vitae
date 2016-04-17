@@ -28,6 +28,8 @@ class StudentController extends Controller
      */
     public function showMyProfileAction(Request $request){
         $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
+        $this->getDoctrine()->getManager()->persist($currentStudent);
+        $this->getDoctrine()->getManager()->flush();
         if($request->getMethod() == 'GET'){
 
             if($currentStudent != "anon."){
@@ -85,6 +87,30 @@ class StudentController extends Controller
             $this->getDoctrine()->getManager()->persist($currentStudent);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', "La photo a bien été transféré");
+            return $this->redirectToRoute('my_profile');
+        }
+        else {
+            $this->addFlash('danger', "Vous devez être connecté avant d'accéder à cette page !");
+            return $this->redirectToRoute('login');
+        }
+
+    }
+    /**
+     * @Route("/profile/me/modify-cv", name="modify_student_cv")
+     * @Method({"POST"})
+     */
+    public function modifyCvAction(Request $request){
+        $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
+        if($currentStudent != "anon."){
+            $file = $request->files->get('cv');
+            if($file == null || !$file->isValid() || !mb_ereg_match("application/x-download|application/pdf", $file->getClientMimeType())) {
+                $this->addFlash("danger", "Veuillez choisir un fichier PDF !");
+                return $this->redirectToRoute('my_profile');
+            }
+            $currentStudent->setCvFile($file);
+            $this->getDoctrine()->getManager()->persist($currentStudent);
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "Le CV a bien été enregistré");
             return $this->redirectToRoute('my_profile');
         }
         else {

@@ -52,6 +52,18 @@ class Student implements UserInterface, \Serializable, NamerInterface
     private $profilePicture;
 
     /**
+     * @ORM\Column(name="cv", type="text", nullable=true)
+     *
+     */
+    private $cv;
+
+    /**
+     * @UploadableField(mapping="student_cv", fileNameProperty="cv")
+     */
+    private $cvFile;
+
+
+    /**
      * @UploadableField(mapping="student_image", fileNameProperty="profilePicture")
      */
     private $profilePictureFile;
@@ -1096,6 +1108,43 @@ class Student implements UserInterface, \Serializable, NamerInterface
      */
     public function name($object, PropertyMapping $mapping)
     {
-        return strtolower(trim($this->getFullName())) . "." . $this->getImageFile()->guessExtension();
+        return 'CV_' . strtolower(str_replace(' ', '_', $object->getFullName())) . "." . $mapping->getFile($object)->guessExtension();
+    }
+
+    public function setCvFile(File $cv = null)
+    {
+        $this->cvFile = $cv;
+
+        if ($cv) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File
+     */
+    public function getCvFile()
+    {
+        return $this->cvFile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCv()
+    {
+        return $this->cv;
+    }
+
+    /**
+     * @param mixed $cv
+     */
+    public function setCv($cv)
+    {
+        $this->cv = $cv;
     }
 }
