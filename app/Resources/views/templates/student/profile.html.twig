@@ -4,6 +4,9 @@
 {% if user.description is not null %}<div class="row-flex center">
     <div class="user-description">
         <p>{{ user.description }}</p>
+        {% if user.cv %}
+            <a href="{{ vich_uploader_asset(user, 'cvFile') }}" class="btn btn-alt btn-large"><i class="fa fa-download">&nbsp;&nbsp;</i>Télécharger mon CV</a>
+        {% endif %}
     </div>
 </div>
 {% endif %}
@@ -59,9 +62,10 @@
     <h3>Réseaux professionnels</h3>
     <div class="row-flex center">
         <div class="information one-column">
-            {% if user.linkedin %}<a href="{{ user.linkedin }}" class="btn btn-alt btn-medium"><i class="fa fa-linkedin">&nbsp;&nbsp;</i>LinkedIn</a>{% endif %}
+            {% if user.linkedin %}<a href="{{ user.linkedin }}" class="btn btn-alt btn-medium il-a-linked-in"><i class="fa fa-linkedin">&nbsp;&nbsp;</i>LinkedIn</a>{% endif %}
             {% if user.viadeo %}<a href="{{ user.viadeo }}" class="btn btn-alt btn-medium"><i class="fa fa-viadeo">&nbsp;&nbsp;</i>Viadeo</a>{% endif %}
         </div>
     </div>
     </section>
 {% endif %}
+
