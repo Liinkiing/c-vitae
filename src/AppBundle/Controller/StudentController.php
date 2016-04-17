@@ -139,6 +139,7 @@ class StudentController extends Controller
             $currentStudent->setFavoriteMusic(self::setNullIfStringEmpty($request->get('favMusic')));
             $currentStudent->setFavoriteQuote(self::setNullIfStringEmpty($request->get('favQuote')));
             $currentStudent->setProjectRole(self::setNullIfStringEmpty($request->get('projectRole')));
+            $currentStudent->setUpdatedAt(new \DateTime('now'));
             $this->getDoctrine()->getManager()->persist($currentStudent);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', "Vos informations ont bien été enregistrés");
