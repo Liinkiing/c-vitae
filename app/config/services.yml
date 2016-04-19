@@ -21,7 +21,7 @@ services:
         class: Jasny\Twig\TextExtension
         tags:
             - { name: twig.extension }
-    namer.student_cv:
+    namer.student:
         class: AppBundle\Entity\Student
         tags:
             - { name: namer }
