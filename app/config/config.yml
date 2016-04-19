@@ -15,7 +15,7 @@ vich_uploader:
         student_image:
             uri_prefix:         /img/students
             upload_destination: '%kernel.root_dir%/../web/img/students'
-            namer:              vich_uploader.namer_uniqid
+            namer:              namer.student
 
             inject_on_load:     false
             delete_on_update:   true
@@ -24,7 +24,7 @@ vich_uploader:
         student_cv:
             uri_prefix: /files/cv/
             upload_destination: '%kernel.root_dir%/../web/files/cv'
-            namer: namer.student_cv
+            namer: namer.student
 
 framework:
     #esi:             ~

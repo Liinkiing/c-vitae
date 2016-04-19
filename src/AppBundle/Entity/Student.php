@@ -1019,9 +1019,9 @@ class Student implements UserInterface, \Serializable, NamerInterface
     {
         $this->profilePictureFile = $image;
 
-//        if ($image) {
+        if ($image) {
             $this->updatedAt = new \DateTime('now');
-//        }
+        }
 
         return $this;
     }
@@ -1108,7 +1108,8 @@ class Student implements UserInterface, \Serializable, NamerInterface
      */
     public function name($object, PropertyMapping $mapping)
     {
-        return 'CV_' . strtolower(str_replace(' ', '_', $object->getFullName())) . "." . $mapping->getFile($object)->guessExtension();
+        if($mapping->getFile($object)->guessExtension() == 'pdf') return 'CV_' . strtolower(str_replace(' ', '_', $object->getFullName())) . "." . $mapping->getFile($object)->guessExtension(); else
+        return strtolower(str_replace(' ', '_', $object->getFullName())) . "." . $mapping->getFile($object)->guessExtension();
     }
 
     public function setCvFile(File $cv = null)
