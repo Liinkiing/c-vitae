@@ -8,13 +8,33 @@ imports:
 parameters:
     locale: en
 
+oneup_flysystem:
+    adapters:
+        student_image_adapter:
+            dropbox:
+                client: app.dropbox_client
+                prefix: /img/students
+        student_cv_adapter:
+            dropbox:
+                client: app.dropbox_client
+                prefix: /files/cv
+
+    filesystems:
+        student_image_fs:
+            adapter: student_image_adapter
+            mount: student_image_fs
+        student_cv_fs:
+            adapter: student_cv_adapter
+            mount: student_cv_fs
+
 vich_uploader:
     db_driver: orm
+    storage:   flysystem
 
     mappings:
         student_image:
             uri_prefix:         /img/students
-            upload_destination: '%kernel.root_dir%/../web/img/students'
+            upload_destination: student_image_fs
             namer:              namer.student
 
             inject_on_load:     false
@@ -22,8 +42,8 @@ vich_uploader:
             delete_on_remove:   true
 
         student_cv:
-            uri_prefix: /files/cv/
-            upload_destination: '%kernel.root_dir%/../web/files/cv'
+            uri_prefix: /files/cv
+            upload_destination: student_cv_fs
             namer: namer.student
 
 framework:
@@ -53,6 +73,8 @@ framework:
 
 # Twig Configuration
 twig:
+    globals:
+        dropbox_client: "@app.dropbox_client"
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
