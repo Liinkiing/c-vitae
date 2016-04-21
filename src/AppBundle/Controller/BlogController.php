@@ -6,6 +6,7 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\User;
+use DateTimeZone;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -53,7 +54,7 @@ class BlogController extends Controller
         $post = $em->getPostsByDateAndSlug($day, $month, $year, $slug);
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $comment = new Comment();
-        $comment->setCreatedAt(new \DateTime('now', 'Europe/Paris'))
+        $comment->setCreatedAt(new \DateTime('now', new DateTimeZone('Europe/Paris')))
             ->setContent($request->get('commentContent'))
             ->setAuthor($user)
             ->setPost($post);
@@ -91,7 +92,7 @@ class BlogController extends Controller
             $post->setTitle($request->get('postTitle'));
             $post->setSubtitle($request->get('postSubtitle'));
             $post->setContent($parsedown->text($request->get('postContent')));
-            $date = new \DateTime('now', 'Europe/Paris');
+            $date = new \DateTime('now', new DateTimeZone('Europe/Paris'));
             $post->setEditedAt($date);
             $post->setCategory($this->getDoctrine()->getRepository(Category::class)->find($request->get('postCategory')));
             $post->setSlug(self::slugify($post->getTitle()));
@@ -130,7 +131,7 @@ class BlogController extends Controller
             $post->setTitle($request->get('postTitle'));
             $post->setSubtitle($request->get('postSubtitle'));
             $post->setContent($parsedown->text($request->get('postContent')));
-            $date = new \DateTime('now', 'Europe/Paris');
+            $date = new \DateTime('now', new DateTimeZone('Europe/Paris'));
             $post->setCreatedAt($date);
             $post->setAuthor($student);
             $post->setCategory($this->getDoctrine()->getRepository(Category::class)->find($request->get('postCategory')));
