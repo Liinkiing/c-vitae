@@ -25,3 +25,8 @@ services:
         class: AppBundle\Entity\Student
         tags:
             - { name: namer }
+    app.dropbox_client:
+            class: Dropbox\Client
+            arguments:
+                - "aIPRwlwowGIAAAAAAAAEud2TfjNsSys2U9EGaKJ-_bAbQpahvwWiPbB-IXGevxRB"
+                - "plumeau-magique/1.0"
