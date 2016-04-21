@@ -53,7 +53,7 @@ class BlogController extends Controller
         $post = $em->getPostsByDateAndSlug($day, $month, $year, $slug);
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $comment = new Comment();
-        $comment->setCreatedAt(new \DateTime('now'))
+        $comment->setCreatedAt(new \DateTime('now', 'Europe/Paris'))
             ->setContent($request->get('commentContent'))
             ->setAuthor($user)
             ->setPost($post);
@@ -91,7 +91,7 @@ class BlogController extends Controller
             $post->setTitle($request->get('postTitle'));
             $post->setSubtitle($request->get('postSubtitle'));
             $post->setContent($parsedown->text($request->get('postContent')));
-            $date = new \DateTime('now');
+            $date = new \DateTime('now', 'Europe/Paris');
             $post->setEditedAt($date);
             $post->setCategory($this->getDoctrine()->getRepository(Category::class)->find($request->get('postCategory')));
             $post->setSlug(self::slugify($post->getTitle()));
