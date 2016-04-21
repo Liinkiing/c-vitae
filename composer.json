@@ -26,7 +26,11 @@
         "ext-mbstring": "*",
         "erusev/parsedown": "1.6.0",
         "league/html-to-markdown": "4.2.0",
-        "vich/uploader-bundle": "^1.0"
+        "vich/uploader-bundle": "^1.0",
+        "oneup/flysystem-bundle": "*",
+        "league/flysystem-dropbox": "*",
+        "dropbox/dropbox-sdk": "*"
+
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -1019,9 +1019,9 @@ class Student implements UserInterface, \Serializable, NamerInterface
     {
         $this->profilePictureFile = $image;
 
-        if ($image) {
+//        if ($image) {
             $this->updatedAt = new \DateTime('now');
-        }
+//        }
 
         return $this;
     }
