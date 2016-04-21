@@ -714,6 +714,7 @@ class Student implements UserInterface, \Serializable, NamerInterface
 
     public function getFacebookImageUrl() {
         if(!$this->fbid) return null;
+
         return "https://graph.facebook.com/v2.6/" . explode('.', sprintf('%f', $this->fbid))[0] . '/picture?type=large&width=400&height=400';
     }
 
