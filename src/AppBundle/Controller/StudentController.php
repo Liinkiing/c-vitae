@@ -130,7 +130,7 @@ class StudentController extends Controller
             $timezone = new \DateTimeZone('Europe/Paris');
             $d = \DateTime::createFromFormat('d/m/Y', $request->get('birthday'), $timezone);
             if(($d && $d->format('d/m/Y') === $request->get('birthday')) == false){
-                $this->addFlash('danger', "Veuillez entrer une date correct !");
+                $this->addFlash('danger', "Veuillez entrer une date valide !");
                 return $this->redirectToRoute('my_profile');
             }
             $currentStudent->setDescription(self::setNullIfStringEmpty($request->get('description')));
