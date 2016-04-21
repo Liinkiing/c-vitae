@@ -600,11 +600,11 @@ form {
 
 }
 
-a.portfolio-link:hover {
+a.student-link:hover {
     color: #d7a965;
 }
 
-.portfolio-item {
+.student-item {
 
     position: relative;
     display: inline-block;
@@ -612,6 +612,11 @@ a.portfolio-link:hover {
     border: 1px solid rgb(67, 75, 85);
     border-radius: 3px;
     margin-right: 100px;
+
+    &.is-connected{
+        background-color: rgba(44, 71, 41, 0.72);
+
+    }
 
     &:last-of-type {
         margin-right: 0;
@@ -694,10 +699,10 @@ a.portfolio-link:hover {
     & img {
         position: absolute;
         z-index: 1;
-        top: -50%;
-        left: -50%;
+        left: 0;
+        top: 0;
+        width: 120%;
         transition: all 0.2s;
-        width: 250%;
         &:hover {
             transform: scale(1.1);
         }

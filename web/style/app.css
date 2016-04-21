@@ -769,19 +769,21 @@ form {
       font-family: FontAwesome;
       content: '\f073\020'; }
 
-a.portfolio-link:hover {
+a.student-link:hover {
   color: #d7a965; }
 
-.portfolio-item {
+.student-item {
   position: relative;
   display: inline-block;
   width: 500px;
   border: 1px solid #434b55;
   border-radius: 3px;
   margin-right: 100px; }
-  .portfolio-item:last-of-type {
+  .student-item.is-connected {
+    background-color: rgba(44, 71, 41, 0.72); }
+  .student-item:last-of-type {
     margin-right: 0; }
-  .portfolio-item::after {
+  .student-item::after {
     transition: all 0.3s;
     content: '';
     position: absolute;
@@ -791,18 +793,18 @@ a.portfolio-link:hover {
     width: 100%;
     height: 100%;
     opacity: 0; }
-  .portfolio-item:hover {
+  .student-item:hover {
     cursor: pointer; }
-    .portfolio-item:hover::after {
+    .student-item:hover::after {
       opacity: 0.1; }
-  .portfolio-item .item-thumbnail {
+  .student-item .item-thumbnail {
     height: 280px;
     overflow: hidden;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center; }
-    .portfolio-item .item-thumbnail .item-categories {
+    .student-item .item-thumbnail .item-categories {
       position: absolute;
       z-index: 3;
       top: 0;
@@ -810,16 +812,16 @@ a.portfolio-link:hover {
       margin: 15px;
       padding: 12px;
       background: rgba(0, 0, 0, 0.6); }
-      .portfolio-item .item-thumbnail .item-categories::before {
+      .student-item .item-thumbnail .item-categories::before {
         font-family: FontAwesome;
         content: '\f02c\020'; }
-    .portfolio-item .item-thumbnail .item-title {
+    .student-item .item-thumbnail .item-title {
       z-index: 3; }
-      .portfolio-item .item-thumbnail .item-title h2 {
+      .student-item .item-thumbnail .item-title h2 {
         margin: 0; }
-        .portfolio-item .item-thumbnail .item-title h2::after {
+        .student-item .item-thumbnail .item-title h2::after {
           content: none; }
-  .portfolio-item .img-overlay {
+  .student-item .img-overlay {
     position: absolute;
     opacity: 0.3;
     top: 0;
@@ -829,18 +831,18 @@ a.portfolio-link:hover {
     height: 100%;
     z-index: 2;
     transition: all 0.2s; }
-    .portfolio-item .img-overlay:hover {
+    .student-item .img-overlay:hover {
       opacity: 0.7; }
-  .portfolio-item img {
+  .student-item img {
     position: absolute;
     z-index: 1;
-    top: -50%;
-    left: -50%;
-    transition: all 0.2s;
-    width: 250%; }
-    .portfolio-item img:hover {
+    left: 0;
+    top: 0;
+    width: 120%;
+    transition: all 0.2s; }
+    .student-item img:hover {
       transform: scale(1.1); }
-  .portfolio-item .item-description {
+  .student-item .item-description {
     padding: 40px;
     position: relative;
     z-index: 3; }
