@@ -1,4 +1,4 @@
-{% embed 'base.html.twig' with {'title': 'Listes des élèves', 'isFullscreen': '1', 'subtitle': "(wllh l'apparence de cette page est pas fini jugez pas)", "randomHeaderColors": '1', 'randomHeaderColors': '1'} %}
+{% embed 'base.html.twig' with {'title': 'Listes des élèves', 'isFullscreen': '1', 'subtitle': "(wllh l'apparence de cette page est pas fini jugez pas)", "randomHeaderColors": '1', 'randomHeaderColors': '1', 'studentPerRow': 2 } %}
 
 
     {% block body %}
@@ -21,14 +21,9 @@
                     {% endautoescape %}
 
                     {% for student in students %}
-                        <p>
-                            {% if app.user.username|default(null) == student.username %}
-                                <span style="color: green;"><a href="{{ path('my_profile') }}">{{ student.firstName }} {{ student.lastName }} (Vous)</a></span>
-                            {% else %}
-                                <a href="{{ path('profile', {"username": student.username}) }}"> {{ student.lastName }} {{ student.firstName }} ({{ student.username }}){% if student.firstName == "Garnet" or  student.lastName == "RICHARD" or
-                                    student.firstName == "Omar" or student.firstName == "Baptiste" %} <span style="color: red;">(lui c un bg)</span>  {% endif %}</a>
-                            {% endif %}
-                        </p>
+                        {% if loop.index0 % studentPerRow == 0 %}<div class="row">{% endif %}
+                            {% embed 'templates/student/student_card.html.twig' with {'student': student} %}{% endembed %}
+                        {% if loop.index % studentPerRow == 0 %}</div>{% endif %}
                     {% endfor %}
                 </div>
 
