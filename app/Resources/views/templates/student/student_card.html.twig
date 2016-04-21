@@ -1,24 +1,6 @@
-{#{% if app.user.username|default(null) == student.username %}#}
-    {#<span style="color: green;"><a href="{{ path('my_profile') }}">{{ student.firstName }} {{ student.lastName }} (Vous)</a></span>#}
-{#{% else %}#}
-    {#<a href="{{ path('profile', {"username": student.username}) }}"> {{ student.lastName }} {{ student.firstName }} ({{ student.username }}){% if student.firstName == "Garnet" or  student.lastName == "RICHARD" or#}
-        {#student.firstName == "Omar" or student.firstName == "Baptiste" %} <span style="color: red;">(lui c un bg)</span>  {% endif %}</a>#}
-{#{% endif %}#}
-
-{#<div class="student-item {% if app.user.username == student.username %} is-connected{% endif %}">#}
-    {#<div class="student-image">#}
-        {#<h2>{{ student.fullName }}</h2>#}
-        {#<img src="{% if vich_uploader_asset(student, 'profilePictureFile') is not null %}{{ vich_uploader_asset(student, 'profilePictureFile') }}{% elseif student.fbid is not null %}{{ student.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}" alt="">#}
-    {#</div>#}
-    {#<div class="student-description">#}
-        {#{{ student.description|default('Étudiant en DUT MMI à l\'université Paris-Est Marne La Vallée')|truncate(50, '...') }}#}
-    {#</div>#}
-{#</div>#}
-
-
-<div class="student-item {% if app.user.username == student.username %} is-connected {% endif %}">
-    <a class="student-link" href="{% if app.user.username == student.username %}{{ path('my_profile') }}{% else %}{{ path('profile', {'username': student.username}) }}{% endif %}">
-        <div class="item-thumbnail" style="background: url('{% if vich_uploader_asset(student, 'profilePictureFile') is not null %}{{ vich_uploader_asset(student, 'profilePictureFile') }}{% elseif student.fbid is not null %}{{ student.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}'); background-position: center center; background-size: cover;">
+<div class="student-item {% if app.user.username|default('anon.') == student.username %} is-connected {% endif %}">
+    <a class="student-link" href="{% if app.user.username|default('anon.') == student.username %}{{ path('my_profile') }}{% else %}{{ path('profile', {'username': student.username}) }}{% endif %}">
+        <div class="item-thumbnail" style="background: url('{% if vich_uploader_asset(student, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(student, 'profilePictureFile'))[0] }}{% elseif student.fbid is not null %}{{ student.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}'); background-position: center center; background-size: cover;">
             <div class="item-title"><h2>{{ student.fullName }}</h2></div>
             <div class="img-overlay"></div>
         </div>
