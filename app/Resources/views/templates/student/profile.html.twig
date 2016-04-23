@@ -1,5 +1,5 @@
 <div class="profile-picture">
-    <img class="" src="{% if vich_uploader_asset(user, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(user, 'profilePictureFile'))[0] }}{% elseif user.fbid is not null %}{{ user.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}" alt="">
+    <img src="{% if vich_uploader_asset(user, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(user, 'profilePictureFile'))[0] }}{% elseif user.fbid is not null %}{{ user.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}" alt="">
 </div>
 <div class="row-flex center">
     <div class="user-description">
