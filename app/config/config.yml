@@ -13,11 +13,11 @@ oneup_flysystem:
         student_image_adapter:
             dropbox:
                 client: app.dropbox_client
-                prefix: /img/students
+                prefix: img/students
         student_cv_adapter:
             dropbox:
                 client: app.dropbox_client
-                prefix: /files/cv
+                prefix: files/cv
 
     filesystems:
         student_image_fs:

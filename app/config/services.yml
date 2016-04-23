@@ -28,5 +28,5 @@ services:
     app.dropbox_client:
             class: Dropbox\Client
             arguments:
-                - "aIPRwlwowGIAAAAAAAAEud2TfjNsSys2U9EGaKJ-_bAbQpahvwWiPbB-IXGevxRB"
+                - "aIPRwlwowGIAAAAAAAAE0NBnGFiscWrc6qIiEcumZzHhCJGdmQq50naczkclsugU"
                 - "plumeau-magique/1.0"
