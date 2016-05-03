@@ -145,7 +145,7 @@ body {
     background-image: url("../img/bg.jpg"), url("../img/overlay.png");
     background-size: 100% auto, 100px 100px;
     background-repeat: no-repeat, no-repeat;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     color: whitesmoke;
 }
 
@@ -827,6 +827,18 @@ section.information{
 
 .ui.category.search .results {
     width: 500px;
+}
+
+p {
+    font-size: 15px;
+}
+
+.information p {
+    margin-bottom: 0 !important;
+}
+section.information > .row-flex:first-of-type{
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
 
 //============= LE STYLE DES CHECKBOXS ONT ÉTÉ RÉCUPÉRÉS A PARTIR DE CE SITE : http://codepen.io/bbodine1/pen/novBm ================
