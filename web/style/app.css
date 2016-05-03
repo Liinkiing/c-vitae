@@ -600,8 +600,10 @@ p.subtitle {
       flex-direction: row;
       justify-content: space-between; }
     .generic-card .content.fullscreen {
-      padding: 40px 20%;
+      padding: 40px 3%;
       text-align: justify; }
+      .generic-card .content.fullscreen.profile {
+        padding: 40px 20%; }
     .generic-card .content.portfolio {
       display: block; }
 
@@ -779,6 +781,13 @@ a.student-link:hover {
   border: 1px solid #434b55;
   border-radius: 3px;
   margin-right: 100px; }
+  .student-item .student-role {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 10; }
   .student-item.is-connected {
     background-color: rgba(44, 71, 41, 0.72); }
   .student-item:last-of-type {
@@ -932,6 +941,9 @@ p {
 section.information > .row-flex:first-of-type {
   margin-top: 40px;
   margin-bottom: 20px; }
+
+.ui.modal p {
+  color: black; }
 
 .slideOne {
   width: 50px;
