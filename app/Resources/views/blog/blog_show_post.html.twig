@@ -13,7 +13,7 @@
                         <i class="fa fa-tag">&nbsp;&nbsp;</i>{{ post.category.name }}
                     </div>
                 </header>
-                <div class="content {% if isFullscreen %} fullscreen {% endif %}">
+                <div class="content-site {% if isFullscreen %} fullscreen {% endif %}">
                     {% autoescape false %}
                         {% for message_danger in app.session.flashBag.get('danger') %}
                             <div class="alert alert-danger">{{ message_danger }}</div>
