@@ -13,9 +13,9 @@ class StudentRestController extends Controller
     /**
      * @return \AppBundle\Entity\Student[]|array
      * @QueryParam(name="group", default="A,B,C,D")
-     * @QueryParam(name="name", requirements="[a-z]+")
+     * @QueryParam(name="name")
      * @QueryParam(name="age", requirements="\d+")
-     * @QueryParam(name="role", requirements="[a-z]+")
+     * @QueryParam(name="role")
      * @QueryParam(name="bac")
      * @QueryParam(name="sort", requirements="(asc|desc|ASC|DESC)", default="asc")
      */
@@ -24,10 +24,9 @@ class StudentRestController extends Controller
         $group = ($paramFetcher->get('group') == '') ? ['A', 'B', 'C', 'D'] : explode(',', $paramFetcher->get('group'));
         $name = $paramFetcher->get('name');
         $age = $paramFetcher->get('age');
-        $role = $paramFetcher->get('role');
-        $bac = $paramFetcher->get('bac');
+        $role = (explode(',', $paramFetcher->get('role'))[0] == '') ? null : explode(',', $paramFetcher->get('role'));
+        $bac = (explode(',', $paramFetcher->get('bac'))[0] == '') ? null : explode(',', $paramFetcher->get('bac'));
         $sort = $paramFetcher->get('sort');
-
         $students = $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams($group, $name, $age, $role, $bac, $sort);
         return $students;
 
@@ -36,7 +35,7 @@ class StudentRestController extends Controller
     /**
      * @QueryParam(name="name")
      * @QueryParam(name="age", requirements="\d+")
-     * @QueryParam(name="role", requirements="[a-z]+")
+     * @QueryParam(name="role")
      * @QueryParam(name="bac")
      * @QueryParam(name="sort", requirements="(asc|desc|ASC|DESC)", default="asc")
      */
@@ -45,9 +44,9 @@ class StudentRestController extends Controller
         $name = $paramFetcher->get('name');
         $age = $paramFetcher->get('age');
         $role = $paramFetcher->get('role');
-        $bac = $paramFetcher->get('bac');
+        $bac = (explode(',', $paramFetcher->get('bac'))[0] == '') ? null : explode(',', $paramFetcher->get('bac'));
         $sort = $paramFetcher->get('sort');
-        
+
         $final= [];
         for($group = "A"; $group <= "D"; $group++){
             $final[$group] = ["name"    => "Groupe $group",
