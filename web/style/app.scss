@@ -920,6 +920,12 @@ form {
         color: #579d69;
     }
 
+    & input[type="checkbox"]:focus ~ label, input[type="checkbox"]:valid ~ label
+    {
+        top: 0;
+
+    }
+
     & .bar {
         position: relative;
         display: block;
