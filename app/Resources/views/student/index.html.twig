@@ -10,7 +10,8 @@
                     <h2>{{ title }}</h2>
                     <p class="subtitle"
                        {% if search|default(false) %}style="background-color: rgba(0,0,0,0.5); width: 700px; margin: 40px auto 0 auto; padding: 30px;"{% endif %}>
-                        {% if search|default(false) %} Résultat de votre recherche ({{ students|length }} étudiant{% if students|length > 1 %}s{% endif %}) <br/>
+                        {% if search|default(false) %} Résultat de votre recherche ({{ students|length }} étudiant{% if students|length > 1 %}s{% endif %})
+                            <br/>
                             {% if app.request.get('age') %}<br><span
                                     class="bold">Age</span> : {{ app.request.get('age') }} ans {% endif %}
                             {% if app.request.get('bac') %}<br><span
@@ -68,7 +69,8 @@
                                     </div>
                                     <div class="three wide field">
                                         <label>Age</label>
-                                        <input name="age" placeholder="Entrez un âge" type="number" min="{{ minAge }}" max="{{ maxAge }}">
+                                        <input name="age" placeholder="Entrez un âge" type="number" min="{{ minAge }}"
+                                               max="{{ maxAge }}">
                                     </div>
                                 </div>
                                 <h4 class="ui dividing header">D'autres informations mashallah</h4>
@@ -88,7 +90,8 @@
                                     {% for prog_lang in programmingLanguages %}
                                         <div class="inline field">
                                             <div class="ui checkbox">
-                                                <input value="{{ prog_lang }}" class="hidden" name="prog_lang[]" tabindex="{{ loop.index0 }}" type="checkbox">
+                                                <input value="{{ prog_lang }}" class="hidden" name="prog_lang[]"
+                                                       tabindex="{{ loop.index0 }}" type="checkbox">
                                                 <label>{{ prog_lang }}</label>
                                             </div>
                                         </div>
@@ -112,9 +115,14 @@
                             </div>
                             <div class="results"></div>
                             <button id="showAdvancedSearch" class="ui primary button"
-                                    style="width: 300px; margin-left: 40px;">
+                                    style="width: 300px; margin-left: 40px; margin-right: 20px;" >
                                 Afficher les options de recherche avancés
                             </button>
+                            {% if search|default(false) %}
+                                <a id="closeSearch" class="ui red icon button" href="{{ path('students_list') }}" data-content="Quitter la recherche">
+                                    <i class="remove icon"></i>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                     {% if students|length != 0 %}
@@ -127,8 +135,8 @@
                         <h2>La recherche n'a donné aucun résultat ! Veuillez réessayer avec d'autres critères :(</h2>
                     {% endif %}
                 </div>
-
             </div>
+
         </div>
 
 
@@ -144,6 +152,9 @@
             ;
             $('.ui.dropdown')
                     .dropdown()
+            ;
+            $('#closeSearch')
+                    .popup()
             ;
             $('.ui.search')
                     .search({
