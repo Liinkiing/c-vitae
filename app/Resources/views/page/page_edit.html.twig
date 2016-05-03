@@ -13,7 +13,7 @@
                     <h2>{{ title }}</h2>
                     <p class="subtitle"><a href="{{ path('page', {"slug": page.slug}) }}">{{ subtitle }}</a></p>
                 </header>
-                <div class="content {% if isFullscreen %} fullscreen {% endif %}">
+                <div class="content-site {% if isFullscreen %} fullscreen {% endif %}">
                     {% autoescape false %}
                         {% for message_danger in app.session.flashBag.get('danger') %}
                             <div class="alert alert-danger">{{ message_danger }}</div>

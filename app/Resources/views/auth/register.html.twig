@@ -9,7 +9,7 @@
                 <header>
                     <h2>{{ title }}</h2>
                 </header>
-                <div class="content fullscreen">
+                <div class="content-site fullscreen">
                     {% if error|default(null) != null %} <div class="alert alert-danger">{{ error }}</div> {% endif %}
                     <form action="{{ path('register') }}" method="post">
                         <div class="group">
