@@ -581,6 +581,12 @@ p.subtitle {
       .features .content .feature:last-of-type {
         border-right: 0; }
 
+.ui.cards > .card {
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.29); }
+
+.ui.inverted.button {
+  transition: all 0.6s; }
+
 .generic-card {
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.26); }
@@ -590,25 +596,25 @@ p.subtitle {
     padding: 120px 60px; }
   .generic-card.fullscreen {
     box-shadow: none; }
-  .generic-card .content {
+  .generic-card .content-site {
     text-align: left;
     padding: 40px;
     background-color: #32383f;
     display: flex;
     flex-direction: column; }
-    .generic-card .content.content-row {
+    .generic-card .content-site.content-row {
       flex-direction: row;
       justify-content: space-between; }
-    .generic-card .content.fullscreen {
+    .generic-card .content-site.fullscreen {
       padding: 40px 3%;
       text-align: justify; }
-      .generic-card .content.fullscreen.profile {
+      .generic-card .content-site.fullscreen.profile {
         padding: 40px 20%; }
-      .generic-card .content.fullscreen.login {
+      .generic-card .content-site.fullscreen.login {
         padding: 40px 20%; }
-      .generic-card .content.fullscreen.error {
+      .generic-card .content-site.fullscreen.error {
         padding: 40px 20%; }
-    .generic-card .content.portfolio {
+    .generic-card .content-site.portfolio {
       display: block; }
 
 .row {
@@ -793,7 +799,7 @@ a.student-link:hover {
     left: 15px;
     z-index: 10; }
   .student-item.is-connected {
-    background-color: rgba(44, 71, 41, 0.72); }
+    width: 400px; }
   .student-item:last-of-type {
     margin-right: 0; }
   .student-item::after {
@@ -949,6 +955,9 @@ section.information > .row-flex:first-of-type {
 .ui.modal p {
   color: black; }
 
+.card.is-connected {
+  width: 400px !important; }
+
 form .group {
   display: inline-block;
   width: 100%;
@@ -1040,5 +1049,14 @@ form .highlight {
   to {
     width: 0;
     background: transparent; } }
+.ui.viadeo.button {
+  background-color: #f07355;
+  color: white; }
+  .ui.viadeo.button i {
+    height: 0.85714286em;
+    opacity: 0.8;
+    margin: 0em 0.6em 0em -0.2em;
+    -webkit-transition: opacity 0.1s ease;
+    transition: opacity 0.1s ease; }
 
 /*# sourceMappingURL=app.css.map */
