@@ -252,32 +252,30 @@ p.subtitle {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
 
     & nav {
+    }
+    & ul {
+        padding: 0;
+        margin: 0;
+        & li {
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            font-size: 0.9em;
+            display: inline-block;
+            padding: 20px;
+            margin-right: 20px;
+            &:hover {
+                background: rgba(lighten($dark-color, 20%), 0.4);
+                cursor: pointer;
+            }
         }
-        & ul {
-            padding: 0;
-            margin: 0;
-            & li {
-                transition: all 0.3s;
-                text-transform: uppercase;
-                font-weight: 700;
-                letter-spacing: 0.25em;
-                font-size: 0.9em;
-                display: inline-block;
-                padding: 20px;
-                margin-right: 20px;
-                &:hover {
-                    background: rgba(lighten($dark-color, 20%), 0.4);
-                    cursor: pointer;
-                }
-            }
 
-            & li:last-of-type {
-                margin-right: 0;
-            }
+        & li:last-of-type {
+            margin-right: 0;
         }
     }
-
-
+}
 
 .features {
 
@@ -340,6 +338,10 @@ p.subtitle {
                 padding: 40px 20%;
 
             }
+            &.login {
+                padding: 40px 20%;
+
+            }
         }
 
         &.portfolio {
@@ -399,7 +401,6 @@ a {
     //}
 
 }
-
 
 .nav-links {
     display: flex;
@@ -617,7 +618,7 @@ a.student-link:hover {
     border-radius: 3px;
     margin-right: 100px;
 
-    & .student-role{
+    & .student-role {
         padding: 20px;
         background-color: rgba(0, 0, 0, 0.5);
         position: absolute;
@@ -626,7 +627,7 @@ a.student-link:hover {
         z-index: 10;
     }
 
-    &.is-connected{
+    &.is-connected {
         background-color: rgba(44, 71, 41, 0.72);
 
     }
@@ -676,7 +677,7 @@ a.student-link:hover {
             left: 0;
             margin: 15px;
             padding: 12px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
 
         }
 
@@ -729,7 +730,6 @@ a.student-link:hover {
     }
 }
 
-
 .buttons {
     float: right;
 }
@@ -768,7 +768,6 @@ span.no-information {
     display: flex;
     flex-direction: row;
 
-
     &.space-around {
 
         justify-content: space-around;
@@ -791,18 +790,17 @@ span.no-information {
         text-align: center;
     }
 
-
 }
 
 div.information {
     width: 500px;
 
-    &:first-child{
+    &:first-child {
         text-align: right;
         padding-right: 60px;
         border-right: 1px solid #434b55;
     }
-    &:last-child{
+    &:last-child {
         text-align: left;
         padding-left: 60px;
     }
@@ -813,7 +811,7 @@ div.information {
     }
 }
 
-section.information{
+section.information {
     margin-bottom: 20px;
 
 }
@@ -822,7 +820,7 @@ section.information{
     width: 500px;
 }
 
-.results.transition.visible{
+.results.transition.visible {
     width: 500px;
 }
 
@@ -849,7 +847,8 @@ p {
 .information p {
     margin-bottom: 0 !important;
 }
-section.information > .row-flex:first-of-type{
+
+section.information > .row-flex:first-of-type {
     margin-top: 40px;
     margin-bottom: 20px;
 }
@@ -858,3 +857,136 @@ section.information > .row-flex:first-of-type{
     color: black;
 }
 
+form {
+    & .group {
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        margin-bottom: 65px;
+    }
+
+    &.form-comment {
+        margin: 20px 0;
+    }
+
+    & input, select, textarea {
+        color: white;
+        font-size: 18px;
+        padding: 10px 10px 10px 5px;
+        display: block;
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        border-bottom: 1px solid #434b55;
+    }
+
+    & input[type="file"] {
+        border-bottom: none;
+    }
+
+    & textarea {
+        max-width: 100%;
+        min-width: 100%;
+    }
+
+    & input:focus, textarea:focus {
+        outline: none;
+    }
+
+    & label {
+        &.no-material {
+            color: #579d69;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        &.material {
+            color: #999;
+            font-size: 18px;
+            font-weight: normal;
+            position: absolute;
+            pointer-events: none;
+            left: 5px;
+            top: 10px;
+            transition: 0.2s ease all;
+            -moz-transition: 0.2s ease all;
+            -webkit-transition: 0.2s ease all;
+        }
+
+    }
+
+    & input:focus ~ label, input[type="text"]:valid ~ label, input[type="email"]:valid ~ label, input[type="password"]:valid ~ label, input[type="date"]:valid ~ label, textarea:focus ~ label, textarea:valid ~ label {
+        top: -40px;
+        font-size: 14px;
+        color: #579d69;
+    }
+
+    & .bar {
+        position: relative;
+        display: block;
+        width: 100%;
+    }
+
+    & .bar:before, .bar:after {
+        content: '';
+        height: 2px;
+        width: 0;
+        bottom: 1px;
+        position: absolute;
+        background: #579d69;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+
+    & .bar:before {
+        left: 50%;
+    }
+
+    & .bar:after {
+        right: 50%;
+    }
+
+    & input:focus ~ .bar:before, input:focus ~ .bar:after, textarea:focus ~ .bar:before, textarea:focus ~ .bar:after {
+        width: 50%;
+    }
+
+    & .highlight {
+        position: absolute;
+        height: 60%;
+        width: 100%;
+        top: 25%;
+        left: 0;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
+
+@-webkit-keyframes inputHighlighter {
+    from {
+        background: #579d69;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@-moz-keyframes inputHighlighter {
+    from {
+        background: #579d69;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@keyframes inputHighlighter {
+    from {
+        background: #579d69;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
