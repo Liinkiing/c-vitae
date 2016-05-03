@@ -342,6 +342,10 @@ p.subtitle {
                 padding: 40px 20%;
 
             }
+            &.error {
+                padding: 40px 20%;
+
+            }
         }
 
         &.portfolio {
@@ -920,8 +924,7 @@ form {
         color: #579d69;
     }
 
-    & input[type="checkbox"]:focus ~ label, input[type="checkbox"]:valid ~ label
-    {
+    & input[type="checkbox"]:focus ~ label, input[type="checkbox"]:valid ~ label {
         top: 0;
 
     }
