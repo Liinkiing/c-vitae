@@ -17,6 +17,7 @@ class StudentRestController extends Controller
      * @QueryParam(name="age", requirements="\d+")
      * @QueryParam(name="role")
      * @QueryParam(name="bac")
+     * @QueryParam(name="prog_lang")
      * @QueryParam(name="sort", requirements="(asc|desc|ASC|DESC)", default="asc")
      */
     public function getStudentsAction(ParamFetcher $paramFetcher){
@@ -26,8 +27,9 @@ class StudentRestController extends Controller
         $age = $paramFetcher->get('age');
         $role = (explode(',', $paramFetcher->get('role'))[0] == '') ? null : explode(',', $paramFetcher->get('role'));
         $bac = (explode(',', $paramFetcher->get('bac'))[0] == '') ? null : explode(',', $paramFetcher->get('bac'));
+        $progLang = (explode(',', $paramFetcher->get('prog_lang'))[0] == '') ? null : explode(',', $paramFetcher->get('prog_lang'));
         $sort = $paramFetcher->get('sort');
-        $students = $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams($group, $name, $age, $role, $bac, $sort);
+        $students = $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams($group, $name, $age, $role, $bac, $progLang, $sort);
         return $students;
 
     }
@@ -37,6 +39,7 @@ class StudentRestController extends Controller
      * @QueryParam(name="age", requirements="\d+")
      * @QueryParam(name="role")
      * @QueryParam(name="bac")
+     * @QueryParam(name="prog_lang")
      * @QueryParam(name="sort", requirements="(asc|desc|ASC|DESC)", default="asc")
      */
     public function getGroupsStudentsAction(ParamFetcher $paramFetcher){
@@ -45,12 +48,13 @@ class StudentRestController extends Controller
         $age = $paramFetcher->get('age');
         $role = $paramFetcher->get('role');
         $bac = (explode(',', $paramFetcher->get('bac'))[0] == '') ? null : explode(',', $paramFetcher->get('bac'));
+        $progLang = (explode(',', $paramFetcher->get('prog_lang'))[0] == '') ? null : explode(',', $paramFetcher->get('prog_lang'));
         $sort = $paramFetcher->get('sort');
 
         $final= [];
         for($group = "A"; $group <= "D"; $group++){
             $final[$group] = ["name"    => "Groupe $group",
-                              "results" => $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams($group, $name, $age, $role, $bac, $sort)];
+                              "results" => $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams($group, $name, $age, $role, $bac, $progLang, $sort)];
         }
 
         return ["results" => $final];
