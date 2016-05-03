@@ -26,7 +26,9 @@ class StudentController extends Controller
             'students' => $students,
             'projectRoles' => $studentRepository->findProjectRoles(),
             'secteurVise' => $studentRepository->findSecteurVise(),
-            'programmingLanguages' => $studentRepository->findProgrammingLanguages()]);
+            'programmingLanguages' => $studentRepository->findProgrammingLanguages(),
+            'minAge' => $studentRepository->getMinOf('age'),
+            'maxAge' => $studentRepository->getMaxOf('age')]);
     }
 
     /**
@@ -48,7 +50,9 @@ class StudentController extends Controller
             'title' => 'Recherche',
             'projectRoles' => $studentRepository->findProjectRoles(),
             'secteurVise' => $studentRepository->findSecteurVise(),
-            'programmingLanguages' => $studentRepository->findProgrammingLanguages()]);
+            'programmingLanguages' => $studentRepository->findProgrammingLanguages(),
+            'minAge' => $studentRepository->getMinOf('age'),
+            'maxAge' => $studentRepository->getMaxOf('age')]);
     }
 
     /**
