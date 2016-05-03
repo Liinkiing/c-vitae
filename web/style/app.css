@@ -907,6 +907,22 @@ div.information {
 section.information {
   margin-bottom: 20px; }
 
+.ui.icon.input {
+  width: 500px; }
+
+.results.transition.visible {
+  width: 500px; }
+
+.ui.search > .results .result .content {
+  background-color: transparent;
+  padding: 10px;
+  transition: all 0.3s; }
+.ui.search > .results .result:hover {
+  background-color: #e6e6e6 !important; }
+
+.ui.category.search .results {
+  width: 500px; }
+
 .slideOne {
   width: 50px;
   height: 10px;

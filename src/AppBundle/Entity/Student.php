@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -88,6 +89,7 @@ class Student implements UserInterface, \Serializable, NamerInterface
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role", inversedBy="students", cascade={"persist"})
+     * @Serializer\Exclude()
      */
     private $roles;
 
@@ -234,14 +236,25 @@ class Student implements UserInterface, \Serializable, NamerInterface
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="author", cascade={"remove"})
+     * @Serializer\Exclude()
      */
     private $posts;
 
 
-
-
+    /**
+     * @param bool $inversed
+     * @return string
+     * @Serializer\VirtualProperty()
+     */
     public function getFullName($inversed = false){
         return ($inversed) ? $this->getLastName() . " " . $this->getFirstName() : $this->getFirstName() . " " . $this->getLastName();
+    }
+
+    /**
+     * @Serializer\VirtualProperty()
+     */
+    public function getUrl(){
+        return '/profile/' . $this->username;
     }
 
 
