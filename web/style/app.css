@@ -989,6 +989,8 @@ form input:focus ~ label, form input[type="text"]:valid ~ label, form input[type
   top: -40px;
   font-size: 14px;
   color: #579d69; }
+form input[type="checkbox"]:focus ~ label, form input[type="checkbox"]:valid ~ label {
+  top: 0; }
 form .bar {
   position: relative;
   display: block;
