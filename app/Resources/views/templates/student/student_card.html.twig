@@ -1,12 +1,47 @@
-<div class="student-item {% if app.user.username|default('anon.') == student.username %} is-connected {% endif %}">
-    <div class="student-role">
-        {{ student.projectRole }} {% if student.programmingLanguages %}| {{ student.programmingLanguages|join(', ')|upper|trim }}{% endif %}
-    </div>
-    <a class="student-link" href="{% if app.user.username|default('anon.') == student.username %}{{ path('my_profile') }}{% else %}{{ path('profile', {'username': student.username}) }}{% endif %}">
-        <div class="item-thumbnail" style="background: url('{% if vich_uploader_asset(student, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(student, 'profilePictureFile'))[0] }}{% elseif student.fbid is not null %}{{ student.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}'); background-position: center center; background-size: cover;">
-            <div class="item-title"><h2>{{ student.fullName }}</h2></div>
-            <div class="img-overlay"></div>
+{#<div class="student-item {% if app.user.username|default('anon.') == student.username %} is-connected {% endif %}">#}
+    {#<div class="student-role">#}
+        {#{{ student.projectRole }} {% if student.programmingLanguages %}| {{ student.programmingLanguages|join(', ')|upper|trim }}{% endif %}#}
+    {#</div>#}
+    {#<a class="student-link" href="{% if app.user.username|default('anon.') == student.username %}{{ path('my_profile') }}{% else %}{{ path('profile', {'username': student.username}) }}{% endif %}">#}
+        {#<div class="item-thumbnail" style="background: url('{% if vich_uploader_asset(student, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(student, 'profilePictureFile'))[0] }}{% elseif student.fbid is not null %}{{ student.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}'); background-position: center center; background-size: cover;">#}
+            {#<div class="item-title"><h2>{{ student.fullName }}</h2></div>#}
+            {#<div class="img-overlay"></div>#}
+        {#</div>#}
+        {#<div class="item-description">{{ student.description|default('Étudiant en DUT MMI à l\'université Paris-Est Marne La Vallée')|truncate(65, '...') }}</div>#}
+    {#</a>#}
+{#</div>#}
+    <div class="card {% if app.user.username|default('anon.') == student.username %} is-connected {% endif %}">
+        <div class="blurring dimmable image">
+            <div class="ui dimmer">
+                <div class="content">
+                    <div class="center">
+                        <a href="{% if app.user.username|default('anon.') == student.username %}{{ path('my_profile') }}{% else %}{{ path('profile', {'username': student.username}) }}{% endif %}"
+                           class="ui inverted button">Voir {% if app.user.username|default('anon.') == student.username %}mon{% else %}son{% endif %} profil</a>
+                    </div>
+                </div>
+            </div>
+            <img src="{% if vich_uploader_asset(student, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(student, 'profilePictureFile'))[0] }}{% elseif student.fbid is not null %}{{ student.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}">
         </div>
-        <div class="item-description">{{ student.description|default('Étudiant en DUT MMI à l\'université Paris-Est Marne La Vallée')|truncate(65, '...') }}</div>
-    </a>
-</div>
+        <div class="content">
+            <a href="{% if app.user.username|default('anon.') == student.username %}{{ path('my_profile') }}{% else %}{{ path('profile', {'username': student.username}) }}{% endif %}" class="header">{{ student.fullname }}</a>
+            <div class="meta">
+                <span>{% if student.linkedin or student.viadeo %}{{ student.description|truncate(65, '...') }}{% else %}{{ student.description|truncate(120, '...') }}{% endif %}</span>
+            </div>
+        </div>
+        {% if student.linkedin or student.viadeo %}
+            <div class="extra content" {% if student.linkedin and student.viadeo %}style="align-self: center;"{% endif %}>
+            {% if student.linkedin %}
+                <a href="{{ student.linkedin }}" class="ui linkedin button">
+                    <i class="linkedin icon"></i>
+                    LinkedIn
+                </a>
+            {% endif %}
+            {% if student.viadeo %}
+                <a href="{{ student.viadeo }}" class="ui viadeo button">
+                    <i class="fa fa-viadeo"></i>
+                    Viadeo
+                </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
