@@ -54,7 +54,6 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
             ->from('AppBundle:Student', 'student')
             ->where($qb->expr()->in('student.groupeTp', '?1'))->setParameter(1, $group);
         if($name != null){
-//            $result->andWhere($qb->expr()->eq('student.firstName', '?2'))->orWhere($qb->expr()->eq('student.lastName', '?2'))->setParameter(2, $name);
             $result->andWhere($qb->expr()->like(
                 "CONCAT(student.firstName, ' ', student.lastName)",
                 "?2"
@@ -64,14 +63,27 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
             $result->andWhere($qb->expr()->eq('student.age', '?3'))->setParameter(3, $age);
         }
         if($role != null){
-            $result->andWhere($qb->expr()->eq('student.projectRole', '?4'))->setParameter(4,$role);
+            $result->andWhere($qb->expr()->in('student.projectRole', '?4'))->setParameter(4, $role);
         }
         if($bac != null){
-            $result->andWhere($qb->expr()->eq('student.bac', '?5'))->setParameter(5,$bac);
+            $result->andWhere($qb->expr()->in('student.bac', '?5'))->setParameter(5, $bac);
         }
         $result->orderBy('student.lastName', $order);
         return $result->getQuery()->getResult();
 
+    }
+
+    public function findProjectRoles(){
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $roles = $qb->select('student.projectRole')->distinct()
+            ->from('AppBundle:Student', 'student')
+            ->getQuery()
+            ->getResult();
+        $final =[];
+        foreach($roles as $role){
+            array_push($final, $role['projectRole']);
+        }
+        return $final;
     }
 
     public function findByGroups(){

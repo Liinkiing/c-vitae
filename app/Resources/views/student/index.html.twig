@@ -1,4 +1,4 @@
-{% embed 'base.html.twig' with {'title': 'Listes des élèves', 'isFullscreen': '1', 'subtitle': "(wllh l'apparence de cette page est pas fini jugez pas)", "randomHeaderColors": '1', 'randomHeaderColors': '1', 'studentPerRow': 2 } %}
+{% embed 'base.html.twig' with {'title': 'Listes des élèves', 'isFullscreen': '1', 'subtitle': "(wllh l'apparence de cette page est pas fini jugez pas)", "randomHeaderColors": '1', 'randomHeaderColors': '1', 'studentPerRow': 2} %}
 
 
     {% block body %}
@@ -8,7 +8,20 @@
             <div class="generic-card {% if isFullscreen %} fullscreen {% endif %}">
                 <header>
                     <h2>{{ title }}</h2>
-                    <p class="subtitle">{{ subtitle }}</p>
+                    <p class="subtitle"
+                       {% if search|default(false) %}style="background-color: rgba(0,0,0,0.5); width: 700px; margin: 40px auto 0 auto; padding: 30px;"{% endif %}>
+                        {% if search|default(false) %} Affichage des élèves <br/>
+                            {% if app.request.get('age') %}<span
+                                    class="bold">Age</span> : {{ app.request.get('age') }} ans {% endif %}
+                            {% if app.request.get('bac') %}<span
+                                    class="bold">Bac</span> : {{ app.request.get('bac')|join(', ') }} {% endif %}
+                            {% if app.request.get('group') %}<span
+                                    class="bold">Groupe de TP</span> : {{ app.request.get('group')|join(', ') }} {% endif %}
+                            {% if app.request.get('role') %}<span
+                                    class="bold">Rôle</span> : {{ app.request.get('role')|join(', ') }} {% endif %}
+                        {% else %}
+                            {{ subtitle }}
+                        {% endif %}</p>
                 </header>
                 <div class="content {% if isFullscreen %} fullscreen {% endif %}">
                     {% autoescape false %}
@@ -19,6 +32,65 @@
                             <div class="alert alert-success">{{ message_success }}</div>
                         {% endfor %}
                     {% endautoescape %}
+                    <div class="ui modal">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            Recherche avancée
+                        </div>
+                        <form id="searchForm" class="ui form" method="get" action="{{ path('search') }}"
+                              style="padding: 40px;">
+                            <div class="ui form">
+                                <h4 class="ui dividing header">Informations basiques</h4>
+                                <div class="fields">
+                                    <div class="seven wide field">
+                                        <label>Groupe de TP</label>
+                                        <select multiple="" class="ui dropdown" name="group[]">
+                                            <option value="">Choisssisez des groupes</option>
+                                            <option value="A">Groupe A</option>
+                                            <option value="B">Groupe B</option>
+                                            <option value="C">Groupe C</option>
+                                            <option value="D">Groupe D</option>
+                                        </select>
+                                    </div>
+                                    <div class="six wide field">
+                                        <label>Bac</label>
+                                        <select multiple="" class="ui dropdown" name="bac[]">
+                                            <option value="">Choisssisez le baccalauréat préparé</option>
+                                            <option value="S">S</option>
+                                            <option value="ES">ES</option>
+                                            <option value="L">L</option>
+                                            <option value="STMG">STMG</option>
+                                            <option value="STI2D">STI2D</option>
+                                            <option value="BAC PRO">BAC PRO</option>
+                                        </select>
+                                    </div>
+                                    <div class="three wide field">
+                                        <label>Age</label>
+                                        <input name="age" placeholder="Entrez un âge" type="number">
+                                    </div>
+                                </div>
+                                <h4 class="ui dividing header">D'autres informations mashallah</h4>
+                                <div class="fields">
+                                    <div class="eight wide field">
+                                        <label>Rôle dans le projet</label>
+                                        <select multiple="" class="ui dropdown" name="role[]">
+                                            <option value="">Choisssisez des rôles</option>
+                                            {% for role in projectRoles %}
+                                                <option value="{{ role }}">{{ role }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                        <div class="actions">
+                            <div id="searchButton" class="ui positive right labeled icon button">
+                                Valider
+                                <i class="checkmark icon"></i>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="ui category search">
                             <div class="ui icon input">
@@ -26,13 +98,21 @@
                                 <i class="search icon"></i>
                             </div>
                             <div class="results"></div>
+                            <button id="showAdvancedSearch" class="ui primary button"
+                                    style="width: 300px; margin-left: 40px;">
+                                Afficher les options de recherche avancés
+                            </button>
                         </div>
                     </div>
-                    {% for student in students %}
-                        {% if loop.index0 % studentPerRow == 0 %}<div class="row">{% endif %}
+                    {% if students|length != 0 %}
+                        {% for student in students %}
+                            {% if loop.index0 % studentPerRow == 0 %}<div class="row">{% endif %}
                             {% embed 'templates/student/student_card.html.twig' with {'student': student} %}{% endembed %}
-                        {% if loop.index % studentPerRow == 0 %}</div>{% endif %}
-                    {% endfor %}
+                            {% if loop.index % studentPerRow == 0 %}</div>{% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <h2>La recherche n'a donné aucun résultat ! Veuillez réessayer avec d'autres critères :(</h2>
+                    {% endif %}
                 </div>
 
             </div>
@@ -42,20 +122,36 @@
     {% endblock %}
 
     {% block javascripts %}
+        <script src="{{ asset('components/dropdown.js') }}"></script>
+        <script src="{{ asset('components/modal.js') }}"></script>
         <script>
+            $('.ui.dropdown')
+                    .dropdown()
+            ;
             $('.ui.search')
                     .search({
-                        apiSettings: {url: '/api/groups/students?name={query}'},
+                        apiSettings: {
+                            url: '/api/groups/students?name={query}'
+                        },
                         fields: {
                             title: 'full_name'
                         },
                         type: 'category',
                         searchDelay: 700
                     });
+            $('#showAdvancedSearch').click(function () {
+                $('.ui.modal')
+                        .modal('show')
+                ;
+            });
+            $('#searchButton').click(function () {
+                $('#searchForm').submit();
+            });
         </script>
     {% endblock %}
 
     {% block customcss %}
+
 
         {% if randomHeaderColors %}
             <style>
