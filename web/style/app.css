@@ -604,6 +604,8 @@ p.subtitle {
       text-align: justify; }
       .generic-card .content.fullscreen.profile {
         padding: 40px 20%; }
+      .generic-card .content.fullscreen.login {
+        padding: 40px 20%; }
     .generic-card .content.portfolio {
       display: block; }
 
@@ -944,5 +946,95 @@ section.information > .row-flex:first-of-type {
 
 .ui.modal p {
   color: black; }
+
+form .group {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  margin-bottom: 65px; }
+form.form-comment {
+  margin: 20px 0; }
+form input, form select, form textarea {
+  color: white;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #434b55; }
+form input[type="file"] {
+  border-bottom: none; }
+form textarea {
+  max-width: 100%;
+  min-width: 100%; }
+form input:focus, form textarea:focus {
+  outline: none; }
+form label.no-material {
+  color: #579d69;
+  font-size: 14px;
+  margin-bottom: 20px; }
+form label.material {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all; }
+form input:focus ~ label, form input[type="text"]:valid ~ label, form input[type="email"]:valid ~ label, form input[type="password"]:valid ~ label, form input[type="date"]:valid ~ label, form textarea:focus ~ label, form textarea:valid ~ label {
+  top: -40px;
+  font-size: 14px;
+  color: #579d69; }
+form .bar {
+  position: relative;
+  display: block;
+  width: 100%; }
+form .bar:before, form .bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #579d69;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all; }
+form .bar:before {
+  left: 50%; }
+form .bar:after {
+  right: 50%; }
+form input:focus ~ .bar:before, form input:focus ~ .bar:after, form textarea:focus ~ .bar:before, form textarea:focus ~ .bar:after {
+  width: 50%; }
+form .highlight {
+  position: absolute;
+  height: 60%;
+  width: 100%;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5; }
+
+@-webkit-keyframes inputHighlighter {
+  from {
+    background: #579d69; }
+  to {
+    width: 0;
+    background: transparent; } }
+@-moz-keyframes inputHighlighter {
+  from {
+    background: #579d69; }
+  to {
+    width: 0;
+    background: transparent; } }
+@keyframes inputHighlighter {
+  from {
+    background: #579d69; }
+  to {
+    width: 0;
+    background: transparent; } }
 
 /*# sourceMappingURL=app.css.map */
