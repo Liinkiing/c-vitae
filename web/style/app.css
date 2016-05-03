@@ -606,6 +606,8 @@ p.subtitle {
         padding: 40px 20%; }
       .generic-card .content.fullscreen.login {
         padding: 40px 20%; }
+      .generic-card .content.fullscreen.error {
+        padding: 40px 20%; }
     .generic-card .content.portfolio {
       display: block; }
 
