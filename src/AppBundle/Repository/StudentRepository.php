@@ -133,6 +133,32 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
         return $final;
     }
 
+    public function getMinOf($attribute){
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $results = $qb->select('student.' . $attribute)->distinct()
+            ->from('AppBundle:Student', 'student')
+            ->getQuery()
+            ->getResult();
+        $final = [];
+        foreach ($results as $result) {
+            array_push($final, $result[$attribute]);
+        }
+        return min($final);
+    }
+
+    public function getMaxOf($attribute){
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $results = $qb->select('student.' . $attribute)->distinct()
+            ->from('AppBundle:Student', 'student')
+            ->getQuery()
+            ->getResult();
+        $final = [];
+        foreach ($results as $result) {
+            array_push($final, $result[$attribute]);
+        }
+        return max($final);
+    }
+
     public function findByGroups()
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
