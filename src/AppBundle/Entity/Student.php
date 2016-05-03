@@ -852,6 +852,7 @@ class Student implements UserInterface, \Serializable, NamerInterface
     public function __construct()
     {
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+
     }
 
     /**
