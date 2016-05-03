@@ -38,6 +38,7 @@ class StudentRestController extends Controller
      * @QueryParam(name="age", requirements="\d+")
      * @QueryParam(name="role", requirements="[a-z]+")
      * @QueryParam(name="bac")
+     * @QueryParam(name="sort", requirements="(asc|desc|ASC|DESC)", default="asc")
      */
     public function getGroupsStudentsAction(ParamFetcher $paramFetcher){
 
@@ -45,19 +46,20 @@ class StudentRestController extends Controller
         $age = $paramFetcher->get('age');
         $role = $paramFetcher->get('role');
         $bac = $paramFetcher->get('bac');
+        $sort = $paramFetcher->get('sort');
 
         $final = ["A" =>
             ["name" => "Groupe A",
-                "results" => $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams('A', $name, $age, $role, $bac)],
+                "results" => $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams('A', $name, $age, $role, $bac, $sort)],
             "B" =>
                 ["name" => "Groupe B",
-                    "results" => $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams('B', $name, $age, $role, $bac)],
+                    "results" => $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams('B', $name, $age, $role, $bac, $sort)],
             "C" =>
                 ["name" => "Groupe C",
-                    "results" => $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams('C', $name, $age, $role, $bac)],
+                    "results" => $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams('C', $name, $age, $role, $bac, $sort)],
             "D" =>
                 ["name" => "Groupe D",
-                    "results" => $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams('D', $name, $age, $role, $bac)]];
+                    "results" => $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams('D', $name, $age, $role, $bac, $sort)]];
 
         return ["results" => $final];
     }
