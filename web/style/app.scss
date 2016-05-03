@@ -334,8 +334,12 @@ p.subtitle {
 
         }
         &.fullscreen {
-            padding: 40px 20%;
+            padding: 40px 3%;
             text-align: justify;
+            &.profile {
+                padding: 40px 20%;
+
+            }
         }
 
         &.portfolio {
@@ -613,6 +617,15 @@ a.student-link:hover {
     border-radius: 3px;
     margin-right: 100px;
 
+    & .student-role{
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        z-index: 10;
+    }
+
     &.is-connected{
         background-color: rgba(44, 71, 41, 0.72);
 
@@ -839,6 +852,10 @@ p {
 section.information > .row-flex:first-of-type{
     margin-top: 40px;
     margin-bottom: 20px;
+}
+
+.ui.modal p {
+    color: black;
 }
 
 //============= LE STYLE DES CHECKBOXS ONT ÉTÉ RÉCUPÉRÉS A PARTIR DE CE SITE : http://codepen.io/bbodine1/pen/novBm ================

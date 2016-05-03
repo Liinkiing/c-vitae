@@ -10,7 +10,7 @@
                     <h2>{{ title }}</h2>
                     <p>{{ subtitle }}</p>
                 </header>
-                <div class="content {% if isFullscreen %} fullscreen {% endif %}">
+                <div class="content profile{% if isFullscreen %} fullscreen {% endif %}">
                     {% autoescape false %}
                         {% for message_danger in app.session.flashBag.get('danger') %}
                             <div class="alert alert-danger">{{ message_danger }}</div>
