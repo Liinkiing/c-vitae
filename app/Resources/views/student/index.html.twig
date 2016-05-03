@@ -19,7 +19,15 @@
                             <div class="alert alert-success">{{ message_success }}</div>
                         {% endfor %}
                     {% endautoescape %}
-
+                    <div class="row">
+                        <div class="ui category search">
+                            <div class="ui icon input">
+                                <input class="prompt" placeholder="Rechercher un élève..." type="text">
+                                <i class="search icon"></i>
+                            </div>
+                            <div class="results"></div>
+                        </div>
+                    </div>
                     {% for student in students %}
                         {% if loop.index0 % studentPerRow == 0 %}<div class="row">{% endif %}
                             {% embed 'templates/student/student_card.html.twig' with {'student': student} %}{% endembed %}
@@ -33,6 +41,26 @@
 
     {% endblock %}
 
+    {% block javascripts %}
+        <script>
+            {#var students = [{% for student in students %}#}
+                {#{title: '{{ student.fullName }}',#}
+                {#description: '{{ student.description|truncate(100, '...') }}',#}
+                {#url: '{{ path('profile', {'username': student.username}) }}'}{% if not loop.last %},{% endif %}#}
+                {#{% endfor %}];#}
+            $.fn.modal.settings.debug = true;
+            $.fn.modal.settings.verbose = true;
+            $('.ui.search')
+                    .search({
+                        apiSettings: {url: '/api/groups/students?name={query}'},
+                        fields: {
+                            title: 'full_name'
+                        },
+                        type: 'category',
+                        searchFullText: true
+                    });
+        </script>
+    {% endblock %}
 
     {% block customcss %}
 
