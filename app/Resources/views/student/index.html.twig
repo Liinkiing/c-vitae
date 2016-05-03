@@ -19,6 +19,8 @@
                                     class="bold">Groupe de TP</span> : {{ app.request.get('group')|join(', ') }} {% endif %}
                             {% if app.request.get('role') %}<span
                                     class="bold">Rôle</span> : {{ app.request.get('role')|join(', ') }} {% endif %}
+                            {% if app.request.get('prog_lang') %}<span
+                                    class="bold">Langages informatique</span> : {{ app.request.get('prog_lang')|join(', ') }} {% endif %}
                         {% else %}
                             {{ subtitle }}
                         {% endif %}</p>
@@ -81,6 +83,17 @@
                                         </select>
                                     </div>
                                 </div>
+                                <h4 class="ui dividing header">Compétences en langage informatique</h4>
+                                <div class="fields">
+                                    {% for prog_lang in programmingLanguages %}
+                                        <div class="inline field">
+                                            <div class="ui checkbox">
+                                                <input value="{{ prog_lang }}" class="hidden" name="prog_lang[]" tabindex="{{ loop.index0 }}" type="checkbox">
+                                                <label>{{ prog_lang }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
                             </div>
 
                         </form>
@@ -124,7 +137,11 @@
     {% block javascripts %}
         <script src="{{ asset('components/dropdown.js') }}"></script>
         <script src="{{ asset('components/modal.js') }}"></script>
+        <script src="{{ asset('components/checkbox.js') }}"></script>
         <script>
+            $('.ui.checkbox')
+                    .checkbox()
+            ;
             $('.ui.dropdown')
                     .dropdown()
             ;

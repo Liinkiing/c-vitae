@@ -19,8 +19,14 @@ class StudentController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $students = $this->getDoctrine()->getRepository('AppBundle:Student')->findByAlphabeticalOrder();
-        return $this->render('student/index.html.twig', ['title' => 'Liste des élèves', 'students' => $students, 'projectRoles' => $this->getDoctrine()->getRepository('AppBundle:Student')->findProjectRoles()]);
+
+        $studentRepository = $this->getDoctrine()->getRepository('AppBundle:Student');
+        $students = $studentRepository->findByAlphabeticalOrder();
+        return $this->render('student/index.html.twig', ['title' => 'Liste des élèves',
+            'students' => $students,
+            'projectRoles' => $studentRepository->findProjectRoles(),
+            'secteurVise' => $studentRepository->findSecteurVise(),
+            'programmingLanguages' => $studentRepository->findProgrammingLanguages()]);
     }
 
     /**
@@ -28,14 +34,21 @@ class StudentController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $students = $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams(
+        $studentRepository = $this->getDoctrine()->getRepository('AppBundle:Student');
+        $students = $studentRepository->findWithParams(
             ($request->get('group') == '') ? ['A','B','C','D'] : $request->get('group'),
             $request->get('name'),
             $request->get('age'),
             $request->get('role'),
             $request->get('bac'),
+            $request->get('prog_lang'),
             $request->get('sort'));
-        return $this->render('student/index.html.twig', ['students' => $students, 'search' => true, 'title' => 'Recherche', 'projectRoles' => $this->getDoctrine()->getRepository('AppBundle:Student')->findProjectRoles()]);
+        return $this->render('student/index.html.twig', ['students' => $students,
+            'search' => true,
+            'title' => 'Recherche',
+            'projectRoles' => $studentRepository->findProjectRoles(),
+            'secteurVise' => $studentRepository->findSecteurVise(),
+            'programmingLanguages' => $studentRepository->findProgrammingLanguages()]);
     }
 
     /**
