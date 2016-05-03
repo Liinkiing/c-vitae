@@ -4,3 +4,8 @@ app:
 
 logout:
   path: /logout
+
+students:
+  type: rest
+  resource: '@AppBundle/Controller/StudentRestController.php'
+  prefix: /api

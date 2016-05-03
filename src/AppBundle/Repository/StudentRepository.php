@@ -25,4 +25,60 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
 
     }
+
+    public function findByTPGroup($tp){
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        return $qb->select('student')
+            ->from('AppBundle:Student', 'student')
+            ->where($qb->expr()->eq('student.groupeTp', '?1'))
+            ->setParameter(1, $tp)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByFirstnameOrLastname($name){
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        return $qb->select('student')
+            ->from('AppBundle:Student', 'student')
+            ->where($qb->expr()->eq('student.firstName', '?1'))
+            ->orWhere($qb->expr()->eq('student.lastName', '?1'))
+            ->setParameter(1, $name)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findWithParams($group = ['A', 'B', 'C', 'D'], $name = null, $age = null, $role = null, $bac = null, $order = 'ASC'){
+
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $result = $qb->select('student')
+            ->from('AppBundle:Student', 'student')
+            ->where($qb->expr()->in('student.groupeTp', '?1'))->setParameter(1, $group);
+        if($name != null){
+//            $result->andWhere($qb->expr()->eq('student.firstName', '?2'))->orWhere($qb->expr()->eq('student.lastName', '?2'))->setParameter(2, $name);
+            $result->andWhere($qb->expr()->like(
+                "CONCAT(student.firstName, ' ', student.lastName)",
+                "?2"
+            ))->setParameter(2, "%$name%");
+        }
+        if($age != null){
+            $result->andWhere($qb->expr()->eq('student.age', '?3'))->setParameter(3, $age);
+        }
+        if($role != null){
+            $result->andWhere($qb->expr()->eq('student.projectRole', '?4'))->setParameter(4,$role);
+        }
+        if($bac != null){
+            $result->andWhere($qb->expr()->eq('student.bac', '?5'))->setParameter(5,$bac);
+        }
+        $result->orderBy('student.lastName', $order);
+        return $result->getQuery()->getResult();
+
+    }
+
+    public function findByGroups(){
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        return $qb->select('student')
+            ->from('AppBundle:Student', 'student')
+            ->groupBy('student.groupeTp')
+            ->getQuery()->getResult();
+    }
 }

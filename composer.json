@@ -29,7 +29,9 @@
         "vich/uploader-bundle": "^1.0",
         "oneup/flysystem-bundle": "*",
         "league/flysystem-dropbox": "*",
-        "dropbox/dropbox-sdk": "*"
+        "dropbox/dropbox-sdk": "*",
+        "friendsofsymfony/rest-bundle": "dev-master",
+        "jms/serializer-bundle": "dev-master"
 
     },
     "require-dev": {

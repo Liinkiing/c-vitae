@@ -805,6 +805,30 @@ section.information{
 
 }
 
+.ui.icon.input {
+    width: 500px;
+}
+
+.results.transition.visible{
+    width: 500px;
+}
+
+.ui.search > .results .result {
+    & .content {
+        background-color: transparent;
+        padding: 10px;
+        transition: all 0.3s;
+
+    }
+    &:hover {
+        background-color: darken(white, 10%) !important;
+    }
+}
+
+.ui.category.search .results {
+    width: 500px;
+}
+
 //============= LE STYLE DES CHECKBOXS ONT ÉTÉ RÉCUPÉRÉS A PARTIR DE CE SITE : http://codepen.io/bbodine1/pen/novBm ================
 
 .slideOne {
