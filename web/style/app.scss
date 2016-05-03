@@ -306,6 +306,14 @@ p.subtitle {
 
 }
 
+.ui.cards > .card {
+    box-shadow: 0 0 9px rgba(0, 0, 0, 0.29);
+}
+
+.ui.inverted.button {
+    transition: all 0.6s;
+}
+
 .generic-card {
     text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
@@ -320,7 +328,7 @@ p.subtitle {
         box-shadow: none;
     }
 
-    & .content {
+    & .content-site {
         text-align: left;
         padding: 40px;
         background-color: $dark-color;
@@ -613,6 +621,8 @@ a.student-link:hover {
     color: #d7a965;
 }
 
+
+
 .student-item {
 
     position: relative;
@@ -632,8 +642,8 @@ a.student-link:hover {
     }
 
     &.is-connected {
-        background-color: rgba(44, 71, 41, 0.72);
-
+        //background-color: rgba(44, 71, 41, 0.72);
+        width: 400px;
     }
 
     &:last-of-type {
@@ -861,6 +871,10 @@ section.information > .row-flex:first-of-type {
     color: black;
 }
 
+.card.is-connected{
+    width: 400px !important;
+}
+
 form {
     & .group {
         display: inline-block;
@@ -997,5 +1011,17 @@ form {
     to {
         width: 0;
         background: transparent;
+    }
+}
+
+.ui.viadeo.button {
+    background-color: #f07355;
+    color: white;
+    & i {
+        height: 0.85714286em;
+        opacity: 0.8;
+        margin: 0em 0.6em 0em -0.2em;
+        -webkit-transition: opacity 0.1s ease;
+        transition: opacity 0.1s ease;
     }
 }
