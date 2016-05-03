@@ -10,16 +10,16 @@
                     <h2>{{ title }}</h2>
                     <p class="subtitle"
                        {% if search|default(false) %}style="background-color: rgba(0,0,0,0.5); width: 700px; margin: 40px auto 0 auto; padding: 30px;"{% endif %}>
-                        {% if search|default(false) %} Affichage des élèves <br/>
-                            {% if app.request.get('age') %}<span
+                        {% if search|default(false) %} Résultat de votre recherche <br/>
+                            {% if app.request.get('age') %}<br><span
                                     class="bold">Age</span> : {{ app.request.get('age') }} ans {% endif %}
-                            {% if app.request.get('bac') %}<span
+                            {% if app.request.get('bac') %}<br><span
                                     class="bold">Bac</span> : {{ app.request.get('bac')|join(', ') }} {% endif %}
-                            {% if app.request.get('group') %}<span
+                            {% if app.request.get('group') %}<br><span
                                     class="bold">Groupe de TP</span> : {{ app.request.get('group')|join(', ') }} {% endif %}
-                            {% if app.request.get('role') %}<span
+                            {% if app.request.get('role') %}<br><span
                                     class="bold">Rôle</span> : {{ app.request.get('role')|join(', ') }} {% endif %}
-                            {% if app.request.get('prog_lang') %}<span
+                            {% if app.request.get('prog_lang') %}<br><span
                                     class="bold">Langages informatique</span> : {{ app.request.get('prog_lang')|join(', ') }} {% endif %}
                         {% else %}
                             {{ subtitle }}
