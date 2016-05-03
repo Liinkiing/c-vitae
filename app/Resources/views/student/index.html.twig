@@ -1,4 +1,4 @@
-{% embed 'base.html.twig' with {'title': 'Listes des élèves', 'isFullscreen': '1', 'subtitle': "(wllh l'apparence de cette page est pas fini jugez pas)", "randomHeaderColors": '1', 'randomHeaderColors': '1', 'studentPerRow': 2} %}
+{% embed 'base.html.twig' with {'title': 'Listes des élèves', 'isFullscreen': '1', 'subtitle': "(wllh l'apparence de cette page est pas fini jugez pas)", "randomHeaderColors": '1', 'randomHeaderColors': '1', 'studentPerRow': 4} %}
 
 
     {% block body %}
@@ -26,7 +26,7 @@
                             {{ subtitle }}
                         {% endif %}</p>
                 </header>
-                <div class="content {% if isFullscreen %} fullscreen {% endif %}">
+                <div class="content-site {% if isFullscreen %} fullscreen {% endif %}">
                     {% autoescape false %}
                         {% for message_danger in app.session.flashBag.get('danger') %}
                             <div class="alert alert-danger">{{ message_danger }}</div>
@@ -127,9 +127,9 @@
                     </div>
                     {% if students|length != 0 %}
                         {% for student in students %}
-                            {% if loop.index0 % studentPerRow == 0 %}<div class="row">{% endif %}
+                            {% if loop.index0 % studentPerRow == 0 %}<div class="row"><div class="ui special cards">{% endif %}
                             {% embed 'templates/student/student_card.html.twig' with {'student': student} %}{% endembed %}
-                            {% if loop.index % studentPerRow == 0 %}</div>{% endif %}
+                            {% if loop.index % studentPerRow == 0 %}</div></div>{% endif %}
                         {% endfor %}
                     {% else %}
                         <h2>La recherche n'a donné aucun résultat ! Veuillez réessayer avec d'autres critères :(</h2>
@@ -156,6 +156,9 @@
             $('#closeSearch')
                     .popup()
             ;
+            $('.special.cards .image').dimmer({
+                on: 'hover'
+            });
             $('.ui.search')
                     .search({
                         apiSettings: {
