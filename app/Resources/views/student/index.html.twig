@@ -43,13 +43,6 @@
 
     {% block javascripts %}
         <script>
-            {#var students = [{% for student in students %}#}
-                {#{title: '{{ student.fullName }}',#}
-                {#description: '{{ student.description|truncate(100, '...') }}',#}
-                {#url: '{{ path('profile', {'username': student.username}) }}'}{% if not loop.last %},{% endif %}#}
-                {#{% endfor %}];#}
-            $.fn.modal.settings.debug = true;
-            $.fn.modal.settings.verbose = true;
             $('.ui.search')
                     .search({
                         apiSettings: {url: '/api/groups/students?name={query}'},
@@ -57,7 +50,7 @@
                             title: 'full_name'
                         },
                         type: 'category',
-                        searchFullText: true
+                        searchDelay: 700
                     });
         </script>
     {% endblock %}
