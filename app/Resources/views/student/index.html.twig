@@ -24,6 +24,11 @@
                                     class="bold">Rôle</span> : {{ app.request.get('role')|join(', ') }} {% endif %}
                             {% if app.request.get('prog_lang') %}<br><span
                                     class="bold">Langages informatique</span> : {{ app.request.get('prog_lang')|join(', ') }} {% endif %}
+                            {% if app.request.get('linkedin') and app.request.get('viadeo') %}<br><span class="bold">Possédant </span><i class="fa fa-linkedin">&nbsp;</i><i class="fa fa-viadeo">&nbsp;</i> {% else %}
+                                {% if app.request.get('viadeo') %}<br><span class="bold">Possédant </span><i class="fa fa-viadeo"></i> {% endif %}
+                                {% if app.request.get('linkedin') %}<br><span class="bold">Possédant </span><i class="fa fa-linkedin"></i> {% endif %}
+                            {% endif %}
+
                         {% else %}
                             {{ subtitle }}
                         {% endif %}</p>
@@ -102,11 +107,35 @@
                                         <div class="inline field">
                                             <div class="ui checkbox">
                                                 <input value="{{ prog_lang }}" class="hidden" name="prog_lang[]"
-                                                       tabindex="{{ loop.index0 }}" type="checkbox">
+                                                       tabindex="0" type="checkbox">
                                                 <label>{{ prog_lang }}</label>
                                             </div>
                                         </div>
                                     {% endfor %}
+                                </div>
+                                <h4 class="ui dividing header">Possédant les réseaux professionnels suivants</h4>
+                                <div class="fields">
+                                        <div class="inline field">
+                                            <div class="ui checkbox">
+                                                <input value="true" class="hidden" name="linkedin" tabindex="0" type="checkbox">
+                                                <label><i class="fa fa-linkedin">&nbsp;&nbsp;</i>LinkedIn</label>
+                                            </div>
+                                            <div class="ui checkbox">
+                                                <input value="true" class="hidden" name="viadeo" tabindex="0" type="checkbox">
+                                                <label><i class="fa fa-viadeo">&nbsp;&nbsp;</i>Viadeo</label>
+                                            </div>
+                                        </div>
+                                </div>
+                                <br><br>
+                                <div class="fields">
+                                    <div class="sixteen wide field">
+                                        <label>Tri</label>
+                                        <select class="ui dropdown" name="sort">
+                                            <option value="">Trier les résultats (par ordre alphabétique)</option>
+                                            <option value="asc">Croissant</option>
+                                            <option value="desc">Décroissant</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 
@@ -143,7 +172,7 @@
                             {% if loop.index % studentPerRow == 0 %}</div></div>{% endif %}
                         {% endfor %}
                     {% else %}
-                        <h2>La recherche n'a donné aucun résultat ! Veuillez réessayer avec d'autres critères :(</h2>
+                        <h1 style="text-align: center;">La recherche n'a donné aucun résultat ! Veuillez réessayer avec d'autres critères.</h1>
                     {% endif %}
                 </div>
             </div>
@@ -189,6 +218,8 @@
             $('#searchButton').click(function () {
                 $('#searchForm').submit();
             });
+
+
         </script>
     {% endblock %}
 
