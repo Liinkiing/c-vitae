@@ -18,6 +18,7 @@ class StudentRestController extends Controller
      * @QueryParam(name="role")
      * @QueryParam(name="bac")
      * @QueryParam(name="prog_lang")
+     * @QueryParam(name="gender")
      * @QueryParam(name="sort", requirements="(asc|desc|ASC|DESC)", default="asc")
      */
     public function getStudentsAction(ParamFetcher $paramFetcher){
@@ -28,8 +29,9 @@ class StudentRestController extends Controller
         $role = (explode(',', $paramFetcher->get('role'))[0] == '') ? null : explode(',', $paramFetcher->get('role'));
         $bac = (explode(',', $paramFetcher->get('bac'))[0] == '') ? null : explode(',', $paramFetcher->get('bac'));
         $progLang = (explode(',', $paramFetcher->get('prog_lang'))[0] == '') ? null : explode(',', $paramFetcher->get('prog_lang'));
+        $gender = $paramFetcher->get('gender');
         $sort = $paramFetcher->get('sort');
-        $students = $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams($group, $name, $age, $role, $bac, $progLang, $sort);
+        $students = $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams($group, $name, $age, $role, $bac, $progLang, $gender, $sort);
         return $students;
 
     }

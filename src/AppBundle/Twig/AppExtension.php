@@ -43,6 +43,15 @@ class AppExtension extends \Twig_Extension
             }));
     }
 
+    public function getFilters()
+    {
+        return array(
+            new \Twig_SimpleFilter('str_replace', function($string, $search, $replace){
+                return str_replace($search, $replace, $string);
+            })
+        );
+    }
+
 }
 
 

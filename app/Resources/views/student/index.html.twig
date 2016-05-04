@@ -12,8 +12,10 @@
                        {% if search|default(false) %}style="background-color: rgba(0,0,0,0.5); width: 700px; margin: 40px auto 0 auto; padding: 30px;"{% endif %}>
                         {% if search|default(false) %} Résultat de votre recherche ({{ students|length }} étudiant{% if students|length > 1 %}s{% endif %})
                             <br/>
+                            {% if app.request.get('gender') and app.request.get('gender') != 'both' %}<br><span
+                                class="bold">Sexe</span> : {{ app.request.get('gender')|str_replace('female', 'Féminin')|str_replace('male', 'Masculin') }} {% endif %}
                             {% if app.request.get('age') %}<br><span
-                                    class="bold">Age</span> : {{ app.request.get('age') }} ans {% endif %}
+                                    class="bold">Âge</span> : {{ app.request.get('age') }} ans {% endif %}
                             {% if app.request.get('bac') %}<br><span
                                     class="bold">Bac</span> : {{ app.request.get('bac')|join(', ') }} {% endif %}
                             {% if app.request.get('group') %}<br><span
@@ -56,6 +58,32 @@
                                         </select>
                                     </div>
                                     <div class="six wide field">
+                                        <label>Sexe</label>
+                                        <select class="ui dropdown" name="gender">
+                                            <option value="">Choisssisez le sexe</option>
+                                            <option value="male">Masculin</option>
+                                            <option value="female">Féminin</option>
+                                            <option value="both">Les deux</option>
+                                        </select>
+                                    </div>
+                                    <div class="three wide field">
+                                        <label>Age</label>
+                                        <input name="age" placeholder="Entrez un âge" type="number" min="{{ minAge }}"
+                                               max="{{ maxAge }}">
+                                    </div>
+                                </div>
+                                <h4 class="ui dividing header">Autres informations</h4>
+                                <div class="fields">
+                                    <div class="nine wide field">
+                                        <label>Rôle dans le projet</label>
+                                        <select multiple="" class="ui dropdown" name="role[]">
+                                            <option value="">Choisssisez des rôles</option>
+                                            {% for role in projectRoles %}
+                                                <option value="{{ role }}">{{ role }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="seven wide field">
                                         <label>Bac</label>
                                         <select multiple="" class="ui dropdown" name="bac[]">
                                             <option value="">Choisssisez le baccalauréat préparé</option>
@@ -65,23 +93,6 @@
                                             <option value="STMG">STMG</option>
                                             <option value="STI2D">STI2D</option>
                                             <option value="BAC PRO">BAC PRO</option>
-                                        </select>
-                                    </div>
-                                    <div class="three wide field">
-                                        <label>Age</label>
-                                        <input name="age" placeholder="Entrez un âge" type="number" min="{{ minAge }}"
-                                               max="{{ maxAge }}">
-                                    </div>
-                                </div>
-                                <h4 class="ui dividing header">D'autres informations mashallah</h4>
-                                <div class="fields">
-                                    <div class="eight wide field">
-                                        <label>Rôle dans le projet</label>
-                                        <select multiple="" class="ui dropdown" name="role[]">
-                                            <option value="">Choisssisez des rôles</option>
-                                            {% for role in projectRoles %}
-                                                <option value="{{ role }}">{{ role }}</option>
-                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>

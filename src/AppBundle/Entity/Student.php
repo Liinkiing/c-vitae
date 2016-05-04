@@ -65,6 +65,11 @@ class Student implements UserInterface, \Serializable, NamerInterface
 
 
     /**
+     * @ORM\Column(name="gender", type="string", length=20)
+     */
+    private $gender;
+
+    /**
      * @UploadableField(mapping="student_image", fileNameProperty="profilePicture")
      */
     private $profilePictureFile;
@@ -1162,5 +1167,21 @@ class Student implements UserInterface, \Serializable, NamerInterface
     public function setCv($cv)
     {
         $this->cv = $cv;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param mixed $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
     }
 }
