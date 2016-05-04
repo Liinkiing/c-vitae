@@ -50,7 +50,8 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
-    public function findWithParams($group = ['A', 'B', 'C', 'D'], $name = null, $age = null, $role = null, $bac = null, $programmingLanguages = null, $gender = null, $order = 'ASC')
+    public function findWithParams($group = ['A', 'B', 'C', 'D'], $name = null, $age = null, $role = null, $bac = null, 
+                                   $programmingLanguages = null, $gender = null, $linkedin = null, $viadeo = null, $order = 'ASC')
     {
 
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -75,12 +76,19 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
         if ($gender != null && $gender != 'both') {
             $result->andWhere($qb->expr()->eq('student.gender', '?6'))->setParameter(6, $gender);
         }
+        if ($linkedin != null) {
+            $result->andWhere($qb->expr()->isNotNull('student.linkedin'));
+        }
+        if ($viadeo != null) {
+            $result->andWhere($qb->expr()->isNotNull('student.viadeo'));
+        }
         if ($programmingLanguages != null) {
             for ($i = 0; $i < count($programmingLanguages); $i++) {
-                $parameterCount = $i + 7;
+                $parameterCount = $i + 8;
                 $result->andWhere($qb->expr()->like('student.programmingLanguages', "?$parameterCount"))->setParameter($parameterCount, "%$programmingLanguages[$i]%");
             }
         }
+
         $result->orderBy('student.lastName', $order);
         return $result->getQuery()->getResult();
 
