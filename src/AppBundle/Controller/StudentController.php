@@ -44,6 +44,7 @@ class StudentController extends Controller
             $request->get('role'),
             $request->get('bac'),
             $request->get('prog_lang'),
+            $request->get('gender'),
             $request->get('sort'));
         return $this->render('student/index.html.twig', ['students' => $students,
             'search' => true,
