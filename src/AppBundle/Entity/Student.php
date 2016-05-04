@@ -65,7 +65,7 @@ class Student implements UserInterface, \Serializable, NamerInterface
 
 
     /**
-     * @ORM\Column(name="gender", type="string", length=20)
+     * @
      */
     private $gender;
 
@@ -1137,8 +1137,6 @@ class Student implements UserInterface, \Serializable, NamerInterface
         $this->cvFile = $cv;
 
         if ($cv) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTime('now');
         }
 
@@ -1167,21 +1165,5 @@ class Student implements UserInterface, \Serializable, NamerInterface
     public function setCv($cv)
     {
         $this->cv = $cv;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getGender()
-    {
-        return $this->gender;
-    }
-
-    /**
-     * @param mixed $gender
-     */
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
     }
 }
