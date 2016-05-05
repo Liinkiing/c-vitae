@@ -25,7 +25,7 @@
             <p><i class="fa fa-users">&nbsp;&nbsp;</i>Groupe de TD :  <span class="bold">{{ user.groupeTp }}</p>
         </div>
         <div class="information">
-            <p><i class="fa fa-globe">&nbsp;&nbsp;</i>Âge : <span class="bold">{{ user.age }} ans</span></p>
+            <p><i class="fa fa-{{ user.gender }}">&nbsp;&nbsp;</i>Âge : <span class="bold">{{ user.age }} ans</span></p>
             <p><i class="fa fa-birthday-cake">&nbsp;&nbsp;</i>Date de naissance : <span class="bold">{{ user.birthday|date('d/m/Y') }}</span></p>
         </div>
     </div>
