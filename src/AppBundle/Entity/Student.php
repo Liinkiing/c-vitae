@@ -65,7 +65,7 @@ class Student implements UserInterface, \Serializable, NamerInterface
 
 
     /**
-     * @
+     * @ORM\Column(name="gender", length=20)
      */
     private $gender;
 
@@ -1165,5 +1165,21 @@ class Student implements UserInterface, \Serializable, NamerInterface
     public function setCv($cv)
     {
         $this->cv = $cv;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param mixed $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
     }
 }
