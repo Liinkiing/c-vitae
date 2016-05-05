@@ -4,6 +4,8 @@
 !app/cache/.gitkeep
 !app/logs/.gitkeep
 
+bfg-1.12.12.jar
+
 # Email spool folder
 /app/spool/*
 
