@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="{{ asset('components/card.css') }}">
         <link rel="stylesheet" href="{{ asset('style/app.css') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block customcss %}{% endblock %}
     </head>
     <body>
 
@@ -29,7 +30,6 @@
         {% block body %}
 
         {% endblock %}
-        {% block customcss %}{% endblock %}
         <script
                 src="https://code.jquery.com/jquery-2.2.2.min.js"
                 integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="

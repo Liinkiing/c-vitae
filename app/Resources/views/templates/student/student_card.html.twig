@@ -14,7 +14,7 @@
                 </div>
             </div>
         </div>
-        <img src="{% if vich_uploader_asset(student, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(student, 'profilePictureFile'))[0] }}{% elseif student.fbid is not null %}{{ student.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}">
+        <img alt="{{ student.fullname }}" src="{% if vich_uploader_asset(student, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(student, 'profilePictureFile'))[0] }}{% elseif student.fbid is not null %}{{ student.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}">
     </div>
     <div class="content">
         <a href="{% if app.user.username|default('anon.') == student.username %}{{ path('my_profile') }}{% else %}{{ path('profile', {'username': student.username}) }}{% endif %}"
