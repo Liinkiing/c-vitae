@@ -1,0 +1,28 @@
+{% embed 'base.html.twig' with {'title': 'Erreur 403', 'subtitle': "T'a vraiment cru t'avais accès à cette page petit coquin ?"} %}
+
+{% block body %}
+    <div class="container fullscreen">
+
+        <div class="generic-card fullscreen">
+            <header>
+                <h2>{{ title }}</h2>
+                <p class="subtitle">{{ subtitle }}</p>
+            </header>
+            <div class="content-site error fullscreen">
+
+                Erreur interne du serveur. T'as du faire péter un truc, t'en fais pas ça a été reporté à la NSA, merci pour ta coopération. En attendant, tu peux
+                <a href="{{ path('homepage') }}" class="btn btn-alt btn-medium"><i class="fa fa-home">&nbsp;&nbsp;</i> Retourner à l'accueil</a>
+            </div>
+
+
+        </div>
+    </div>
+
+    <style>
+        .generic-card header {
+            background: url("{{ asset('img/overlay.png') }}"), url("{{ asset('img/svg/header-bg.svg') }}"), linear-gradient(45deg, #8b5141 20%, #772812 80%) center, center, center;
+        }
+    </style>
+{% endblock %}
+
+{% endembed %}
