@@ -9,5 +9,5 @@ gulp.task('minify-css', function() {
 	return gulp.src('web/style/*.css')
 		.pipe(cleanCSS())
 		.pipe(rename({suffix: '.min'}))
-		.pipe(gulp.dest('web/style/dist'));
+		.pipe(gulp.dest('web/style/'));
 });
