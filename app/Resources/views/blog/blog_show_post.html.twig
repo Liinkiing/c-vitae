@@ -74,7 +74,8 @@
                         <ul class="comments">
                             {% for comment in post.comments|reverse %}
                                 <li class="comment">
-                                        <div class="comment-author">{{ comment.author.username }}</div>
+                                        <div class="comment-author"><a
+                                                    href="{{ path('profile', {'username': comment.author.username}) }}"></a>{{ comment.author.username }}</div>
                                         <div class="comment-content">{{ comment.content }}</div>
                                         {% if is_granted('ROLE_MOD') or comment.author.username == app.user.username|default('') %}
                                         <form class="form-comment" action="{{ path('blog_delete_comment_from_post', {
