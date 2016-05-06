@@ -49,5 +49,7 @@ bfg-1.12.12.jar
 # Backup entities generated with doctrine:generate:entities command
 */Entity/*~
 
-/.idea/*
+/.idea/
+
+/node_modules/
 

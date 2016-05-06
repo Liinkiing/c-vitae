@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Le plumeau magique | {{ title }}{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Le plumeau magique | {{ title }}{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    {% if app.environment == 'dev' %}
         <link rel="stylesheet" href="{{ asset('style/font-awesome.css') }}">
-        <link rel="stylesheet" href="{{ asset('semantic.css') }}">
-        <link rel="stylesheet" href="{{ asset('components/dropdown.css') }}">
-        <link rel="stylesheet" href="{{ asset('components/modal.css') }}">
-        <link rel="stylesheet" href="{{ asset('components/checkbox.css') }}">
-        <link rel="stylesheet" href="{{ asset('components/card.css') }}">
+        <link rel="stylesheet" href="{{ asset('semantic/semantic.css') }}">
         <link rel="stylesheet" href="{{ asset('style/app.css') }}">
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        {% block customcss %}{% endblock %}
-    </head>
-    <body>
+    {% else %}
+        <link rel="stylesheet" href="{{ asset('style/dist/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('semantic/semantic.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('style/dist/app.min.css') }}">
+    {% endif %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    {% block customcss %}{% endblock %}
+</head>
+<body>
 
-        <nav class="nav fixed">
-            <div class="container">
-                <div class="brand">
-                    <a href="{{ path('homepage') }}">Le plumeau magique</a>
-                </div>
-                <div class="nav-links">
-                    {{ render(controller('AppBundle:Default:dislayMenu'))}}
-                </div>
-            </div>
-        </nav>
+<nav class="nav fixed">
+    <div class="container">
+        <div class="brand">
+            <a href="{{ path('homepage') }}">Le plumeau magique</a>
+        </div>
+        <div class="nav-links">
+            {{ render(controller('AppBundle:Default:dislayMenu')) }}
+        </div>
+    </div>
+</nav>
 
-        {% block body %}
+{% block body %}
 
-        {% endblock %}
-        <script
-                src="https://code.jquery.com/jquery-2.2.2.min.js"
-                integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
-                crossorigin="anonymous"></script>
-        <script src="{{ asset('semantic.js') }}"></script>
-        <script src="{{ asset('components/search.js') }}"></script>
-        <script src="{{ asset('components/dimmer.js') }}"></script>
-        {% block javascripts %}
+{% endblock %}
+<script
+        src="https://code.jquery.com/jquery-2.2.2.min.js"
+        integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+        crossorigin="anonymous"></script>
+<script src="{{ asset('semantic/semantic.min.js') }}"></script>
+{% block javascripts %}
 
-        {% endblock %}
+{% endblock %}
 
-        <footer class="footer {% if title == "Accueil" %}footer-index{% endif %}">
-            <div class="container">
-                &copy; {{ 'now'|date('Y') }} - Le plumeau magique - Tous droits réservés - Réalisé avec la prestance et la classe d'un bg grâce à Symfony
-            </div>
-        </footer>
-    </body>
+<footer class="footer {% if title == "Accueil" %}footer-index{% endif %}">
+    <div class="container">
+        &copy; {{ 'now'|date('Y') }} - Le plumeau magique - Tous droits réservés - Réalisé avec la prestance et la
+        classe d'un bg grâce à Symfony
+    </div>
+</footer>
+</body>
 </html>
