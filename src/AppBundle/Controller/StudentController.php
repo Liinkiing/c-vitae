@@ -27,6 +27,7 @@ class StudentController extends Controller
             'projectRoles' => $studentRepository->findProjectRoles(),
             'secteurVise' => $studentRepository->findSecteurVise(),
             'programmingLanguages' => $studentRepository->findProgrammingLanguages(),
+            'langs' => $studentRepository->findLanguages(),
             'minAge' => $studentRepository->getMinOf('age'),
             'maxAge' => $studentRepository->getMaxOf('age')]);
     }
@@ -47,6 +48,7 @@ class StudentController extends Controller
             $request->get('gender'),
             $request->get('linkedin'),
             $request->get('viadeo'),
+            $request->get('langs'),
             $request->get('sort'));
         return $this->render('student/index.html.twig', ['students' => $students,
             'search' => true,
@@ -54,6 +56,7 @@ class StudentController extends Controller
             'projectRoles' => $studentRepository->findProjectRoles(),
             'secteurVise' => $studentRepository->findSecteurVise(),
             'programmingLanguages' => $studentRepository->findProgrammingLanguages(),
+            'langs' => $studentRepository->findLanguages(),
             'minAge' => $studentRepository->getMinOf('age'),
             'maxAge' => $studentRepository->getMaxOf('age')]);
     }

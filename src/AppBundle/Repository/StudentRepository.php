@@ -51,7 +51,7 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function findWithParams($group = ['A', 'B', 'C', 'D'], $name = null, $age = null, $role = null, $bac = null, 
-                                   $programmingLanguages = null, $gender = null, $linkedin = null, $viadeo = null, $order = 'ASC')
+                                   $programmingLanguages = null, $gender = null, $linkedin = null, $viadeo = null, $langs = null, $order = 'ASC')
     {
 
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -82,10 +82,17 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
         if ($viadeo != null) {
             $result->andWhere($qb->expr()->isNotNull('student.viadeo'));
         }
+        $parameterCount = 7;
         if ($programmingLanguages != null) {
             for ($i = 0; $i < count($programmingLanguages); $i++) {
-                $parameterCount = $i + 8;
+                $parameterCount += $i;
                 $result->andWhere($qb->expr()->like('student.programmingLanguages', "?$parameterCount"))->setParameter($parameterCount, "%$programmingLanguages[$i]%");
+            }
+        }
+        if ($langs != null) {
+            for ($i = 0; $i < count($langs); $i++) {
+                $parameterCount += $i;
+                $result->andWhere($qb->expr()->like('student.languages', "?$parameterCount"))->setParameter($parameterCount, "%$langs[$i]%");
             }
         }
 
@@ -109,8 +116,8 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
-     * @return array
-     */
+ * @return array
+ */
     public function findProgrammingLanguages(){
         $qb = $this->getEntityManager()->createQueryBuilder();
         $langs = $qb->select('student.programmingLanguages')->distinct()
@@ -120,6 +127,28 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
         $temp = [];
         foreach($langs as $lang){
             array_push($temp, $lang['programmingLanguages']);
+        }
+        $langs = [];
+        foreach($temp as $item){
+            foreach(explode(',', $item) as $language){
+                if($language) array_push($langs, trim($language));
+            }
+        }
+        return array_unique($langs);
+    }
+
+    /**
+     * @return array
+     */
+    public function findLanguages(){
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $langs = $qb->select('student.languages')->distinct()
+            ->from('AppBundle:Student', 'student')
+            ->getQuery()
+            ->getScalarResult();
+        $temp = [];
+        foreach($langs as $lang){
+            array_push($temp, $lang['languages']);
         }
         $langs = [];
         foreach($temp as $item){

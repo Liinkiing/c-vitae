@@ -24,10 +24,13 @@
                                     class="bold">Rôle</span> : {{ app.request.get('role')|join(', ') }} {% endif %}
                             {% if app.request.get('prog_lang') %}<br><span
                                     class="bold">Langages informatique</span> : {{ app.request.get('prog_lang')|join(', ') }} {% endif %}
+                            {% if app.request.get('langs') %}<br><span
+                                    class="bold">Langues maîtrisés</span> : {{ app.request.get('langs')|join(', ') }} {% endif %}
                             {% if app.request.get('linkedin') and app.request.get('viadeo') %}<br><span class="bold">Possédant </span><i class="fa fa-linkedin">&nbsp;</i><i class="fa fa-viadeo">&nbsp;</i> {% else %}
                                 {% if app.request.get('viadeo') %}<br><span class="bold">Possédant </span><i class="fa fa-viadeo"></i> {% endif %}
                                 {% if app.request.get('linkedin') %}<br><span class="bold">Possédant </span><i class="fa fa-linkedin"></i> {% endif %}
                             {% endif %}
+
 
                         {% else %}
                             {{ subtitle }}
@@ -113,6 +116,22 @@
                                         </div>
                                     {% endfor %}
                                 </div>
+                                <h4 class="ui dividing header">Langues</h4>
+                                {% for lang in langs %}
+                                    {% if loop.index0 % 8 == 0 %}
+                                        <div class="fields">
+                                    {% endif %}
+                                            <div class="inline field">
+                                                <div class="ui checkbox">
+                                                    <input value="{{ lang }}" class="hidden" name="langs[]"
+                                                           tabindex="0" type="checkbox">
+                                                    <label>{{ lang }}</label>
+                                                </div>
+                                            </div>
+                                    {% if loop.index % 8 == 0 or loop.index == langs|length %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                                 <h4 class="ui dividing header">Possédant les réseaux professionnels suivants</h4>
                                 <div class="fields">
                                         <div class="inline field">
