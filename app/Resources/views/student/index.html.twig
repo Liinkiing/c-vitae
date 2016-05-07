@@ -13,7 +13,7 @@
                         {% if search|default(false) %} Résultat de votre recherche ({{ students|length }} étudiant{% if students|length > 1 %}s{% endif %})
                             <br/>
                             {% if app.request.get('gender') and app.request.get('gender') != 'both' %}<br><span
-                                class="bold">Sexe</span> : {{ app.request.get('gender')|str_replace('female', 'Féminin')|str_replace('male', 'Masculin') }} {% endif %}
+                                    class="bold">Sexe</span> : {{ app.request.get('gender')|str_replace('female', 'Féminin')|str_replace('male', 'Masculin') }} {% endif %}
                             {% if app.request.get('age') %}<br><span
                                     class="bold">Âge</span> : {{ app.request.get('age') }} ans {% endif %}
                             {% if app.request.get('bac') %}<br><span
@@ -26,9 +26,12 @@
                                     class="bold">Langages informatique</span> : {{ app.request.get('prog_lang')|join(', ') }} {% endif %}
                             {% if app.request.get('langs') %}<br><span
                                     class="bold">Langues maîtrisés</span> : {{ app.request.get('langs')|join(', ') }} {% endif %}
-                            {% if app.request.get('linkedin') and app.request.get('viadeo') %}<br><span class="bold">Possédant </span><i class="fa fa-linkedin">&nbsp;</i><i class="fa fa-viadeo">&nbsp;</i> {% else %}
-                                {% if app.request.get('viadeo') %}<br><span class="bold">Possédant </span><i class="fa fa-viadeo"></i> {% endif %}
-                                {% if app.request.get('linkedin') %}<br><span class="bold">Possédant </span><i class="fa fa-linkedin"></i> {% endif %}
+                            {% if app.request.get('linkedin') and app.request.get('viadeo') %}<br><span class="bold">Possédant </span>
+                                <i class="fa fa-linkedin">&nbsp;</i><i class="fa fa-viadeo">&nbsp;</i> {% else %}
+                                {% if app.request.get('viadeo') %}<br><span class="bold">Possédant </span><i
+                                        class="fa fa-viadeo"></i> {% endif %}
+                                {% if app.request.get('linkedin') %}<br><span class="bold">Possédant </span><i
+                                        class="fa fa-linkedin"></i> {% endif %}
                             {% endif %}
 
 
@@ -105,8 +108,10 @@
                                     </div>
                                 </div>
                                 <h4 class="ui dividing header">Compétences en langage informatique</h4>
-                                <div class="fields">
-                                    {% for prog_lang in programmingLanguages %}
+                                {% for prog_lang in programmingLanguages %}
+                                {% if loop.index0 % 8 == 0 %}
+                                    <div class="fields">
+                                {% endif %}
                                         <div class="inline field">
                                             <div class="ui checkbox">
                                                 <input value="{{ prog_lang }}" class="hidden" name="prog_lang[]"
@@ -114,36 +119,40 @@
                                                 <label>{{ prog_lang }}</label>
                                             </div>
                                         </div>
-                                    {% endfor %}
-                                </div>
+                                {% if loop.index % 8 == 0 or loop.last %}
+                                    </div>
+                                {% endif %}
+                                {% endfor %}
                                 <h4 class="ui dividing header">Langues maîtrisés</h4>
                                 {% for lang in langs %}
-                                    {% if loop.index0 % 8 == 0 %}
-                                        <div class="fields">
-                                    {% endif %}
-                                            <div class="inline field">
-                                                <div class="ui checkbox">
-                                                    <input value="{{ lang }}" class="hidden" name="langs[]"
-                                                           tabindex="0" type="checkbox">
-                                                    <label>{{ lang }}</label>
-                                                </div>
+                                {% if loop.index0 % 8 == 0 %}
+                                    <div class="fields">
+                                {% endif %}
+                                        <div class="inline field">
+                                            <div class="ui checkbox">
+                                                <input value="{{ lang }}" class="hidden" name="langs[]"
+                                                       tabindex="0" type="checkbox">
+                                                <label>{{ lang }}</label>
                                             </div>
-                                    {% if loop.index % 8 == 0 or loop.index == langs|length %}
                                         </div>
-                                    {% endif %}
+                                {% if loop.index % 8 == 0 or loop.last %}
+                                    </div>
+                                {% endif %}
                                 {% endfor %}
                                 <h4 class="ui dividing header">Possédant les réseaux professionnels suivants</h4>
                                 <div class="fields">
-                                        <div class="inline field">
-                                            <div class="ui checkbox">
-                                                <input value="true" class="hidden" name="linkedin" tabindex="0" type="checkbox">
-                                                <label><i class="fa fa-linkedin">&nbsp;&nbsp;</i>LinkedIn</label>
-                                            </div>
-                                            <div class="ui checkbox">
-                                                <input value="true" class="hidden" name="viadeo" tabindex="0" type="checkbox">
-                                                <label><i class="fa fa-viadeo">&nbsp;&nbsp;</i>Viadeo</label>
-                                            </div>
+                                    <div class="inline field">
+                                        <div class="ui checkbox">
+                                            <input value="true" class="hidden" name="linkedin" tabindex="0"
+                                                   type="checkbox">
+                                            <label><i class="fa fa-linkedin">&nbsp;&nbsp;</i>LinkedIn</label>
                                         </div>
+                                        <div class="ui checkbox">
+                                            <input value="true" class="hidden" name="viadeo" tabindex="0"
+                                                   type="checkbox">
+                                            <label><i class="fa fa-viadeo">&nbsp;&nbsp;</i>Viadeo</label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <br><br>
                                 <div class="fields">
@@ -174,12 +183,13 @@
                             </div>
                             <div class="results"></div>
                             <button id="showAdvancedSearch" class="ui labeled icon primary button"
-                                    style="width: 350px; margin-left: 40px; margin-right: 20px;" >
+                                    style="width: 350px; margin-left: 40px; margin-right: 20px;">
                                 <i class="filter icon"></i>
                                 Afficher les options de recherche avancés
                             </button>
                             {% if search|default(false) %}
-                                <a id="closeSearch" class="ui red icon button" href="{{ path('students_list') }}" data-content="Quitter la recherche">
+                                <a id="closeSearch" class="ui red icon button" href="{{ path('students_list') }}"
+                                   data-content="Quitter la recherche">
                                     <i class="remove icon"></i>
                                 </a>
                             {% endif %}
@@ -192,7 +202,8 @@
                             {% if loop.index % studentPerRow == 0 %}</div></div>{% endif %}
                         {% endfor %}
                     {% else %}
-                        <h1 style="text-align: center;">La recherche n'a donné aucun résultat ! Veuillez réessayer avec d'autres critères.</h1>
+                        <h1 style="text-align: center;">La recherche n'a donné aucun résultat ! Veuillez réessayer avec
+                            d'autres critères.</h1>
                     {% endif %}
                 </div>
             </div>
