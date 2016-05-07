@@ -32,7 +32,7 @@ class StudentRestController extends Controller
 
         self::fillParams($paramFetcher, $name, $age, $role, $bac, $progLang, $gender, $linkedin, $viadeo, $langs, $sort, $by);
 
-        $students = $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams($group, $name, $age, $role, $bac, $progLang, 
+        $students = $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams($group, $name, $age, $role, $bac, $progLang,
             $gender, $linkedin, $viadeo, $langs, $sort, $by);
         return $students;
 
@@ -75,7 +75,7 @@ class StudentRestController extends Controller
         $viadeo = $paramFetcher->get('viadeo');
         $langs = (explode(',', $paramFetcher->get('langs'))[0] == '') ? null : explode(',', $paramFetcher->get('langs'));
         $sort = $paramFetcher->get('sort');
-        $by = (explode(',', $paramFetcher->get('by')[0] == '') ? null : explode(',', $paramFetcher->get('by')));
+        $by = (explode(',', $paramFetcher->get('by'))[0] == '') ? null : explode(',', $paramFetcher->get('by'));
     }
 
 }
