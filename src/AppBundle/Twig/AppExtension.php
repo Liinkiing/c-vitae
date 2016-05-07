@@ -48,6 +48,9 @@ class AppExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('str_replace', function($string, $search, $replace){
                 return str_replace($search, $replace, $string);
+            }),
+            new \Twig_SimpleFilter('strpos', function($source, $chars){
+                return strpos($source, $chars) === 0;
             })
         );
     }
