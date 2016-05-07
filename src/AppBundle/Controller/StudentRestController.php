@@ -47,6 +47,7 @@ class StudentRestController extends Controller
      * @QueryParam(name="gender")
      * @QueryParam(name="linkedin", requirements="(true|false|TRUE|FALSE)", strict=true, nullable=true)
      * @QueryParam(name="viadeo", requirements="(true|false|TRUE|FALSE)", strict=true, nullable=true)
+     * @QueryParam(name="langs")
      * @QueryParam(name="sort", requirements="(asc|desc|ASC|DESC)", strict=true, nullable=true, default="asc")
      * @QueryParam(name="by")
      */
