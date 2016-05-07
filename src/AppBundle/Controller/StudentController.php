@@ -49,7 +49,8 @@ class StudentController extends Controller
             $request->get('linkedin'),
             $request->get('viadeo'),
             $request->get('langs'),
-            $request->get('sort'));
+            $request->get('sort'),
+            $request->get('by'));
         return $this->render('student/index.html.twig', ['students' => $students,
             'search' => true,
             'title' => 'Recherche',

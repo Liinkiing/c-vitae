@@ -1061,4 +1061,11 @@ form .highlight {
     -webkit-transition: opacity 0.1s ease;
     transition: opacity 0.1s ease; }
 
+.student-metadata {
+  position: absolute;
+  bottom: 20px;
+  left: 91px; }
+  .student-metadata .student-age, .student-metadata .student-group {
+    padding: 10px; }
+
 /*# sourceMappingURL=app.css.map */

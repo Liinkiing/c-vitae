@@ -3,18 +3,28 @@
         <div class="ui dimmer">
             <div class="content">
                 <div class="center">
-                    <a class="ui vertical inverted animated button" href="{% if app.user.username|default('anon.') == student.username %}{{ path('my_profile') }}
+                    <a class="ui vertical inverted animated button"
+                       href="{% if app.user.username|default('anon.') == student.username %}{{ path('my_profile') }}
                     {% else %}{{ path('profile', {'username': student.username}) }}{% endif %}" tabindex="0">
-                        <div class="visible content">Voir {% if app.user.username|default('anon.') == student.username %}mon{% else %}son{% endif %}
-                            profil</div>
+                        <div class="visible content">
+                            Voir {% if app.user.username|default('anon.') == student.username %}mon{% else %}son{% endif %}
+                            profil
+                        </div>
                         <div class="hidden content">
                             <i class="zoom icon"></i>
                         </div>
                     </a>
+                    <div class="student-metadata">
+                        <div class="student-age"><i class="birthday icon"></i> {{ student.age }} ans
+                        </div>
+                        <div class="student-group"><i class="users icon"></i> Groupe {{ student.groupeTp }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <img alt="{{ student.fullname }}" src="{% if vich_uploader_asset(student, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(student, 'profilePictureFile'))[0] }}{% elseif student.fbid is not null %}{{ student.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}">
+        <img alt="{{ student.fullname }}"
+             src="{% if vich_uploader_asset(student, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(student, 'profilePictureFile'))[0] }}{% elseif student.fbid is not null %}{{ student.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}">
     </div>
     <div class="content">
         <a href="{% if app.user.username|default('anon.') == student.username %}{{ path('my_profile') }}{% else %}{{ path('profile', {'username': student.username}) }}{% endif %}"

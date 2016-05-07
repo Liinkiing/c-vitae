@@ -1029,3 +1029,12 @@ form {
         transition: opacity 0.1s ease;
     }
 }
+
+.student-metadata {
+    position: absolute;
+    bottom: 20px;
+    left: 91px;
+    & .student-age, .student-group {
+        padding: 10px;
+    }
+}

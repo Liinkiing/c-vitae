@@ -33,7 +33,10 @@
                                 {% if app.request.get('linkedin') %}<br><span class="bold">Possédant </span><i
                                         class="fa fa-linkedin"></i> {% endif %}
                             {% endif %}
-
+                            {% if app.request.get('sort') or app.request.get('by') %}<br>Tri <span
+                                    class="bold">{{ app.request.get('sort')|str_replace('asc', 'croissant')|str_replace('desc', 'décroissant') }}</span> selon <span class="bold">{{ app.request.get('by')|default('le nom de famille')
+                                |str_replace('lastName', 'le nom de famille')|str_replace('age', "l'âge")|str_replace('firstName', 'le prénom')|str_replace('birthday', 'la date de naissance')|
+                                str_replace('groupeTp', 'le groupe de TP')|join(', ') }}</span> {% endif %}
 
                         {% else %}
                             {{ subtitle }}
@@ -156,11 +159,21 @@
                                 </div>
                                 <br><br>
                                 <div class="fields">
-                                    <div class="sixteen wide field">
-                                        <label>Tri</label>
+                                    <div class="ten wide field">
+                                        <label>Trier</label>
+                                        <select multiple="" class="ui dropdown" name="by[]">
+                                            <option value="">Selon...</option>
+                                            <option value="groupeTp">Le groupe de TP</option>
+                                            <option value="age">L'âge</option>
+                                            <option value="firstName">Le prénom</option>
+                                            <option value="lastName">Le nom</option>
+                                            <option value="birthday">La date de naissance</option>
+                                        </select>
+                                    </div>
+                                    <div class="six wide field">
+                                        <label>par ordre</label>
                                         <select class="ui dropdown" name="sort">
-                                            <option value="">Trier les résultats (par ordre alphabétique)</option>
-                                            <option value="asc">Croissant</option>
+                                            <option selected value="asc">Croissant</option>
                                             <option value="desc">Décroissant</option>
                                         </select>
                                     </div>

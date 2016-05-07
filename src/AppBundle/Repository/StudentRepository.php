@@ -51,7 +51,7 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function findWithParams($group = ['A', 'B', 'C', 'D'], $name = null, $age = null, $role = null, $bac = null, 
-                                   $programmingLanguages = null, $gender = null, $linkedin = null, $viadeo = null, $langs = null, $order = 'ASC')
+                                   $programmingLanguages = null, $gender = null, $linkedin = null, $viadeo = null, $langs = null, $order = 'ASC', $by = ['lastName'])
     {
 
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -96,7 +96,10 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
             }
         }
 
-        $result->orderBy('student.lastName', $order);
+        if($by == null) $by = ['lastName'];
+        foreach($by as $value){
+            $result->addOrderBy("student.$value", $order);
+        }
         return $result->getQuery()->getResult();
 
     }
