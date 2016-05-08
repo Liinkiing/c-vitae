@@ -1064,7 +1064,7 @@ form .highlight {
 .student-metadata {
   position: absolute;
   bottom: 20px;
-  width: 290px; }
+  width: 100%; }
   .student-metadata .student-age, .student-metadata .student-group, .student-metadata .student-role {
     margin-bottom: 10px; }
 
