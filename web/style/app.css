@@ -1064,8 +1064,8 @@ form .highlight {
 .student-metadata {
   position: absolute;
   bottom: 20px;
-  left: 91px; }
+  width: 290px; }
   .student-metadata .student-age, .student-metadata .student-group, .student-metadata .student-role {
-    padding: 10px; }
+    margin-bottom: 10px; }
 
 /*# sourceMappingURL=app.css.map */
