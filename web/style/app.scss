@@ -1029,7 +1029,7 @@ form {
 
 @media screen and (max-width: 1400px), (max-device-width: 1400px) {
     .generic-card .content-site.fullscreen, .content-site.fullscreen{
-        padding: 40px 3%;
+        padding: 40px 3% !important;
     }
     .nav .container {
         width: 100%;
