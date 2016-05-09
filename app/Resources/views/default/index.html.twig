@@ -3,7 +3,14 @@
 
 {% block body %}
     <div class="container">
-
+        {% autoescape false %}
+            {% for message_danger in app.session.flashBag.get('danger') %}
+                <div class="alert alert-danger">{{ message_danger }}</div>
+            {% endfor %}
+            {% for message_success in app.session.flashBag.get('success') %}
+                <div class="alert alert-success">{{ message_success }}</div>
+            {% endfor %}
+        {% endautoescape %}
         <section class="greetings">
             <header>
                 <h2>Le plumeau magique</h2>

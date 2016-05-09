@@ -19,6 +19,10 @@
                         {% endfor %}
                     {% endautoescape %}
                     <form action="{{ path('login') }}" method="post">
+                        <input type="hidden" name="_target_path" value="{{ path('my_profile') }}" />
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
                         <div class="group">
                             <input name="_username" type="text" required value="{{ last_username|default('') }}">
                             <span class="highlight"></span>
