@@ -346,7 +346,12 @@ p.subtitle {
         &.fullscreen {
             padding: 40px 20%;
             text-align: justify;
+            &.student-list {
+                padding: 40px 3%;
+            }
         }
+
+
 
         &.portfolio {
             display: block;
@@ -1028,8 +1033,8 @@ form {
 }
 
 @media screen and (max-width: 1400px), (max-device-width: 1400px) {
-    .generic-card .content-site.fullscreen, .content-site.fullscreen{
-        padding: 40px 3% !important;
+    .generic-card .content-site.fullscreen{
+        padding: 40px 3%;
     }
     .nav .container {
         width: 100%;

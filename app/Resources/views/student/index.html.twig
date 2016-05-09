@@ -42,7 +42,7 @@
                             {{ subtitle }}
                         {% endif %}</p>
                 </header>
-                <div class="content-site {% if isFullscreen %} fullscreen {% endif %}">
+                <div class="content-site {% if isFullscreen %} fullscreen {% endif %}student-list">
                     {% autoescape false %}
                         {% for message_danger in app.session.flashBag.get('danger') %}
                             <div class="alert alert-danger">{{ message_danger }}</div>
