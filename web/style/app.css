@@ -608,14 +608,8 @@ p.subtitle {
       flex-direction: row;
       justify-content: space-between; }
     .generic-card .content-site.fullscreen {
-      padding: 40px 3%;
+      padding: 40px 20%;
       text-align: justify; }
-      .generic-card .content-site.fullscreen.profile {
-        padding: 40px 20%; }
-      .generic-card .content-site.fullscreen.login {
-        padding: 40px 20%; }
-      .generic-card .content-site.fullscreen.error {
-        padding: 40px 20%; }
     .generic-card .content-site.portfolio {
       display: block; }
 
@@ -1067,5 +1061,13 @@ form .highlight {
   width: 100%; }
   .student-metadata .student-age, .student-metadata .student-group, .student-metadata .student-role {
     margin-bottom: 10px; }
+
+@media screen and (max-width: 1400px), (max-device-width: 1400px) {
+  .generic-card .content-site.fullscreen {
+    padding: 40px 3%; }
+
+  .nav .container {
+    width: 100%;
+    padding: 0 20px; } }
 
 /*# sourceMappingURL=app.css.map */
