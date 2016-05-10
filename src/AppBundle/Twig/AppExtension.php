@@ -16,6 +16,7 @@ use NumberFormatter;
 class AppExtension extends \Twig_Extension
 {
 
+
     /**
      * Returns the name of the extension.
      *

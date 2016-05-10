@@ -25,6 +25,8 @@ services:
         class: AppBundle\Entity\Student
         tags:
             - { name: namer }
+    app.utilities:
+        class: AppBundle\Utilities
     app.dropbox_client:
             class: Dropbox\Client
             arguments:

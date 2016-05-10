@@ -170,26 +170,40 @@ class StudentController extends Controller
     {
         $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
         if ($currentStudent != "anon.") {
+            $utils = $this->get('app.utilities');
             $timezone = new \DateTimeZone('Europe/Paris');
             $d = \DateTime::createFromFormat('d/m/Y', $request->get('birthday'), $timezone);
             if (($d && $d->format('d/m/Y') === $request->get('birthday')) == false) {
                 $this->addFlash('danger', "Veuillez entrer une date valide !");
                 return $this->redirectToRoute('my_profile');
             }
-            $currentStudent->setDescription(self::setNullIfStringEmpty($request->get('description')));
-            $currentStudent->setWebsite(self::setNullIfStringEmpty($request->get('website')));
-            $currentStudent->setLinkedin(self::setNullIfStringEmpty($request->get('linkedin')));
-            $currentStudent->setViadeo(self::setNullIfStringEmpty($request->get('viadeo')));
-            $currentStudent->setProfessionalMail(self::setNullIfStringEmpty($request->get('mail')));
+            $currentStudent->setDescription($utils->setNullIfStringEmpty($request->get('description')));
+            $currentStudent->setWebsite($utils->setNullIfStringEmpty($request->get('website')));
+            $currentStudent->setLinkedin($utils->setNullIfStringEmpty($request->get('linkedin')));
+            $currentStudent->setViadeo($utils->setNullIfStringEmpty($request->get('viadeo')));
+            $errors = [];
+            if($currentStudent->getLinkedin() != '' && !$utils->matchWebsite('linkedin.com', $currentStudent->getLinkedin())){
+                array_push($errors, 'Veuillez entrer un profil LinkedIn valide !');
+            }
+            if($currentStudent->getViadeo() != '' && !$utils->matchWebsite('viadeo.com', $currentStudent->getViadeo())){
+                array_push($errors, 'Veuillez entrer un profil Viadeo valide !');
+            }
+            if(count($errors) > 0){
+                foreach($errors as $error){
+                    $this->addFlash('danger', $error);
+                }
+                return $this->redirectToRoute('my_profile');
+            }
+            $currentStudent->setProfessionalMail($utils->setNullIfStringEmpty($request->get('mail')));
             $currentStudent->setBirthday($d);
             $currentStudent->setAge($d->diff(new \DateTime('now', $timezone))->y);
-            if ($request->get('hobbies') == '') $currentStudent->setHobbies(null); else $currentStudent->setHobbies(explode(',', self::removeWhitespace($request->get('hobbies'))));
-            if ($request->get('softwares') == '') $currentStudent->setSoftwares(null); else $currentStudent->setSoftwares(explode(',', self::removeWhitespace($request->get('softwares'))));
-            if ($request->get('languages') == '') $currentStudent->setLanguages(null); else $currentStudent->setLanguages(explode(',', self::removeWhitespace($request->get('languages'))));
-            if ($request->get('programmingLanguages') == '') $currentStudent->setProgrammingLanguages(null); else $currentStudent->setProgrammingLanguages(explode(',', self::removeWhitespace($request->get('programmingLanguages'))));
-            $currentStudent->setFavoriteMusic(self::setNullIfStringEmpty($request->get('favMusic')));
-            $currentStudent->setFavoriteQuote(self::setNullIfStringEmpty($request->get('favQuote')));
-            $currentStudent->setProjectRole(self::setNullIfStringEmpty($request->get('projectRole')));
+            if ($request->get('hobbies') == '') $currentStudent->setHobbies(null); else $currentStudent->setHobbies(explode(',', $utils->removeWhitespace($request->get('hobbies'))));
+            if ($request->get('softwares') == '') $currentStudent->setSoftwares(null); else $currentStudent->setSoftwares(explode(',', $utils->removeWhitespace($request->get('softwares'))));
+            if ($request->get('languages') == '') $currentStudent->setLanguages(null); else $currentStudent->setLanguages(explode(',', $utils->removeWhitespace($request->get('languages'))));
+            if ($request->get('programmingLanguages') == '') $currentStudent->setProgrammingLanguages(null); else $currentStudent->setProgrammingLanguages(explode(',', $utils->removeWhitespace($request->get('programmingLanguages'))));
+            $currentStudent->setFavoriteMusic($utils->setNullIfStringEmpty($request->get('favMusic')));
+            $currentStudent->setFavoriteQuote($utils->setNullIfStringEmpty($request->get('favQuote')));
+            $currentStudent->setProjectRole($utils->setNullIfStringEmpty($request->get('projectRole')));
             $currentStudent->setUpdatedAt(new \DateTime('now', $timezone));
             $this->getDoctrine()->getManager()->persist($currentStudent);
             $this->getDoctrine()->getManager()->flush();
@@ -200,21 +214,9 @@ class StudentController extends Controller
             return $this->redirectToRoute('login');
         }
     }
+    
 
-    public static function setNullIfStringEmpty($string)
-    {
-        return ($string == '') ? null : $string;
-    }
-
-    public static function removeWhitespace($string)
-    {
-        return preg_replace('/\s+/', ' ', $string);
-    }
-
-    public function TestsListsEmpty()
-    {
-
-    }
+    
 
 
 }
