@@ -12,9 +12,16 @@
                 </header>
                 <div class="content-site {% if isFullscreen %} fullscreen {% endif %}">
                     {% autoescape false %}
-                        {% for message_danger in app.session.flashBag.get('danger') %}
-                            <div class="alert alert-danger">{{ message_danger }}</div>
-                        {% endfor %}
+                        {% if app.session.flashBag.peek('danger') %}
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {% for danger in app.session.flashBag.get('danger') %}
+                                        <li>{{ danger }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
                         {% for message_success in app.session.flashBag.get('success') %}
                             <div class="alert alert-success">{{ message_success }}</div>
                         {% endfor %}

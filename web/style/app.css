@@ -671,10 +671,6 @@ a {
   .alert.alert-danger {
     background: rgba(185, 91, 91, 0.28);
     border: rgba(185, 91, 91, 0.39) solid 1px; }
-    .alert.alert-danger::before {
-      font-family: 'FontAwesome';
-      content: '\f071';
-      margin-right: 10px; }
   .alert.alert-success {
     background: rgba(93, 185, 64, 0.28);
     border: rgba(86, 185, 64, 0.39) solid 1px; }

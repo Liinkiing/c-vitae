@@ -168,6 +168,7 @@ class StudentController extends Controller
      */
     public function modifyInformations(Request $request)
     {
+
         $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
         if ($currentStudent != "anon.") {
             $utils = $this->get('app.utilities');
@@ -194,6 +195,7 @@ class StudentController extends Controller
                 }
                 return $this->redirectToRoute('my_profile');
             }
+
             $currentStudent->setProfessionalMail($utils->setNullIfStringEmpty($request->get('mail')));
             $currentStudent->setBirthday($d);
             $currentStudent->setAge($d->diff(new \DateTime('now', $timezone))->y);

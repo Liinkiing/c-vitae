@@ -446,11 +446,11 @@ a {
     padding: 20px;
     border-radius: 2px;
     &.alert-danger {
-        &::before {
-            font-family: 'FontAwesome';
-            content: '\f071';
-            margin-right: 10px;
-        }
+        //&::before {
+        //    font-family: 'FontAwesome';
+        //    content: '\f071';
+        //    margin-right: 10px;
+        //}
         background: rgba(185, 91, 91, 0.28);
         border: rgba(185, 91, 91, 0.39) solid 1px;
     }
