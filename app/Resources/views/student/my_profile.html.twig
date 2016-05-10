@@ -157,7 +157,19 @@
                             </div>
                             <div class="sixteen wide column">
                                 <div class="group">
-                                    <input name="projectRole" type="text" value="{{ user.projectRole }}">
+                                    <select name="projectRole">
+
+                                        <option {% if user.projectRole == "Chargé de communication / Marketing" %}selected {% endif %}value="Chargé de communication / Marketing">Chargé de communication /
+                                        <option {% if user.projectRole == "Chef de projet" %}selected {% endif %}value="Chef de projet">Chef de projet</option>
+                                            Marketing
+                                        </option>
+                                        <option {% if user.projectRole == "Développeur" %}selected {% endif %}value="Développeur">Développeur</option>
+                                        <option {% if user.projectRole == "Développeur / Intégrateur" %}selected {% endif %}value="Développeur / Intégrateur">Développeur / Intégrateur</option>
+                                        <option {% if user.projectRole == "Graphiste" %}selected {% endif %}value="Graphiste">Graphiste</option>
+                                        <option {% if user.projectRole == "Intégrateur" %}selected {% endif %}value="Intégrateur">Intégrateur</option>
+                                        <option {% if user.projectRole == "Vidéaste" %}selected {% endif %}value="Vidéaste">Vidéaste</option>
+                                        <option {% if user.projectRole == "Vidéaste / Chargé de communication" %}selected {% endif %}value="Vidéaste / Chargé de communication">Vidéaste / Chargé de communication</option>
+                                    </select>
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label class="material">Votre rôle dans le projet tutoré</label>
