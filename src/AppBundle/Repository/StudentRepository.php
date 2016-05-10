@@ -51,7 +51,7 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function findWithParams($group = ['A', 'B', 'C', 'D'], $name = null, $age = null, $role = null, $bac = null, 
-                                   $programmingLanguages = null, $gender = null, $linkedin = null, $viadeo = null, $langs = null, $order = 'ASC', $by = ['lastName'])
+                                   $programmingLanguages = null, $gender = null, $linkedin = null, $viadeo = null, $langs = null, $cv = null, $order = 'ASC', $by = ['lastName'])
     {
 
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -76,10 +76,10 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
         if ($gender != null && $gender != 'both') {
             $result->andWhere($qb->expr()->eq('student.gender', '?6'))->setParameter(6, $gender);
         }
-        if ($linkedin != null) {
+        if ($linkedin == 'true') {
             $result->andWhere($qb->expr()->isNotNull('student.linkedin'));
         }
-        if ($viadeo != null) {
+        if ($viadeo == 'true') {
             $result->andWhere($qb->expr()->isNotNull('student.viadeo'));
         }
         $parameterCount = 7;
@@ -94,6 +94,9 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
                 $parameterCount += $i;
                 $result->andWhere($qb->expr()->like('student.languages', "?$parameterCount"))->setParameter($parameterCount, "%$langs[$i]%");
             }
+        }
+        if ($cv == 'true') {
+            $result->andWhere($qb->expr()->isNotNull('student.cv'));
         }
 
         if($by == null) $by = ['lastName'];

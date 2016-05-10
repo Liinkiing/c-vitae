@@ -26,17 +26,24 @@
                                     class="bold">Langages informatique</span> : {{ app.request.get('prog_lang')|join(', ') }} {% endif %}
                             {% if app.request.get('langs') %}<br><span
                                     class="bold">Langues maîtrisés</span> : {{ app.request.get('langs')|join(', ') }} {% endif %}
-                            {% if app.request.get('linkedin') and app.request.get('viadeo') %}<br><span class="bold">Possédant </span>
-                                <i class="fa fa-linkedin">&nbsp;</i><i class="fa fa-viadeo">&nbsp;</i> {% else %}
-                                {% if app.request.get('viadeo') %}<br><span class="bold">Possédant </span><i
-                                        class="fa fa-viadeo"></i> {% endif %}
-                                {% if app.request.get('linkedin') %}<br><span class="bold">Possédant </span><i
-                                        class="fa fa-linkedin"></i> {% endif %}
+                            {#{% if app.request.get('linkedin') and app.request.get('viadeo') %}<br><span class="bold">Possédant </span>#}
+                            {#<i class="fa fa-linkedin">&nbsp;</i><i class="fa fa-viadeo">&nbsp;</i> {% else %}#}
+                            {#{% if app.request.get('viadeo') %}<br><span class="bold">Possédant </span><i#}
+                            {#class="fa fa-viadeo"></i> {% endif %}#}
+                            {#{% if app.request.get('linkedin') %}<br><span class="bold">Possédant </span><i#}
+                            {#class="fa fa-linkedin"></i> {% endif %}#}
+                            {#{% endif %}#}
+                            {% if app.request.get('cv') or app.request.get('linkedin') or app.request.get('viadeo') %}
+                                <br><span
+                                    class="bold">Possédant</span>{% if app.request.get('cv') %} un CV {% endif %}{% if app.request.get('linkedin') %}
+                                <i class="fa fa-linkedin"></i> {% endif %}
+                                {% if app.request.get('viadeo') %}  <i class="fa fa-viadeo"></i> {% endif %}
                             {% endif %}
                             {% if app.request.get('sort') or app.request.get('by') %}<br>Tri <span
-                                    class="bold">{{ app.request.get('sort')|str_replace('asc', 'croissant')|str_replace('desc', 'décroissant') }}</span> selon <span class="bold">{{ app.request.get('by')|default('le nom de famille')
-                                |str_replace('lastName', 'le nom de famille')|str_replace('age', "l'âge")|str_replace('firstName', 'le prénom')|str_replace('birthday', 'la date de naissance')|
-                                str_replace('groupeTp', 'le groupe de TP')|join(', ') }}</span> {% endif %}
+                                    class="bold">{{ app.request.get('sort')|str_replace('asc', 'croissant')|str_replace('desc', 'décroissant') }}</span> selon
+                                <span class="bold">{{ app.request.get('by')|default('le nom de famille')
+                                    |str_replace('lastName', 'le nom de famille')|str_replace('age', "l'âge")|str_replace('firstName', 'le prénom')|str_replace('birthday', 'la date de naissance')|
+                                    str_replace('groupeTp', 'le groupe de TP')|join(', ') }}</span> {% endif %}
 
                         {% else %}
                             {{ subtitle }}
@@ -112,48 +119,57 @@
                                 </div>
                                 <h4 class="ui dividing header">Compétences en langage informatique</h4>
                                 {% for prog_lang in programmingLanguages %}
-                                {% if loop.index0 % 8 == 0 %}
-                                    <div class="fields">
-                                {% endif %}
-                                        <div class="inline field">
-                                            <div class="ui checkbox">
-                                                <input value="{{ prog_lang }}" class="hidden" name="prog_lang[]"
-                                                       tabindex="0" type="checkbox">
-                                                <label>{{ prog_lang }}</label>
-                                            </div>
+                                    {% if loop.index0 % 8 == 0 %}
+                                        <div class="fields">
+                                    {% endif %}
+                                    <div class="inline field">
+                                        <div class="ui checkbox">
+                                            <input value="{{ prog_lang }}" class="hidden" name="prog_lang[]"
+                                                   tabindex="0" type="checkbox">
+                                            <label>{{ prog_lang }}</label>
                                         </div>
-                                {% if loop.index % 8 == 0 or loop.last %}
                                     </div>
-                                {% endif %}
+                                    {% if loop.index % 8 == 0 or loop.last %}
+                                        </div>
+                                    {% endif %}
                                 {% endfor %}
                                 <h4 class="ui dividing header">Langues maîtrisés</h4>
                                 {% for lang in langs %}
-                                {% if loop.index0 % 8 == 0 %}
-                                    <div class="fields">
-                                {% endif %}
-                                        <div class="inline field">
-                                            <div class="ui checkbox">
-                                                <input value="{{ lang }}" class="hidden" name="langs[]"
-                                                       tabindex="0" type="checkbox">
-                                                <label>{{ lang }}</label>
-                                            </div>
-                                        </div>
-                                {% if loop.index % 8 == 0 or loop.last %}
-                                    </div>
-                                {% endif %}
-                                {% endfor %}
-                                <h4 class="ui dividing header">Possédant les réseaux professionnels suivants</h4>
-                                <div class="fields">
+                                    {% if loop.index0 % 8 == 0 %}
+                                        <div class="fields">
+                                    {% endif %}
                                     <div class="inline field">
+                                        <div class="ui checkbox">
+                                            <input value="{{ lang }}" class="hidden" name="langs[]"
+                                                   tabindex="0" type="checkbox">
+                                            <label>{{ lang }}</label>
+                                        </div>
+                                    </div>
+                                    {% if loop.index % 8 == 0 or loop.last %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                <h4 class="ui dividing header">Possédant </h4>
+                                <div class="fields">
+                                    <div class="three wide field">
                                         <div class="ui checkbox">
                                             <input value="true" class="hidden" name="linkedin" tabindex="0"
                                                    type="checkbox">
-                                            <label><i class="fa fa-linkedin">&nbsp;&nbsp;</i>LinkedIn</label>
+                                            <label><i class="fa fa-linkedin">&nbsp;&nbsp;</i>LinkedIn </label>
                                         </div>
+                                    </div>
+                                    <div class="three wide field">
                                         <div class="ui checkbox">
                                             <input value="true" class="hidden" name="viadeo" tabindex="0"
                                                    type="checkbox">
-                                            <label><i class="fa fa-viadeo">&nbsp;&nbsp;</i>Viadeo</label>
+                                            <label><i class="fa fa-viadeo">&nbsp;&nbsp;</i>Viadeo </label>
+                                        </div>
+                                    </div>
+                                    <div class="three wide field">
+                                        <div class="ui checkbox">
+                                            <input value="true" class="hidden" name="cv" tabindex="0"
+                                                   type="checkbox">
+                                            <label><i class="fa fa-file">&nbsp;&nbsp;</i>Un cv</label>
                                         </div>
                                     </div>
                                 </div>

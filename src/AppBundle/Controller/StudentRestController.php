@@ -22,20 +22,37 @@ class StudentRestController extends Controller
      * @QueryParam(name="linkedin", requirements="(true|false|TRUE|FALSE)", strict=true, nullable=true)
      * @QueryParam(name="viadeo", requirements="(true|false|TRUE|FALSE)", strict=true, nullable=true)
      * @QueryParam(name="langs")
+     * @QueryParam(name="cv")
      * @QueryParam(name="sort", requirements="(asc|desc|ASC|DESC)", strict=true, nullable=true, default="asc")
      * @QueryParam(name="by")
-
      */
-    public function getStudentsAction(ParamFetcher $paramFetcher){
+    public function getStudentsAction(ParamFetcher $paramFetcher)
+    {
 
         $group = ($paramFetcher->get('group') == '') ? ['A', 'B', 'C', 'D'] : explode(',', $paramFetcher->get('group'));
 
-        self::fillParams($paramFetcher, $name, $age, $role, $bac, $progLang, $gender, $linkedin, $viadeo, $langs, $sort, $by);
+        self::fillParams($paramFetcher, $name, $age, $role, $bac, $progLang, $gender, $linkedin, $viadeo, $langs, $cv, $sort, $by);
 
         $students = $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams($group, $name, $age, $role, $bac, $progLang,
-            $gender, $linkedin, $viadeo, $langs, $sort, $by);
+            $gender, $linkedin, $viadeo, $langs, $cv, $sort, $by);
         return $students;
 
+    }
+
+    public static function fillParams(ParamFetcher $paramFetcher, &$name, &$age, &$role, &$bac, &$progLang, &$gender, &$linkedin, &$viadeo, &$langs, &$cv, &$sort, &$by)
+    {
+        $name = $paramFetcher->get('name');
+        $age = $paramFetcher->get('age');
+        $role = (explode(',', $paramFetcher->get('role'))[0] == '') ? null : explode(',', $paramFetcher->get('role'));
+        $bac = (explode(',', $paramFetcher->get('bac'))[0] == '') ? null : explode(',', $paramFetcher->get('bac'));
+        $progLang = (explode(',', $paramFetcher->get('prog_lang'))[0] == '') ? null : explode(',', $paramFetcher->get('prog_lang'));
+        $gender = $paramFetcher->get('gender');
+        $linkedin = $paramFetcher->get('linkedin');
+        $viadeo = $paramFetcher->get('viadeo');
+        $langs = (explode(',', $paramFetcher->get('langs'))[0] == '') ? null : explode(',', $paramFetcher->get('langs'));
+        $cv = $paramFetcher->get('cv');
+        $sort = $paramFetcher->get('sort');
+        $by = (explode(',', $paramFetcher->get('by'))[0] == '') ? null : explode(',', $paramFetcher->get('by'));
     }
 
     /**
@@ -48,35 +65,23 @@ class StudentRestController extends Controller
      * @QueryParam(name="linkedin", requirements="(true|false|TRUE|FALSE)", strict=true, nullable=true)
      * @QueryParam(name="viadeo", requirements="(true|false|TRUE|FALSE)", strict=true, nullable=true)
      * @QueryParam(name="langs")
+     * @QueryParam(name="cv")
      * @QueryParam(name="sort", requirements="(asc|desc|ASC|DESC)", strict=true, nullable=true, default="asc")
      * @QueryParam(name="by")
      */
-    public function getGroupsStudentsAction(ParamFetcher $paramFetcher){
+    public function getGroupsStudentsAction(ParamFetcher $paramFetcher)
+    {
 
-        self::fillParams($paramFetcher, $name, $age, $role, $bac, $progLang, $gender, $linkedin, $viadeo, $langs, $sort, $by);
+        self::fillParams($paramFetcher, $name, $age, $role, $bac, $progLang, $gender, $linkedin, $viadeo, $langs, $cv, $sort, $by);
 
-        $final= [];
-        for($group = "A"; $group <= "D"; $group++){
-            $final[$group] = ["name"    => "Groupe $group",
-                              "results" => $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams($group, $name, $age, $role, $bac, $progLang,
-                                  $gender, $linkedin, $viadeo, $langs, $sort, $by)];
+        $final = [];
+        for ($group = "A"; $group <= "D"; $group++) {
+            $final[$group] = ["name" => "Groupe $group",
+                "results" => $this->getDoctrine()->getRepository('AppBundle:Student')->findWithParams($group, $name, $age, $role, $bac, $progLang,
+                    $gender, $linkedin, $viadeo, $langs, $cv, $sort, $by)];
         }
 
         return ["results" => $final];
-    }
-
-    public static function fillParams(ParamFetcher $paramFetcher, &$name, &$age, &$role, &$bac, &$progLang, &$gender, &$linkedin, &$viadeo, &$langs, &$sort, &$by){
-        $name = $paramFetcher->get('name');
-        $age = $paramFetcher->get('age');
-        $role = (explode(',', $paramFetcher->get('role'))[0] == '') ? null : explode(',', $paramFetcher->get('role'));
-        $bac = (explode(',', $paramFetcher->get('bac'))[0] == '') ? null : explode(',', $paramFetcher->get('bac'));
-        $progLang = (explode(',', $paramFetcher->get('prog_lang'))[0] == '') ? null : explode(',', $paramFetcher->get('prog_lang'));
-        $gender = $paramFetcher->get('gender');
-        $linkedin = $paramFetcher->get('linkedin');
-        $viadeo = $paramFetcher->get('viadeo');
-        $langs = (explode(',', $paramFetcher->get('langs'))[0] == '') ? null : explode(',', $paramFetcher->get('langs'));
-        $sort = $paramFetcher->get('sort');
-        $by = (explode(',', $paramFetcher->get('by'))[0] == '') ? null : explode(',', $paramFetcher->get('by'));
     }
 
 }
