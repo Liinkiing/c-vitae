@@ -26,13 +26,6 @@
                                     class="bold">Langages informatique</span> : {{ app.request.get('prog_lang')|join(', ') }} {% endif %}
                             {% if app.request.get('langs') %}<br><span
                                     class="bold">Langues maîtrisés</span> : {{ app.request.get('langs')|join(', ') }} {% endif %}
-                            {#{% if app.request.get('linkedin') and app.request.get('viadeo') %}<br><span class="bold">Possédant </span>#}
-                            {#<i class="fa fa-linkedin">&nbsp;</i><i class="fa fa-viadeo">&nbsp;</i> {% else %}#}
-                            {#{% if app.request.get('viadeo') %}<br><span class="bold">Possédant </span><i#}
-                            {#class="fa fa-viadeo"></i> {% endif %}#}
-                            {#{% if app.request.get('linkedin') %}<br><span class="bold">Possédant </span><i#}
-                            {#class="fa fa-linkedin"></i> {% endif %}#}
-                            {#{% endif %}#}
                             {% if app.request.get('cv') or app.request.get('linkedin') or app.request.get('viadeo') %}
                                 <br><span
                                     class="bold">Possédant</span>{% if app.request.get('cv') %} un CV {% endif %}{% if app.request.get('linkedin') %}
