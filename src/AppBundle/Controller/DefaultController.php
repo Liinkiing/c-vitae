@@ -61,7 +61,10 @@ class DefaultController extends Controller
             ->setTo($request->get('to'))
             ->setBody($this->renderView('mails/contact.html.twig', ['content' => $request->get('message'),
                 'sender' => $sender,
-                'student' => $student]), 'text/html');
+                'student' => $student]), 'text/html')
+            ->addPart($this->renderView('mails/contact.txt.twig', ['content' => $request->get('message'),
+                'sender' => $sender,
+                'student' => $student]), 'text/plain');
         $this->get('mailer')->send($message);
         $this->addFlash('success', "Le message a bien été envoyé !");
         return $this->redirectToRoute('profile', ['username' => $student->getUsername()]);
