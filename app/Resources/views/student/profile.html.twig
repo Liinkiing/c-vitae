@@ -1,5 +1,13 @@
 {% embed 'base.html.twig' with {'randomHeaderColors': '1'} %}
 
+    {% if user.professionalMail and user.username != app.user.username|default('anon.') %}
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+            <link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+        {% endblock %}
+
+    {% endif %}
 
     {% block body %}
 
@@ -27,6 +35,7 @@
                         {% endfor %}
                     {% endautoescape %}
                     {% embed 'templates/student/profile.html.twig' %} {% endembed %}
+
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MOD') %}
                         <h3>Rôles utilisateur</h3>
                         <table>
@@ -55,12 +64,15 @@
 
 
             </div>
+
         </div>
 
 
     {% endblock %}
 
     {% block customcss %}
+
+
 
         {% if randomHeaderColors %}
             <style>
@@ -72,5 +84,13 @@
         {% endif %}
 
     {% endblock %}
+
+    {% block javascripts %}
+
+
+
+    {% endblock %}
+
+
 
 {% endembed %}

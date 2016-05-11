@@ -401,6 +401,10 @@ footer.footer {
     padding: 60px;
     text-align: center; }
 
+.editor-toolbar {
+  background: #fff;
+  opacity: 0.9; }
+
 table {
   width: 100%; }
   table thead {

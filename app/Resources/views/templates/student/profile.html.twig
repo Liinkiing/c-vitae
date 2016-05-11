@@ -137,21 +137,47 @@
                             <span class="bar"></span>
                             <label class="material">Sujet du message</label>
                         </div>
-                        <div class="sixteen wide column">
-                            <div class="group">
-                                <textarea name="message" cols="120" rows="3" required="required"></textarea>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label class="material">Corps votre message</label>
-                            </div>
-                        </div>
+                        <div class="sixteen wide column" style="text-align:left;">
 
+                            <div class="postContent">
+                                <label class="no-material" for="mailBody">Corps du message</label>
+                                <textarea name="message" id="mailBody" cols="30" rows="10"></textarea>
+                            </div>
+
+                            <script
+                                    src="https://code.jquery.com/jquery-2.2.2.min.js"
+                                    integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+                                    crossorigin="anonymous"></script>
+                            <script src="{{ asset('js/semantic.min.js') }}"></script>
+                            <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+                            <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+                            <script>
+                                var simplemde = new SimpleMDE({
+                                    element: $("#mailBody")[0],
+                                    spellChecker: false,
+                                    promptURLs: true,
+                                    renderingConfig: {
+                                        codeSyntaxHighlighting: true
+                                    }
+                                });
+
+                            </script>
+                        </div>
                         <button class="btn btn-success btn-medium" type="submit">Envoyer un message</button>
 
                     </div>
                 </form>
+
             </div>
+
         </div>
     </section>
+
+
+
+
 {% endif %}
+
+
+
 
