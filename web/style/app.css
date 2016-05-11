@@ -1067,5 +1067,10 @@ form .highlight {
   .nav .container {
     width: 100%;
     padding: 0 20px; } }
+.subtitle.search {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 700px;
+  margin: 40px auto 0 auto;
+  padding: 30px; }
 
 /*# sourceMappingURL=app.css.map */
