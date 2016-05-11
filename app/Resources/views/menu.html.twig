@@ -7,7 +7,6 @@
         <li><a href="{{ path('students_list') }}">Élèves</a></li>
         {%  if not app.user %}
             <li><a href="{{ path('login') }}">Se connecter</a></li>
-            {#<li><a href="{{ path('register') }}">S'inscrire</a></li>#}
         {% endif %}
         {% if app.user %}
             <li><a href="{{ path('my_profile') }}">Mon profil</a></li>

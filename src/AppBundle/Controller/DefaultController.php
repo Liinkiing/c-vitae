@@ -29,18 +29,21 @@ class DefaultController extends Controller
     /**
      * @Route(name="menu")
      */
-    public function dislayMenuAction($classNames = ''){
+    public function dislayMenuAction($classNames = '')
+    {
         $em = $this->getDoctrine()->getRepository(Page::class);
         $pages = $em->findAll();
         return $this->render('menu.html.twig', ['pages' => $pages, 'classNames' => $classNames]);
     }
+
     /**
      * @Route("/{slug}", name="page")
      */
-    public function showPageAction(Request $request, $slug){
+    public function showPageAction(Request $request, $slug)
+    {
         $em = $this->getDoctrine()->getRepository(Page::class);
         $page = $em->findOneBy(['slug' => $slug]);
-        if($page == null){
+        if ($page == null) {
             throw new NotFoundHttpException('Page non trouvé');
         }
         return $this->render('default/page.html.twig', ['page' => $page]);
@@ -50,7 +53,8 @@ class DefaultController extends Controller
      * @Route("/mail/send", name="send_mail")
      * @Method({"POST"})
      */
-    public function sendMailAction(Request $request){
+    public function sendMailAction(Request $request)
+    {
         $sender['firstName'] = $request->get('firstName');
         $sender['lastName'] = $request->get('lastName');
         $sender['mail'] = $request->get('mail');
@@ -69,11 +73,6 @@ class DefaultController extends Controller
         $this->addFlash('success', "Le message a bien été envoyé !");
         return $this->redirectToRoute('profile', ['username' => $student->getUsername()]);
     }
-
-
-
-
-
 
 
 }
