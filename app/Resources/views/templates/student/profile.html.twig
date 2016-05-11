@@ -94,8 +94,9 @@
     </section>
 {% endif %}
 {% if user.professionalMail and user.username != app.user.username|default('anon.') %}
+    <hr>
     <section class="contact">
-        <h3>Contacter {{ user.firstName }}</h3>
+        <h2>Contacter {{ user.firstName }}</h2>
         <div class="row-flex center">
             <div class="information one-column">
                 <form action="{{ path('send_mail') }}" method="post">
