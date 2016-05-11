@@ -22,7 +22,6 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getRepository(Page::class);
         $pages = $em->findAll();
-        $token = $this->get('security.token_storage')->getToken()->setAuthenticated(false);
         return $this->render('default/index.html.twig', ['title' => 'Accueil', 'menu' => $pages]);
     }
 
