@@ -11,6 +11,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class StudentController extends Controller
 {
@@ -166,7 +167,7 @@ class StudentController extends Controller
      * @Route("/profile/me/modify-informations", name="modify_student_informations")
      * @Method({"POST"})
      */
-    public function modifyInformations(Request $request)
+    public function modifyInformationsAction(Request $request)
     {
 
         $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
@@ -216,9 +217,5 @@ class StudentController extends Controller
             return $this->redirectToRoute('login');
         }
     }
-    
-
-    
-
 
 }

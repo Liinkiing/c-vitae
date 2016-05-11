@@ -1,32 +1,43 @@
 <div class="profile-picture">
-    <img src="{% if vich_uploader_asset(user, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(user, 'profilePictureFile'))[0] }}{% elseif user.fbid is not null %}{{ user.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}" alt="">
+    <img src="{% if vich_uploader_asset(user, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(user, 'profilePictureFile'))[0] }}{% elseif user.fbid is not null %}{{ user.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}"
+         alt="">
 </div>
 <div class="row-flex center">
     <div class="user-description">
         <p>{{ user.description|default('Étudiant en DUT MMI à l\'université Paris-Est Marne La Vallée') }}</p>
-        {% if user.cv %}<a href="{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(user, 'cvFile'))[0] }}" class="btn btn-alt btn-large"><i class="fa fa-download">&nbsp;&nbsp;</i>Télécharger mon CV</a>{% endif %}
+        {% if user.cv %}<a href="{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(user, 'cvFile'))[0] }}"
+                           class="btn btn-alt btn-large"><i class="fa fa-download">&nbsp;&nbsp;</i>Télécharger mon CV
+            </a>{% endif %}
     </div>
 </div>
 <section class="information">
     <h3>Informations basiques</h3>
     <div class="row-flex center">
         <div class="information">
-            <p><i class="fa fa-user">&nbsp;&nbsp;</i>Nom d'utilisateur : <span class="bold">{{ user.username }}</span></p>
-            <p><i class="fa fa-envelope-o">&nbsp;&nbsp;</i>E-mail :  <span class="bold">{% if user.professionalMail %}<a href="mailto:{{ user.professionalMail }}">{{ user.professionalMail }}</a></span>{% else %}<span class="no-information">Non renseigné</span>{% endif %}</p>
+            <p><i class="fa fa-user">&nbsp;&nbsp;</i>Nom d'utilisateur : <span class="bold">{{ user.username }}</span>
+            </p>
+            <p><i class="fa fa-envelope-o">&nbsp;&nbsp;</i>E-mail : <span class="bold">{% if user.professionalMail %}<a
+                            href="mailto:{{ user.professionalMail }}">{{ user.professionalMail }}</a></span>{% else %}
+                <span class="no-information">Non renseigné</span>{% endif %}</p>
         </div>
         <div class="information">
-            <p><i class="fa fa-globe">&nbsp;&nbsp;</i>Site web : <span class="bold">{% if user.website %}<a href="{% if not user.website|strpos('http') %}//{% endif %}{{ user.website }}">{{ user.website }}</a></span>{% else %}<span class="no-information">Non renseigné</span>{% endif %}</p>
-            <p><i class="fa fa-mail-reply">&nbsp;&nbsp;</i>Rôle dans le projet : <span class="bold">{{ user.projectRole }}</span></p>
+            <p><i class="fa fa-globe">&nbsp;&nbsp;</i>Site web : <span class="bold">{% if user.website %}<a
+                            href="{% if not user.website|strpos('http') %}//{% endif %}{{ user.website }}">{{ user.website }}</a></span>{% else %}
+                <span class="no-information">Non renseigné</span>{% endif %}</p>
+            <p><i class="fa fa-mail-reply">&nbsp;&nbsp;</i>Rôle dans le projet : <span
+                        class="bold">{{ user.projectRole }}</span></p>
         </div>
     </div>
     <div class="row-flex center">
         <div class="information">
-            <p><i class="fa fa-university">&nbsp;&nbsp;</i>Baccalauréat préparé : <span class="bold">{{ user.bac }}</span></p>
-            <p><i class="fa fa-users">&nbsp;&nbsp;</i>Groupe de TP :  <span class="bold">{{ user.groupeTp }}</p>
+            <p><i class="fa fa-university">&nbsp;&nbsp;</i>Baccalauréat préparé : <span
+                        class="bold">{{ user.bac }}</span></p>
+            <p><i class="fa fa-users">&nbsp;&nbsp;</i>Groupe de TP : <span class="bold">{{ user.groupeTp }}</p>
         </div>
         <div class="information">
             <p><i class="fa fa-{{ user.gender }}">&nbsp;&nbsp;</i>Âge : <span class="bold">{{ user.age }} ans</span></p>
-            <p><i class="fa fa-birthday-cake">&nbsp;&nbsp;</i>Date de naissance : <span class="bold">{{ user.birthday|date('d/m/Y') }}</span></p>
+            <p><i class="fa fa-birthday-cake">&nbsp;&nbsp;</i>Date de naissance : <span
+                        class="bold">{{ user.birthday|date('d/m/Y') }}</span></p>
         </div>
     </div>
 </section>
@@ -34,34 +45,112 @@
     <h3>Compétences</h3>
     <div class="row-flex center">
         <div class="information one-column">
-            <p><i class="fa fa-language">&nbsp;&nbsp;</i>Langues : <span class="bold">{{ user.languages|default('<span class="no-information">Non renseigné</span>')|join(', ')|trim|raw }}</span></p>
-            <p><i class="fa fa-wrench">&nbsp;&nbsp;</i>Langages de développement :  <span class="bold">{{ user.programmingLanguages|default('<span class="no-information">Non renseigné</span>')|join(',')|trim|raw }}</p>
-            <p><i class="fa fa-file">&nbsp;&nbsp;</i>Logiciels maîtrisés :  <span class="bold">{{ user.softwares|default('<span class="no-information">Non renseigné</span>')|join(',')|trim|raw }}</p>
+            <p><i class="fa fa-language">&nbsp;&nbsp;</i>Langues : <span
+                        class="bold">{{ user.languages|default('<span class="no-information">Non renseigné</span>')|join(', ')|trim|raw }}</span>
+            </p>
+            <p><i class="fa fa-wrench">&nbsp;&nbsp;</i>Langages de développement : <span
+                        class="bold">{{ user.programmingLanguages|default('<span class="no-information">Non renseigné</span>')|join(',')|trim|raw }}
+            </p>
+            <p><i class="fa fa-file">&nbsp;&nbsp;</i>Logiciels maîtrisés : <span
+                        class="bold">{{ user.softwares|default('<span class="no-information">Non renseigné</span>')|join(',')|trim|raw }}
+            </p>
         </div>
     </div>
 </section>
 <section class="information">
-    <h3>A propos d{% if user.firstName|truncate(1, '')|preg_match('#a|e|é|è|i|o|u|y#i') %}'{% else %}e {% endif %}{{ user.firstName }}</h3>
+    <h3>A propos
+        d{% if user.firstName|truncate(1, '')|preg_match('#a|e|é|è|i|o|u|y#i') %}'{% else %}e {% endif %}{{ user.firstName }}</h3>
     <div class="row-flex center">
         <div class="information">
-            <p><i class="fa fa-gavel">&nbsp;&nbsp;</i>Mes hobbies : <span class="bold">{{ user.hobbies|default('<span class="no-information">Non renseigné</span>')|join(', ')|trim|raw }}</span></p>
-            <p><i class="fa fa-quote-left">&nbsp;&nbsp;</i>Citation favorite :  <span class="bold">{% if user.favoriteQuote %}<i class="fa fa-angle-double-left">&nbsp;</i>{{ user.favoriteQuote }}&nbsp;<i class="fa fa-angle-double-right"></i>{% else %}<span class="no-information">Non renseigné</span>{% endif %}</p>
+            <p><i class="fa fa-gavel">&nbsp;&nbsp;</i>Mes hobbies : <span
+                        class="bold">{{ user.hobbies|default('<span class="no-information">Non renseigné</span>')|join(', ')|trim|raw }}</span>
+            </p>
+            <p><i class="fa fa-quote-left">&nbsp;&nbsp;</i>Citation favorite : <span
+                        class="bold">{% if user.favoriteQuote %}<i class="fa fa-angle-double-left">
+                        &nbsp;</i>{{ user.favoriteQuote }}&nbsp;<i class="fa fa-angle-double-right"></i>{% else %}<span
+                            class="no-information">Non renseigné</span>{% endif %}</p>
         </div>
         <div class="information">
-            <p><i class="fa fa-music">&nbsp;&nbsp;</i>Musique préférée : <span class="bold">{{ user.favoriteMusic|default('<span class="no-information">Non renseigné</span>')|raw }}</span></p>
-            <p><i class="fa fa-briefcase">&nbsp;&nbsp;</i>Secteur visé : <span class="bold">{{ user.secteur|default('<span class="no-information">Non renseigné</span>')|raw }}</span></p>
+            <p><i class="fa fa-music">&nbsp;&nbsp;</i>Musique préférée : <span
+                        class="bold">{{ user.favoriteMusic|default('<span class="no-information">Non renseigné</span>')|raw }}</span>
+            </p>
+            <p><i class="fa fa-briefcase">&nbsp;&nbsp;</i>Secteur visé : <span
+                        class="bold">{{ user.secteur|default('<span class="no-information">Non renseigné</span>')|raw }}</span>
+            </p>
         </div>
     </div>
 </section>
 {% if user.linkedin or user.viadeo %}
     <section class="information">
-    <h3>Réseaux professionnels</h3>
-    <div class="row-flex center">
-        <div class="information one-column">
-            {% if user.linkedin %}<a href="{{ user.linkedin }}" class="btn btn-alt btn-medium il-a-linked-in"><i class="fa fa-linkedin">&nbsp;&nbsp;</i>LinkedIn</a>{% endif %}
-            {% if user.viadeo %}<a href="{{ user.viadeo }}" class="btn btn-alt btn-medium"><i class="fa fa-viadeo">&nbsp;&nbsp;</i>Viadeo</a>{% endif %}
+        <h3>Réseaux professionnels</h3>
+        <div class="row-flex center">
+            <div class="information one-column">
+                {% if user.linkedin %}<a href="{{ user.linkedin }}" class="btn btn-alt btn-medium il-a-linked-in"><i
+                            class="fa fa-linkedin">&nbsp;&nbsp;</i>LinkedIn</a>{% endif %}
+                {% if user.viadeo %}<a href="{{ user.viadeo }}" class="btn btn-alt btn-medium"><i class="fa fa-viadeo">
+                        &nbsp;&nbsp;</i>Viadeo</a>{% endif %}
+            </div>
         </div>
-    </div>
+    </section>
+{% endif %}
+{% if user.professionalMail and user.username != app.user.username|default('anon.') %}
+    <section class="contact">
+        <h3>Contacter {{ user.firstName }}</h3>
+        <div class="row-flex center">
+            <div class="information one-column">
+                <form action="{{ path('send_mail') }}" method="post">
+
+                    <input type="hidden" value="{{ user.professionalMail }}" name="to">
+                    <div class="ui grid">
+                        <div class="ten wide column">
+                            <div class="group">
+                                <input name="lastName" type="text" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label class="material">Votre nom</label>
+                            </div>
+                        </div>
+                        <div class="six wide column">
+                            <div class="group">
+                                <input name="firstName" type="text" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label class="material">Votre prénom</label>
+                            </div>
+                        </div>
+                        <div class="ten wide column">
+                            <div class="group">
+                                <input name="mail" type="email" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label class="material">Votre mail</label>
+                            </div>
+                        </div>
+                        <div class="six wide column">
+                            <select name="subject">
+                                <option selected value="Proposition d'un stage">Proposition d'un stage</option>
+                                <option value="Prise de rendez-vous">Prise de rendez-vous</option>
+                                <option value="Demande d'informations">Demande d'informations</option>
+                            </select>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="material">Sujet du message</label>
+                        </div>
+                        <div class="sixteen wide column">
+                            <div class="group">
+                                <textarea name="message" cols="120" rows="3" required="required"></textarea>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label class="material">Corps votre message</label>
+                            </div>
+                        </div>
+
+                    <button class="btn btn-success btn-medium" type="submit">Envoyer un message</button>
+
+
+                </form>
+            </div>
+        </div>
     </section>
 {% endif %}
 

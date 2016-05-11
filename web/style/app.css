@@ -917,7 +917,7 @@ div.information {
     text-align: center;
     width: 100%; }
 
-section.information {
+section.information, section.contact {
   margin-bottom: 20px; }
 
 .ui.icon.input {
