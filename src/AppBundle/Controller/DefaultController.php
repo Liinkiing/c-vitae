@@ -64,7 +64,7 @@ class DefaultController extends Controller
                 'sender' => $sender,
                 'student' => $student]), 'text/html');
         $this->get('mailer')->send($message);
-        $this->addFlash('success', "Le mail a bien été envoyé !");
+        $this->addFlash('success', "Le message a bien été envoyé !");
         return $this->redirectToRoute('profile', ['username' => $student->getUsername()]);
     }
 
