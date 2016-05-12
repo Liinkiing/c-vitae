@@ -61,7 +61,7 @@ class DefaultController extends Controller
         $parsedown = new \Parsedown();
         $student = $this->getDoctrine()->getRepository('AppBundle:Student')->findOneBy(['professionalMail' => $request->get('to')]);
         $message = \Swift_Message::newInstance()
-            ->setSubject("[Le plumeau magique] - " . $request->get('subject'))
+            ->setSubject("[C-Vitae] - " . $request->get('subject'))
             ->setFrom($sender['mail'])
             ->setTo($request->get('to'))
             ->setBody($this->renderView('mails/contact.html.twig', ['content' => $parsedown->text($request->get('message')),
