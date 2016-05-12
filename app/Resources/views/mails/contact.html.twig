@@ -8,5 +8,5 @@
     <p>Si vous désirez lui répondre, contactez le dès maintenant : <a
                 href="mailto:{{ sender.mail }}">{{ sender.mail }}</a></p>
 
-    Envoyé depuis la plateforme &laquo; le Plumeau Magique &raquo;
+    Envoyé depuis la plateforme &laquo; le <a href="{{ absolute_url(path("homepage")) }}">Plumeau Magique</a> &raquo;
 {% endautoescape %}
