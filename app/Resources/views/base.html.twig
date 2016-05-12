@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>{% block title %}Le plumeau magique | {{ title }}{% endblock %}</title>
+    <title>{% block title %}C-Vitae | {{ title }}{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     {#{% if app.environment == 'dev' %}#}
     <link rel="stylesheet" href="{{ asset('style/font-awesome.css') }}">
@@ -21,7 +21,7 @@
 <nav class="nav fixed">
     <div class="container">
         <div class="brand">
-            <a href="{{ path('homepage') }}">Le plumeau magique</a>
+            <a href="{{ path('homepage') }}">C-Vitae</a>
         </div>
         <div class="nav-links">
             {{ render(controller('AppBundle:Default:dislayMenu')) }}
@@ -43,7 +43,7 @@
 
 <footer class="footer {% if title == "Accueil" %}footer-index{% endif %}">
     <div class="container">
-        &copy; {{ 'now'|date('Y') }} - Le plumeau magique - Tous droits réservés - Réalisé avec la prestance et la
+        &copy; {{ 'now'|date('Y') }} - C-Vitae - Tous droits réservés - Réalisé avec la prestance et la
         classe d'un bg grâce à Symfony
     </div>
 </footer>
