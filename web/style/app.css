@@ -972,6 +972,8 @@ form input, form select, form textarea {
   border: none;
   background-color: transparent;
   border-bottom: 1px solid #434b55; }
+form select {
+  background-color: #32383f; }
 form input[type="file"] {
   border-bottom: none; }
 form textarea {

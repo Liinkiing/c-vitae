@@ -42,6 +42,8 @@ footer.footer {
     opacity: 0.9;
 }
 
+
+
 table {
 
     width: 100%;
@@ -894,6 +896,10 @@ form {
         border: none;
         background-color: transparent;
         border-bottom: 1px solid #434b55;
+    }
+
+    & select {
+        background-color: #32383f;
     }
 
     & input[type="file"] {

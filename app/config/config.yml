@@ -93,6 +93,7 @@ framework:
 twig:
     globals:
         dropbox_client: "@app.dropbox_client"
+        site_name:    C-Vitae
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 

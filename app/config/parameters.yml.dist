@@ -15,5 +15,6 @@ parameters:
     mailer_user:       '%mail.user%'
     mailer_password:   '%mail.pass%'
 
+
     # A secret key that's used to generate certain security-related tokens
     secret:            '%security.secretkey%'
