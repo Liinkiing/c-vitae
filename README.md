@@ -1,4 +1,4 @@
-le-plumeau-magique
+C-Vitae
 ==================
 
-A Symfony project created on April 14, 2016, 1:17 am.
+Un projet réalisé dans le cadre de la première année en formation de MMI.
