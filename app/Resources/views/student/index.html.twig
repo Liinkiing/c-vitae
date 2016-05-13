@@ -11,7 +11,7 @@
                     <h2>{{  title }}</h2>
                     <p class="subtitle {% if search|default(false) %}search{% endif %}">
                         {% if search|default(false) %}
-                        Résultat de votre recherche ({{ students|length }}) étudiant{% if students|length > 1 %}s{% endif %}
+                        Résultat de votre recherche ({{ students|length }} étudiant{% if students|length > 1 %}s{% endif %})
                             <br/>
                             {% if app.request.get('gender') and app.request.get('gender') != 'both' %}<br><span
                                     class="bold">Sexe</span> : {{ app.request.get('gender')|str_replace('female', 'Féminin')|str_replace('male', 'Masculin') }} {% endif %}
