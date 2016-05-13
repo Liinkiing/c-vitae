@@ -1,5 +1,4 @@
 @import "components/normalizer";
-@import "components/roboto";
 @import "components/colors";
 
 $container-width: 1200px;
@@ -152,7 +151,7 @@ body {
     background-image: url("../img/bg.jpg"), url("../img/overlay.png");
     background-size: 100% auto, 100px 100px;
     background-repeat: no-repeat, no-repeat;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: 'Lato', sans-serif;
     color: whitesmoke;
 }
 
