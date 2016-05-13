@@ -35,7 +35,8 @@
                             <i class="fa fa-clock-o">&nbsp;&nbsp;</i>{{ post.createdAt|date('H:i') }}
                         </div>
                         <div class="author">
-                            <i class="fa fa-user">&nbsp;&nbsp;</i>{{ post.author.username }}
+                            <i class="fa fa-user">&nbsp;&nbsp;</i><a
+                                    href="{{ path('profile', {'username': post.author.username}) }}">{{ post.author.username }}</a>
                         </div>
                     </div>
 
