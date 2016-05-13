@@ -477,7 +477,7 @@ h2 {
     top: 10px;
     left: 0;
     background: whitesmoke;
-    width: 14%;
+    width: 16%;
     height: 1px;
     margin: 0.4em auto; }
 
@@ -503,9 +503,10 @@ p.subtitle {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url("http://www.solodepot.fr/image/cache/data///plumeau_jaune2-600x600.jpg") center no-repeat;
+  background: url("../img/greetings-bg.jpg") center no-repeat;
   background-size: cover;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.26); }
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
+  border: 1px rgba(255, 255, 255, 0.12) solid; }
   .greetings footer, .greetings header {
     z-index: 1; }
   .greetings footer {
@@ -519,8 +520,8 @@ p.subtitle {
     position: absolute;
     top: 0;
     left: 0;
-    background: #20303f;
-    opacity: 0.5;
+    background: #0D1D2C;
+    opacity: 0.65;
     width: 100%;
     height: 100%; }
   .greetings ul {
@@ -543,7 +544,10 @@ p.subtitle {
 
 .features {
   text-align: center;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.26); }
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
+  border: 1px rgba(255, 255, 255, 0.1) solid;
+  width: 80%;
+  margin: 0 auto; }
   .features header {
     background: url("../img/overlay.png"), url("../img/svg/header-bg.svg"), linear-gradient(45deg, #c4918a 20%, #6093c4 80%) center, center, center;
     background-size: 100px 100px, contain, cover;
