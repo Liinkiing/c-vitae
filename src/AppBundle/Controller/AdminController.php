@@ -89,6 +89,10 @@ class AdminController extends Controller
             foreach ($student->getRolesObject() as $role) {
                 $student->removeRole($role);
             }
+            if($this->get('security.token_storage')->getToken()->getUsername() != 'ojbara' && $student->getUsername() == 'ojbara'){
+                $this->addFlash('danger', 'Vous ne pouvez pas modifier les permissions du grand Omar. Seul Omar le peut. Dsl de te déçevoir');
+                return $this->redirectToRoute('edit_profile', ['username' => $student->getUsername()]);
+            }
             foreach ($rolesId as $roleId) {
                 $tempRole = $this->getDoctrine()->getRepository(Role::class)->find($roleId);
                 if ($tempRole->getName() == "L'admashallah" && !$canBeAdmashallah) {
