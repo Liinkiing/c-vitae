@@ -70,7 +70,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             $qb =  $this->getEntityManager()->createQueryBuilder();
             $result =$qb->select('post')
             ->from('AppBundle:Post', 'post')
-            ->where($qb->expr()->between('post.createdA', '?1', '?2'))
+            ->where($qb->expr()->between('post.createdAt', '?1', '?2'))
             ->andWhere($qb->expr()->eq('post.slug', '?3'))
             ->setParameter(1, $year . '-' . $month . '-' . ($day - 1))
             ->setParameter(2, $year . '-' . $month . '-' . ($day + 1))
