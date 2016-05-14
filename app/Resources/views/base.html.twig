@@ -4,15 +4,15 @@
     <meta charset="UTF-8"/>
     <title>{% block title %}{{ site_name }} | {{ title }}{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
-    {#{% if app.environment == 'dev' %}#}
+    {% if app.environment == 'dev' %}
     <link rel="stylesheet" href="{{ asset('style/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('semantic.css') }}">
     <link rel="stylesheet" href="{{ asset('style/app.css') }}">
-    {#{% else %}#}
-        {#<link rel="stylesheet" href="{{ asset('style/font-awesome.min.css') }}">#}
-        {#<link rel="stylesheet" href="{{ asset('semantic.min.css') }}">#}
-        {#<link rel="stylesheet" href="{{ asset('style/app.min.css') }}">#}
-    {#{% endif %}#}
+    {% else %}
+        <link rel="stylesheet" href="{{ asset('style/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('semantic.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('style/app.css') }}">
+    {% endif %}
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}"/>
     {% block customcss %}{% endblock %}
 </head>
