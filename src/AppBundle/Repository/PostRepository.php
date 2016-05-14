@@ -72,7 +72,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->from('AppBundle:Post', 'post')
             ->where($qb->expr()->like('post.createdAt', '?1'))
             ->andWhere($qb->expr()->eq('post.slug', '?2'))
-            ->setParameter(1, $year . '-' . $month . '-' . $day . '%')
+            ->setParameter(1, $year . '-' . $month . '-' . $day)
             ->setParameter(2, $slug)
             ->getQuery()
             ->getResult();
@@ -80,7 +80,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
                 return $result[0];
             } else {
                 throw new NotFoundHttpException("L'article n'a pas été trouvé");
-            };
+            }
     }
 
 }
