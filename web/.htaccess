@@ -147,37 +147,9 @@ DirectoryIndex app.php
 
 </IfModule>
 
-### Caching mod_headers + mod_expires
-
-#<ifmodule mod_expires.c="">
-#
-# # Turn on Expires and set default to now
-# ExpiresActive On
-# ExpiresDefault "now"
-#
-# # Set up caching on media files for 1 month
-# <filesmatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav|swf)$"="">
-# ExpiresDefault "access plus 1 month"
-# </filesmatch>
-#
-# # Set up caching on images, CSS and JS files for 1 week
-# <filesmatch "\.(gif|jpg|jpeg|png|js|css)$"="">
-# ExpiresDefault "access plus 1 week"
-# </filesmatch>
-#
-# # Set up 1 hour caching on commonly updated files
-# <filesmatch "\.(xml|xsl|html|htm|txt)$"="">
-# ExpiresDefault "access plus 1 hour"
-# </filesmatch>
-#
-# # Force no caching for dynamic files
-# <filesmatch "\.(php|cgi|pl)$"="">
-# ExpiresActive Off
-# </filesmatch>
-#</ifmodule>
 
 <ifmodule mod_headers.c>
- <filesmatch "\\.(ico|jpe?g|png|gif|swf|gz|ttf)$">
+ <filesmatch "\\.(ico|jpe?g|png|gif|swf|gz|svg|ttf)$">
  Header set Cache-Control "max-age=2592000, public"
  </filesmatch>
  <filesmatch "\\.(css)$">
@@ -189,39 +161,8 @@ DirectoryIndex app.php
 <filesmatch "\\.(html|htm)$">
 Header set Cache-Control "max-age=7200, public"
 </filesmatch>
-# Disable caching for scripts and other dynamic files
+
 <filesmatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
 Header unset Cache-Control
 </filesmatch>
 </ifmodule>
-
-#<ifmodule mod_headers.c="">
-#
-# # Remote ETag from headers
-# Header unset ETag
-#
-# # Disable ETag for files
-# FileETag None
-#
-# # Media files are catchable
-# <filesmatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav|swf)$"="">
-# Header append Cache-Control "public"
-# </filesmatch>
-#
-# # Images, css and javascript files are catchable
-# <filesmatch "\.(gif|jpg|jpeg|png|js|css)$"="">
-# Header append Cache-Control "public"
-# </filesmatch>
-#
-# # Commonly updated files are catchable
-# <filesmatch "\.(xml|html|htm|txt)$"="">
-# Header append Cache-Control "public"
-# </filesmatch>
-#
-# # Force no caching for dynamic files
-# <filesmatch "\.(php|cgi|pl|htm)$"="">
-# Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-transform"
-# Header set Pragma "no-cache"
-# </filesmatch>
-#
-#</ifmodule>
