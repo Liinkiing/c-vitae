@@ -149,34 +149,34 @@ DirectoryIndex app.php
 
 ### Caching mod_headers + mod_expires
 
-<IfModule mod_expires.c="">
+<ifmodule mod_expires.c="">
 
  # Turn on Expires and set default to now
  ExpiresActive On
  ExpiresDefault "now"
 
  # Set up caching on media files for 1 month
- <FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav|swf)$"="">
- ExpiresDefault "access plus 1 week"
- </FilesMatch>
+ <filesmatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav|swf)$"="">
+ ExpiresDefault "access plus 1 month"
+ </filesmatch>
 
  # Set up caching on images, CSS and JS files for 1 week
- <FilesMatch "\.(gif|jpg|jpeg|png|js|css)$"="">
- ExpiresDefault "access plus 1 minute"
- </FilesMatch>
+ <filesmatch "\.(gif|jpg|jpeg|png|js|css)$"="">
+ ExpiresDefault "access plus 1 week"
+ </filesmatch>
 
  # Set up 1 hour caching on commonly updated files
- <FilesMatch "\.(xml|xsl|html|htm|txt)$"="">
- ExpiresDefault "access plus 1 minute"
- </FilesMatch>
+ <filesmatch "\.(xml|xsl|html|htm|txt)$"="">
+ ExpiresDefault "access plus 1 hour"
+ </filesmatch>
 
  # Force no caching for dynamic files
- <FilesMatch "\.(php|cgi|pl)$"="">
+ <filesmatch "\.(php|cgi|pl)$"="">
  ExpiresActive Off
- </FilesMatch>
-</IfModule>
+ </filesmatch>
+</ifmodule>
 
-<IfModule mod_headers.c="">
+<ifmodule mod_headers.c="">
 
  # Remote ETag from headers
  Header unset ETag
@@ -185,24 +185,24 @@ DirectoryIndex app.php
  FileETag None
 
  # Media files are catchable
- <FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav|swf)$"="">
+ <filesmatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav|swf)$"="">
  Header append Cache-Control "public"
- </FilesMatch>
+ </filesmatch>
 
  # Images, css and javascript files are catchable
- <FilesMatch "\.(gif|jpg|jpeg|png|js|css)$"="">
+ <filesmatch "\.(gif|jpg|jpeg|png|js|css)$"="">
  Header append Cache-Control "public"
- </FilesMatch>
+ </filesmatch>
 
  # Commonly updated files are catchable
- <FilesMatch "\.(xml|html|htm|txt)$"="">
+ <filesmatch "\.(xml|html|htm|txt)$"="">
  Header append Cache-Control "public"
- </FilesMatch>
+ </filesmatch>
 
  # Force no caching for dynamic files
- <FilesMatch "\.(php|cgi|pl|htm)$"="">
+ <filesmatch "\.(php|cgi|pl|htm)$"="">
  Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-transform"
  Header set Pragma "no-cache"
- </FilesMatch>
+ </filesmatch>
 
-</IfModule>
+</ifmodule>
