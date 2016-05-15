@@ -147,7 +147,7 @@ class StudentController extends Controller
         $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
         if ($currentStudent != "anon.") {
             $file = $request->files->get('cv');
-            if ($file == null || !$file->isValid() || !mb_ereg_match("application/x-download|application/pdf", $file->getClientMimeType())) {
+            if ($file == null || !$file->isValid() || !mb_ereg_match("application/x-download|application/pdf", $file->getMimeType())) {
                 $this->addFlash("danger", "Veuillez choisir un fichier PDF !");
                 return $this->redirectToRoute('my_profile');
             }
