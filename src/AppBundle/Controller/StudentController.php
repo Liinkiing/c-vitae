@@ -122,7 +122,7 @@ class StudentController extends Controller
         $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
         if ($currentStudent != "anon.") {
             $file = $request->files->get('profilePictureFile');
-            if ($file == null || !$file->isValid() || !mb_ereg_match("image/.*", $file->getClientMimeType())) {
+            if ($file == null || !$file->isValid() || !mb_ereg_match("image/.*", $file->getMimeType())) {
                 $this->addFlash("danger", "Veuillez choisir une image !");
                 return $this->redirectToRoute('my_profile');
             }
