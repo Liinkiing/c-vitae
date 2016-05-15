@@ -10,6 +10,30 @@ parameters:
 
 oneup_flysystem:
     adapters:
+        ftp_student_image_adapter:
+            ftp:
+                host: etudiant.u-pem.fr
+                port: ~
+                username: '%ftp_user%'
+                password: '%ftp_password%'
+                root: WWW/cvitae/img/students
+                ssl: false
+                timeout: ~
+                permPrivate: ~
+                permPublic: ~
+                passive: ~
+        ftp_student_cv_adapter:
+            ftp:
+                host: etudiant.u-pem.fr
+                port: ~
+                username: '%ftp_user%'
+                password: '%ftp_password%'
+                root: WWW/cvitae/files/cv
+                ssl: false
+                timeout: ~
+                permPrivate: ~
+                permPublic: ~
+                passive: ~
         student_image_adapter:
             dropbox:
                 client: app.dropbox_client
@@ -20,6 +44,12 @@ oneup_flysystem:
                 prefix: files/cv
 
     filesystems:
+        ftp_student_image_fs:
+            adapter: ftp_student_image_adapter
+            mount: ftp_student_image_fs
+        ftp_student_cv_fs:
+            adapter: ftp_student_cv_adapter
+            mount: ftp_student_cv_fs
         student_image_fs:
             adapter: student_image_adapter
             mount: student_image_fs
@@ -33,8 +63,8 @@ vich_uploader:
 
     mappings:
         student_image:
-            uri_prefix:         /img/students
-            upload_destination: student_image_fs
+            uri_prefix:         /cvitae/img/students
+            upload_destination: ftp_student_image_fs
             namer:              namer.student
 
             inject_on_load:     false
@@ -42,8 +72,8 @@ vich_uploader:
             delete_on_remove:   true
 
         student_cv:
-            uri_prefix: /files/cv
-            upload_destination: student_cv_fs
+            uri_prefix: /cvitae/files/cv
+            upload_destination: ftp_student_cv_fs
             namer: namer.student
 
 fos_rest:

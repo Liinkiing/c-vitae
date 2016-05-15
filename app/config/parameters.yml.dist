@@ -8,6 +8,8 @@ parameters:
     database_name:     '%database.name%'
     database_user:     '%database.user%'
     database_password: '%database.pass%'
+    ftp_user:          '%ftp.user%'
+    ftp_password:      '%ftp.password%'
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
