@@ -37,11 +37,11 @@ oneup_flysystem:
         student_image_adapter:
             dropbox:
                 client: app.dropbox_client
-                prefix: img/students
+                prefix: /img/students
         student_cv_adapter:
             dropbox:
                 client: app.dropbox_client
-                prefix: files/cv
+                prefix: /files/cv
 
     filesystems:
         ftp_student_image_fs:
@@ -63,8 +63,8 @@ vich_uploader:
 
     mappings:
         student_image:
-            uri_prefix:         /cvitae/img/students
-            upload_destination: ftp_student_image_fs
+            uri_prefix:         /img/students
+            upload_destination: student_image_fs
             namer:              namer.student
 
             inject_on_load:     false
@@ -72,8 +72,8 @@ vich_uploader:
             delete_on_remove:   true
 
         student_cv:
-            uri_prefix: /cvitae/files/cv
-            upload_destination: ftp_student_cv_fs
+            uri_prefix: /files/cv
+            upload_destination: student_cv_fs
             namer: namer.student
 
 fos_rest:

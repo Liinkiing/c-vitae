@@ -1,11 +1,11 @@
 <div class="profile-picture">
-    <img src="{% if vich_uploader_asset(user, 'profilePictureFile') is not null %}https://etudiant.u-pem.fr/~ojbara{{ vich_uploader_asset(user, 'profilePictureFile') }}{% elseif user.fbid is not null %}{{ user.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}"
+    <img src="{% if vich_uploader_asset(user, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(user, 'profilePictureFile'))[0] }}{% elseif user.fbid is not null %}{{ user.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}"
          alt="">
 </div>
 <div class="row-flex center">
     <div class="user-description">
         <p>{{ user.description|default('Étudiant en DUT MMI à l\'université Paris-Est Marne La Vallée') }}</p>
-        {% if user.cv %}<a href="https://etudiant.u-pem.fr/~ojbara{{ vich_uploader_asset(user, 'cvFile')}}"
+        {% if user.cv %}<a href="{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(user, 'cvFile'))[0]}}"
                            class="btn btn-alt btn-large"><i class="fa fa-download">&nbsp;&nbsp;</i>Télécharger mon CV
             </a>{% endif %}
     </div>
