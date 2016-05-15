@@ -40,7 +40,7 @@ class StudentController extends Controller
     {
         $studentRepository = $this->getDoctrine()->getRepository('AppBundle:Student');
         $students = $studentRepository->findWithParams(
-            ($request->get('group') == '') ? ['A','B','C','D'] : $request->get('group'),
+            ($request->get('group') == '') ? ['A', 'B', 'C', 'D'] : $request->get('group'),
             $request->get('name'),
             $request->get('age'),
             $request->get('role'),
@@ -184,14 +184,14 @@ class StudentController extends Controller
             $currentStudent->setLinkedin($utils->setNullIfStringEmpty($request->get('linkedin')));
             $currentStudent->setViadeo($utils->setNullIfStringEmpty($request->get('viadeo')));
             $errors = [];
-            if($currentStudent->getLinkedin() != '' && !$utils->matchWebsite('linkedin.com', $currentStudent->getLinkedin())){
+            if ($currentStudent->getLinkedin() != '' && !$utils->matchWebsite('linkedin.com', $currentStudent->getLinkedin())) {
                 array_push($errors, 'Veuillez entrer un profil LinkedIn valide !');
             }
-            if($currentStudent->getViadeo() != '' && !$utils->matchWebsite('viadeo.com', $currentStudent->getViadeo())){
+            if ($currentStudent->getViadeo() != '' && !$utils->matchWebsite('viadeo.com', $currentStudent->getViadeo())) {
                 array_push($errors, 'Veuillez entrer un profil Viadeo valide !');
             }
-            if(count($errors) > 0){
-                foreach($errors as $error){
+            if (count($errors) > 0) {
+                foreach ($errors as $error) {
                     $this->addFlash('danger', $error);
                 }
                 return $this->redirectToRoute('my_profile');
@@ -200,10 +200,19 @@ class StudentController extends Controller
             $currentStudent->setProfessionalMail($utils->setNullIfStringEmpty($request->get('mail')));
             $currentStudent->setBirthday($d);
             $currentStudent->setAge($d->diff(new \DateTime('now', $timezone))->y);
-            if ($request->get('hobbies') == '') $currentStudent->setHobbies(null); else $currentStudent->setHobbies(explode(',', $utils->removeWhitespace($request->get('hobbies'))));
-            if ($request->get('softwares') == '') $currentStudent->setSoftwares(null); else $currentStudent->setSoftwares(explode(',', $utils->removeWhitespace($request->get('softwares'))));
-            if ($request->get('languages') == '') $currentStudent->setLanguages(null); else $currentStudent->setLanguages(explode(',', $utils->removeWhitespace($request->get('languages'))));
-            if ($request->get('programmingLanguages') == '') $currentStudent->setProgrammingLanguages(null); else $currentStudent->setProgrammingLanguages(explode(',', $utils->removeWhitespace($request->get('programmingLanguages'))));
+            if ($request->get('hobbies') == '') $currentStudent->setHobbies(null); else $currentStudent->setHobbies(
+                array_map(function ($item) {
+                    return trim($item); }, explode(',', $request->get('hobbies'))));
+            if ($request->get('softwares') == '') $currentStudent->setSoftwares(null); else $currentStudent->setSoftwares(
+                array_map(function ($item) {
+                    return trim($item); }, explode(',', $request->get('softwares'))));
+            if ($request->get('languages') == '') $currentStudent->setLanguages(null); else $currentStudent->setLanguages(
+                array_map(function ($item) {
+                    return trim($item); }, explode(',', $request->get('languages'))));
+            if ($request->get('programmingLanguages') == '') $currentStudent->setProgrammingLanguages(null); else $currentStudent->setProgrammingLanguages(
+                array_map(function ($item) {
+                    return trim($item); }, explode(',', $request->get('programmingLanguages'))));
+            
             $currentStudent->setFavoriteMusic($utils->setNullIfStringEmpty($request->get('favMusic')));
             $currentStudent->setFavoriteQuote($utils->setNullIfStringEmpty($request->get('favQuote')));
             $currentStudent->setProjectRole($utils->setNullIfStringEmpty($request->get('projectRole')));
