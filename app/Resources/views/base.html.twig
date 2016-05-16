@@ -4,15 +4,13 @@
     <meta charset="UTF-8"/>
     <title>{% block title %}{{ site_name }} | {{ title }}{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
-    {% if app.environment == 'dev' %}
-    <link rel="stylesheet" href="{{ asset('style/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('semantic.css') }}">
-    <link rel="stylesheet" href="{{ asset('style/app.css') }}">
+    {% if app.environment == "dev" %}
+        <link rel="stylesheet" href="{{ asset('style/semantic.css') }}">
+        <link rel="stylesheet" href="{{ asset('style/font-awesome.css') }}">
+        <link rel="stylesheet" href="{{ asset('style/app.css') }}">
     {% else %}
-        <link rel="stylesheet" href="{{ asset('style/font-awesome.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('semantic.min.css') }}">
+        <link rel="stylesheet" href="dist/{{ asset('style/dist/app.min.css') }}">
     {% endif %}
-    <link rel="stylesheet" href="{{ asset('style/app.css') }}">
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}"/>
     {% block customcss %}{% endblock %}
 </head>
@@ -32,18 +30,21 @@
 {% block body %}
 
 {% endblock %}
-<script
-        src="https://code.jquery.com/jquery-2.2.2.min.js"
-        integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
-        crossorigin="anonymous"></script>
-<script src="{{ asset('js/semantic.min.js') }}"></script>
+
+{% if app.environment == "dev" %}
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/semantic.js') }}"></script>
+{% else %}
+    <script src="{{ asset('js/dist/app.min.js') }}"></script>
+{% endif %}
 {% block javascripts %}
 
 {% endblock %}
 
 <footer class="footer {% if title == "Accueil" %}footer-index{% endif %}">
     <div class="container">
-        &copy; {{ 'now'|date('Y') }} - {{ site_name }} - Tous droits réservés - Propulsé par Symfony </div>
+        &copy; {{ 'now'|date('Y') }} - {{ site_name }} - Tous droits réservés - Propulsé par Symfony
+    </div>
 </footer>
 </body>
 </html>
