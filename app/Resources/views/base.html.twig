@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{ asset('style/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('style/app.css') }}">
     {% else %}
-        <link rel="stylesheet" href="dist/{{ asset('style/dist/app.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('style/dist/app.min.css') }}">
     {% endif %}
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}"/>
     {% block customcss %}{% endblock %}
