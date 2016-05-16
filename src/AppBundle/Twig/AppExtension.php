@@ -12,6 +12,7 @@ namespace AppBundle\Twig;
 use AppBundle\AppBundle;
 use League\HTMLToMarkdown\HtmlConverter;
 use NumberFormatter;
+use phpbrowscap\Browscap;
 
 class AppExtension extends \Twig_Extension
 {

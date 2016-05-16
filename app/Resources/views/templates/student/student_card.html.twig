@@ -47,7 +47,7 @@
                 </a>
             {% endif %}
             {% if student.cv %}
-                <a class="extra-icon popup" data-position="top center" data-content="Télécharger le CV d{% if student.firstName|truncate(1, '')|preg_match('#a|e|é|è|i|o|u|y#i') %}'{% else %}e {% endif %}{{ student.firstName }}" href="{{ base_upload_url }}{{ vich_uploader_asset(student, 'cvFile') }}"><i class="fa fa-file"></i></a>
+                <a class="extra-icon popup" data-position="top center" data-html="<div style='overflow: hidden;'><embed src='{{ base_upload_url }}{{ vich_uploader_asset(student, 'cvFile') }}' width='442px' height='626px'></embed></div>" href="{{ base_upload_url }}{{ vich_uploader_asset(student, 'cvFile') }}"><i class="fa fa-file"></i></a>
             {% endif %}
         </div>
     {% endif %}
