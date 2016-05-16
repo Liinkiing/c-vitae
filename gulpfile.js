@@ -18,7 +18,7 @@ gulp.task('js-bundle', function(){
 });
 
 gulp.task('css-bundle', function(){
-	return gulp.src(['web/style/font-awesome.css', 'web/style/semantic.css', 'web/style/app.css'])
+	return gulp.src(['web/style/font-awesome.css', 'web/style/semantic.css', 'web/style/animate.css', 'web/style/app.css'])
 		.pipe(gp_concat_css("dist/app.css"))
 		.pipe(gulp.dest(css_dest))
 		.pipe(gp_rename('app.min.css'))
