@@ -149,7 +149,7 @@ DirectoryIndex app.php
 
 
 <ifmodule mod_headers.c>
- <filesmatch "\\.(ico|jpg|png|gif|swf|gz|svg|ttf|jpeg)$">
+ <filesmatch "\\.(ico|jpg|png|gif|swf|gz|svg|ttf|jpeg|woff)$">
  Header set Cache-Control "max-age=1209600, public"
  </filesmatch>
  <filesmatch "\\.(css)$">
