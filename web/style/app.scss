@@ -222,7 +222,6 @@ p.subtitle {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
     border: 1px rgba(255, 255, 255, 0.12) solid;
 
-
     & footer, header {
         z-index: 1;
     }
@@ -1045,4 +1044,9 @@ form {
     width: 700px;
     margin: 40px auto 0 auto;
     padding: 30px;
+}
+
+.extra-icon {
+    float: right;
+    line-height: 34px;
 }

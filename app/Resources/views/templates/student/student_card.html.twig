@@ -23,7 +23,7 @@
             </div>
         </div>
         <img alt="{{ student.fullname }}"
-             src="{% if vich_uploader_asset(student, 'profilePictureFile') is not null %}{{ dropbox_client.createTemporaryDirectLink(vich_uploader_asset(student, 'profilePictureFile'))[0] }}{% elseif student.fbid is not null %}{{ student.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}">
+             src="{% if vich_uploader_asset(student, 'profilePictureFile') is not null %}{{ base_upload_url }}{{ vich_uploader_asset(student, 'profilePictureFile') }}{% elseif student.fbid is not null %}{{ student.facebookImageUrl }}{% else %}{{ asset('img/students/default.jpg') }}{% endif %}">
     </div>
     <div class="content">
         <a href="{% if app.user.username|default('anon.') == student.username %}{{ path('my_profile') }}{% else %}{{ path('profile', {'username': student.username}) }}{% endif %}"
@@ -32,7 +32,7 @@
             <span>{% if student.linkedin or student.viadeo %}{{ student.description|truncate(75, '...') }}{% else %}{{ student.description|truncate(130, '...') }}{% endif %}</span>
         </div>
     </div>
-    {% if student.linkedin or student.viadeo %}
+    {% if student.linkedin or student.viadeo or student.cv %}
         <div class="extra content" {% if student.linkedin and student.viadeo %}style="align-self: center;"{% endif %}>
             {% if student.linkedin %}
                 <a href="{{ student.linkedin }}" class="ui linkedin button">
@@ -45,6 +45,9 @@
                     <i class="fa fa-viadeo"></i>
                     Viadeo
                 </a>
+            {% endif %}
+            {% if student.cv %}
+                <a class="extra-icon" title="Télécharger son CV" href="{{ base_upload_url }}{{ vich_uploader_asset(student, 'cvFile') }}"><i class="fa fa-file"></i></a>
             {% endif %}
         </div>
     {% endif %}

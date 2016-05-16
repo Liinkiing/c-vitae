@@ -123,7 +123,7 @@ class StudentController extends Controller
         if ($currentStudent != "anon.") {
             $file = $request->files->get('profilePictureFile');
             if ($file == null || !$file->isValid() || !mb_ereg_match("image/.*", $file->getMimeType())) {
-                $this->addFlash("danger", "Veuillez choisir une image !");
+                $this->addFlash("danger", "Veuillez choisir une image valide !");
                 return $this->redirectToRoute('my_profile');
             }
             $currentStudent->setImageFile($file);
@@ -148,7 +148,7 @@ class StudentController extends Controller
         if ($currentStudent != "anon.") {
             $file = $request->files->get('cv');
             if ($file == null || !$file->isValid() || !mb_ereg_match("application/x-download|application/pdf", $file->getMimeType())) {
-                $this->addFlash("danger", "Veuillez choisir un fichier PDF !");
+                $this->addFlash("danger", "Veuillez choisir un fichier PDF valide !");
                 return $this->redirectToRoute('my_profile');
             }
             $currentStudent->setCvFile($file);

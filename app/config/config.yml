@@ -16,7 +16,7 @@ oneup_flysystem:
                 port: ~
                 username: '%ftp_user%'
                 password: '%ftp_password%'
-                root: WWW/cvitae/img/students
+                root: WWW-perso/cvitae/img/students
                 ssl: false
                 timeout: ~
                 permPrivate: ~
@@ -28,7 +28,7 @@ oneup_flysystem:
                 port: ~
                 username: '%ftp_user%'
                 password: '%ftp_password%'
-                root: WWW/cvitae/files/cv
+                root: WWW-perso/cvitae/files/cv
                 ssl: false
                 timeout: ~
                 permPrivate: ~
@@ -63,8 +63,8 @@ vich_uploader:
 
     mappings:
         student_image:
-            uri_prefix:         /img/students
-            upload_destination: student_image_fs
+            uri_prefix:         cvitae/img/students
+            upload_destination: ftp_student_image_fs
             namer:              namer.student
 
             inject_on_load:     false
@@ -72,8 +72,8 @@ vich_uploader:
             delete_on_remove:   true
 
         student_cv:
-            uri_prefix: /files/cv
-            upload_destination: student_cv_fs
+            uri_prefix: cvitae/files/cv
+            upload_destination: ftp_student_cv_fs
             namer: namer.student
 
 fos_rest:
@@ -122,8 +122,9 @@ framework:
 # Twig Configuration
 twig:
     globals:
-        dropbox_client: "@app.dropbox_client"
-        site_name:    C-Vitae
+        dropbox_client:   "@app.dropbox_client"
+        site_name:        C-Vitae
+        base_upload_url: "http://perso-etudiant.u-pem.fr/~ojbara/"
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
