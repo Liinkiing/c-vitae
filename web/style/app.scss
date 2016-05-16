@@ -178,7 +178,8 @@ h2 {
     font-size: 1.8em;
     font-weight: 700;
     letter-spacing: 0.15em;
-    text-align: center;;
+    text-align: center;
+    text-shadow: 0 0 24px rgba(0, 0, 0, 0.67);
     &::after {
         content: '';
         display: block;
@@ -189,6 +190,7 @@ h2 {
         width: 16%;
         height: 1px;
         margin: 0.4em auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.67);
     }
 }
 
@@ -204,6 +206,8 @@ p.subtitle {
     letter-spacing: 0.25em;
     margin-top: 2em;
     word-spacing: 0.3em;
+    text-shadow: 0 0 18px rgba(0, 0, 0, 0.67);
+
 }
 
 .greetings {
@@ -324,6 +328,11 @@ p.subtitle {
         background-size: 100px 100px, contain, cover;
         padding: 120px 60px;
     }
+
+    &.fullscreen header {
+        box-shadow: 0 0 16px rgba(0, 0, 0, 0.39) inset;
+    }
+
 
     &.fullscreen {
         box-shadow: none;
