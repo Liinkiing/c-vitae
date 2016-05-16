@@ -149,17 +149,17 @@ DirectoryIndex app.php
 
 
 <ifmodule mod_headers.c>
- <filesmatch "\\.(ico|jpe?g|png|gif|swf|gz|svg|ttf)$">
- Header set Cache-Control "max-age=120, public"
+ <filesmatch "\\.(ico|jpg|png|gif|swf|gz|svg|ttf|jpeg)$">
+ Header set Cache-Control "max-age=1209600, public"
  </filesmatch>
  <filesmatch "\\.(css)$">
- Header set Cache-Control "max-age=120, public"
+ Header set Cache-Control "max-age=1209600, public"
  </filesmatch>
  <filesmatch "\\.(js)$">
- Header set Cache-Control "max-age=120, private"
+ Header set Cache-Control "max-age=1209600, private"
  </filesmatch>
 <filesmatch "\\.(html|htm)$">
-Header set Cache-Control "max-age=120, public"
+Header set Cache-Control "max-age=1209600, public"
 </filesmatch>
 
 <filesmatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
