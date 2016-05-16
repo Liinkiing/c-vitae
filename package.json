@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Liinkiing/c-vitae",
   "devDependencies": {
+    "git-guppy": "^1.2.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-concat-css": "^2.2.0",

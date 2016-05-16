@@ -7,6 +7,8 @@ var gulp = require('gulp'),
 	js_dest = "web/js/dist",
 	css_dest = "web/style";
 
+var guppy = require('git-guppy')(gulp);
+
 
 gulp.task('js-bundle', function(){
 	return gulp.src(['web/js/jquery.js', 'web/js/semantic.js'])
@@ -26,4 +28,7 @@ gulp.task('css-bundle', function(){
 		.pipe(gulp.dest(css_dest + '/dist'));
 });
 
+
 gulp.task('default', ['js-bundle', 'css-bundle'], function(){});
+
+gulp.task('pre-commit', ['default']);
