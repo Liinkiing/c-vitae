@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class StudentController extends Controller
 {
@@ -121,21 +122,36 @@ class StudentController extends Controller
     {
         $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
         if ($currentStudent != "anon.") {
-            $file = $request->files->get('profilePictureFile');
-            if ($file == null || !$file->isValid() || !mb_ereg_match("image/.*", $file->getMimeType())) {
-                $this->addFlash("danger", "Veuillez choisir une image valide !");
+            if ($request->get('action') == "delete") {
+                $this->get('oneup_flysystem.ftp_student_image_fs_filesystem')->delete($currentStudent->getProfilePicture());
+                $currentStudent->setProfilePicture(null);
+                $this->getDoctrine()->getManager()->persist($currentStudent);
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', "Votre photo a bien été supprimé !");
                 return $this->redirectToRoute('my_profile');
-            }
-            $currentStudent->setImageFile($file);
-            $this->getDoctrine()->getManager()->persist($currentStudent);
-            $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', "La photo a bien été transféré");
-            return $this->redirectToRoute('my_profile');
-        } else {
+            } else if ($request->get('action') == "edit") {
+                if ($currentStudent != "anon.") {
+                    $file = $request->files->get('profilePictureFile');
+                    if ($file == null || !$file->isValid() || !mb_ereg_match("image/.*", $file->getMimeType())) {
+                        $this->addFlash("danger", "Veuillez choisir une image valide !");
+                        return $this->redirectToRoute('my_profile');
+                    }
+                    $currentStudent->setImageFile($file);
+                    $this->getDoctrine()->getManager()->persist($currentStudent);
+                    $this->getDoctrine()->getManager()->flush();
+                    $this->addFlash('success', "La photo a bien été transféré");
+                    return $this->redirectToRoute('my_profile');
+                } else {
+                    $this->addFlash('danger', "Vous devez être connecté avant d'accéder à cette page !");
+                    return $this->redirectToRoute('login');
+                }
+            } else {
+                return new HttpException(500, "Paramètres passé au champs 'action' non valide");
+                }
+            } else {
             $this->addFlash('danger', "Vous devez être connecté avant d'accéder à cette page !");
             return $this->redirectToRoute('login');
         }
-
     }
 
     /**
@@ -146,22 +162,35 @@ class StudentController extends Controller
     {
         $currentStudent = $this->get('security.token_storage')->getToken()->getUser();
         if ($currentStudent != "anon.") {
-            $file = $request->files->get('cv');
-            if ($file == null || !$file->isValid() || !mb_ereg_match("application/x-download|application/pdf", $file->getMimeType())) {
-                $this->addFlash("danger", "Veuillez choisir un fichier PDF valide !");
+            if ($request->get('action') == "delete") {
+                $this->get('oneup_flysystem.ftp_student_cv_fs_filesystem')->delete($currentStudent->getCv());
+                $currentStudent->setCv(null);
+                $this->getDoctrine()->getManager()->persist($currentStudent);
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', "Votre CV a bien été supprimé !");
                 return $this->redirectToRoute('my_profile');
+            } else if ($request->get('action') == "edit") {
+
+                $file = $request->files->get('cv');
+                if ($file == null || !$file->isValid() || !mb_ereg_match("application/x-download|application/pdf", $file->getMimeType())) {
+                    $this->addFlash("danger", "Veuillez choisir un fichier PDF valide !");
+                    return $this->redirectToRoute('my_profile');
+                }
+                $currentStudent->setCvFile($file);
+                $this->getDoctrine()->getManager()->persist($currentStudent);
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', "Le CV a bien été enregistré");
+                return $this->redirectToRoute('my_profile');
+
+            } else {
+                return new HttpException(500, "Paramètres passé au champs 'action' non valide");
             }
-            $currentStudent->setCvFile($file);
-            $this->getDoctrine()->getManager()->persist($currentStudent);
-            $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', "Le CV a bien été enregistré");
-            return $this->redirectToRoute('my_profile');
         } else {
             $this->addFlash('danger', "Vous devez être connecté avant d'accéder à cette page !");
             return $this->redirectToRoute('login');
         }
-
     }
+
 
     /**
      * @Route("/profile/me/modify-informations", name="modify_student_informations")
@@ -202,17 +231,21 @@ class StudentController extends Controller
             $currentStudent->setAge($d->diff(new \DateTime('now', $timezone))->y);
             if ($request->get('hobbies') == '') $currentStudent->setHobbies(null); else $currentStudent->setHobbies(
                 array_map(function ($item) {
-                    return trim($item); }, explode(',', $request->get('hobbies'))));
+                    return trim($item);
+                }, explode(',', $request->get('hobbies'))));
             if ($request->get('softwares') == '') $currentStudent->setSoftwares(null); else $currentStudent->setSoftwares(
                 array_map(function ($item) {
-                    return trim($item); }, explode(',', $request->get('softwares'))));
+                    return trim($item);
+                }, explode(',', $request->get('softwares'))));
             if ($request->get('languages') == '') $currentStudent->setLanguages(null); else $currentStudent->setLanguages(
                 array_map(function ($item) {
-                    return trim($item); }, explode(',', $request->get('languages'))));
+                    return trim($item);
+                }, explode(',', $request->get('languages'))));
             if ($request->get('programmingLanguages') == '') $currentStudent->setProgrammingLanguages(null); else $currentStudent->setProgrammingLanguages(
                 array_map(function ($item) {
-                    return trim($item); }, explode(',', $request->get('programmingLanguages'))));
-            
+                    return trim($item);
+                }, explode(',', $request->get('programmingLanguages'))));
+
             $currentStudent->setFavoriteMusic($utils->setNullIfStringEmpty($request->get('favMusic')));
             $currentStudent->setFavoriteQuote($utils->setNullIfStringEmpty($request->get('favQuote')));
             $currentStudent->setProjectRole($utils->setNullIfStringEmpty($request->get('projectRole')));

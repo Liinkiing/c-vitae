@@ -16,7 +16,7 @@ oneup_flysystem:
                 port: ~
                 username: '%ftp_user%'
                 password: '%ftp_password%'
-                root: WWW-perso/cvitae/img/students
+                root: WWW-perso/cvitae/img/students/
                 ssl: false
                 timeout: ~
                 permPrivate: ~
@@ -28,7 +28,7 @@ oneup_flysystem:
                 port: ~
                 username: '%ftp_user%'
                 password: '%ftp_password%'
-                root: WWW-perso/cvitae/files/cv
+                root: WWW-perso/cvitae/files/cv/
                 ssl: false
                 timeout: ~
                 permPrivate: ~
