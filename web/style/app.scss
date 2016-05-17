@@ -405,6 +405,8 @@ pre:not(.CodeMirror-line) {
     transition: all 0.3s;
     background-color: $dark-color;
     font-size: 1.15em;
+    z-index: 5;
+
     & .container {
         width: $container-width;
         margin: 0 auto;
@@ -428,7 +430,6 @@ pre:not(.CodeMirror-line) {
     &.fixed {
         position: fixed;
         width: 100%;
-        z-index: 1000;
         top: 0;
         left: 0;
         box-shadow: 0 -6px 44px rgba(0, 0, 0, 0.4);

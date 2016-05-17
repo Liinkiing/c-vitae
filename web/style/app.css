@@ -639,7 +639,8 @@ pre:not(.CodeMirror-line) {
   text-shadow: 0 0 10px #000;
   transition: all 0.3s;
   background-color: #32383f;
-  font-size: 1.15em; }
+  font-size: 1.15em;
+  z-index: 5; }
   .nav .container {
     width: 62%;
     margin: 0 auto; }
@@ -656,7 +657,6 @@ pre:not(.CodeMirror-line) {
   .nav.fixed {
     position: fixed;
     width: 100%;
-    z-index: 1000;
     top: 0;
     left: 0;
     box-shadow: 0 -6px 44px rgba(0, 0, 0, 0.4);
