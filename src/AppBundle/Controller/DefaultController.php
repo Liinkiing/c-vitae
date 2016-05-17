@@ -21,8 +21,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository(Page::class);
-        $pages = $em->findAll();
-        return $this->render('default/index.html.twig', ['title' => 'Accueil', 'menu' => $pages]);
+        return $this->render('default/index.html.twig', ['title' => 'Accueil']);
     }
 
 
