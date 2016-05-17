@@ -33,7 +33,7 @@ class AppExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction('generateColor', function(){
-                $colors = ['#bc0c5a', '#582aaa', '#09546e', '#45a59a', '#772135', '#5f68b0', '#51b6f8'];
+                $colors = ['#5f1234', '#582aaa', '#09546e', '#45a59a', '#772135', '#5f68b0', '#51b6f8'];
 //                return "#" . str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT) . str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT) . str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT);
                 return $colors[mt_rand(0, count($colors) - 1)];
             })
