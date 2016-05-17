@@ -32,9 +32,9 @@
                             <tbody>
                                 {% for role in availableRoles %}
                                 <tr>
-                                    <td>
-                                        <div class="squaredThree">
-                                            <input id="role{{ loop.index }}" name="roles[]" type="checkbox" value="{{ role.id }}" {% if student.granted(role.role) %} checked="checked" {% endif %}">
+                                    <td class="center">
+                                        <div class="ui checkbox">
+                                            <input name="roles[]" id="role{{ loop.index }}" value="{{ role.id }}" {% if student.granted(role.role) %} checked="checked" {% endif %}type="checkbox">
                                             <label for="role{{ loop.index }}"></label>
                                         </div>
                                     </td>

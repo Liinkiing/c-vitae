@@ -2,7 +2,7 @@
 
 
 {% block body %}
-    <div class="container">
+    <div class="container fullscreen home">
         {% autoescape false %}
             {% for message_danger in app.session.flashBag.get('danger') %}
                 <div class="alert alert-danger">{{ message_danger }}</div>
@@ -13,8 +13,8 @@
         {% endautoescape %}
         <section class="greetings">
             <header>
-                <h2>{{ site_name }}</h2>
-                <p class="subtitle">Une agence constituée de bg</p>
+                <h2>Une plateforme en ligne, pour tous</h2>
+                <p class="subtitle">Réalisé par 4 étudiants en DUT MMI</p>
             </header>
         </section>
 
@@ -40,6 +40,7 @@
                 </div>
             </div>
         </section>
+
     </div>
 {% endblock %}
 

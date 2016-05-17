@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<nav class="nav fixed">
+<nav class="nav fixed before-scroll">
     <div class="container">
         <div class="brand">
             <a href="{{ path('homepage') }}">{{ site_name }}</a>
@@ -38,6 +38,25 @@
 {% else %}
     <script src="{{ asset('js/dist/app.min.js') }}"></script>
 {% endif %}
+<script>
+
+    $(window).on('scroll', function (e) {
+        let navbar = $('nav.nav');
+        let limitElem = $('.greetings, .generic-card.fullscreen > header');
+        let limit = limitElem.offset().top + limitElem.outerHeight();
+        let position = Math.round($(window).scrollTop());
+        console.log(limit + "px, scroll à : " + position + "px");
+        if(position < (limit - 65)){
+            navbar.addClass('before-scroll');
+        } else {
+            navbar.removeClass('before-scroll');
+        }
+    });
+
+    $('nav li').hover(function(){
+        console.log($(this));
+    });
+</script>
 {% block javascripts %}
 
 {% endblock %}

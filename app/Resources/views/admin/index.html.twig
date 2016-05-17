@@ -19,19 +19,26 @@
                             <div class="alert alert-success">{{ message_success }}</div>
                         {% endfor %}
                     {% endautoescape %}
+                    <div class="ui grid stretch">
+                        <div class="eight wide column">
+                            <div class="pages">
+                                <h3>Gérer les pages</h3>
+                                <a href="{{ path('page_list') }}" class="btn btn-info btn-medium">Gérer les pages</a>
+                            </div>
+                        </div>
+                        <div class="eight wide column">
+                            <div class="users">
+                                <h3>Gérer les élèves</h3>
+                                <a href="{{ path('user_list') }}" class="btn btn-info btn-medium">Gérer les élèves</a>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="pages">
-                        <h3>Gérer les pages</h3>
-                        <a href="{{ path('page_list') }}" class="btn btn-info btn-medium">Gérer les pages</a>
-                    </div>
-                    <div class="posts">
-                        <h3>Gérer les articles</h3>
-                        <a href="{{ path('blog_list_posts') }}" class="btn btn-info btn-medium">Gérer les articles</a>
-                    </div>
-                    <div class="users">
-                        <h3>Gérer les élèves</h3>
-                        <a href="{{ path('user_list') }}" class="btn btn-info btn-medium">Gérer les élèves</a>
-                    </div>
+                    {#<div class="posts">#}
+                    {#<h3>Gérer les articles</h3>#}
+                    {#<a href="{{ path('blog_list_posts') }}" class="btn btn-info btn-medium">Gérer les articles</a>#}
+                    {#</div>#}
+
                 </div>
 
             </div>

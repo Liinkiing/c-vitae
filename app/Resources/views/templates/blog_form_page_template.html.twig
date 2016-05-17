@@ -13,11 +13,13 @@
 
 <div class="group">
     <label class="no-material" for="fullscreen" style="display: inline-block; width: 90px; height: 60px;">Plein écran</label>
-    <input name="fullscreen" style="display: inline-block; width: 5px;" type="checkbox" {% if editMode and page.isFullscreen %} checked {% endif %} value="1">
+    <input name="fullscreen" type="checkbox" style="display: inline-block; width: 20px;" {% if editMode and page.isFullscreen %} checked {% endif %} value="1">
 </div>
 
 
-<div class="pageContent" style="position: relative; top: -87px;">
+
+
+<div class="pageContent" style="position: relative; top: -60px;">
     <label class="no-material" for="pageContent">Contenu de la page</label>
     <textarea name="pageContent" id="pageContent" cols="30" rows="10"></textarea>
 </div>

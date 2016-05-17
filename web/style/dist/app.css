@@ -38954,7 +38954,7 @@ p.subtitle {
   background: url("../../img/greetings-bg.jpg") center no-repeat;
   background-size: cover;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
-  border: 1px rgba(255, 255, 255, 0.12) solid;
+  border-bottom: 1px rgba(255, 255, 255, 0.12) solid;
 }
 
 .greetings footer,
@@ -39010,14 +39010,14 @@ p.subtitle {
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
   border: 1px rgba(255, 255, 255, 0.1) solid;
-  width: 80%;
-  margin: 0 auto;
+  width: 50%;
+  margin: 0 auto 40px auto;
 }
 
 .features header {
   background: url("../../img/overlay.png"), url("../../img/svg/header-bg.svg"), linear-gradient(45deg, #c4918a 20%, #6093c4 80%) center, center, center;
   background-size: 100px 100px, contain, cover;
-  padding: 120px 60px;
+  padding: 190px 60px;
 }
 
 .features .content {
@@ -39059,7 +39059,7 @@ p.subtitle {
 .generic-card header {
   background: url("../../img/overlay.png"), url("../../img/svg/header-bg.svg"), linear-gradient(45deg, #c4918a 20%, #6093c4 80%) center, center, center;
   background-size: 100px 100px, contain, cover;
-  padding: 120px 60px;
+  padding: 190px 60px;
 }
 
 .generic-card.fullscreen header {
@@ -39105,12 +39105,16 @@ p.subtitle {
 
 .container {
   width: 1200px;
-  margin: 100px auto;
+  margin: 170px auto;
 }
 
 .container.fullscreen {
   width: 100%;
   margin: 0;
+}
+
+.container.home {
+  margin: 0 auto;
 }
 
 a {
@@ -39121,12 +39125,14 @@ a {
 }
 
 a:hover {
-  color: darkgray;
+  color: gainsboro;
 }
 
 .nav {
-  background-color: #3d454d;
   height: 70px;
+  text-shadow: 0 0 10px #000;
+  transition: all 0.3s;
+  background-color: #32383f;
 }
 
 .nav .container {
@@ -39135,11 +39141,34 @@ a:hover {
 }
 
 .nav .brand {
+  transition: all 0.3s;
   font-size: 1.5em;
   font-weight: 300;
   display: inline-block;
   height: 100%;
   line-height: 70px;
+}
+
+.nav .brand a:hover {
+  text-shadow: 0 0 15px white;
+  color: white;
+}
+
+.nav.fixed {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  box-shadow: 0 -6px 44px rgba(0, 0, 0, 0.4);
+  background-color: #2b3036;
+  border-bottom: 1px solid #434b55;
+}
+
+.nav.before-scroll {
+  border-bottom: none;
+  background: transparent;
+  box-shadow: none;
 }
 
 .nav-links {
@@ -39156,11 +39185,35 @@ a:hover {
 
 .nav-links ul li {
   display: inline-block;
-  padding-right: 30px;
+  padding: 0 15px;
+  height: 70px;
+  line-height: 70px;
+  transition: all 0.3s;
 }
 
-.slider-options #projectImage:first-of-type {
-  margin-top: 65px;
+.nav-links ul li a:hover {
+  text-shadow: 0 0 15px white;
+  color: white;
+}
+
+.ui.checkbox label {
+  color: white;
+}
+
+.ui.checkbox label:hover {
+  color: #e6e6e6;
+}
+
+.color.white {
+  color: white;
+}
+
+.color .black {
+  color: black;
+}
+
+.color .darkwhite {
+  color: #e6e6e6;
 }
 
 .alert {
@@ -39220,6 +39273,10 @@ form input {
   outline: none;
   border: none;
   border-bottom: 1px solid #434b55;
+}
+
+.ui.grid.stretch {
+  width: 100%;
 }
 
 .page-description,
@@ -39788,6 +39845,10 @@ form .highlight {
 
 form.inline-form {
   display: inline-block;
+}
+
+.center {
+  text-align: center;
 }
 
 /*# sourceMappingURL=app.css.map */
