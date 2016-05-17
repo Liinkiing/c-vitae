@@ -38770,7 +38770,7 @@ footer.footer .container {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  width: 1200px;
+  width: 62%;
   padding: 60px;
   text-align: center;
 }
@@ -39106,7 +39106,7 @@ p.subtitle {
 }
 
 .container {
-  width: 1200px;
+  width: 62%;
   margin: 170px auto;
 }
 
@@ -39146,7 +39146,7 @@ pre {
 }
 
 .nav .container {
-  width: 1200px;
+  width: 62%;
   margin: 0 auto;
 }
 

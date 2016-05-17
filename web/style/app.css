@@ -372,7 +372,7 @@ footer.footer {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    width: 1200px;
+    width: 62%;
     padding: 60px;
     text-align: center; }
 
@@ -612,7 +612,7 @@ p.subtitle {
   align-self: center; }
 
 .container {
-  width: 1200px;
+  width: 62%;
   margin: 170px auto; }
   .container.fullscreen {
     width: 100%;
@@ -641,7 +641,7 @@ pre {
   background-color: #32383f;
   font-size: 1.15em; }
   .nav .container {
-    width: 1200px;
+    width: 62%;
     margin: 0 auto; }
   .nav .brand {
     transition: all 0.3s;
