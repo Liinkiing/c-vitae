@@ -391,7 +391,7 @@ a {
     }
 }
 
-pre {
+pre:not(.CodeMirror-line) {
     background: rgb(58, 64, 72);
     padding: 20px;
     border-radius: 3px;
