@@ -39010,7 +39010,9 @@ p.subtitle {
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
   border: 1px rgba(255, 255, 255, 0.1) solid;
-  width: 50%;
+  width: 70%;
+  min-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto 40px auto;
 }
 
