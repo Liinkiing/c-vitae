@@ -632,7 +632,8 @@ a {
   height: 70px;
   text-shadow: 0 0 10px #000;
   transition: all 0.3s;
-  background-color: #32383f; }
+  background-color: #32383f;
+  font-size: 1.15em; }
   .nav .container {
     width: 1200px;
     margin: 0 auto; }
