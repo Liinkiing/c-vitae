@@ -60,9 +60,9 @@ class StudentRepository extends \Doctrine\ORM\EntityRepository
             ->where($qb->expr()->in('student.groupeTp', '?1'))->setParameter(1, $group);
         if ($name != null) {
             $result->andWhere($qb->expr()->like(
-                "CONCAT(student.firstName, ' ', student.lastName)",
+                "LOWER(CONCAT(student.firstName, ' ', student.lastName))",
                 "?2"
-            ))->setParameter(2, "%$name%");
+            ))->setParameter(2, strtolower("%$name%"));
         }
         if ($age != null) {
             $result->andWhere($qb->expr()->eq('student.age', '?3'))->setParameter(3, $age);
