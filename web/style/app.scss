@@ -391,6 +391,13 @@ a {
     }
 }
 
+pre {
+    background: rgb(58, 64, 72);
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.06);
+}
+
 .nav {
 
     height: $nav-height;

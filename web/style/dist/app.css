@@ -39130,6 +39130,13 @@ a:hover {
   color: gainsboro;
 }
 
+pre {
+  background: #3a4048;
+  padding: 20px;
+  border-radius: 3px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.06);
+}
+
 .nav {
   height: 70px;
   text-shadow: 0 0 10px #000;
