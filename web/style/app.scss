@@ -481,6 +481,14 @@ a {
     }
 }
 
+.ui.form label {
+    color: black;
+
+    &:hover {
+        color: lighten(black, 20%);
+    }
+}
+
 .alert {
 
     margin-bottom: 40px;

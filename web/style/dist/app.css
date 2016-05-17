@@ -39216,6 +39216,14 @@ a:hover {
   color: #e6e6e6;
 }
 
+.ui.form label {
+  color: black;
+}
+
+.ui.form label:hover {
+  color: #333333;
+}
+
 .alert {
   margin-bottom: 40px;
   padding: 20px;
