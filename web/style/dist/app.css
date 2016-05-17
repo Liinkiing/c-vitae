@@ -39130,7 +39130,7 @@ a:hover {
   color: gainsboro;
 }
 
-pre {
+pre:not(.CodeMirror-line) {
   background: #3a4048;
   padding: 20px;
   border-radius: 3px;
