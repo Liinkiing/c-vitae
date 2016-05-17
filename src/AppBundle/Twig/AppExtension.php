@@ -38,7 +38,7 @@ class AppExtension extends \Twig_Extension
                 return $colors[mt_rand(0, count($colors) - 1)];
             })
         ,   new \Twig_SimpleFunction('convertHtmlToMarkdown', function($html){
-                $parser = new HtmlConverter();
+                $parser = new HtmlConverter(['header_style' => 'atx']);
                 return $parser->convert($html);
             })
         ,   new \Twig_SimpleFunction('convertMarkdownToHtml', function($markdown){

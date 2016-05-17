@@ -70,6 +70,7 @@ class PageController extends Controller
      */
     public function editAction(Request $request, $id){
         $parsedown = new \Parsedown();
+        
         $em = $this->getDoctrine()->getManager();
         $page = $this->getDoctrine()->getRepository(Page::class)->find($id);
         if(!$page){
