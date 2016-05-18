@@ -208,10 +208,10 @@ class StudentController extends Controller
                 $this->addFlash('danger', "Veuillez entrer une date valide !");
                 return $this->redirectToRoute('my_profile');
             }
-            $currentStudent->setDescription($utils->setNullIfStringEmpty($request->get('description')));
-            $currentStudent->setWebsite($utils->setNullIfStringEmpty($request->get('website')));
-            $currentStudent->setLinkedin($utils->setNullIfStringEmpty($request->get('linkedin')));
-            $currentStudent->setViadeo($utils->setNullIfStringEmpty($request->get('viadeo')));
+            $currentStudent->setDescription($utils->setNullIfStringEmpty(trim($request->get('description'))));
+            $currentStudent->setWebsite($utils->setNullIfStringEmpty(trim($request->get('website'))));
+            $currentStudent->setLinkedin($utils->setNullIfStringEmpty(trim($request->get('linkedin'))));
+            $currentStudent->setViadeo($utils->setNullIfStringEmpty(trim($request->get('viadeo'))));
             $errors = [];
             if ($currentStudent->getLinkedin() != '' && !$utils->matchWebsite('linkedin.com', $currentStudent->getLinkedin())) {
                 array_push($errors, 'Veuillez entrer un profil LinkedIn valide !');
