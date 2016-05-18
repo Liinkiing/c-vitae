@@ -39106,7 +39106,6 @@ p.subtitle {
   overflow: hidden;
   background: url("../../img/overlay.png"), url("../../img/svg/header-bg.svg"), linear-gradient(45deg, #c4918a 20%, #6093c4 80%) center, center, center;
   background-size: 100px 100px, contain, cover;
-  background-attachment: fixed;
   padding: 190px 60px;
 }
 
