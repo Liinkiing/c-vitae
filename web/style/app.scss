@@ -229,10 +229,12 @@ p.subtitle {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: url('../img/greetings-bg.jpg') center no-repeat;
+    background: url('../img/greetings-bg.jpg') center;
     background-size: cover;
+    background-attachment: fixed;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
     border-bottom: 1px rgba(255, 255, 255, 0.12) solid;
+    overflow: hidden;
 
     & footer, header {
         z-index: 1;
@@ -283,6 +285,12 @@ p.subtitle {
 
 .features {
 
+    & header {
+        background: url("../img/overlay.png"), url("../img/svg/header-bg.svg"), linear-gradient(45deg, #c4918a 20%, #6093c4 80%) center, center, center;
+        background-size: 100px 100px, contain, cover;
+        padding: (80px + $nav-height) 60px;
+    }
+
     text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
     border: 1px rgba(255, 255, 255, 0.1) solid;
@@ -291,15 +299,49 @@ p.subtitle {
     max-width: 1200px;
     margin: 0 auto 40px auto;
 
-    header {
-        background: url("../img/overlay.png"), url("../img/svg/header-bg.svg"), linear-gradient(45deg, #c4918a 20%, #6093c4 80%) center, center, center;
-        background-size: 100px 100px, contain, cover;
-        padding: (80px + $nav-height) 60px;
+    &.alt {
+        width: 40%;
+        min-width: 700px;
+        max-width: 900px;
+
+        & header {
+            background: url('../img/banner.jpg') center center;
+            background-size: cover;
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: $dark-color;
+                opacity: 0.5;
+                z-index: 0;
+            }
+        }
+
+        & h2 {
+            position: relative;
+            z-index: 1;
+        }
+
+
     }
+
+
 
     .content {
         background-color: $dark-color;
         display: flex;
+        &.alt {
+
+            display: block;
+            padding: 40px;
+            text-align: justify;
+
+        }
         & .feature {
             width: 33.3333%;
             border-right: 1px lighten($dark-color, 10%) solid;
@@ -332,8 +374,10 @@ p.subtitle {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
 
     & header {
+        overflow: hidden;
         background: url("../img/overlay.png"), url("../img/svg/header-bg.svg"), linear-gradient(45deg, #c4918a 20%, #6093c4 80%) center, center, center;
         background-size: 100px 100px, contain, cover;
+        background-attachment: fixed;
         padding: (120px + $nav-height) 60px;
     }
 

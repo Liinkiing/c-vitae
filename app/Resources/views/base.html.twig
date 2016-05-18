@@ -35,17 +35,27 @@
 {% if app.environment == "dev" %}
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/semantic.js') }}"></script>
+    <script src="{{ asset('js/parallax.js') }}"></script>
 {% else %}
     <script src="{{ asset('js/dist/app.min.js') }}"></script>
 {% endif %}
 <script>
 
     $(window).on('scroll', function (e) {
+        let scrollPos = $(window).scrollTop();
+        console.log("Position du scroll : " + scrollPos + "px");
+
+        $('.greetings header, .generic-card.fullscreen > header > div').css({
+            'position': 'relative',
+            'left': 0,
+            'top': (scrollPos * 0.55) + "px",
+            "opacity": 1 - (scrollPos * 0.0025)
+        });
+
         let navbar = $('nav.nav');
         let limitElem = $('.greetings, .generic-card.fullscreen > header');
         let limit = limitElem.offset().top + limitElem.outerHeight();
         let position = Math.round($(window).scrollTop());
-        console.log(limit + "px, scroll à : " + position + "px");
         if(position < (limit - 65)){
             navbar.addClass('before-scroll');
         } else {
