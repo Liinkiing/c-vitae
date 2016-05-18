@@ -8,7 +8,7 @@
 
             <div class="generic-card {% if isFullscreen %} fullscreen {% endif %}">
                 <header>
-                    <h2>{{ title }}</h2>
+                    <h1>{{ title }}</h1>
                     <p class="subtitle {% if search|default(false) %}search{% endif %}">
                         {% if search|default(false) %}
                             Résultat de votre recherche ({{ students|length }} étudiant{% if students|length > 1 %}s{% endif %})

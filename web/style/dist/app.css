@@ -38904,7 +38904,7 @@ h3::after {
   background-color: #434b55;
 }
 
-h2 {
+h1 {
   text-transform: uppercase;
   font-size: 1.8em;
   font-weight: 700;
@@ -38913,7 +38913,7 @@ h2 {
   text-shadow: 0 0 24px rgba(0, 0, 0, 0.67);
 }
 
-h2::after {
+h1::after {
   content: '';
   display: block;
   position: relative;
@@ -38923,7 +38923,14 @@ h2::after {
   width: 16%;
   height: 1px;
   margin: 0.4em auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.67);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.67);
+}
+
+h2 {
+  text-transform: uppercase;
+  font-size: 1.6em;
+  font-weight: 100;
+  text-shadow: 0 0 24px rgba(0, 0, 0, 0.57);
 }
 
 p {
@@ -39019,7 +39026,7 @@ p.subtitle {
 .features header {
   background: url("../../img/overlay.png"), url("../../img/svg/header-bg.svg"), linear-gradient(45deg, #c4918a 20%, #6093c4 80%) center, center, center;
   background-size: 100px 100px, contain, cover;
-  padding: 190px 60px;
+  padding: 150px 60px;
 }
 
 .features .content {
@@ -39139,7 +39146,7 @@ pre:not(.CodeMirror-line) {
 
 .nav {
   height: 70px;
-  text-shadow: 0 0 10px #000;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   transition: all 0.3s;
   background-color: #32383f;
   font-size: 1.15em;

@@ -10,7 +10,7 @@
 
             <div class="generic-card {% if isFullscreen %} fullscreen {% endif %}">
                 <header>
-                    <h2>{{ title }}</h2>
+                    <h1>{{ title }}</h1>
                     <p class="subtitle"><a href="{{ path('blog_show_post', {
                             'day': post.createdAt|date('d'),
                             'month': post.createdAt|date('m'),
