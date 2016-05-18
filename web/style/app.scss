@@ -456,7 +456,7 @@ pre:not(.CodeMirror-line) {
     transition: all 0.3s;
     background-color: $dark-color;
     font-size: 1.15em;
-    z-index: 5;
+    z-index: 100;
 
     & .container {
         width: $container-width;
@@ -1178,4 +1178,8 @@ form.inline-form {
 
 .center {
     text-align: center;
+}
+
+.CodeMirror-fullscreen, .editor-toolbar.fullscreen, .editor-preview-side {
+    z-index: 101;
 }

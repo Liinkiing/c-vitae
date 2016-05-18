@@ -674,7 +674,7 @@ pre:not(.CodeMirror-line) {
   transition: all 0.3s;
   background-color: #32383f;
   font-size: 1.15em;
-  z-index: 5; }
+  z-index: 100; }
   .nav .container {
     width: 62%;
     margin: 0 auto; }
@@ -1160,5 +1160,8 @@ form.inline-form {
 
 .center {
   text-align: center; }
+
+.CodeMirror-fullscreen, .editor-toolbar.fullscreen, .editor-preview-side {
+  z-index: 101; }
 
 /*# sourceMappingURL=app.css.map */
