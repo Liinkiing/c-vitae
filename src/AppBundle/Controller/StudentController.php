@@ -75,7 +75,7 @@ class StudentController extends Controller
         if ($request->getMethod() == 'GET') {
 
             if ($currentStudent != "anon.") {
-                return $this->render('student/my_profile.html.twig', ['user' => $this->get('security.token_storage')->getToken()->getUser(), 'title' => 'Mon profil', 'subtitle' => '', 'isFullscreen' => true]);
+                return $this->render('student/my_profile.html.twig', ['user' => $this->get('security.token_storage')->getToken()->getUser()]);
             } else {
                 $this->addFlash('danger', "Vous devez être connecté avant d'accéder à cette page !");
                 return $this->redirectToRoute('login');

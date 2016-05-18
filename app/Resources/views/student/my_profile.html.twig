@@ -1,4 +1,4 @@
-{% embed 'base.html.twig' with {'randomHeaderColors': '1'} %}
+{% embed 'base.html.twig' with {'randomHeaderColors': 1, 'title': 'Mon profil', 'subtitle': 'Modifiez les informations de votre profil', 'isFullscreen': 1} %}
 
 
     {% block body %}
@@ -41,13 +41,16 @@
                             {% if user.profilePicture %}
                                 <form class="inline-form" action="{{ path('modify_student_image') }}" method="post">
                                     <input type="hidden" name="action" value="delete">
-                                    <button class="btn btn-danger btn-medium" type="submit">Supprimer votre image ({{ user.profilePicture }})</button>
+                                    <button class="btn btn-danger btn-medium" type="submit">Supprimer votre image
+                                        ({{ user.profilePicture }})
+                                    </button>
                                 </form>
                             {% endif %}
                         </div>
 
                         <div class="eight wide column">
-                            <form class="inline-form" action="{{ path('modify_student_cv') }}" method="post" enctype="multipart/form-data">
+                            <form class="inline-form" action="{{ path('modify_student_cv') }}" method="post"
+                                  enctype="multipart/form-data">
                                 Choisissez votre CV (au format PDF)
                                 <input type="hidden" name="action" value="edit">
                                 <input accept="application/pdf" type="file" name="cv" id="cv">
@@ -56,7 +59,9 @@
                             {% if user.cv %}
                                 <form class="inline-form" action="{{ path('modify_student_cv') }}" method="post">
                                     <input type="hidden" name="action" value="delete">
-                                    <button class="btn btn-danger btn-medium" type="submit">Supprimer votre CV ({{ user.cv }})</button>
+                                    <button class="btn btn-danger btn-medium" type="submit">Supprimer votre CV
+                                        ({{ user.cv }})
+                                    </button>
                                 </form>
                             {% endif %}
                         </div>
@@ -173,16 +178,33 @@
                                 <div class="group">
                                     <select name="projectRole">
 
-                                        <option {% if user.projectRole == "Chargé de communication / Marketing" %}selected {% endif %}value="Chargé de communication / Marketing">Chargé de communication /
-                                        <option {% if user.projectRole == "Chef de projet" %}selected {% endif %}value="Chef de projet">Chef de projet</option>
-                                            Marketing
+                                        <option {% if user.projectRole == "Chargé de communication / Marketing" %}selected
+                                                {% endif %}value="Chargé de communication / Marketing">Chargé de
+                                            communication /
+                                        <option {% if user.projectRole == "Chef de projet" %}selected
+                                                {% endif %}value="Chef de projet">Chef de projet
                                         </option>
-                                        <option {% if user.projectRole == "Développeur" %}selected {% endif %}value="Développeur">Développeur</option>
-                                        <option {% if user.projectRole == "Développeur / Intégrateur" %}selected {% endif %}value="Développeur / Intégrateur">Développeur / Intégrateur</option>
-                                        <option {% if user.projectRole == "Graphiste" %}selected {% endif %}value="Graphiste">Graphiste</option>
-                                        <option {% if user.projectRole == "Intégrateur" %}selected {% endif %}value="Intégrateur">Intégrateur</option>
-                                        <option {% if user.projectRole == "Vidéaste" %}selected {% endif %}value="Vidéaste">Vidéaste</option>
-                                        <option {% if user.projectRole == "Vidéaste / Chargé de communication" %}selected {% endif %}value="Vidéaste / Chargé de communication">Vidéaste / Chargé de communication</option>
+                                        Marketing
+                                        </option>
+                                        <option {% if user.projectRole == "Développeur" %}selected
+                                                {% endif %}value="Développeur">Développeur
+                                        </option>
+                                        <option {% if user.projectRole == "Développeur / Intégrateur" %}selected
+                                                {% endif %}value="Développeur / Intégrateur">Développeur / Intégrateur
+                                        </option>
+                                        <option {% if user.projectRole == "Graphiste" %}selected
+                                                {% endif %}value="Graphiste">Graphiste
+                                        </option>
+                                        <option {% if user.projectRole == "Intégrateur" %}selected
+                                                {% endif %}value="Intégrateur">Intégrateur
+                                        </option>
+                                        <option {% if user.projectRole == "Vidéaste" %}selected
+                                                {% endif %}value="Vidéaste">Vidéaste
+                                        </option>
+                                        <option {% if user.projectRole == "Vidéaste / Chargé de communication" %}selected
+                                                {% endif %}value="Vidéaste / Chargé de communication">Vidéaste / Chargé
+                                            de communication
+                                        </option>
                                     </select>
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
