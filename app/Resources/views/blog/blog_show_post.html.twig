@@ -1,4 +1,4 @@
-{% embed 'base.html.twig' with {'title': post.title, 'isFullscreen': '0', 'subtitle': post.subtitle, 'randomHeaderColors': '1'} %}
+{% embed 'base.html.twig' with {'title': post.title, 'isFullscreen': 0, 'subtitle': post.subtitle, 'randomHeaderColors': 1} %}
 
 
     {% block body %}
@@ -113,7 +113,7 @@
             <style>
                 .generic-card header {
                     background: url("{{ asset('img/overlay.png') }}"), url("{{ asset('img/svg/header-bg.svg') }}"), linear-gradient(45deg, {{ generateColor() }} 20%, {{ generateColor() }} 80%) center, center, center;
-                    background-attachment: fixed;
+                    {% if isFullscreen|default(false) %} background-attachment: fixed; {% endif %}
 
                 }
 

@@ -1,5 +1,5 @@
-{% embed 'base.html.twig' with {'title': 'Listes des élèves', 'isFullscreen': '1', 'subtitle': students|length ~ ' étudiants dans la promotion MMI',
-"randomHeaderColors": '1', 'randomHeaderColors': '1', 'studentPerRow': 4} %}
+{% embed 'base.html.twig' with {'title': 'Listes des élèves', 'isFullscreen': 1, 'subtitle': students|length ~ ' étudiants dans la promotion MMI',
+'randomHeaderColors': 1, 'studentPerRow': 4} %}
 
 
     {% block body %}
@@ -284,7 +284,7 @@
             <style>
                 .generic-card header {
                     background: url("{{ asset('img/overlay.png') }}"), url("{{ asset('img/svg/header-bg.svg') }}"), linear-gradient(45deg, {{ generateColor() }} 20%, {{ generateColor() }} 80%) center, center, center;
-                    background-attachment: fixed;
+                    {% if isFullscreen|default(false) %} background-attachment: fixed; {% endif %}
 
                 }
 
