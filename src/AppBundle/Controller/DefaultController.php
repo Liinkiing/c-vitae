@@ -60,8 +60,8 @@ class DefaultController extends Controller
         $parsedown = new \Parsedown();
         $student = $this->getDoctrine()->getRepository('AppBundle:Student')->findOneBy(['professionalMail' => $request->get('to')]);
         $message = \Swift_Message::newInstance()
-            ->setSubject("[" . $this->get('twig')->getGlobals()['site_name'] ."] - " . $request->get('subject'))
-            ->setFrom($sender['mail'])
+            ->setSubject($request->get('subject'))
+            ->setFrom($this->get('twig')->getGlobals()['site_name'] . '@' . strtolower($this->get('twig')->getGlobals()['site_name']) . '.com')
             ->setTo($request->get('to'))
             ->setBody($this->renderView('mails/contact.html.twig', ['content' => $parsedown->text($request->get('message')),
                 'sender' => $sender,
