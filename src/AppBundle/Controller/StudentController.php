@@ -110,7 +110,7 @@ class StudentController extends Controller
         if (!$student) {
             throw $this->createNotFoundException("L'utilisateur n'a pas été trouvé");
         } elseif ($student->getUsername() == $this->get('security.token_storage')->getToken()->getUsername()) return $this->redirectToRoute('my_profile');
-        return $this->render('student/profile.html.twig', ['user' => $student, 'title' => $student->getFirstName() . ' ' . $student->getLastName(), 'subtitle' => 'Son profil', 'isFullscreen' => true]);
+        return $this->render('student/profile.html.twig', ['user' => $student]);
     }
 
 
