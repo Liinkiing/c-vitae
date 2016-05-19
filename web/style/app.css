@@ -572,7 +572,8 @@ p.subtitle {
     .features.alt header {
       background: url("../img/banner.jpg") center center;
       background-size: cover;
-      position: relative; }
+      position: relative;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.66) inset; }
       .features.alt header::before {
         content: '';
         position: absolute;
