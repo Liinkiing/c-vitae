@@ -20,7 +20,10 @@
 <nav class="nav fixed {% if isFullscreen|default(false) or title == 'Accueil' %}before-scroll{% endif %}">
     <div class="container">
         <div class="brand">
-            <a href="{{ path('homepage') }}">{{ site_name }}</a>
+            <a href="{{ path('homepage') }}">
+                {#<img src="{{ asset('img/logo.png') }}" alt="">#}
+                <div class="brand-image"></div>
+            </a>
         </div>
         <div class="nav-links">
             {{ render(controller('AppBundle:Default:dislayMenu')) }}
@@ -57,6 +60,7 @@
                 'top': (scrollPos * 0.55) + "px",
                 "opacity": 1 - (scrollPos * 0.0025)
             });
+            $('.brand img').attr('src', '/img/logo_c.png')
         }
 
 

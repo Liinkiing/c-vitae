@@ -39015,6 +39015,10 @@ p.subtitle {
   margin-right: 0;
 }
 
+.brand img {
+  height: 70px;
+}
+
 .features {
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
@@ -39192,6 +39196,12 @@ pre:not(.CodeMirror-line) {
   z-index: 100;
 }
 
+.nav div.brand-image {
+  background: url("../../img/logo_c.png");
+  height: 70px;
+  width: 180px;
+}
+
 .nav .container {
   width: 62%;
   margin: 0 auto;
@@ -39225,6 +39235,12 @@ pre:not(.CodeMirror-line) {
   border-bottom: none;
   background: transparent;
   box-shadow: none;
+}
+
+.nav.before-scroll div.brand-image {
+  background: url("../../img/logo.png");
+  height: 70px;
+  width: 180px;
 }
 
 .nav-links {

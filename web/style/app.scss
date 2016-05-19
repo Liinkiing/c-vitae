@@ -283,6 +283,11 @@ p.subtitle {
     }
 }
 
+.brand img {
+    height: $nav-height;
+}
+
+
 .features {
 
     & header {
@@ -459,6 +464,12 @@ pre:not(.CodeMirror-line) {
     font-size: 1.15em;
     z-index: 100;
 
+    & div.brand-image {
+        background: url('../img/logo_c.png');
+        height: 70px;
+        width: 180px;
+    }
+
     & .container {
         width: $container-width;
         margin: 0 auto;
@@ -493,6 +504,11 @@ pre:not(.CodeMirror-line) {
         border-bottom: none;
         background: transparent;
         box-shadow: none;
+        & div.brand-image {
+            background: url('../img/logo.png');
+            height: 70px;
+            width: 180px;
+        }
     }
 
 }
