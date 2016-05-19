@@ -7,8 +7,8 @@
 
             <div class="generic-card {% if isFullscreen %} fullscreen {% endif %}">
                 <header>
-                    <h1>{{ title }}</h1>
-                    <p class="subtitle">{{ subtitle }}</p>
+                    <div><h1>{{ title }}</h1>
+                    <p class="subtitle">{{ subtitle }}</p></div>
                 </header>
                 <div class="content-site content-row {% if isFullscreen %} fullscreen {% endif %}">
                     {% autoescape false %}
@@ -33,11 +33,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {#<div class="posts">#}
-                    {#<h3>Gérer les articles</h3>#}
-                    {#<a href="{{ path('blog_list_posts') }}" class="btn btn-info btn-medium">Gérer les articles</a>#}
-                    {#</div>#}
 
                 </div>
 

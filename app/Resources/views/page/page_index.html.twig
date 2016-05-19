@@ -28,11 +28,14 @@
                         </tr>
                         </thead>
                         <tbody>
-
+                            <tr>
+                                <td><a href="{{ path('homepage') }}"><i class="fa fa-home">&nbsp;&nbsp;</i>Accueil</a></td>
+                                <td class="actions"><a href="{{ path('homepage_edit') }}" class="btn btn-info"><i class="fa fa-edit">&nbsp;&nbsp;</i>Éditer</a></td>
+                            </tr>
                         {% for page in pages %}
                             <tr>
                                 <td><a href="{{ path('page', {'slug' : page.slug }) }}">{{ page.name }}</a> <span class="page-description">{{ page.subtitle }}</span></td>
-                                <td class="actions"><a class ="btn btn-info" href="{{ path('page_edit', {'id': page.id }) }}"><i class="fa fa-edit">&nbsp;&nbsp;</i>Éditer</a><a class="btn btn-danger" href="{{ path('page_delete',{'id': page.id}) }}"><i class="fa fa-times">&nbsp;&nbsp;</i>Supprimer</a></td>
+                                <td class="actions"><a class="btn btn-info" href="{{ path('page_edit', {'id': page.id }) }}"><i class="fa fa-edit">&nbsp;&nbsp;</i>Éditer</a><a class="btn btn-danger" href="{{ path('page_delete',{'id': page.id}) }}"><i class="fa fa-times">&nbsp;&nbsp;</i>Supprimer</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

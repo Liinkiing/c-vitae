@@ -35,30 +35,31 @@ class AdminController extends Controller
     }
 
 
-
     /**
-     * @Route("/admin/posts/", name="blog_list_posts")
+     * @Route("/admin/homepage/edit", name="homepage_edit")
      * @Security("has_role('ROLE_ADMIN')")
+     * @Method({"GET", "POST"})
      */
-    public function listPostAction(Request $request){
-        $em = $this->getDoctrine()->getRepository(Post::class);
-        $posts = $em->findAll('DESC');
+    public function editHomepageAction(Request $request){
+        $homepage = $this->getDoctrine()->getRepository('AppBundle:Homepage')->find(1);
+        if($request->getMethod() == 'GET'){
+            return $this->render('admin/homepage_edit.html.twig', ['homepage' => $homepage]);
+        } else {
+            $mmiDetail = $request->get('mmi_detail');
+            $parsedown = new \Parsedown();
+            $mmiDetail['content'] = $parsedown->text($mmiDetail['content']);
+            $homepage->setTitle($request->get('title'))
+                ->setSubtitle($request->get('subtitle'))
+                ->setFeature($request->get('feature'))
+                ->setMmiDetail($mmiDetail);
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Les modifications ont bien été enregistrées');
+            return $this->redirectToRoute('homepage_edit');
 
-        return $this->render('admin/blog_list_posts.html.twig', ['posts' => $posts]);
+        }
+
     }
 
-    /**
-     * @Route("/admin/projects/", name="portfolio_list_projects")
-     * @Security("has_role('ROLE_ADMIN')")
-     */
-    public function listProjectsAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getRepository(Project::class);
-        $projects = $em->findAll();
-        return $this->render('admin/portfolio_list_projects.html.twig', ['projects' => $projects]);
-
-
-    }
 
     /**
      * @Route("/admin/students/", name="user_list")

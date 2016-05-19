@@ -20,8 +20,22 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getRepository(Page::class);
-        return $this->render('default/index.html.twig', ['title' => 'Accueil']);
+//        $tab = ['feature' => [
+//                    'title' => 'Pourquoi c crée',
+//                    'features' => [
+//                        ['name' => 'test',
+//                            'content' => 'blablablablabla'
+//                            ],
+//                        ['name' => 'test2',
+//                            'content' => 'blablablablabla2'
+//                        ],
+//                        ['name' => 'test3',
+//                            'content' => 'blablablablabla3'
+//                        ]
+//                    ]
+//        ]];
+        $homepage = $this->getDoctrine()->getRepository('AppBundle:Homepage')->find(1);
+        return $this->render('default/index.html.twig', ['homepage' => $homepage]);
     }
 
 

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% embed 'base.html.twig' with {'title': homepage.title, 'subtitle': homepage.subtitle, 'isFullscreen': 1 } %}
 
 
 {% block body %}
@@ -13,47 +13,35 @@
         {% endautoescape %}
         <section class="greetings">
             <header>
-                <h1>Une plateforme en ligne, pour tous</h1>
-                <p class="subtitle">Réalisé par 4 étudiants en DUT MMI</p>
+                <h1>{{ title }}</h1>
+                <p class="subtitle">{{ subtitle }}</p>
             </header>
         </section>
 
         <section class="features">
             <header>
-                <h2>Pourquoi ce projet a t-il été crée ?</h2>
+                <h2>{{ homepage.feature.title }}</h2>
             </header>
             <div class="content">
-                <div class="feature">
-                    <div class="icon-container"><i class="fa fa-2x fa-television"></i></div>
-                    <h3>Je suis une feature</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam architecto excepturi facere optio provident sed voluptatem. Accusantium ad ea eos exercitationem itaque obcaecati, pariatur, ratione sequi sint suscipit ullam.</p>
-                </div>
-                <div class="feature">
-                    <div class="icon-container"><i class="fa fa-2x fa-gamepad"></i></div>
-                    <h3>Je suis une feature</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium eos ipsum minima odio quisquam, reprehenderit vitae! Asperiores expedita facere illum, magni maiores, neque nesciunt nulla quod rerum sed ut, veniam.</p>
-                </div>
-                <div class="feature">
-                    <div class="icon-container"><i class="fa fa-2x fa-save"></i></div>
-                    <h3>Je suis une feature</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet aspernatur atque beatae, blanditiis esse illo impedit ipsa iste laudantium natus odio, omnis saepe sint temporibus veritatis vero voluptates voluptatum!</p>
-                </div>
+                {% for feature in homepage.feature.features %}
+
+                    <div class="feature">
+                        <div class="icon-container"><i class="fa fa-2x fa-{{ feature.icon }}"></i></div>
+                        <h3>{{ feature.name }}</h3>
+                        <p>{{ feature.content }}</p>
+                    </div>
+
+                {% endfor %}
+
             </div>
         </section>
         <section class="features alt">
             <header>
-                <h2>Bla bla bla</h2>
+                <h2>{{ homepage.mmiDetail.title }}</h2>
             </header>
             <div class="content alt">
-                <h3>Je suis un text</h3>
-                <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea magnam molestiae perspiciatis. Adipisci dolor dolorem ducimus ex itaque iure magni minima minus obcaecati perspiciatis possimus
-                        recusandae reiciendis totam, voluptas voluptatibus.</span><span>Accusamus ad,
-                        alias aliquam aut consequatur cupiditate debitis dolore eos eum fugiat inventore
-                        ipsum magnam maiores minima modi, nisi odio quod reiciendis sed similique sunt suscipit ut vel
-                        voluptas voluptates!</span><span>Eaque incidunt iure magnam neque soluta ullam.
-                        Dicta eos maiores rerum similique velit? Animi esse expedita fuga itaque labore maiores modi nam necessitatibus,
-                        neque quam rem repellat sed tenetur, vitae!</span>
-                </p>
+                <h3>{{ homepage.mmiDetail.paragraph_title }}</h3>
+                <p>{{ homepage.mmiDetail.content|raw }}</p>
             </div>
         </section>
 
@@ -66,4 +54,5 @@
     </script>
 {% endblock %}
 
+{% endembed %}
 

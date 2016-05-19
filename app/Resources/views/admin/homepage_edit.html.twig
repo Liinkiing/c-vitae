@@ -1,0 +1,175 @@
+{% embed 'base.html.twig' with {'title': 'Éditer la page d\'accueil', 'subtitle': '', 'isFullscreen': 1, 'randomHeaderColors': 1} %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    {% endblock %}
+
+    {% block body %}
+        <div class="container {% if isFullscreen %} fullscreen {% endif %}">
+
+            <div class="generic-card {% if isFullscreen %} fullscreen {% endif %}">
+                <header>
+                    <div><h1>{{ title }}</h1>
+                    <p class="subtitle">{{ subtitle }}</p></div>
+                </header>
+                <div class="content-site {% if isFullscreen %} fullscreen {% endif %}">
+                    {% autoescape false %}
+                        {% for message_danger in app.session.flashBag.get('danger') %}
+                            <div class="alert alert-danger">{{ message_danger }}</div>
+                        {% endfor %}
+                        {% for message_success in app.session.flashBag.get('success') %}
+                            <div class="alert alert-success">{{ message_success }}</div>
+                        {% endfor %}
+                    {% endautoescape %}
+
+
+                    <form action="" method="post">
+                        <div class="ui grid">
+
+                            <div class="ten wide column">
+                                <div class="group">
+                                    <input name="title" type="text" value="{{ homepage.title }}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Titre de la page d'accueil</label>
+                                </div>
+                            </div>
+                            <div class="six wide column">
+                                <div class="group">
+                                    <input name="subtitle" type="text" value="{{ homepage.subtitle }}"
+                                           required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Sous titre de la page d'accueil</label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="sixteen wide column">
+                                <h2>Édition des features (jtrouve pas de meilleures façons d'le dire wallay)</h2>
+                                <hr>
+                            </div>
+                            <div class="sixteen wide column">
+                                <div class="group">
+                                    <input name="feature[title]" type="text" value="{{ homepage.feature.title }}"
+                                           required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Titre du bloc des features</label>
+                                </div>
+                            </div>
+                            {% for feature in homepage.feature.features %}
+                                <div class="{% if loop.last %}six{% else %}five{% endif %} wide column">
+                                    <div class="group">
+                                        <input name=feature[features][{{ loop.index0 }}][name]" type="text"
+                                               value="{{ feature.name }}"
+                                               required>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label class="material">Nom feature n°{{ loop.index }}</label>
+                                    </div>
+                                    <div class="group">
+                                        <input name="feature[features][{{ loop.index0 }}][icon]" type="text"
+                                               value="{{ feature.icon }}"
+                                               required>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label class="material">Icône feature n°{{ loop.index }}</label>
+                                    </div>
+                                    <div class="group">
+                                        <input name="feature[features][{{ loop.index0 }}][content]" type="text"
+                                               value="{{ feature.content }}"
+                                               required>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label class="material">Contenu feature n°{{ loop.index }}</label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            <div class="sixteen wide column">
+                                <h2>Édition du bloc de présentation MMI</h2>
+                                <hr>
+                            </div>
+                            <div class="ten wide column">
+                                <div class="group">
+                                    <input name="mmi_detail[title]" type="text" value="{{ homepage.mmiDetail.title }}"
+                                           required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Titre du bloc</label>
+                                </div>
+                            </div>
+                            <div class="six wide column">
+                                <div class="group">
+                                    <input name="mmi_detail[paragraph_title]" type="text" value="{{ homepage.mmiDetail.paragraph_title }}"
+                                           required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Titre du paragraphe</label>
+                                </div>
+                            </div>
+                            <div class="sixteen wide column">
+                                <div class="pageContent">
+                                    <label class="no-material" for="detailContent">Contenu du bloc</label>
+                                    <textarea name="mmi_detail[content]" id="detailContent" cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="buttons">
+                            <button class="btn btn-info btn-medium" type="submit"><i class="fa fa-edit">&nbsp;&nbsp;</i>Modifier
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    {% endblock %}
+
+    {% block customcss %}
+        <style>
+            .editor-toolbar {
+                background: #fff;
+                opacity: 0.9;
+            }
+
+            {% if randomHeaderColors %}
+            .generic-card header {
+                background: url("{{ asset('img/overlay.png') }}"), url("{{ asset('img/svg/header-bg.svg') }}"), linear-gradient(45deg, {{ generateColor() }} 20%, {{ generateColor() }} 80%) center, center, center;
+            {% if isFullscreen|default(false) %} background-attachment: fixed;
+            {% endif %}
+
+            }
+
+            {% endif %}
+
+        </style>
+    {% endblock %}
+
+
+    {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+        <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+        <script>
+            var simplemde = new SimpleMDE({
+                element: $("#detailContent")[0],
+                spellChecker: false,
+                promptURLs: true,
+                renderingConfig: {
+                    codeSyntaxHighlighting: true
+                }
+            });
+            simplemde.value("{{ convertHtmlToMarkdown(homepage.mmiDetail.content)|e('js')|preg_replace("/\r|\n/", "\\n") }}");
+
+        </script>
+
+    {% endblock %}
+
+{% endembed %}
