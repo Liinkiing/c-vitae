@@ -89,6 +89,7 @@ class Student implements UserInterface, \Serializable, NamerInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
+     * @Serializer\Exclude()
      */
     private $password;
 
