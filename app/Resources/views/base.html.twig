@@ -43,6 +43,12 @@
 {% endif %}
 <script>
 
+    $('nav.nav').on('animationend', function(e) {
+       console.log("anim fini");
+        $('.brand-image').removeClass('animated fadeIn')
+
+    });
+
     $(window).on('scroll', function (e) {
         let scrollPos = $(window).scrollTop();
 
@@ -50,7 +56,6 @@
         let limitElem = $('.greetings, .generic-card.fullscreen > header');
         let limit = limitElem.offset().top + limitElem.outerHeight();
         let position = Math.round($(window).scrollTop());
-        console.log("Position du scroll : " + scrollPos + "px");
 
         if(position < limit - 65)
         {
@@ -60,7 +65,7 @@
                 'top': (scrollPos * 0.55) + "px",
                 "opacity": 1 - (scrollPos * 0.0025)
             });
-            $('.brand img').attr('src', '/img/logo_c.png')
+            $('.brand img').attr('src', '/img/logo_c.png');
         }
 
 
