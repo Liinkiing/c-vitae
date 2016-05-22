@@ -758,6 +758,13 @@ pre:not(.CodeMirror-line) {
       font-family: 'FontAwesome';
       content: '\f00c';
       margin-right: 10px; }
+  .alert.alert-info {
+    background: rgba(68, 116, 185, 0.28);
+    border: rgba(68, 105, 185, 0.39) solid 1px; }
+    .alert.alert-info::before {
+      font-family: 'FontAwesome';
+      content: '\f129';
+      margin-right: 10px; }
 
 .icon-container {
   margin: 0 0 1.5em 0; }

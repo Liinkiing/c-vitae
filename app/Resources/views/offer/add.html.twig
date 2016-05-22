@@ -21,11 +21,13 @@
                         {% for message_danger in app.session.flashBag.get('danger') %}
                             <div class="alert alert-danger">{{ message_danger }}</div>
                         {% endfor %}
+                        {% for message_info in app.session.flashBag.get('info') %}
+                            <div class="alert alert-info">{{ message_info }}</div>
+                        {% endfor %}
                         {% for message_success in app.session.flashBag.get('success') %}
                             <div class="alert alert-success">{{ message_success }}</div>
                         {% endfor %}
-                        {% if not app.user %}
-                        {% endif %}
+
                     {% endautoescape %}
 
                     <form action="" method="post" enctype="multipart/form-data">

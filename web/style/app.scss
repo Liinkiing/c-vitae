@@ -589,6 +589,16 @@ pre:not(.CodeMirror-line) {
         border: rgba(86, 185, 64, 0.39) solid 1px;
     }
 
+    &.alert-info {
+        &::before {
+            font-family: 'FontAwesome';
+            content: '\f129';
+            margin-right: 10px;
+        }
+        background: rgba(68, 116, 185, 0.28);
+        border: rgba(68, 105, 185, 0.39) solid 1px;
+    }
+
 }
 
 .icon-container {

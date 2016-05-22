@@ -77,6 +77,7 @@ class OfferController extends Controller
     {
         if ($this->getUser() != null && !in_array('ROLE_ADMIN', $this->getUser()->getRoles())) throw new AccessDeniedException();
         if ($request->getMethod() == "GET") {
+            if(!$this->getUser()) $this->addFlash("info", "Votre offre ne sera pas instantanément disponible. Elle sera soumise à approbation");
             return $this->render('offer/add.html.twig');
         } else {
             $parsedown = new \Parsedown();

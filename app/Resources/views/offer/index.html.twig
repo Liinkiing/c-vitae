@@ -17,10 +17,12 @@
                         {% for message_danger in app.session.flashBag.get('danger') %}
                             <div class="alert alert-danger">{{ message_danger }}</div>
                         {% endfor %}
+                        {% for message_info in app.session.flashBag.get('info') %}
+                            <div class="alert alert-info">{{ message_info }}</div>
+                        {% endfor %}
                         {% for message_success in app.session.flashBag.get('success') %}
                             <div class="alert alert-success">{{ message_success }}</div>
                         {% endfor %}
-
                     {% endautoescape %}
 
                     {% if offers|length > 0 %}
@@ -35,7 +37,7 @@
                     {% endif %}
                     {% if not app.user or is_granted('ROLE_ADMIN') %}
                         <a class="btn btn-success btn-medium" href="{{ path('offer_add') }}"><i class="fa fa-plus">
-                                &nbsp;&nbsp;</i>Ajouter une offre</a>
+                                &nbsp;&nbsp;</i>{% if is_granted('ROLE_ADMIN') %}Ajouter{% else %}Proposer{% endif %} une offre</a>
                     {% endif %}
 
                 </div>
