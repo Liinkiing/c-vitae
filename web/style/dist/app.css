@@ -40009,7 +40009,7 @@ ul.students li:last-of-type {
 }
 
 .ui.items > .item > .image:not(.ui) {
-  border-right: 1px solid red;
+  border-right: 1px solid #434b55;
   padding-right: 20px;
 }
 
