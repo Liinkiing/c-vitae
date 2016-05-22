@@ -2,6 +2,8 @@
 
     <div class="container" style="font-family: Lucida Sans Unicode, Lucida Grande, sans-serif">
         <h1>Vous avez une offre en attente de modération</h1>
+        <a href="mailto{{ offer.contact }}">{{ offer.contact }}</a> ({{ ip }}) a soumis l'offre suivante :
+        <h2>{{ offer.title }}</h2>
         <hr>
         <h2>Contenu de l'offre :</h2>
         <p class="message">{{ offer.description }}</p>

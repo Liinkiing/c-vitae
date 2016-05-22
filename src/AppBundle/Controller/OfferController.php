@@ -100,7 +100,6 @@ class OfferController extends Controller
                 $this->addFlash("danger", "Veuillez choisir une image valide !");
                 return $this->redirectToRoute('offer_add');
             }
-
             $offer->setImageFile($file);
             $em = $this->getDoctrine()->getManager();
             $em->persist($offer);
@@ -110,7 +109,7 @@ class OfferController extends Controller
                 $message->setSubject("Approbation d'une nouvelle offre !")
                     ->setFrom($this->get('twig')->getGlobals()['site_name'] . '@' . strtolower($this->get('twig')->getGlobals()['site_name']) . '.com')
                     ->setTo("omar.jbara2@gmail.com")
-                    ->setBody($this->renderView("mails/validate_offer.html.twig", ['offer' => $offer]), 'text/html');
+                    ->setBody($this->renderView("mails/validate_offer.html.twig", ['offer' => $offer, 'ip' => $request->getClientIp()]), 'text/html');
                 $this->get('mailer')->send($message);
                 $this->addFlash('success', "L'offre a été ajouté et est en cours d'approbation. Un mail vous préviendra lorsque celle ci aura été accepté !");
             } else {
