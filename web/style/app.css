@@ -877,8 +877,9 @@ a.student-link:hover {
   margin: 3em 0em; }
 
 .ui.items > .item > .content > .description {
-  max-height: 180px;
-  overflow: hidden; }
+  max-height: 170px;
+  overflow: hidden;
+  margin-bottom: 20px; }
 
 .student-item {
   position: relative;
@@ -1222,5 +1223,9 @@ ul.datas, ul.students {
 .offer-image {
   width: 175px;
   height: 175px; }
+
+.ui.items > .item > .image:not(.ui) {
+  border-right: 1px solid black;
+  padding-right: 20px; }
 
 /*# sourceMappingURL=app.css.map */

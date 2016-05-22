@@ -39487,8 +39487,9 @@ a.student-link:hover {
 }
 
 .ui.items > .item > .content > .description {
-  max-height: 180px;
+  max-height: 170px;
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .student-item {
@@ -40005,6 +40006,11 @@ ul.students li:last-of-type {
 .offer-image {
   width: 175px;
   height: 175px;
+}
+
+.ui.items > .item > .image:not(.ui) {
+  border-right: 1px solid black;
+  padding-right: 20px;
 }
 
 /*# sourceMappingURL=app.css.map */
