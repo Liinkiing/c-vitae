@@ -34,6 +34,18 @@ oneup_flysystem:
                 permPrivate: ~
                 permPublic: ~
                 passive: ~
+        ftp_offer_image_adapter:
+            ftp:
+                host: etudiant.u-pem.fr
+                port: ~
+                username: '%ftp_user%'
+                password: '%ftp_password%'
+                root: WWW-perso/cvitae/img/offers/
+                ssl: false
+                timeout: ~
+                permPrivate: ~
+                permPublic: ~
+                passive: ~
         student_image_adapter:
             dropbox:
                 client: app.dropbox_client
@@ -50,6 +62,9 @@ oneup_flysystem:
         ftp_student_cv_fs:
             adapter: ftp_student_cv_adapter
             mount: ftp_student_cv_fs
+        ftp_offer_image_fs:
+            adapter: ftp_offer_image_adapter
+            mount: ftp_offer_image_fs
         student_image_fs:
             adapter: student_image_adapter
             mount: student_image_fs
@@ -75,6 +90,15 @@ vich_uploader:
             uri_prefix: cvitae/files/cv
             upload_destination: ftp_student_cv_fs
             namer: namer.student
+
+        offer_image:
+            uri_prefix: cvitae/img/offers
+            upload_destination: ftp_offer_image_fs
+            namer: namer.offer
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
 
 fos_rest:
     param_fetcher_listener: force

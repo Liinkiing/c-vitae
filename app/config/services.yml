@@ -25,6 +25,11 @@ services:
         class: AppBundle\Entity\Student
         tags:
             - { name: namer }
+
+    namer.offer:
+        class: AppBundle\Entity\Offer
+        tags:
+            - { name: namer }
     app.utilities:
         class: AppBundle\Utilities
     app.dropbox_client:

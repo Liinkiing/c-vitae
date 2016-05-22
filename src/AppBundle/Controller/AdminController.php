@@ -53,7 +53,7 @@ class AdminController extends Controller
                 ->setFeature($request->get('feature'))
                 ->setMmiDetail($mmiDetail);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'Les modifications ont bien été enregistrées');
+            $this->addFlash('success', 'Les modifications ont bien été enregistrées. <a href="/">Voir la page</a>');
             return $this->redirectToRoute('homepage_edit');
 
         }

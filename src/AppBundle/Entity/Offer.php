@@ -3,30 +3,36 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
+use Vich\UploaderBundle\Mapping\PropertyMapping;
+use Vich\UploaderBundle\Naming\NamerInterface;
 
 /**
  * Offer
  *
  * @ORM\Table(name="offer")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\OfferRepository")
+ * @Uploadable()
  */
-class Offer
+class Offer implements NamerInterface
 {
     /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    private $name;
+    private $title;
 
     /**
      * @var string
@@ -36,11 +42,26 @@ class Offer
     private $secteur;
 
     /**
+     * @ORM\Column(name="image_url", type="string", length=255, nullable=true)
+     */
+    private $imageUrl;
+
+    /**
+     * @UploadableField(mapping="offer_image", fileNameProperty="imageUrl")
+     */
+    private $imageFile;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="published_at", type="datetime")
      */
     private $publishedAt;
+
+    /**
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
 
     /**
      * @var string
@@ -78,6 +99,16 @@ class Offer
     private $localisation;
 
     /**
+     * @ORM\Column(name="entreprise", type="string", length=255)
+     */
+    private $entreprise;
+
+    /**
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="contact", type="string", length=255)
@@ -85,11 +116,18 @@ class Offer
     private $contact;
 
     /**
+     * @ORM\Column(name="is_active", type="boolean", nullable=true)
+     */
+    private $isActive = false;
+
+    /**
      * @var array
      *
-     * @ORM\Column(name="students_postuled", type="simple_array")
+     * @ORM\Column(name="students_postuled", type="simple_array", nullable=true)
      */
     private $studentsPostuled;
+
+
 
 
     /**
@@ -105,13 +143,13 @@ class Offer
     /**
      * Set name
      *
-     * @param string $name
+     * @param string $title
      *
      * @return Offer
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->$title = $title;
 
         return $this;
     }
@@ -121,9 +159,9 @@ class Offer
      *
      * @return string
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**
@@ -340,6 +378,112 @@ class Offer
     public function getStudentsPostuled()
     {
         return $this->studentsPostuled;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return Student
+     */
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        $this->updatedAt = new \DateTime('now');
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageUrl()
+    {
+        return $this->imageUrl;
+    }
+
+    /**
+     * @param mixed $imageUrl
+     */
+    public function setImageUrl($imageUrl)
+    {
+        $this->imageUrl = $imageUrl;
+    }
+
+    /**
+     * Creates a name for the file being uploaded.
+     *
+     * @param Offer $object The object the upload is attached to.
+     * @param PropertyMapping $mapping The mapping to use to manipulate the given object.
+     *
+     * @return string The file name.
+     */
+    public function name($object, PropertyMapping $mapping)
+    {
+        $date = new \DateTime($this->getPublishedAt());
+        return "offer_" . $date->format('d_m_Y-H_i_s') . "." . $mapping->getFile($object)->guessExtension();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEntreprise()
+    {
+        return $this->entreprise;
+    }
+
+    /**
+     * @param mixed $entreprise
+     */
+    public function setEntreprise($entreprise)
+    {
+        $this->entreprise = $entreprise;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }
 

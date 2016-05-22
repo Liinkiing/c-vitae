@@ -1,0 +1,167 @@
+{% embed 'base.html.twig' with {'title': 'Ajouter une offre', 'subtitle': 'Personnaliser votre offre',
+'isFullscreen': 1, 'randomHeaderColors': 1} %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    {% endblock %}
+
+
+    {% block body %}
+
+        <div class="container {% if isFullscreen|default(false) %} fullscreen{% endif %}">
+
+            <div class="generic-card {% if isFullscreen %} fullscreen {% endif %}">
+                <header>
+                    <div><h1>{{ title }}</h1>
+                        <p class="subtitle">{{ subtitle }}</p></div>
+                </header>
+                <div class="content-site {% if isFullscreen %} fullscreen {% endif %}">
+                    {% autoescape false %}
+                        {% for message_danger in app.session.flashBag.get('danger') %}
+                            <div class="alert alert-danger">{{ message_danger }}</div>
+                        {% endfor %}
+                        {% for message_success in app.session.flashBag.get('success') %}
+                            <div class="alert alert-success">{{ message_success }}</div>
+                        {% endfor %}
+                        {% if not app.user %}
+                        {% endif %}
+                    {% endautoescape %}
+
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="ui grid">
+                            <div class="eight wide column centered">
+                                <label for="image">Choissisez une image</label>
+                                <input accept="image/*" type="file" name="offer[image]" id="image">
+                            </div>
+                            <div class="ten wide column">
+                                <div class="group">
+                                    <input name="offer[name]" type="text" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Nom de l'offre</label>
+                                </div>
+                            </div>
+                            <div class="six wide column">
+                                <div class="group">
+                                    <input name="offer[secteur]" type="text"
+                                           required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Secteur</label>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <div class="group">
+                                    <input name="offer[duree]" type="text" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Durée du stage</label>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <div class="group">
+                                    <input name="offer[nb_post]" type="number" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Nombre de postes à pourvoir</label>
+                                </div>
+                            </div>
+                            <div class="six wide column">
+                                <div class="group">
+                                    <input name="offer[remuneration]" type="number" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Rémunération</label>
+                                </div>
+                            </div>
+
+                            <div class="six wide column">
+                                <div class="group">
+                                    <input name="offer[type_contrat]" type="text" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Type de contrat</label>
+                                </div>
+                            </div>
+                            <div class="ten wide column">
+                                <div class="group">
+                                    <input name="offer[localisation]" type="text" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Lieu du stage</label>
+                                </div>
+                            </div>
+
+                            <div class="eight wide column">
+                                <div class="group">
+                                    <input name="offer[contact]" type="email" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Votre mail de contact</label>
+                                </div>
+                            </div>
+
+                            <div class="eight wide column">
+                                <div class="group">
+                                    <input name="offer[entreprise]" type="text" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="material">Votre entreprise</label>
+                                </div>
+                            </div>
+
+                            <div class="sixteen wide column">
+                                <div class="pageContent">
+                                    <label class="no-material" for="offerDesc">Description de l'offre</label>
+                                    <textarea name="offer[description]" id="offerDesc" cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="buttons">
+                            <input type="submit" class="btn btn-success btn-medium">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+
+    {% block customcss %}
+
+        {% if randomHeaderColors %}
+            <style>
+                .generic-card header {
+                    background: url("{{ asset('img/overlay.png') }}"), url("{{ asset('img/svg/header-bg.svg') }}"), linear-gradient(45deg, {{ generateColor() }} 20%, {{ generateColor() }} 80%) center, center, center;
+                {% if isFullscreen|default(false) %} background-attachment: fixed;
+                {% endif %}
+
+                }
+
+            </style>
+        {% endif %}
+
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+        <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+        <script>
+            var simplemde = new SimpleMDE({
+                element: $("#offerDesc")[0],
+                spellChecker: false,
+                promptURLs: true,
+                renderingConfig: {
+                    codeSyntaxHighlighting: true
+                }
+            });
+
+        </script>
+
+    {% endblock %}
+
+{% endembed %}

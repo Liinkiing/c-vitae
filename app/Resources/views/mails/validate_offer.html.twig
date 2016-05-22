@@ -1,0 +1,15 @@
+{% autoescape false %}
+
+    <div class="container" style="font-family: Lucida Sans Unicode, Lucida Grande, sans-serif">
+        <h1>Vous avez une offre en attente de modération</h1>
+        <hr>
+        <h2>Contenu de l'offre :</h2>
+        <p class="message">{{ offer.description }}</p>
+
+        <hr>
+        <p>Si vous désirez approuver l'offre, cliquer <a href="{{ absolute_url(path('activate_offer', {'id': offer.id })) }}">ici</a>, sinon, cliquer <a href="{{absolute_url(path('delete_offer', {'id': offer.id })) }}">ici</a></p>
+
+        Envoyé depuis la plateforme &laquo; <a href="{{ absolute_url(path("homepage")) }}">{{ site_name }}</a> &raquo;
+    </div>
+
+{% endautoescape %}
