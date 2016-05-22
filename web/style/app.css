@@ -1205,6 +1205,8 @@ form.inline-form {
   border-right: 1px solid #434b55;
   padding-right: 20px;
   height: 100%; }
+  .offer-informations .ui.image.small {
+    margin-left: 56%; }
 
 .align-right {
   float: right; }

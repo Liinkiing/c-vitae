@@ -39979,6 +39979,10 @@ form.inline-form {
   height: 100%;
 }
 
+.offer-informations .ui.image.small {
+  margin-left: 56%;
+}
+
 .align-right {
   float: right;
 }
