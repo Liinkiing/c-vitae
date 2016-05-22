@@ -39464,6 +39464,33 @@ a.student-link:hover {
   color: #d7a965;
 }
 
+.ui.items > .item > .content > a.header {
+  transition: all .3s;
+  color: white;
+}
+
+.ui.items > .item > .content > a.header:hover {
+  color: #00ACED;
+}
+
+.ui.items > .item .extra,
+.ui.items > .item > .content > .description {
+  color: whitesmoke;
+}
+
+.ui.items > .item .meta {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.ui.items > .item {
+  margin: 3em 0em;
+}
+
+.ui.items > .item > .content > .description {
+  max-height: 180px;
+  overflow: hidden;
+}
+
 .student-item {
   position: relative;
   display: inline-block;
@@ -39585,11 +39612,13 @@ a.student-link:hover {
   float: right;
 }
 
-.profile-picture {
+.profile-picture,
+.offer-picture {
   margin-bottom: 10px;
 }
 
-.profile-picture img {
+.profile-picture img,
+.offer-picture img {
   position: relative;
   display: block;
   margin: 0 auto;
@@ -39780,7 +39809,8 @@ form input[type="email"]:valid ~ label,
 form input[type="password"]:valid ~ label,
 form input[type="date"]:valid ~ label,
 form textarea:focus ~ label,
-form textarea:valid ~ label {
+form textarea:valid ~ label,
+form input[type="number"]:valid ~ label {
   top: -40px;
   font-size: 14px;
   color: #579d69;
@@ -39929,6 +39959,52 @@ form.inline-form {
 .editor-toolbar.fullscreen,
 .editor-preview-side {
   z-index: 101;
+}
+
+.postuled {
+  display: inline-block;
+  float: right;
+  margin-left: 20px;
+}
+
+.blue {
+  color: #0d71bb;
+}
+
+.offer-informations {
+  text-align: right;
+  border-right: 1px solid #434b55;
+  padding-right: 20px;
+  height: 100%;
+}
+
+.align-right {
+  float: right;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+ul.datas,
+ul.students {
+  list-style-type: none;
+}
+
+ul.datas li,
+ul.students li {
+  padding: 10px 0;
+  border-bottom: 1px solid #434b55;
+}
+
+ul.datas li:last-of-type,
+ul.students li:last-of-type {
+  margin-bottom: 50px;
+}
+
+.offer-image {
+  width: 175px;
+  height: 175px;
 }
 
 /*# sourceMappingURL=app.css.map */
