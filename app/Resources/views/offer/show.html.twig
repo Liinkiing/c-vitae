@@ -19,15 +19,18 @@
                         {% for message_success in app.session.flashBag.get('success') %}
                             <div class="alert alert-success">{{ message_success }}</div>
                         {% endfor %}
-                        {% if not app.user %}
-                            <a class="btn btn-success btn-medium" href="{{ path('offer_add') }}"><i class="fa fa-plus">&nbsp;&nbsp;</i>Ajouter une offre</a>
-                        {% endif %}
-
-                        <div class="content">
-                            {{ offer.description|raw }}
-                        </div>
 
                     {% endautoescape %}
+
+                    <div class="content">
+                        {{ offer.description|raw }}
+                    </div>
+
+                    {% if app.user and not offer.hasPostuled(app.user) %}
+                        <a class="btn btn-success btn-medium" href="{{ path('offer_apply', {'id': offer.id }) }}"><i class="fa fa-plus">&nbsp;&nbsp;</i>Postuler à l'offre</a>
+                    {% else %}
+                        Vous avez déjà postulé pour cette offre
+                    {% endif %}
 
                 </div>
             </div>

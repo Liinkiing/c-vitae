@@ -1,0 +1,55 @@
+{% autoescape false %}
+
+    <div class="container" style="font-family: Lucida Sans Unicode, Lucida Grande, sans-serif">
+        <h1>{{ student.fullName }} est intéressé{% if student.gender == "female" %}e{% endif %} par votre offre</h1>
+        <hr>
+        {% if student.description %}
+            <p class="description">&laquo; {{ student.description }} &raquo;</p>
+        {% endif %}
+        {% if student.programmingLanguages %}
+            <hr>
+            <p class="skills">Ses compétences en langages informatique : </p>
+            <ul>
+                {% for progLang in student.programmingLanguages %}
+                    <li>{{ progLang }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if student.languages %}
+            <hr>
+            <p class="languages">{{ student.firstName }} sait parler les langues suivantes : </p>
+            <ul>
+                {% for lang in student.languages %}
+                    <li>{{ lang }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if student.softwares %}
+            <hr>
+            <p class="softwares">{% if student.gender == "male" %}Il{% else %}Elle{% endif %} maîtrise les
+                logiciels
+                suivants : </p>
+            <ul>
+                {% for software in student.softwares %}
+                    <li>{{ software }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if student.secteur %}
+            <hr>
+            <p class="secteur">Plus tard, {{ student.firstName }} voudrait travailler dans :
+                <em><strong>{{ student.secteur }}</strong></em></p>
+        {% endif %}
+        {% if student.linkedin or student.viadeo %}
+            <hr>
+            N'hésitez pas à le suivre sur {% if student.linkedin %} <a
+                href="{{ student.linkedin }}">LinkedIn</a> {% endif %} {% if student.viadeo %}
+            <a href="{{ student.viadeo }}">Viadeo</a> {% endif %}
+        {% endif %}
+
+        <hr>
+        Envoyé depuis la plateforme &laquo; <a
+                href="{{ absolute_url(path("homepage")) }}">{{ site_name }}</a> &raquo;
+    </div>
+
+{% endautoescape %}

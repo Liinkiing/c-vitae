@@ -26,9 +26,33 @@ class OfferController extends Controller
      */
     public function showOfferAction(Request $request, Offer $offer){
         if(!$offer) throw new NotFoundHttpException();
-        $this->render('offer/show.html.twig', ['offer' => $offer]);
+        return $this->render('offer/show.html.twig', ['offer' => $offer]);
     }
 
+    /**
+     * @Route("/offer/{id}/apply", name="offer_apply")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function offerApplyAction(Request $request, Offer $offer){
+        if(!$offer) throw new NotFoundHttpException();
+        $currentUser = $this->getUser();
+        if($offer->hasPostuled($currentUser)) {
+            $this->addFlash("danger", "Vous avez déjà postulé à cette offre !");
+            return $this->redirectToRoute("offer_show", ['id' => $offer->getId()]);
+        }
+        $studentsPostulated = $offer->getStudentsPostuled();
+        array_push($studentsPostulated, $currentUser->getUsername());
+        $offer->setStudentsPostuled($studentsPostulated);
+        $this->getDoctrine()->getEntityManager()->flush();
+        $message = \Swift_Message::newInstance();
+        $message->setSubject($currentUser->getFullName() . " souhaite postuler pour votre offre « " . $offer->getTitle() . " »")
+            ->setFrom($this->get('twig')->getGlobals()['site_name'] . '@' . strtolower($this->get('twig')->getGlobals()['site_name']) . '.com')
+            ->setTo($offer->getContact())
+            ->setBody($this->renderView('mails/apply.html.twig', ['offer' => $offer, 'student' => $currentUser]), 'text/html');
+        $this->get('mailer')->send($message);
+        $this->addFlash("success", "Vous avez bien postulé à l'offre !");
+        return $this->redirectToRoute("offer_show", ['id' => $offer->getId()]);
+    }
     /**
      * @Route("/offers/add", name="offer_add")
      */
@@ -39,7 +63,7 @@ class OfferController extends Controller
         } else {
             $parsedown = new \Parsedown();
             $offer = new Offer();
-            $offer->setName($request->get('offer')['name']);
+            $offer->setTitle($request->get('offer')['title']);
             $offer->setSecteur($request->get('offer')['secteur']);
             $offer->setPublishedAt(new \DateTime('now'));
             $offer->setDuree($request->get('offer')['duree']);
@@ -73,6 +97,12 @@ class OfferController extends Controller
         if(!$offer) throw new NotFoundHttpException();
         $offer->setIsActive(true);
         $this->getDoctrine()->getManager()->flush();
+        $message = \Swift_Message::newInstance();
+        $message->setSubject("Votre offre a été approuvé !")
+            ->setFrom($this->get('twig')->getGlobals()['site_name'] . '@' . strtolower($this->get('twig')->getGlobals()['site_name']) . '.com')
+            ->setTo($offer->getContact())
+            ->setBody($this->renderView("mails/offer_validated.html.twig", ['offer' => $offer]), 'text/html');
+        $this->get('mailer')->send($message);
         $this->addFlash('success', "L'offre n°" . $offer->getId() . " a bien été activé !");
         return $this->redirectToRoute("offers_index");
     }

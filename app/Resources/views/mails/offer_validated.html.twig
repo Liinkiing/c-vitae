@@ -1,0 +1,15 @@
+{% autoescape false %}
+
+    <div class="container" style="font-family: Lucida Sans Unicode, Lucida Grande, sans-serif">
+        <h1>Félicitations ! Votre offre a été acceptée</h1>
+        <hr>
+        <h2>Votre offre &laquo; {{ offer.title }} &raquo; a été approuvé</h2>
+        <p class="message">Votre offre viens d'être validé. Elle est désormais accessible <a
+                    href="{{ absolute_url(path('offer_show', {'id': offer.id })) }}">à cette adresse</a> </p>
+
+        <hr>
+
+        Envoyé depuis la plateforme &laquo; <a href="{{ absolute_url(path("homepage")) }}">{{ site_name }}</a> &raquo;
+    </div>
+
+{% endautoescape %}

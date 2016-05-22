@@ -140,29 +140,7 @@ class Offer implements NamerInterface
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $title
-     *
-     * @return Offer
-     */
-    public function setTitle($title)
-    {
-        $this->$title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
+    
 
     /**
      * Set secteur
@@ -485,5 +463,56 @@ class Offer implements NamerInterface
     {
         $this->description = $description;
     }
-}
 
+    public function hasPostuled(Student $student){
+        return in_array($student->getUsername(), $this->studentsPostuled);
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Offer
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Offer
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+}
