@@ -747,6 +747,32 @@ a.student-link:hover {
     color: #d7a965;
 }
 
+.ui.items > .item > .content > a.header {
+    transition: all .3s;
+    color: white;
+    &:hover {
+        color: #00ACED;
+    }
+}
+
+.ui.items > .item .extra, .ui.items > .item > .content > .description {
+    color: whitesmoke;
+}
+
+.ui.items > .item .meta {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.ui.items > .item {
+    margin: 3em 0em;
+}
+
+.ui.items > .item > .content > .description {
+    max-height: 180px;
+    overflow: hidden;
+}
+
+
 .student-item {
 
     position: relative;

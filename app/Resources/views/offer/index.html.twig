@@ -23,13 +23,31 @@
                         <a class="btn btn-success btn-medium" href="{{ path('offer_add') }}"><i class="fa fa-plus">&nbsp;&nbsp;</i>Ajouter une offre</a>
                     {% endif %}
 
-                    {% for offer in offers %}
-                        <div class="offer">
-                            <a href="{{ path('offer_show', {'id': offer.id }) }}">{{ offer.title }}</a>
-                            <hr>
-                            {{ offer.entreprise }}
-                        </div>
-                    {% endfor %}
+                    <div class="ui items">
+                        {% for offer in offers %}
+                            <div class="item">
+                                <div class="image">
+                                    <img src="{% if offer.imageUrl %}{{ base_upload_url }}{{ vich_uploader_asset(offer, "imageFile") }}{% else %}{{ asset("img/offers/default.png") }}{% endif %}" alt="">
+                                </div>
+                                <div class="content">
+                                    <a href="{{ path('offer_show', {'id': offer.id }) }}" class="header">{{ offer.title }}</a>
+                                    <div class="meta">
+                                        <span>{{ offer.entreprise }}</span>
+                                    </div>
+                                    <div class="description">
+                                        <p>{{ offer.description }}</p>
+                                    </div>
+                                    <div class="extra">
+                                        <i class="fa fa-map-marker"></i>{{ offer.localisation }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if not loop.last %}
+                                <hr>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
                     {% endautoescape %}
 
                 </div>
