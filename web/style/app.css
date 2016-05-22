@@ -965,9 +965,9 @@ a.student-link:hover {
 .buttons {
   float: right; }
 
-.profile-picture {
+.profile-picture, .offer-picture {
   margin-bottom: 10px; }
-  .profile-picture img {
+  .profile-picture img, .offer-picture img {
     position: relative;
     display: block;
     margin: 0 auto;

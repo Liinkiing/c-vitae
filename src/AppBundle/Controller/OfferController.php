@@ -121,8 +121,8 @@ class OfferController extends Controller
                 $offer->setImageFile($request->files->get('offer')['image']);
             }
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("success", "L'offre a bien été mise à jour ! <a href='" . $this->generateUrl('offer_show', ['id' => $offer->getId()]) ."'>Voir les nouvelles modifications</a>");
-            return $this->redirectToRoute('admin_offer_index');
+            $this->addFlash("success", "L'offre a bien été mise à jour !");
+            return $this->redirectToRoute('offer_show', ['id' => $offer->getId()]);
         }
     }
 
@@ -154,5 +154,18 @@ class OfferController extends Controller
         $this->getDoctrine()->getManager()->flush();
         $this->addFlash("success", "L'offre a bien été supprimé !");
         return $this->redirectToRoute("admin_offer_index");
+    }
+
+    /**
+     * @Route("/offers/delete/image/{id}", name="admin_delete_offer_image")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function deleteOfferImageAction(Request $request, Offer $offer){
+        if(!$offer) throw new NotFoundHttpException();
+        $this->get('oneup_flysystem.ftp_offer_image_fs_filesystem')->delete($offer->getImageUrl());
+        $offer->setImageUrl(null);
+        $this->getDoctrine()->getEntityManager()->flush();
+        $this->addFlash("success", "L'image a bien été supprimé !");
+        return $this->redirectToRoute("admin_offer_edit", ['id' => $offer->getId()]);
     }
 }

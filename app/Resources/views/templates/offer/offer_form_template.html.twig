@@ -1,11 +1,21 @@
 {% if is_granted('ROLE_ADMIN') %}
     <input type="hidden" name="offer[is_active]" value="true">
 {% endif %}
+    {% if editMode and offer.imageUrl %}
+        <div class="offer-picture">
+            <img src="{{ base_upload_url }}{{ vich_uploader_asset(offer, "imageFile") }}" alt="">
+
+    {% endif %}
 <div class="ui grid">
+
     <div class="eight wide column centered">
         <label for="image">Choissisez une image</label>
         <input accept="image/*" type="file" name="offer[image]" id="image">
+        {% if is_granted('ROLE_ADMIN') and editMode and offer.imageUrl %}
+            <a class="btn btn-danger btn-medium" href="{{ path('admin_delete_offer_image', {'id': offer.id }) }}">Supprimer l'image</a>
+        {% endif %}
     </div>
+
     <div class="ten wide column">
         <div class="group">
             <input name="offer[title]" type="text" required {% if editMode %}value="{{ offer.title }}"{% endif %}>
