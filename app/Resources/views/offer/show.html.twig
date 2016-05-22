@@ -53,7 +53,7 @@
                                        href="{{ path('offer_apply', {'id': offer.id }) }}"><i class="fa fa-plus">&nbsp;&nbsp;</i>Postuler
                                         à l'offre</a>
                                 {% elseif app.user and offer.hasPostuled(app.user) %}
-                                    <span class="blue"><i class="fa fa-info">&nbsp;&nbsp;</i>Vous avez postulé pour cette offre</span>
+                                    <span class="blue"><i class="fa fa-info">&nbsp;&nbsp;</i>Vous avez déjà postulé pour cette offre</span>
                                 {% else %}
                                     <span class="blue"><i class="fa fa-info">&nbsp;&nbsp;</i>Connectez-vous pour postuler</span>
                                 {% endif %}
