@@ -1225,7 +1225,7 @@ ul.datas, ul.students {
   height: 175px; }
 
 .ui.items > .item > .image:not(.ui) {
-  border-right: 1px solid black;
+  border-right: 1px solid red;
   padding-right: 20px; }
 
 /*# sourceMappingURL=app.css.map */
