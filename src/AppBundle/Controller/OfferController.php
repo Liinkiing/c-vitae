@@ -24,8 +24,13 @@ class OfferController extends Controller
     /**
      * @Route("/offer/{id}", name="offer_show")
      */
-    public function showOfferAction(Request $request, Offer $offer){
-        if(!$offer) throw new NotFoundHttpException();
+    public function showOfferAction(Request $request, Offer $offer)
+    {
+        if (!$offer) throw new NotFoundHttpException();
+        if (($this->getUser() == null && !$offer->getIsActive()) || (!$this->getUser()->isGranted('ROLE_ADMIN') && !$offer->getIsActive())) {
+            $this->addFlash("danger", "L'offre n'a pas encore été approuvé, veuillez patienter !");
+            return $this->redirectToRoute("offers_index");
+        }
         return $this->render('offer/show.html.twig', ['offer' => $offer]);
     }
 
@@ -33,10 +38,15 @@ class OfferController extends Controller
      * @Route("/offer/{id}/apply", name="offer_apply")
      * @Security("has_role('ROLE_USER')")
      */
-    public function offerApplyAction(Request $request, Offer $offer){
-        if(!$offer) throw new NotFoundHttpException();
+    public function offerApplyAction(Request $request, Offer $offer)
+    {
+        if (!$offer) throw new NotFoundHttpException();
         $currentUser = $this->getUser();
-        if($offer->hasPostuled($currentUser)) {
+        if (($currentUser == null && !$offer->getIsActive()) || (!$currentUser->isGranted('ROLE_ADMIN') && !$offer->getIsActive())) {
+            $this->addFlash("danger", "L'offre n'a pas encore été approuvé, veuillez patienter !");
+            return $this->redirectToRoute("offers_index");
+        }
+        if ($offer->hasPostuled($currentUser)) {
             $this->addFlash("danger", "Vous avez déjà postulé à cette offre !");
             return $this->redirectToRoute("offer_show", ['id' => $offer->getId()]);
         }
@@ -53,12 +63,14 @@ class OfferController extends Controller
         $this->addFlash("success", "Vous avez bien postulé à l'offre !");
         return $this->redirectToRoute("offer_show", ['id' => $offer->getId()]);
     }
+
     /**
      * @Route("/offers/add", name="offer_add")
      */
-    public function offerAddAction(Request $request){
-        if($this->getUser() != null && !in_array('ROLE_ADMIN', $this->getUser()->getRoles())) throw new AccessDeniedException();
-        if($request->getMethod() == "GET"){
+    public function offerAddAction(Request $request)
+    {
+        if ($this->getUser() != null && !in_array('ROLE_ADMIN', $this->getUser()->getRoles())) throw new AccessDeniedException();
+        if ($request->getMethod() == "GET") {
             return $this->render('offer/add.html.twig');
         } else {
             $parsedown = new \Parsedown();
@@ -72,14 +84,14 @@ class OfferController extends Controller
             $offer->setTypeContrat($request->get('offer')['type_contrat']);
             $offer->setLocalisation($request->get('offer')['localisation']);
             $offer->setContact($request->get('offer')['contact']);
-            if(array_key_exists('is_active',$request->get('offer'))) $offer->setIsActive($request->get('offer')['is_active']);
+            if (array_key_exists('is_active', $request->get('offer'))) $offer->setIsActive($request->get('offer')['is_active']);
             $offer->setEntreprise($request->get('offer')['entreprise']);
             $offer->setDescription($parsedown->text($request->get('offer')['description']));
             $offer->setImageFile($request->files->get('offer')['image']);
             $em = $this->getDoctrine()->getManager();
             $em->persist($offer);
             $em->flush();
-            if(!$offer->getIsActive()){
+            if (!$offer->getIsActive()) {
                 $message = \Swift_Message::newInstance();
                 $message->setSubject("Approbation d'une nouvelle offre !")
                     ->setFrom($this->get('twig')->getGlobals()['site_name'] . '@' . strtolower($this->get('twig')->getGlobals()['site_name']) . '.com')
@@ -99,10 +111,11 @@ class OfferController extends Controller
      * @Route("/admin/offers/edit/{id}", name="admin_offer_edit")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function editOfferAction(Request $request, $id){
+    public function editOfferAction(Request $request, $id)
+    {
         $offer = $this->getDoctrine()->getRepository('AppBundle:Offer')->find($id);
-        if(!$offer) throw $this->createNotFoundException();
-        if($request->getMethod() == "GET"){
+        if (!$offer) throw $this->createNotFoundException();
+        if ($request->getMethod() == "GET") {
             return $this->render('offer/edit.html.twig', ['offer' => $offer]);
         } else {
             $parsedown = new \Parsedown();
@@ -117,7 +130,7 @@ class OfferController extends Controller
             $offer->setContact($request->get('offer')['contact']);
             $offer->setEntreprise($request->get('offer')['entreprise']);
             $offer->setDescription($parsedown->text($request->get('offer')['description']));
-            if($request->files->get('offer')['image']){
+            if ($request->files->get('offer')['image']) {
                 $offer->setImageFile($request->files->get('offer')['image']);
             }
             $this->getDoctrine()->getManager()->flush();
@@ -130,8 +143,9 @@ class OfferController extends Controller
      * @Route("/offers/activate/{id}", name="activate_offer")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function activateOfferAction(Request $request, Offer $offer){
-        if(!$offer) throw new NotFoundHttpException();
+    public function activateOfferAction(Request $request, Offer $offer)
+    {
+        if (!$offer) throw new NotFoundHttpException();
         $offer->setIsActive(true);
         $this->getDoctrine()->getManager()->flush();
         $message = \Swift_Message::newInstance();
@@ -148,8 +162,9 @@ class OfferController extends Controller
      * @Route("/offers/delete/{id}", name="delete_offer")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function deleteOfferAction(Request $request, Offer $offer){
-        if(!$offer) throw new NotFoundHttpException();
+    public function deleteOfferAction(Request $request, Offer $offer)
+    {
+        if (!$offer) throw new NotFoundHttpException();
         $this->getDoctrine()->getManager()->remove($offer);
         $this->getDoctrine()->getManager()->flush();
         $this->addFlash("success", "L'offre a bien été supprimé !");
@@ -160,8 +175,9 @@ class OfferController extends Controller
      * @Route("/offers/delete/image/{id}", name="admin_delete_offer_image")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function deleteOfferImageAction(Request $request, Offer $offer){
-        if(!$offer) throw new NotFoundHttpException();
+    public function deleteOfferImageAction(Request $request, Offer $offer)
+    {
+        if (!$offer) throw new NotFoundHttpException();
         $this->get('oneup_flysystem.ftp_offer_image_fs_filesystem')->delete($offer->getImageUrl());
         $offer->setImageUrl(null);
         $this->getDoctrine()->getEntityManager()->flush();
