@@ -91,7 +91,14 @@ class OfferController extends Controller
             if (array_key_exists('is_active', $request->get('offer'))) $offer->setIsActive($request->get('offer')['is_active']);
             $offer->setEntreprise($request->get('offer')['entreprise']);
             $offer->setDescription($parsedown->text($request->get('offer')['description']));
-            $offer->setImageFile($request->files->get('offer')['image']);
+
+            $file = $request->files->get('offer')['image'];
+            if ($file == null || !$file->isValid() || !mb_ereg_match("image/.*", $file->getMimeType())) {
+                $this->addFlash("danger", "Veuillez choisir une image valide !");
+                return $this->redirectToRoute('offer_add');
+            }
+
+            $offer->setImageFile($file);
             $em = $this->getDoctrine()->getManager();
             $em->persist($offer);
             $em->flush();
@@ -134,7 +141,14 @@ class OfferController extends Controller
             $offer->setContact($request->get('offer')['contact']);
             $offer->setEntreprise($request->get('offer')['entreprise']);
             $offer->setDescription($parsedown->text($request->get('offer')['description']));
-            if ($request->files->get('offer')['image']) {
+
+            $file = $request->files->get('offer')['image'];
+            if ($file == null || !$file->isValid() || !mb_ereg_match("image/.*", $file->getMimeType())) {
+                $this->addFlash("danger", "Veuillez choisir une image valide !");
+                return $this->redirectToRoute('admin_offer_edit', ['id' => $offer->getId()]);
+            }
+            if ($file) {
+
                 $offer->setImageFile($request->files->get('offer')['image']);
             }
             $this->getDoctrine()->getManager()->flush();
