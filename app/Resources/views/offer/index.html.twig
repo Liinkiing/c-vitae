@@ -1,5 +1,5 @@
 {% embed 'base.html.twig' with {'title': 'Liste des offres',
-                        'isFullscreen': 1, 'randomHeaderColors': 1} %}
+'isFullscreen': 1, 'randomHeaderColors': 1} %}
 
 
     {% block body %}
@@ -9,7 +9,8 @@
             <div class="generic-card {% if isFullscreen %} fullscreen {% endif %}">
                 <header>
                     <div><h1>{{ title }}</h1>
-                        <p class="subtitle">{{ offers|length }} offre{% if offers|length > 1 %}s{% endif %} disponibles</p></div>
+                        <p class="subtitle">{% if offers|length == 0 %}Aucune offre pour le moment{% else %}{{ offers|length }} offre{% if offers|length > 1 %}s{% endif %} disponible{% if offers|length > 1 %}s{% endif %}{% endif %}</p>
+                    </div>
                 </header>
                 <div class="content-site {% if isFullscreen %} fullscreen {% endif %}">
                     {% autoescape false %}
@@ -19,21 +20,23 @@
                         {% for message_success in app.session.flashBag.get('success') %}
                             <div class="alert alert-success">{{ message_success }}</div>
                         {% endfor %}
-                    {% if not app.user %}
-                        <a class="btn btn-success btn-medium" href="{{ path('offer_add') }}"><i class="fa fa-plus">&nbsp;&nbsp;</i>Ajouter une offre</a>
-                    {% endif %}
-
-                    <div class="ui items">
-                        {% for offer in offers %}
-
-                            {% if not loop.last %}
-                                {% embed 'templates/offer/offer.html.twig' %}{% endembed %}
-                                <hr>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
 
                     {% endautoescape %}
+
+                    {% if offers|length > 0 %}
+                        <div class="ui items">
+                            {% for offer in offers %}
+                                {% embed 'templates/offer/offer.html.twig' %}{% endembed %}
+                                <hr>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <h3>Aucune offre n'est disponible actuellement. Revenez plus tard !</h3>
+                    {% endif %}
+                    {% if not app.user or is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-success btn-medium" href="{{ path('offer_add') }}"><i class="fa fa-plus">
+                                &nbsp;&nbsp;</i>Ajouter une offre</a>
+                    {% endif %}
 
                 </div>
             </div>
@@ -47,7 +50,8 @@
             <style>
                 .generic-card header {
                     background: url("{{ asset('img/overlay.png') }}"), url("{{ asset('img/svg/header-bg.svg') }}"), linear-gradient(45deg, {{ generateColor() }} 20%, {{ generateColor() }} 80%) center, center, center;
-                {% if isFullscreen|default(false) %} background-attachment: fixed; {% endif %}
+                {% if isFullscreen|default(false) %} background-attachment: fixed;
+                {% endif %}
 
                 }
 

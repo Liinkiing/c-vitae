@@ -1211,12 +1211,12 @@ form.inline-form {
 .clearfix {
   overflow: auto; }
 
-ul.datas {
+ul.datas, ul.students {
   list-style-type: none; }
-  ul.datas li {
+  ul.datas li, ul.students li {
     padding: 10px 0;
     border-bottom: 1px solid #434b55; }
-    ul.datas li:last-of-type {
+    ul.datas li:last-of-type, ul.students li:last-of-type {
       margin-bottom: 50px; }
 
 .offer-image {

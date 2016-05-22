@@ -25,33 +25,71 @@
                     <div class="ui grid">
                         <div class="three wide column">
                             <div class="offer-informations clearfix">
-                                <img class="offer-image right floated" src="{% if offer.imageUrl %}{{ base_upload_url }}{{ vich_uploader_asset(offer, "imageFile") }}{% else %}{{ asset("img/offers/default.png") }}{% endif %}" alt="">
+                                <img class="offer-image right floated"
+                                     src="{% if offer.imageUrl %}{{ base_upload_url }}{{ vich_uploader_asset(offer, "imageFile") }}{% else %}{{ asset("img/offers/default.png") }}{% endif %}"
+                                     alt="">
                                 <ul class="datas">
                                     <li><strong>Entreprise : </strong>{{ offer.entreprise }}</li>
                                     <li><strong>Durée : </strong>{{ offer.duree }}</li>
                                     <li><strong>Rémunération : </strong>{{ offer.remuneration }} €</li>
                                     <li><strong>Contrat : </strong>{{ offer.typeContrat }}</li>
                                     <li><strong>Secteur : </strong>{{ offer.secteur }}</li>
-                                    <li><strong>{{ offer.nbPost }}</strong> poste{% if offer.nbPost > 1 %}s{% endif %} à pourvoir</li>
-                                    <li><strong><i class="fa fa-envelope">&nbsp;&nbsp;</i> </strong><a href="mailto:{{ offer.contact }}">{{ offer.contact }}</a></li>
-                                    <li><strong><i class="fa fa-map-marker">&nbsp;&nbsp;</i> </strong>{{ offer.localisation }}</li>
+                                    <li><strong>{{ offer.nbPost }}</strong> poste{% if offer.nbPost > 1 %}s{% endif %} à
+                                        pourvoir
+                                    </li>
+                                    <li><strong><i class="fa fa-envelope">&nbsp;&nbsp;</i> </strong><a
+                                                href="mailto:{{ offer.contact }}">{{ offer.contact }}</a></li>
+                                    <li><strong><i class="fa fa-map-marker">&nbsp;&nbsp;</i>
+                                        </strong>{{ offer.localisation }}</li>
+                                    <li><strong><i class="fa fa-calendar">&nbsp;&nbsp;</i>
+                                        </strong>{{ offer.publishedAt|date('d/m/Y') }}</li>
 
 
                                 </ul>
 
+
                                 {% if app.user and not offer.hasPostuled(app.user) %}
-                                    <a class="btn btn-success btn-medium" href="{{ path('offer_apply', {'id': offer.id }) }}"><i class="fa fa-plus">&nbsp;&nbsp;</i>Postuler à l'offre</a>
-                                {% else %}
+                                    <a class="btn btn-success btn-medium"
+                                       href="{{ path('offer_apply', {'id': offer.id }) }}"><i class="fa fa-plus">&nbsp;&nbsp;</i>Postuler
+                                        à l'offre</a>
+                                {% elseif app.user and offer.hasPostuled(app.user) %}
                                     <span class="blue"><i class="fa fa-info">&nbsp;&nbsp;</i>Vous avez postulé pour cette offre</span>
+                                {% else %}
+                                    <span class="blue"><i class="fa fa-info">&nbsp;&nbsp;</i>Connectez-vous pour postuler</span>
                                 {% endif %}
+
                             </div>
                         </div>
                         <div class="thirteen wide column">
                             {{ offer.description|raw }}
-
                         </div>
                     </div>
 
+                    {% if app.user and is_granted('ROLE_ADMIN') %}
+
+                    <hr>
+                    <div class="buttons">
+                        <a class="btn btn-info btn-medium" href="{{ path('admin_offer_edit', {'id': offer.id }) }}"><i
+                                    class="fa fa-edit"></i>Éditer l'offre</a>
+                    </div>
+                    <hr>
+                    <div class="ui grid">
+                        <div class="sixteen wide column">
+
+                            {% if offer.studentsPostuled|length > 0 %}
+                                <h3>Listes des élèves ayant postulés pour cette offre</h3>
+                                <ul class="students">
+                                    {% for student in offer.studentsPostuled %}
+                                        <li><a href="{{ path('profile', {'username': student }) }}">{{ student }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <h3>Aucun élève n'a encore postulé pour cette offre</h3>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
 
 
                 </div>
@@ -66,7 +104,8 @@
             <style>
                 .generic-card header {
                     background: url("{{ asset('img/overlay.png') }}"), url("{{ asset('img/svg/header-bg.svg') }}"), linear-gradient(45deg, {{ generateColor() }} 20%, {{ generateColor() }} 80%) center, center, center;
-                {% if isFullscreen|default(false) %} background-attachment: fixed; {% endif %}
+                {% if isFullscreen|default(false) %} background-attachment: fixed;
+                {% endif %}
 
                 }
 

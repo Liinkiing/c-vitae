@@ -72,7 +72,7 @@ class OfferController extends Controller
             $offer->setTypeContrat($request->get('offer')['type_contrat']);
             $offer->setLocalisation($request->get('offer')['localisation']);
             $offer->setContact($request->get('offer')['contact']);
-            if($request->get('offer')['is_active']) $offer->setIsActive($request->get('offer')['is_active']);
+            if(array_key_exists('is_active',$request->get('offer'))) $offer->setIsActive($request->get('offer')['is_active']);
             $offer->setEntreprise($request->get('offer')['entreprise']);
             $offer->setDescription($parsedown->text($request->get('offer')['description']));
             $offer->setImageFile($request->files->get('offer')['image']);

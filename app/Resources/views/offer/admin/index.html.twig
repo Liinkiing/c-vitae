@@ -32,17 +32,20 @@
                         </thead>
                         <tbody>
 
-                        {% for offer in offers %}
-                            <tr>
-                            <td><a href="{{ path('offer_show', {'id': offer.id }) }}">{{ offer.title }}</a></td>
-                            <td>{{ offer.entreprise }}</td>
-                            <td>{{ offer.publishedAt|date('d/m/Y') }} <span class="hour">{{ offer.publishedAt|date('H:i') }}</span></td>
-                            <td>{% if offer.isActive %}Oui{% else %}Non{% endif %}</td>
-                            <td class="actions">
-                                <a class="btn btn-info" href="{{ path('admin_offer_edit', {'id': offer.id }) }}"><i class="fa fa-edit">&nbsp;&nbsp;</i>Éditer</a>
-                                <a class="btn btn-danger" href="{{ path('delete_offer', {'id': offer.id }) }}"><i class="fa fa-times">&nbsp;&nbsp;</i>Supprimer</a></td>
-                            </tr>
-                        {% endfor %}
+                        {% if offers|length > 0 %}
+                            {% for offer in offers %}
+                                <tr>
+                                <td><a href="{{ path('offer_show', {'id': offer.id }) }}">{{ offer.title }}</a></td>
+                                <td>{{ offer.entreprise }}</td>
+                                <td>{{ offer.publishedAt|date('d/m/Y') }} <span class="hour">{{ offer.publishedAt|date('H:i') }}</span></td>
+                                <td>{% if offer.isActive %}Oui{% else %}Non (<a
+                                            href="{{ path('activate_offer', {'id': offer.id }) }}">Activer</a>){% endif %}</td>
+                                <td class="actions">
+                                    <a class="btn btn-info" href="{{ path('admin_offer_edit', {'id': offer.id }) }}"><i class="fa fa-edit">&nbsp;&nbsp;</i>Éditer</a>
+                                    <a class="btn btn-danger" href="{{ path('delete_offer', {'id': offer.id }) }}"><i class="fa fa-times">&nbsp;&nbsp;</i>Supprimer</a></td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
                         </tbody>
                     </table>
 
