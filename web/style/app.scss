@@ -1190,7 +1190,7 @@ form {
     }
 }
 
-@media screen and (max-width: 1400px), (max-device-width: 1400px) {
+@media screen and (max-width: 1700px), (max-device-width: 1400px) {
     .generic-card .content-site.fullscreen {
         padding: 40px 3%;
     }
@@ -1199,6 +1199,9 @@ form {
         padding: 0 20px;
     }
 }
+
+
+
 
 .subtitle.search {
     background-color: rgba(0, 0, 0, 0.5);

@@ -23,7 +23,7 @@
                     {% endautoescape %}
 
                     <div class="ui grid">
-                        <div class="three wide column">
+                        <div class="four wide column">
                             <div class="offer-informations clearfix">
                                 <img class="offer-image right floated"
                                      src="{% if offer.imageUrl %}{{ base_upload_url }}{{ vich_uploader_asset(offer, "imageFile") }}{% else %}{{ asset("img/offers/default.png") }}{% endif %}"
@@ -60,7 +60,7 @@
 
                             </div>
                         </div>
-                        <div class="thirteen wide column">
+                        <div class="twelve wide column">
                             {{ offer.description|raw }}
                         </div>
                     </div>
