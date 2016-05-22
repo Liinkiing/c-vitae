@@ -42,7 +42,7 @@
         {% endif %}
         {% if student.linkedin or student.viadeo %}
             <hr>
-            N'hésitez pas à {% if student.gender == "male" %}le{% else %}la suivre sur {% if student.linkedin %} <a
+            N'hésitez pas à {% if student.gender == "male" %}le{% else %}la{% endif %} suivre sur {% if student.linkedin %} <a
                 href="{{ student.linkedin }}">LinkedIn</a> {% endif %} {% if student.viadeo %}
             <a href="{{ student.viadeo }}">Viadeo</a> {% endif %}
         {% endif %}
