@@ -25,7 +25,7 @@
                     <div class="ui grid">
                         <div class="four wide column">
                             <div class="offer-informations clearfix">
-                                <img class="offer-image right floated"
+                                <img class="ui image small right floated"
                                      src="{% if offer.imageUrl %}{{ base_upload_url }}{{ vich_uploader_asset(offer, "imageFile") }}{% else %}{{ asset("img/offers/default.png") }}{% endif %}"
                                      alt="">
                                 <ul class="datas">
@@ -75,7 +75,6 @@
                     <hr>
                     <div class="ui grid">
                         <div class="sixteen wide column">
-
                             {% if offer.studentsPostuled|length > 0 %}
                                 <h3>Listes des élèves ayant postulés pour cette offre</h3>
                                 <ul class="students">

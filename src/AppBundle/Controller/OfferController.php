@@ -93,7 +93,7 @@ class OfferController extends Controller
             $offer->setDescription($parsedown->text($request->get('offer')['description']));
 
             $file = $request->files->get('offer')['image'];
-            if ($file == null || !$file->isValid() || !mb_ereg_match("image/.*", $file->getMimeType())) {
+            if (($file != null && !$file->isValid()) || ($file != null && !mb_ereg_match("image/.*", $file->getMimeType()))) {
                 $this->addFlash("danger", "Veuillez choisir une image valide !");
                 return $this->redirectToRoute('offer_add');
             }
@@ -143,12 +143,12 @@ class OfferController extends Controller
             $offer->setDescription($parsedown->text($request->get('offer')['description']));
 
             $file = $request->files->get('offer')['image'];
-            if ($file == null || !$file->isValid() || !mb_ereg_match("image/.*", $file->getMimeType())) {
+            if (($file != null && !$file->isValid()) || ($file != null && !mb_ereg_match("image/.*", $file->getMimeType()))) {
                 $this->addFlash("danger", "Veuillez choisir une image valide !");
-                return $this->redirectToRoute('admin_offer_edit', ['id' => $offer->getId()]);
+                return $this->redirectToRoute('offer_add');
             }
-            if ($file) {
 
+            if ($file) {
                 $offer->setImageFile($request->files->get('offer')['image']);
             }
             $this->getDoctrine()->getManager()->flush();
