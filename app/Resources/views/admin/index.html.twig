@@ -20,13 +20,19 @@
                         {% endfor %}
                     {% endautoescape %}
                     <div class="ui grid stretch">
-                        <div class="eight wide column">
+                        <div class="five wide column">
                             <div class="pages">
                                 <h3>Gérer les pages</h3>
                                 <a href="{{ path('page_list') }}" class="btn btn-info btn-medium">Gérer les pages</a>
                             </div>
                         </div>
-                        <div class="eight wide column">
+                        <div class="five wide column">
+                            <div class="offers">
+                                <h3>Gérer les offres</h3>
+                                <a href="{{ path('admin_offer_index') }}" class="btn btn-info btn-medium">Gérer les offres</a>
+                            </div>
+                        </div>
+                        <div class="five wide column">
                             <div class="users">
                                 <h3>Gérer les étudiants</h3>
                                 <a href="{{ path('user_list') }}" class="btn btn-info btn-medium">Gérer les étudiants</a>

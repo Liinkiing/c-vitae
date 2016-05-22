@@ -1,4 +1,4 @@
-{% embed 'base.html.twig' with {'title': 'Ajouter une offre', 'subtitle': 'Personnaliser votre offre',
+{% embed 'base.html.twig' with {'title': 'Editer une offre', 'subtitle': offer.title,
 'isFullscreen': 1, 'randomHeaderColors': 1} %}
 
     {% block stylesheets %}
@@ -29,7 +29,7 @@
                     {% endautoescape %}
 
                     <form action="" method="post" enctype="multipart/form-data">
-                       {% embed 'templates/offer/offer_form_template.html.twig' with {'editMode': false} %}{% endembed %}
+                       {% embed 'templates/offer/offer_form_template.html.twig' with {'editMode': true, 'offer': offer } %}{% endembed %}
                     </form>
 
                 </div>
@@ -65,7 +65,10 @@
                 renderingConfig: {
                     codeSyntaxHighlighting: true
                 }
+
             });
+            simplemde.value("{{ convertHtmlToMarkdown(offer.description)|e('js')|preg_replace("/\r|\n/", "\\n") }}");
+
 
         </script>
 

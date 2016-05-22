@@ -1223,3 +1223,45 @@ form.inline-form {
 .CodeMirror-fullscreen, .editor-toolbar.fullscreen, .editor-preview-side {
     z-index: 101;
 }
+
+.postuled {
+    display: inline-block;
+    float: right;
+    margin-left: 20px;
+}
+
+.blue {
+    color: #0d71bb;
+}
+
+.offer-informations {
+    text-align: right;
+    border-right: 1px solid #434b55;
+    padding-right: 20px;
+    height: 100%;
+}
+
+.align-right {
+    float: right;
+}
+
+.clearfix {
+    overflow: auto;
+}
+
+ul.datas {
+    list-style-type: none;
+
+    & li {
+        padding: 10px 0;
+        border-bottom: 1px solid #434b55;
+        &:last-of-type {
+            margin-bottom: 50px;
+        }
+    }
+}
+
+.offer-image {
+    width: 175px;
+    height: 175px;
+}

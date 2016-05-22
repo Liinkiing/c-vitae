@@ -1,0 +1,78 @@
+{% embed 'base.html.twig' with {'title': 'Offres', 'subtitle': "Liste des offres", 'isFullscreen': 1, 'randomHeaderColors': 1} %}
+
+
+    {% block body %}
+        <div class="container {% if isFullscreen %} fullscreen {% endif %}">
+
+            <div class="generic-card {% if isFullscreen %} fullscreen {% endif %}">
+                <header>
+                    <h1>{{ title }}</h1>
+                    <p class="subtitle">{{ subtitle }}</p>
+                </header>
+                <div class="content-site {% if isFullscreen %} fullscreen {% endif %}">
+                    {% autoescape false %}
+                        {% for message_danger in app.session.flashBag.get('danger') %}
+                            <div class="alert alert-danger">{{ message_danger }}</div>
+                        {% endfor %}
+                        {% for message_success in app.session.flashBag.get('success') %}
+                            <div class="alert alert-success">{{ message_success }}</div>
+                        {% endfor %}
+                    {% endautoescape %}
+                    <p>Liste des offres</p>
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Nom de l'offre</th>
+                            <th>Entreprise</th>
+                            <th>Publié le</th>
+                            <th>Active</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for offer in offers %}
+                            <tr>
+                            <td><a href="{{ path('offer_show', {'id': offer.id }) }}">{{ offer.title }}</a></td>
+                            <td>{{ offer.entreprise }}</td>
+                            <td>{{ offer.publishedAt|date('d/m/Y') }} <span class="hour">{{ offer.publishedAt|date('H:i') }}</span></td>
+                            <td>{% if offer.isActive %}Oui{% else %}Non{% endif %}</td>
+                            <td class="actions">
+                                <a class="btn btn-info" href="{{ path('admin_offer_edit', {'id': offer.id }) }}"><i class="fa fa-edit">&nbsp;&nbsp;</i>Éditer</a>
+                                <a class="btn btn-danger" href="{{ path('delete_offer', {'id': offer.id }) }}"><i class="fa fa-times">&nbsp;&nbsp;</i>Supprimer</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <hr>
+
+                    <div class="buttons">
+                        <a class="btn btn-success btn-medium" href="{{ path('offer_add') }}"><i class="fa fa-plus">&nbsp;&nbsp;</i>Ajouter une offre</a>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    {% endblock %}
+
+    {% block customcss %}
+
+        {% if randomHeaderColors %}
+            <style>
+                .generic-card header {
+                    background: url("{{ asset('img/overlay.png') }}"), url("{{ asset('img/svg/header-bg.svg') }}"), linear-gradient(45deg, {{ generateColor() }} 20%, {{ generateColor() }} 80%) center, center, center;
+                {% if isFullscreen|default(false) %} background-attachment: fixed; {% endif %}
+                }
+
+            </style>
+        {% endif %}
+
+    {% endblock %}
+
+
+{% endembed %}

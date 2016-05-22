@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use Doctrine\DBAL\Query\QueryBuilder;
 
 /**
  * OfferRepository
@@ -10,4 +11,25 @@ namespace AppBundle\Repository;
  */
 class OfferRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findAll($order = "DESC")
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        return $qb->select('offer')
+            ->from('AppBundle:Offer', 'offer')
+            ->orderBy('offer.publishedAt', $order)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllActive($order = "DESC")
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        return $qb->select('offer')
+            ->from('AppBundle:Offer', 'offer')
+            ->where($qb->expr()->eq('offer.isActive', "true"))
+            ->orderBy('offer.publishedAt', $order)
+            ->getQuery()
+            ->getResult();
+    }
 }

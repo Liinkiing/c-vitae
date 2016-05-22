@@ -22,15 +22,37 @@
 
                     {% endautoescape %}
 
-                    <div class="content">
-                        {{ offer.description|raw }}
+                    <div class="ui grid">
+                        <div class="three wide column">
+                            <div class="offer-informations clearfix">
+                                <img class="offer-image right floated" src="{% if offer.imageUrl %}{{ base_upload_url }}{{ vich_uploader_asset(offer, "imageFile") }}{% else %}{{ asset("img/offers/default.png") }}{% endif %}" alt="">
+                                <ul class="datas">
+                                    <li><strong>Entreprise : </strong>{{ offer.entreprise }}</li>
+                                    <li><strong>Durée : </strong>{{ offer.duree }}</li>
+                                    <li><strong>Rémunération : </strong>{{ offer.remuneration }} €</li>
+                                    <li><strong>Contrat : </strong>{{ offer.typeContrat }}</li>
+                                    <li><strong>Secteur : </strong>{{ offer.secteur }}</li>
+                                    <li><strong>{{ offer.nbPost }}</strong> poste{% if offer.nbPost > 1 %}s{% endif %} à pourvoir</li>
+                                    <li><strong><i class="fa fa-envelope">&nbsp;&nbsp;</i> </strong><a href="mailto:{{ offer.contact }}">{{ offer.contact }}</a></li>
+                                    <li><strong><i class="fa fa-map-marker">&nbsp;&nbsp;</i> </strong>{{ offer.localisation }}</li>
+
+
+                                </ul>
+
+                                {% if app.user and not offer.hasPostuled(app.user) %}
+                                    <a class="btn btn-success btn-medium" href="{{ path('offer_apply', {'id': offer.id }) }}"><i class="fa fa-plus">&nbsp;&nbsp;</i>Postuler à l'offre</a>
+                                {% else %}
+                                    <span class="blue"><i class="fa fa-info">&nbsp;&nbsp;</i>Vous avez postulé pour cette offre</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="thirteen wide column">
+                            {{ offer.description|raw }}
+
+                        </div>
                     </div>
 
-                    {% if app.user and not offer.hasPostuled(app.user) %}
-                        <a class="btn btn-success btn-medium" href="{{ path('offer_apply', {'id': offer.id }) }}"><i class="fa fa-plus">&nbsp;&nbsp;</i>Postuler à l'offre</a>
-                    {% else %}
-                        Vous avez déjà postulé pour cette offre
-                    {% endif %}
+
 
                 </div>
             </div>

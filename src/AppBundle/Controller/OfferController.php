@@ -17,7 +17,7 @@ class OfferController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $offers = $this->getDoctrine()->getRepository('AppBundle:Offer')->findBy(['isActive' => true]);
+        $offers = $this->getDoctrine()->getRepository('AppBundle:Offer')->findAllActive();
         return $this->render('offer/index.html.twig', ['offers' => $offers]);
     }
 
@@ -57,7 +57,7 @@ class OfferController extends Controller
      * @Route("/offers/add", name="offer_add")
      */
     public function offerAddAction(Request $request){
-        if($this->getUser() != null) throw new AccessDeniedException();
+        if($this->getUser() != null && !in_array('ROLE_ADMIN', $this->getUser()->getRoles())) throw new AccessDeniedException();
         if($request->getMethod() == "GET"){
             return $this->render('offer/add.html.twig');
         } else {
@@ -72,20 +72,57 @@ class OfferController extends Controller
             $offer->setTypeContrat($request->get('offer')['type_contrat']);
             $offer->setLocalisation($request->get('offer')['localisation']);
             $offer->setContact($request->get('offer')['contact']);
+            if($request->get('offer')['is_active']) $offer->setIsActive($request->get('offer')['is_active']);
             $offer->setEntreprise($request->get('offer')['entreprise']);
             $offer->setDescription($parsedown->text($request->get('offer')['description']));
             $offer->setImageFile($request->files->get('offer')['image']);
             $em = $this->getDoctrine()->getManager();
             $em->persist($offer);
             $em->flush();
-            $message = \Swift_Message::newInstance();
-            $message->setSubject("Approbation d'une nouvelle offre !")
-                ->setFrom($this->get('twig')->getGlobals()['site_name'] . '@' . strtolower($this->get('twig')->getGlobals()['site_name']) . '.com')
-                ->setTo("omar.jbara2@gmail.com")
-                ->setBody($this->renderView("mails/validate_offer.html.twig", ['offer' => $offer]), 'text/html');
-            $this->get('mailer')->send($message);
-            $this->addFlash('success', "L'offre a été ajouté et est en cours d'approbation. Un mail vous préviendra lorsque celle ci aura été accepté !");
+            if(!$offer->getIsActive()){
+                $message = \Swift_Message::newInstance();
+                $message->setSubject("Approbation d'une nouvelle offre !")
+                    ->setFrom($this->get('twig')->getGlobals()['site_name'] . '@' . strtolower($this->get('twig')->getGlobals()['site_name']) . '.com')
+                    ->setTo("omar.jbara2@gmail.com")
+                    ->setBody($this->renderView("mails/validate_offer.html.twig", ['offer' => $offer]), 'text/html');
+                $this->get('mailer')->send($message);
+                $this->addFlash('success', "L'offre a été ajouté et est en cours d'approbation. Un mail vous préviendra lorsque celle ci aura été accepté !");
+            } else {
+                $this->addFlash("success", "L'offre a été ajouté et n'a pas besoin d'approbation étant donné que vous êtes administrateur");
+            }
             return $this->redirectToRoute("offers_index");
+        }
+    }
+
+
+    /**
+     * @Route("/admin/offers/edit/{id}", name="admin_offer_edit")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function editOfferAction(Request $request, $id){
+        $offer = $this->getDoctrine()->getRepository('AppBundle:Offer')->find($id);
+        if(!$offer) throw $this->createNotFoundException();
+        if($request->getMethod() == "GET"){
+            return $this->render('offer/edit.html.twig', ['offer' => $offer]);
+        } else {
+            $parsedown = new \Parsedown();
+            $offer->setTitle($request->get('offer')['title']);
+            $offer->setSecteur($request->get('offer')['secteur']);
+            $offer->setPublishedAt(new \DateTime('now'));
+            $offer->setDuree($request->get('offer')['duree']);
+            $offer->setNbPost($request->get('offer')['nb_post']);
+            $offer->setRemuneration($request->get('offer')['remuneration']);
+            $offer->setTypeContrat($request->get('offer')['type_contrat']);
+            $offer->setLocalisation($request->get('offer')['localisation']);
+            $offer->setContact($request->get('offer')['contact']);
+            $offer->setEntreprise($request->get('offer')['entreprise']);
+            $offer->setDescription($parsedown->text($request->get('offer')['description']));
+            if($request->files->get('offer')['image']){
+                $offer->setImageFile($request->files->get('offer')['image']);
+            }
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash("success", "L'offre a bien été mise à jour ! <a href='" . $this->generateUrl('offer_show', ['id' => $offer->getId()]) ."'>Voir les nouvelles modifications</a>");
+            return $this->redirectToRoute('admin_offer_index');
         }
     }
 
@@ -116,6 +153,6 @@ class OfferController extends Controller
         $this->getDoctrine()->getManager()->remove($offer);
         $this->getDoctrine()->getManager()->flush();
         $this->addFlash("success", "L'offre a bien été supprimé !");
-        return $this->redirectToRoute("offers_index");
+        return $this->redirectToRoute("admin_offer_index");
     }
 }

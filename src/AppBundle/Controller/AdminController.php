@@ -71,6 +71,8 @@ class AdminController extends Controller
         return $this->render('student/student_list.html.twig', ['students' => $students]);
     }
 
+
+
     /**
      * @Route("/admin/student/edit/{username}", name="edit_profile")
      * @Method({"GET", "POST"})
@@ -123,5 +125,13 @@ class AdminController extends Controller
         return $this->redirectToRoute('user_list');
     }
 
+    /**
+     * @Route("/admin/offers/", name="admin_offer_index")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function listOfferAction(Request $request){
+        $offers = $this->getDoctrine()->getRepository('AppBundle:Offer')->findAll();
+        return $this->render('offer/admin/index.html.twig', ['offers' => $offers]);
+    }
 
 }

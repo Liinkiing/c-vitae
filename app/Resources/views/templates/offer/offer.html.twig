@@ -1,0 +1,18 @@
+<div class="item">
+    <div class="image">
+        <img src="{% if offer.imageUrl %}{{ base_upload_url }}{{ vich_uploader_asset(offer, "imageFile") }}{% else %}{{ asset("img/offers/default.png") }}{% endif %}" alt="">
+    </div>
+    <div class="content">
+        <a href="{{ path('offer_show', {'id': offer.id }) }}" class="header">{{ offer.title }}</a>
+        <div class="meta">
+            <span>{{ offer.entreprise }}</span>
+        </div>
+        <div class="description">
+            <p>{{ offer.description|raw }}</p>
+        </div>
+        <div class="extra">
+            <i class="fa fa-map-marker"></i>{{ offer.localisation }} {% if app.user and offer.hasPostuled(app.user) %}
+                <span class="postuled blue"><i class="fa fa-info">&nbsp;&nbsp;</i>Vous avez postulé pour cette offre</span> {% endif %}
+        </div>
+    </div>
+</div>
