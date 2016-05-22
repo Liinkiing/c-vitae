@@ -6,6 +6,10 @@
         <a href="{{ path('offer_show', {'id': offer.id }) }}" class="header">{{ offer.title }}</a>
         <div class="meta">
             <span>{{ offer.entreprise }}</span>
+            <span>-</span>
+            <span>{{ offer.remuneration }} €</span>
+            <span>-</span>
+            <span>{{ offer.duree }}</span>
         </div>
         <div class="description">
             <p>{{ offer.description|raw }}</p>
