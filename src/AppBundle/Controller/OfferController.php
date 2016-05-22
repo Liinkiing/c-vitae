@@ -82,6 +82,7 @@ class OfferController extends Controller
             $offer->setTitle($request->get('offer')['title']);
             $offer->setSecteur($request->get('offer')['secteur']);
             $offer->setPublishedAt(new \DateTime('now'));
+            $offer->setUpdatedAt(new \DateTime('now'));
             $offer->setDuree($request->get('offer')['duree']);
             $offer->setNbPost($request->get('offer')['nb_post']);
             $offer->setRemuneration($request->get('offer')['remuneration']);
@@ -132,7 +133,7 @@ class OfferController extends Controller
             $parsedown = new \Parsedown();
             $offer->setTitle($request->get('offer')['title']);
             $offer->setSecteur($request->get('offer')['secteur']);
-            $offer->setPublishedAt(new \DateTime('now'));
+            $offer->setUpdatedAt(new \DateTime('now'));
             $offer->setDuree($request->get('offer')['duree']);
             $offer->setNbPost($request->get('offer')['nb_post']);
             $offer->setRemuneration($request->get('offer')['remuneration']);
