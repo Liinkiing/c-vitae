@@ -27,7 +27,11 @@ class OfferController extends Controller
     public function showOfferAction(Request $request, Offer $offer)
     {
         if (!$offer) throw new NotFoundHttpException();
-        if (($this->getUser() == null && !$offer->getIsActive()) || (!$this->getUser()->isGranted('ROLE_ADMIN') && !$offer->getIsActive())) {
+        $currentStudent = $this->getUser();
+        if($currentStudent == null && !$offer->getIsActive()){
+            $this->addFlash("danger", "L'offre n'a pas encore été approuvé, veuillez patienter !");
+            return $this->redirectToRoute("offers_index");
+        } elseif ($currentStudent != null && !$currentStudent->isGranted('ROLE_ADMIN') && !$offer->getIsActive()) {
             $this->addFlash("danger", "L'offre n'a pas encore été approuvé, veuillez patienter !");
             return $this->redirectToRoute("offers_index");
         }
