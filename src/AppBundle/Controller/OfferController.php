@@ -58,11 +58,13 @@ class OfferController extends Controller
         array_push($studentsPostulated, $currentUser->getUsername());
         $offer->setStudentsPostuled($studentsPostulated);
         $this->getDoctrine()->getEntityManager()->flush();
+        $parsedown = new \Parsedown();
+        $personnalMessage = $this->get('app.utilities')->setNullIfStringEmpty($parsedown->text($request->get('aboutme')));
         $message = \Swift_Message::newInstance();
         $message->setSubject($currentUser->getFullName() . " souhaite postuler pour votre offre « " . $offer->getTitle() . " »")
             ->setFrom($this->get('twig')->getGlobals()['site_name'] . '@' . strtolower($this->get('twig')->getGlobals()['site_name']) . '.com')
             ->setTo($offer->getContact())
-            ->setBody($this->renderView('mails/apply.html.twig', ['offer' => $offer, 'student' => $currentUser]), 'text/html');
+            ->setBody($this->renderView('mails/apply.html.twig', ['offer' => $offer, 'student' => $currentUser, 'personnalMessage' => $personnalMessage]), 'text/html');
         $this->get('mailer')->send($message);
         $this->addFlash("success", "Vous avez bien postulé à l'offre !");
         return $this->redirectToRoute("offer_show", ['id' => $offer->getId()]);

@@ -4,7 +4,13 @@
         <h1>{{ student.fullName }} est intéressé{% if student.gender == "female" %}e{% endif %} par votre offre</h1>
         <hr>
         {% if student.description %}
+            <h3>Comment je me décrirai ?</h3>
             <p class="description">&laquo; {{ student.description }} &raquo;</p>
+        {% endif %}
+        {% if personnalMessage %}
+            <hr>
+            <h3>Pourquoi devriez-vous me choisir ?</h3>
+            <div>{{ personnalMessage|raw }}</div>
         {% endif %}
         {% if student.programmingLanguages %}
             <hr>

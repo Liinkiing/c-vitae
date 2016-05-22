@@ -35,13 +35,13 @@
     {% if student.linkedin or student.viadeo or student.cv %}
         <div class="extra content" {% if student.linkedin and student.viadeo %}style="align-self: center;"{% endif %}>
             {% if student.linkedin %}
-                <a href="{{ student.linkedin }}" class="ui linkedin button">
+                <a href="{{ student.linkedin }}" target="_blank" class="ui linkedin button">
                     <i class="linkedin icon"></i>
                     LinkedIn
                 </a>
             {% endif %}
             {% if student.viadeo %}
-                <a href="{{ student.viadeo }}" class="ui viadeo button">
+                <a href="{{ student.viadeo }}" target="_blank" class="ui viadeo button">
                     <i class="fa fa-viadeo"></i>
                     Viadeo
                 </a>

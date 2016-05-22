@@ -85,9 +85,9 @@
         <h3>Réseaux professionnels</h3>
         <div class="row-flex center">
             <div class="information one-column">
-                {% if user.linkedin %}<a href="{{ user.linkedin }}" class="btn btn-alt btn-medium il-a-linked-in"><i
+                {% if user.linkedin %}<a href="{{ user.linkedin }}" target="_blank" class="btn btn-alt btn-medium il-a-linked-in"><i
                             class="fa fa-linkedin">&nbsp;&nbsp;</i>LinkedIn</a>{% endif %}
-                {% if user.viadeo %}<a href="{{ user.viadeo }}" class="btn btn-alt btn-medium"><i class="fa fa-viadeo">
+                {% if user.viadeo %}<a href="{{ user.viadeo }}" target="_blank" class="btn btn-alt btn-medium"><i class="fa fa-viadeo">
                         &nbsp;&nbsp;</i>Viadeo</a>{% endif %}
             </div>
         </div>

@@ -1,6 +1,10 @@
 {% embed 'base.html.twig' with {'title': offer.title, 'subtitle': offer.entreprise,
 'isFullscreen': 1, 'randomHeaderColors': 1} %}
 
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    {% endblock %}
 
     {% block body %}
 
@@ -21,6 +25,33 @@
                         {% endfor %}
 
                     {% endautoescape %}
+
+                    <div class="ui modal">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            Un petit message à faire passer ?
+                        </div>
+                        <div class="image content">
+                            <div class="description">
+                                <form action="{{ path('offer_apply', {'id': offer.id }) }}" method="post"
+                                      id="formOffer">
+                                    <textarea name="aboutme" id="aboutMe" cols="30" rows="10"></textarea>
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <div class="ui black deny button" onclick="handleForm()">
+                                Non merci
+                            </div>
+                            <div onclick="$('#formOffer').submit()"
+                                 class="ui positive right labeled icon button">
+                                Envoyer
+                                <i class="checkmark icon"></i>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div class="ui grid">
                         <div class="four wide column">
@@ -49,8 +80,8 @@
 
 
                                 {% if app.user and not offer.hasPostuled(app.user) %}
-                                    <a class="btn btn-success btn-medium"
-                                       href="{{ path('offer_apply', {'id': offer.id }) }}"><i class="fa fa-plus">&nbsp;&nbsp;</i>Postuler
+                                    <a class="btn btn-success btn-medium" id="applyOffer"
+                                       href=""><i class="fa fa-plus">&nbsp;&nbsp;</i>Postuler
                                         à l'offre</a>
                                 {% elseif app.user and offer.hasPostuled(app.user) %}
                                     <span class="blue"><i class="fa fa-info">&nbsp;&nbsp;</i>Vous avez déjà postulé pour cette offre</span>
@@ -114,7 +145,32 @@
     {% endblock %}
 
     {% block javascripts %}
+        {% if app.user and not offer.hasPostuled(app.user) %}
+            <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+            <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+            <script>
+                var simplemde = new SimpleMDE({
+                    element: $("#aboutMe")[0],
+                    spellChecker: false,
+                    promptURLs: true,
+                    renderingConfig: {
+                        codeSyntaxHighlighting: true
+                    }
 
+                });
+
+
+                $('#applyOffer').click(function (e) {
+                    e.preventDefault();
+                    $('.ui.modal').modal('show');
+                });
+
+                function handleForm() {
+                    simplemde.value('');
+                    $('#formOffer').submit();
+                }
+            </script>
+        {% endif %}
     {% endblock %}
 
 {% endembed %}
