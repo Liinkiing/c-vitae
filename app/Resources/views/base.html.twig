@@ -50,12 +50,12 @@
     });
 
     $(window).on('scroll', function (e) {
-        let scrollPos = $(window).scrollTop();
+        var scrollPos = $(window).scrollTop();
 
-        let navbar = $('nav.nav');
-        let limitElem = $('.greetings, .generic-card.fullscreen > header');
-        let limit = limitElem.offset().top + limitElem.outerHeight();
-        let position = Math.round($(window).scrollTop());
+        var navbar = $('nav.nav');
+        var limitElem = $('.greetings, .generic-card.fullscreen > header');
+        var limit = limitElem.offset().top + limitElem.outerHeight();
+        var position = Math.round($(window).scrollTop());
 
         if(position < limit - 65)
         {
