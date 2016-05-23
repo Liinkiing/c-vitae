@@ -46,12 +46,12 @@
             <p class="secteur">Plus tard, {{ student.firstName }} voudrait travailler dans :
                 <em><strong>{{ student.secteur }}</strong></em></p>
         {% endif %}
-        {% if student.linkedin or student.viadeo %}
-            <hr>
-            N'hésitez pas à {% if student.gender == "male" %}le{% else %}la{% endif %} suivre sur {% if student.linkedin %} <a
-                href="{{ student.linkedin }}">LinkedIn</a> {% endif %} {% if student.viadeo %}
+        <hr>
+        N'hésitez pas à {% if student.gender == "male" %}le{% else %}la{% endif %} contacter <a href="mailto:{{ student.professionalMail }}">directement par mail</a>
+            {% if student.linkedin or student.viadeo %} et {% if student.gender == "male" %}le{% else %}la{% endif %} suivre sur {% if student.linkedin %} <a href="{{ student.linkedin }}">LinkedIn</a> {% endif %} {% if student.viadeo %}
             <a href="{{ student.viadeo }}">Viadeo</a> {% endif %}
         {% endif %}
+
 
         <hr>
         Envoyé depuis la plateforme &laquo; <a
