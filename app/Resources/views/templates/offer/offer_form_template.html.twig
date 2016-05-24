@@ -2,107 +2,130 @@
     <input type="hidden" name="offer[is_active]" value="true">
 {% endif %}
     {% if editMode and offer.imageUrl %}
-        <div class="offer-picture">
-            <img src="{{ base_upload_url }}{{ vich_uploader_asset(offer, "imageFile") }}" alt="">
+<div class="offer-picture">
+    <img src="{{ base_upload_url }}{{ vich_uploader_asset(offer, "imageFile") }}" alt="">
 
     {% endif %}
-<div class="ui grid">
+    <div class="ui grid">
 
-    <div class="eight wide column centered">
-        <label for="image">Choissisez une image</label>
-        <input accept="image/*" type="file" name="offer[image]" id="image">
-        {% if is_granted('ROLE_ADMIN') and editMode and offer.imageUrl %}
-            <a class="btn btn-danger btn-medium" href="{{ path('admin_delete_offer_image', {'id': offer.id }) }}">Supprimer l'image</a>
-        {% endif %}
+        <div class="eight wide column centered">
+            <label for="image">Choissisez une image</label>
+            <input accept="image/*" type="file" name="offer[image]" id="image">
+            {% if is_granted('ROLE_ADMIN') and editMode and offer.imageUrl %}
+                <a class="btn btn-danger btn-medium" href="{{ path('admin_delete_offer_image', {'id': offer.id }) }}">Supprimer
+                    l'image</a>
+            {% endif %}
+        </div>
+
+        <div class="ten wide column">
+            <div class="group">
+                <input name="offer[title]" type="text" required {% if editMode %}value="{{ offer.title }}"{% endif %}>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material">Nom de l'offre</label>
+            </div>
+        </div>
+        <div class="six wide column">
+            <div class="group">
+                <input name="offer[secteur]" type="text"
+                       required {% if editMode %}value="{{ offer.secteur }}"{% endif %}>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material">Secteur</label>
+            </div>
+        </div>
+        <div class="five wide column">
+            <div class="group">
+                <input name="offer[duree]" type="text" required {% if editMode %}value="{{ offer.duree }}"{% endif %}>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material">Durée du stage</label>
+            </div>
+        </div>
+        <div class="five wide column">
+            <div class="group">
+                <input name="offer[nb_post]" type="number" required
+                       {% if editMode %}value="{{ offer.nbPost }}"{% endif %}>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material">Nombre de postes à pourvoir</label>
+            </div>
+        </div>
+        <div class="six wide column">
+            <div class="group">
+                <input name="offer[remuneration]" type="number" required
+                       {% if editMode %}value="{{ offer.remuneration }}"{% endif %}>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material">Rémunération</label>
+            </div>
+        </div>
+
+        <div class="six wide column">
+            <div class="group">
+                <select name="offer[type_contrat]" type="text" required>
+                    <option value="Stage conventionné"
+                            {% if editMode and offer.typeContrat == "Stage conventionné" %}selected{% endif %}>Stage
+                        conventionné
+                    </option>
+                    <option value="Contrat à durée déterminé"
+                            {% if editMode and offer.typeContrat == "Contrat à durée déterminé" %}selected{% endif %}">
+                        Contrat à durée déterminé
+                    </option>
+                    <option value="Contrat à durée indeterminé"
+                            {% if editMode and offer.typeContrat == "Contrat à durée indeterminé" %}selected{% endif %}>
+                        Contrat à durée indeterminé
+                    </option>
+                    <option value="Contrat de travail temporaire"
+                            {% if editMode and offer.typeContrat == "Contrat de travail temporaire" %}selected{% endif %}>
+                        Contrat de travail temporaire
+                    </option>
+                </select>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material">Type de contrat</label>
+            </div>
+        </div>
+        <div class="ten wide column">
+            <div class="group">
+                <input name="offer[localisation]" type="text" required
+                       {% if editMode %}value="{{ offer.localisation }}"{% endif %}>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material">Lieu du stage</label>
+            </div>
+        </div>
+
+        <div class="eight wide column">
+            <div class="group">
+                <input name="offer[contact]" type="email" required
+                       {% if editMode %}value="{{ offer.contact }}"{% endif %}>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material">Votre mail de contact</label>
+            </div>
+        </div>
+
+        <div class="eight wide column">
+            <div class="group">
+                <input name="offer[entreprise]" type="text" required
+                       {% if editMode %}value="{{ offer.entreprise }}"{% endif %}>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="material">Votre entreprise</label>
+            </div>
+        </div>
+
+        <div class="sixteen wide column">
+            <div class="pageContent">
+                <label class="no-material" for="offerDesc">Description de l'offre</label>
+                <textarea name="offer[description]" id="offerDesc" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+
+
     </div>
 
-    <div class="ten wide column">
-        <div class="group">
-            <input name="offer[title]" type="text" required {% if editMode %}value="{{ offer.title }}"{% endif %}>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label class="material">Nom de l'offre</label>
-        </div>
+    <div class="buttons">
+        <input type="submit" class="btn btn-success btn-medium">
     </div>
-    <div class="six wide column">
-        <div class="group">
-            <input name="offer[secteur]" type="text"
-                   required {% if editMode %}value="{{ offer.secteur }}"{% endif %}>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label class="material">Secteur</label>
-        </div>
-    </div>
-    <div class="five wide column">
-        <div class="group">
-            <input name="offer[duree]" type="text" required {% if editMode %}value="{{ offer.duree }}"{% endif %}>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label class="material">Durée du stage</label>
-        </div>
-    </div>
-    <div class="five wide column">
-        <div class="group">
-            <input name="offer[nb_post]" type="number" required {% if editMode %}value="{{ offer.nbPost }}"{% endif %}>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label class="material">Nombre de postes à pourvoir</label>
-        </div>
-    </div>
-    <div class="six wide column">
-        <div class="group">
-            <input name="offer[remuneration]" type="number" required {% if editMode %}value="{{ offer.remuneration }}"{% endif %}>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label class="material">Rémunération</label>
-        </div>
-    </div>
-
-    <div class="six wide column">
-        <div class="group">
-            <input name="offer[type_contrat]" type="text" required {% if editMode %}value="{{ offer.typeContrat }}"{% endif %}>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label class="material">Type de contrat</label>
-        </div>
-    </div>
-    <div class="ten wide column">
-        <div class="group">
-            <input name="offer[localisation]" type="text" required {% if editMode %}value="{{ offer.localisation }}"{% endif %}>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label class="material">Lieu du stage</label>
-        </div>
-    </div>
-
-    <div class="eight wide column">
-        <div class="group">
-            <input name="offer[contact]" type="email" required {% if editMode %}value="{{ offer.contact }}"{% endif %}>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label class="material">Votre mail de contact</label>
-        </div>
-    </div>
-
-    <div class="eight wide column">
-        <div class="group">
-            <input name="offer[entreprise]" type="text" required {% if editMode %}value="{{ offer.entreprise }}"{% endif %}>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label class="material">Votre entreprise</label>
-        </div>
-    </div>
-
-    <div class="sixteen wide column">
-        <div class="pageContent">
-            <label class="no-material" for="offerDesc">Description de l'offre</label>
-            <textarea name="offer[description]" id="offerDesc" cols="30" rows="10"></textarea>
-        </div>
-    </div>
-
-
-</div>
-
-<div class="buttons">
-    <input type="submit" class="btn btn-success btn-medium">
-</div>
