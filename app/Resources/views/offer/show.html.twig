@@ -72,7 +72,7 @@
                                     <li><strong><i class="fa fa-envelope">&nbsp;&nbsp;</i> </strong><a
                                                 href="mailto:{{ offer.contact }}">{{ offer.contact }}</a></li>
                                     <li><strong><i class="fa fa-map-marker">&nbsp;&nbsp;</i>
-                                        </strong>{{ offer.localisation }}</li>
+                                        </strong><a href="https://www.google.com/maps?q={{ offer.localisation|url_encode }}">{{ offer.localisation }}</a></li>
                                     <li><strong><i class="fa fa-calendar">&nbsp;&nbsp;</i>
                                         </strong>{{ offer.publishedAt|date('d/m/Y') }}</li>
 
