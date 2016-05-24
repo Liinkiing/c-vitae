@@ -903,7 +903,7 @@ a.student-link:hover {
     left: 15px;
     z-index: 10; }
   .student-item.is-connected {
-    width: 400px; }
+    width: 330px; }
   .student-item:last-of-type {
     margin-right: 0; }
   .student-item::after {
