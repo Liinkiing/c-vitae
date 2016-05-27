@@ -18,6 +18,8 @@ parameters:
     mailer_user:       '%mail.user%'
     mailer_password:   '%mail.pass%'
 
+    google_geocoding_api_key: '%google.geocoding.api.key%'
+
 
     # A secret key that's used to generate certain security-related tokens
     secret:            '%security.secretkey%'

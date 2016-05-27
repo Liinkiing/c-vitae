@@ -98,6 +98,10 @@
                             </div>
                         </div>
                         <div class="twelve wide column">
+                            <div class="map">
+                                <div id="map"></div>
+                                <hr>
+                            </div>
                             {{ offer.description|raw }}
                         </div>
                     </div>
@@ -152,6 +156,34 @@
     {% endblock %}
 
     {% block javascripts %}
+        <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+                async defer></script>
+        <script>
+            function initMap() {
+                var mapDiv = document.getElementById('map');
+                var latitude, longitude = 0;
+                var json = $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address={{ offer.localisation }}", null, function(data){
+                    if(data.results.length > 0){
+                        console.log(data.results[0].geometry.location);
+                        latitude = data.results[0].geometry.location.lat;
+                        longitude = data.results[0].geometry.location.lng;
+                        console.log(latitude);
+                        var map = new google.maps.Map(mapDiv, {
+                            center: {lat: latitude, lng: longitude},
+                            disableDoubleClickZoom: true,
+                            zoomControl: false,
+                            minZoom: 18,
+                            maxZoom: 18,
+                            zoom: 18
+                        });
+                    } else {
+                        $('.map').remove();
+                    }
+
+                })
+            }
+        </script>
+
         {% if app.user and not offer.hasPostuled(app.user) %}
             <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
             <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
