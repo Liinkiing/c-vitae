@@ -69,9 +69,9 @@
 
                                     </tr></table>
                                 <br style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
-                                {% if student.linkedin or student.viadeo %}
-                                    {% if student.gender == "male" %}Le{% else %}La{% endif %} suivre sur {% if student.linkedin %}<a href="{{ student.linkedin }}" target="_blank"  style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; color: #348eda; margin: 0; padding: 0;">LinkedIn</a>{% endif %} {% if student.viadeo %}<a href="{{ student.viadeo }}" target="_blank"  style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; color: #348eda; margin: 0; padding: 0;">Viadeo</a>{% endif %}
-                                {% endif %}
+                                {#{% if student.linkedin or student.viadeo %}#}
+                                    {#{% if student.gender == "male" %}Le{% else %}La{% endif %} suivre sur {% if student.linkedin %}<a href="{{ student.linkedin }}" target="_blank"  style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; color: #348eda; margin: 0; padding: 0;">LinkedIn</a>{% endif %} {% if student.viadeo %}<a href="{{ student.viadeo }}" target="_blank"  style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; color: #348eda; margin: 0; padding: 0;">Viadeo</a>{% endif %}#}
+                                {#{% endif %}#}
 
                             </td>
                         </tr></table>
@@ -87,8 +87,8 @@
                 <div class="content" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; display: block; max-width: 100%; margin: 0 auto; padding: 0;">
                     <table style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
                             <td align="center" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
-                                <p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.6em; color: #666666; font-weight: normal; margin: 0 0 10px; padding: 0;">Envoyé depuis la plateforme &laquo; <a
-                                            href="{{ absolute_url(path("homepage")) }}">{{ site_name }}</a> &raquo;</p>
+                                {#<p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.6em; color: #666666; font-weight: normal; margin: 0 0 10px; padding: 0;">Envoyé depuis la plateforme &laquo; <a#}
+                                            {#href="{{ absolute_url(path("homepage")) }}">{{ site_name }}</a> &raquo;</p>#}
                             </td>
                         </tr></table>
                 </div>
