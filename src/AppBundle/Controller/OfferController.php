@@ -29,14 +29,17 @@ class OfferController extends Controller
     {
         if (!$offer) throw new NotFoundHttpException();
         $currentStudent = $this->getUser();
-        if($currentStudent == null && !$offer->getIsActive()){
+        if ($currentStudent == null && !$offer->getIsActive()) {
             $this->addFlash("danger", "L'offre n'a pas encore été approuvé, veuillez patienter !");
             return $this->redirectToRoute("offers_index");
         } elseif ($currentStudent != null && !$currentStudent->isGranted('ROLE_ADMIN') && !$offer->getIsActive()) {
             $this->addFlash("danger", "L'offre n'a pas encore été approuvé, veuillez patienter !");
             return $this->redirectToRoute("offers_index");
         }
-        return $this->render('offer/show.html.twig', ['offer' => $offer, 'hasCV' => ($currentStudent->getCv() != null) ? 'true' : 'false']);
+        if ($currentStudent != null) {
+            $hasCV = ($currentStudent->getCv() != null) ? true : false;
+        } else $hasCV = false;
+        return $this->render('offer/show.html.twig', ['offer' => $offer, 'hasCV' => $hasCV]);
     }
 
     /**
@@ -64,7 +67,7 @@ class OfferController extends Controller
             ->setTo($offer->getContact())
             ->setBody($this->renderView('mails/apply.html.twig', ['offer' => $offer, 'student' => $currentUser, 'personnalMessage' => $personnalMessage]), 'text/html')
             ->addPart('texte brut en version text', 'text/plain');
-        if($currentUser != null && $currentUser->getCv()){
+        if ($currentUser->getCv()) {
             $url = $this->get('twig')->getGlobals()['base_upload_url'] . $this->get('vich_uploader.templating.helper.uploader_helper')->asset($currentUser, 'cvFile');
             $message->attach(Swift_Attachment::fromPath($url));
         }
@@ -84,7 +87,7 @@ class OfferController extends Controller
     {
         if ($this->getUser() != null && !in_array('ROLE_ADMIN', $this->getUser()->getRoles())) throw new AccessDeniedException();
         if ($request->getMethod() == "GET") {
-            if(!$this->getUser()) $this->addFlash("info", "Votre offre ne sera pas instantanément disponible. Elle sera soumise à approbation");
+            if (!$this->getUser()) $this->addFlash("info", "Votre offre ne sera pas instantanément disponible. Elle sera soumise à approbation");
             return $this->render('offer/add.html.twig');
         } else {
             $parsedown = new \Parsedown();
