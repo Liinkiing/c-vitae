@@ -64,7 +64,7 @@ class OfferController extends Controller
             ->setTo($offer->getContact())
             ->setBody($this->renderView('mails/apply.html.twig', ['offer' => $offer, 'student' => $currentUser, 'personnalMessage' => $personnalMessage]), 'text/html')
             ->addPart('texte brut en version text', 'text/plain');
-        if($currentUser->getCv()){
+        if($currentUser != null && $currentUser->getCv()){
             $url = $this->get('twig')->getGlobals()['base_upload_url'] . $this->get('vich_uploader.templating.helper.uploader_helper')->asset($currentUser, 'cvFile');
             $message->attach(Swift_Attachment::fromPath($url));
         }
