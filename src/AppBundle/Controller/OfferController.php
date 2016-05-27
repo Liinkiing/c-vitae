@@ -62,9 +62,10 @@ class OfferController extends Controller
         $personnalMessage = $this->get('app.utilities')->setNullIfStringEmpty($parsedown->text($request->get('aboutme')));
         $message = \Swift_Message::newInstance();
         $message->setSubject($currentUser->getFullName() . " souhaite postuler pour votre offre « " . $offer->getTitle() . " »")
-            ->setFrom($this->get('twig')->getGlobals()['site_name'] . '@' . strtolower($this->get('twig')->getGlobals()['site_name']) . '.com')
+            ->setFrom([$this->get('twig')->getGlobals()['contact_mail'] => $this->get('twig')->getGlobals()['site_name']])
             ->setTo($offer->getContact())
-            ->setBody($this->renderView('mails/apply.html.twig', ['offer' => $offer, 'student' => $currentUser, 'personnalMessage' => $personnalMessage]), 'text/html');
+            ->setBody($this->renderView('mails/apply.html.twig', ['offer' => $offer, 'student' => $currentUser, 'personnalMessage' => $personnalMessage]), 'text/html')
+            ->addPart('texte brut en version text', 'text/plain');
         $this->get('mailer')->send($message);
         $this->addFlash("success", "Vous avez bien postulé à l'offre !");
         return $this->redirectToRoute("offer_show", ['id' => $offer->getId()]);
@@ -108,7 +109,7 @@ class OfferController extends Controller
             if (!$offer->getIsActive()) {
                 $message = \Swift_Message::newInstance();
                 $message->setSubject("Approbation d'une nouvelle offre !")
-                    ->setFrom($this->get('twig')->getGlobals()['site_name'] . '@' . strtolower($this->get('twig')->getGlobals()['site_name']) . '.com')
+                    ->setFrom([$this->get('twig')->getGlobals()['contact_mail'] => $this->get('twig')->getGlobals()['site_name']])
                     ->setTo("omar.jbara2@gmail.com")
                     ->setBody($this->renderView("mails/validate_offer.html.twig", ['offer' => $offer, 'ip' => $request->getClientIp()]), 'text/html');
                 $this->get('mailer')->send($message);
@@ -171,7 +172,7 @@ class OfferController extends Controller
         $this->getDoctrine()->getManager()->flush();
         $message = \Swift_Message::newInstance();
         $message->setSubject("Votre offre a été approuvé !")
-            ->setFrom($this->get('twig')->getGlobals()['site_name'] . '@' . strtolower($this->get('twig')->getGlobals()['site_name']) . '.com')
+            ->setFrom([$this->get('twig')->getGlobals()['contact_mail'] => $this->get('twig')->getGlobals()['site_name']])
             ->setTo($offer->getContact())
             ->setBody($this->renderView("mails/offer_validated.html.twig", ['offer' => $offer]), 'text/html');
         $this->get('mailer')->send($message);

@@ -148,6 +148,7 @@ twig:
     globals:
         dropbox_client:   "@app.dropbox_client"
         site_name:        C-Vitae
+        contact_mail:     contact@cvitae.com
         base_upload_url: "http://perso-etudiant.u-pem.fr/~ojbara/"
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"

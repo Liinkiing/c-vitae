@@ -20,20 +20,6 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-//        $tab = ['feature' => [
-//                    'title' => 'Pourquoi c crée',
-//                    'features' => [
-//                        ['name' => 'test',
-//                            'content' => 'blablablablabla'
-//                            ],
-//                        ['name' => 'test2',
-//                            'content' => 'blablablablabla2'
-//                        ],
-//                        ['name' => 'test3',
-//                            'content' => 'blablablablabla3'
-//                        ]
-//                    ]
-//        ]];
         $homepage = $this->getDoctrine()->getRepository('AppBundle:Homepage')->find(1);
         return $this->render('default/index.html.twig', ['homepage' => $homepage]);
     }
@@ -75,7 +61,7 @@ class DefaultController extends Controller
         $student = $this->getDoctrine()->getRepository('AppBundle:Student')->findOneBy(['professionalMail' => $request->get('to')]);
         $message = \Swift_Message::newInstance()
             ->setSubject($request->get('subject'))
-            ->setFrom(['support@' . strtolower($this->get('twig')->getGlobals()['site_name']) . '.com' => $this->get('twig')->getGlobals()['site_name']])
+            ->setFrom([$this->get('twig')->getGlobals()['contact_mail'] => $this->get('twig')->getGlobals()['site_name']])
             ->setTo($request->get('to'))
             ->setBody($this->renderView('mails/contact.html.twig', ['content' => $parsedown->text($request->get('message')),
                 'sender' => $sender,
