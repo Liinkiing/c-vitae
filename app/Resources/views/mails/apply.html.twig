@@ -1,117 +1,102 @@
 {% autoescape false %}
-    {#<!DOCTYPE html>#}
-    {#<html style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">#}
-    {#<head>#}
-        {#<meta name="viewport" content="width=device-width">#}
-        {#<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">#}
-        {#<title>C-Vitae - Offre de stage</title>#}
-    {#</head>#}
-    {#<body bgcolor="#f6f6f6" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; -webkit-font-smoothing: antialiased; height: 100%; -webkit-text-size-adjust: none; width: 100% !important; margin: 0; padding: 0;">#}
+    <!DOCTYPE html>
+    <html style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>C-Vitae - Offre de stage</title>
+    </head>
+    <body bgcolor="#f6f6f6" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; -webkit-font-smoothing: antialiased; height: 100%; -webkit-text-size-adjust: none; width: 100% !important; margin: 0; padding: 0;">
 
-    {#<table class="body-wrap" bgcolor="#f6f6f6" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; width: 100%; margin: 0; padding: 30px;"><tr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">#}
-            {#<td style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;"></td>#}
-            {#<td class="container" bgcolor="#FFFFFF" style="box-shadow: 0 0 50px rgba(0, 0, 0, 0.08); font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; clear: both !important; display: block !important; max-width: 900px !important; margin: 0 auto; padding: 20px; border: 1px solid #f0f0f0;">#}
+    <table class="body-wrap" bgcolor="#f6f6f6" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; width: 100%; margin: 0; padding: 30px;"><tr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
+            <td style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;"></td>
+            <td class="container" bgcolor="#FFFFFF" style="box-shadow: 0 0 50px rgba(0, 0, 0, 0.08); font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; clear: both !important; display: block !important; max-width: 900px !important; margin: 0 auto; padding: 20px; border: 1px solid #f0f0f0;">
 
-                {#<div class="content" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; display: block; max-width: 100%; margin: 0 auto; padding: 0;">#}
-                    {#<table style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">#}
-                            {#<td style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">#}
-                                {#<h1 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 36px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">{{ student.fullName }} est intéressé{% if student.gender == "female" %}e{% endif %} par votre offre</h1>#}
-                                {#<p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">Votre offre « <strong style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">{{ offer.title }}</strong> » intéresse {{ student.firstName }}</p>#}
-                                {#{% if student.description %}#}
-                                    {#<h2 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 28px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">Comment je me décrirai ?</h2>#}
-                                    {#<p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">&laquo; {{ student.description }}  &raquo;</p>#}
-                                    {#<hr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 0, 0, 0.3); margin: 24px 0 0; padding: 0;">#}
-                                {#{% endif %}#}
-                                {#{% if personnalMessage %}#}
-                                    {#<h2 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 28px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">Pourquoi devriez-vous me choisir ?</h2>#}
+                <div class="content" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; display: block; max-width: 100%; margin: 0 auto; padding: 0;">
+                    <table style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
+                            <td style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
+                                <h1 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 36px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">{{ student.fullName }} est intéressé{% if student.gender == "female" %}e{% endif %} par votre offre</h1>
+                                <p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">Votre offre « <strong style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">{{ offer.title }}</strong> » intéresse {{ student.firstName }}</p>
+                                {% if student.description %}
+                                    <h2 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 28px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">Comment je me décrirai ?</h2>
+                                    <p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">&laquo; {{ student.description }}  &raquo;</p>
+                                    <hr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 0, 0, 0.3); margin: 24px 0 0; padding: 0;">
+                                {% endif %}
+                                {% if personnalMessage %}
+                                    <h2 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 28px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">Pourquoi devriez-vous me choisir ?</h2>
 
-                                    {#<p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">{{ personnalMessage }}</p>#}
-                                    {#<hr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 0, 0, 0.3); margin: 24px 0 0; padding: 0;">#}
+                                    <p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">{{ personnalMessage }}</p>
+                                    <hr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 0, 0, 0.3); margin: 24px 0 0; padding: 0;">
 
-                                {#{% endif %}#}
-                                {#{% if student.programmingLanguages %}#}
-                                    {#<h3 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 22px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">Ses compétences en langages informatique : </h3>#}
-                                    {#<ul style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">#}
-                                        {#{% for progLang in student.programmingLanguages %}#}
-                                            {#<li style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0 0 0 5px; padding: 0; list-style: inside;">{{ progLang|trim }}</li>#}
-                                        {#{% endfor %}#}
-                                    {#</ul>#}
-                                    {#<hr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 0, 0, 0.3); margin: 24px 0 0; padding: 0;">#}
-                                {#{% endif %}#}
-                                {#{% if student.languages %}#}
-                                    {#<h3 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 22px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">{{ student.firstName }} sait parler les langues suivantes : </h3>#}
-                                    {#<ul style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">#}
-                                        {#{% for lang in student.languages %}#}
-                                            {#<li style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0 0 0 5px; padding: 0; list-style: inside;">{{ lang|trim }}</li>#}
+                                {% endif %}
+                                {% if student.programmingLanguages %}
+                                    <h3 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 22px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">Ses compétences en langages informatique : </h3>
+                                    <ul style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">
+                                        {% for progLang in student.programmingLanguages %}
+                                            <li style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0 0 0 5px; padding: 0; list-style: inside;">{{ progLang|trim }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    <hr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 0, 0, 0.3); margin: 24px 0 0; padding: 0;">
+                                {% endif %}
+                                {% if student.languages %}
+                                    <h3 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 22px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">{{ student.firstName }} sait parler les langues suivantes : </h3>
+                                    <ul style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">
+                                        {% for lang in student.languages %}
+                                            <li style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0 0 0 5px; padding: 0; list-style: inside;">{{ lang|trim }}</li>
 
-                                        {#{% endfor %}#}
-                                    {#</ul>#}
-                                    {#<hr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 0, 0, 0.3); margin: 24px 0 0; padding: 0;">#}
-                                {#{% endif %}#}
+                                        {% endfor %}
+                                    </ul>
+                                    <hr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 0, 0, 0.3); margin: 24px 0 0; padding: 0;">
+                                {% endif %}
 
-                                {#{% if student.softwares %}#}
-                                    {#<h3 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 22px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">{% if student.gender == "male" %}Il{% else %}Elle{% endif %} maîtrise les#}
-                                        {#logiciels#}
-                                        {#suivants : </h3>#}
-                                    {#<ul style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">#}
-                                        {#{% for software in student.softwares %}#}
-                                            {#<li style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0 0 0 5px; padding: 0; list-style: inside;">{{ software|trim }}</li>#}
-                                        {#{% endfor %}#}
-                                    {#</ul>#}
-                                    {#<hr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 0, 0, 0.3); margin: 24px 0 0; padding: 0;">#}
-                                {#{% endif %}#}
+                                {% if student.softwares %}
+                                    <h3 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 22px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">{% if student.gender == "male" %}Il{% else %}Elle{% endif %} maîtrise les
+                                        logiciels
+                                        suivants : </h3>
+                                    <ul style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">
+                                        {% for software in student.softwares %}
+                                            <li style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0 0 0 5px; padding: 0; list-style: inside;">{{ software|trim }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    <hr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 0, 0, 0.3); margin: 24px 0 0; padding: 0;">
+                                {% endif %}
 
-                                {#<br style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">#}
-                                {#<table class="btn-primary" cellpadding="0" cellspacing="0" border="0" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; width: 300px !important; margin: 0 auto; padding: 0;"><tr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">#}
-                                        {#<td style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 14px; line-height: 1.6em; border-radius: 25px; text-align: center; vertical-align: top; background: #348eda; margin: 0; padding: 0;" align="center" bgcolor="#348eda" valign="top">#}
-                                            {#<a href="mailto:{{ student.professionalMail }}" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 2; color: #ffffff; border-radius: 25px; display: inline-block; cursor: pointer; font-weight: bold; text-decoration: none; background: #348eda; margin: 0 auto; padding: 0; border-color: #348eda; border-style: solid; border-width: 10px 20px;">Contacter {{ student.firstName }}</a>#}
-                                        {#</td>#}
+                                <br style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
+                                <table class="btn-primary" cellpadding="0" cellspacing="0" border="0" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; width: 300px !important; margin: 0 auto; padding: 0;"><tr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
+                                        <td style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 14px; line-height: 1.6em; border-radius: 25px; text-align: center; vertical-align: top; background: #348eda; margin: 0; padding: 0;" align="center" bgcolor="#348eda" valign="top">
+                                            <a href="mailto:{{ student.professionalMail }}" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 2; color: #ffffff; border-radius: 25px; display: inline-block; cursor: pointer; font-weight: bold; text-decoration: none; background: #348eda; margin: 0 auto; padding: 0; border-color: #348eda; border-style: solid; border-width: 10px 20px;">Contacter {{ student.firstName }}</a>
+                                        </td>
 
-                                    {#</tr></table>#}
-                                {#<br style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">#}
-                                {#{% if student.linkedin or student.viadeo %}#}
-                                    {#{% if student.gender == "male" %}Le{% else %}La{% endif %} suivre sur {% if student.linkedin %}<a href="{{ student.linkedin }}" target="_blank"  style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; color: #348eda; margin: 0; padding: 0;">LinkedIn</a>{% endif %} {% if student.viadeo %}<a href="{{ student.viadeo }}" target="_blank"  style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; color: #348eda; margin: 0; padding: 0;">Viadeo</a>{% endif %}#}
-                                {#{% endif %}#}
+                                    </tr></table>
+                                <br style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
+                                {% if student.linkedin or student.viadeo %}
+                                    {% if student.gender == "male" %}Le{% else %}La{% endif %} suivre sur {% if student.linkedin %}<a href="{{ student.linkedin }}" target="_blank"  style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; color: #348eda; margin: 0; padding: 0;">LinkedIn</a>{% endif %} {% if student.viadeo %}<a href="{{ student.viadeo }}" target="_blank"  style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; color: #348eda; margin: 0; padding: 0;">Viadeo</a>{% endif %}
+                                {% endif %}
 
-                            {#</td>#}
-                        {#</tr></table>#}
-                {#</div>#}
+                            </td>
+                        </tr></table>
+                </div>
 
-            {#</td>#}
-            {#<td style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;"></td>#}
-        {#</tr></table>#}
-    {#<table class="footer-wrap" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; clear: both !important; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">#}
-            {#<td style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;"></td>#}
-            {#<td class="container" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; clear: both !important; display: block !important; max-width: 900px !important; margin: 0 auto; padding: 0;">#}
+            </td>
+            <td style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;"></td>
+        </tr></table>
+    <table class="footer-wrap" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; clear: both !important; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
+            <td style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;"></td>
+            <td class="container" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; clear: both !important; display: block !important; max-width: 900px !important; margin: 0 auto; padding: 0;">
 
-                {#<div class="content" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; display: block; max-width: 100%; margin: 0 auto; padding: 0;">#}
-                    {#<table style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">#}
-                            {#<td align="center" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">#}
-                                {#<p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.6em; color: #666666; font-weight: normal; margin: 0 0 10px; padding: 0;">Envoyé depuis la plateforme &laquo; <a#}
-                                            {#href="{{ absolute_url(path("homepage")) }}">{{ site_name }}</a> &raquo;</p>#}
-                            {#</td>#}
-                        {#</tr></table>#}
-                {#</div>#}
+                <div class="content" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; display: block; max-width: 100%; margin: 0 auto; padding: 0;">
+                    <table style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
+                            <td align="center" style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
+                                <p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.6em; color: #666666; font-weight: normal; margin: 0 0 10px; padding: 0;">Envoyé depuis la plateforme &laquo; <a
+                                            href="{{ absolute_url(path("homepage")) }}">{{ site_name }}</a> &raquo;</p>
+                            </td>
+                        </tr></table>
+                </div>
 
-            {#</td>#}
-            {#<td style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;"></td>#}
-        {#</tr></table>#}
-    {#</body>#}
-    {#</html>#}
-
-    <h1>Test mail</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium aliquam aspernatur cumque cupiditate excepturi id itaque laboriosam molestiae nisi odio quae rem repellat sapiente soluta, veritatis vero vitae voluptate.</p>
-    <h2>Encore test</h2>
-    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam autem ipsum maxime officia possimus quod
-        ratione recusandae, sed sunt voluptatum. Commodi cum ex magnam modi nihil nisi omnis sint voluptatem.
-    </div>
-    <div>Accusamus asperiores assumenda, consectetur corporis, doloremque ducimus eveniet ex hic iure iusto perspiciatis
-        placeat repellendus sit ullam unde velit, veniam! Facere impedit nisi officiis possimus tempore! Doloremque
-        fugiat minima sed?
-    </div>
-    <div>Architecto atque beatae corporis cupiditate dicta nemo quasi quos sed sunt totam. Accusamus asperiores commodi
-        debitis delectus, deserunt possimus repellendus totam unde! Aspernatur consequatur dolores iste modi nobis
-        optio, quidem.
-    </div>
+            </td>
+            <td style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;"></td>
+        </tr></table>
+    </body>
+    </html>
 
 {% endautoescape %}
