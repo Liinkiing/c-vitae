@@ -37,8 +37,8 @@ class OfferController extends Controller
             return $this->redirectToRoute("offers_index");
         }
         if ($currentStudent != null) {
-            $hasCV = ($currentStudent->getCv() != null) ? true : false;
-        } else $hasCV = false;
+            $hasCV = ($currentStudent->getCv() != null) ? "true" : "false";
+        } else $hasCV = "false";
         return $this->render('offer/show.html.twig', ['offer' => $offer, 'hasCV' => $hasCV]);
     }
 
