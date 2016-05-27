@@ -168,14 +168,24 @@
                         latitude = data.results[0].geometry.location.lat;
                         longitude = data.results[0].geometry.location.lng;
                         console.log(latitude);
+                        var offerLocalisation = {lat: latitude, lng: longitude};
+
                         var map = new google.maps.Map(mapDiv, {
-                            center: {lat: latitude, lng: longitude},
+                            center: offerLocalisation,
                             disableDoubleClickZoom: true,
                             zoomControl: false,
                             minZoom: 18,
                             maxZoom: 18,
                             zoom: 18
                         });
+
+                        var marker = new google.maps.Marker({
+                            animation: google.maps.Animation.DROP,
+                            position: offerLocalisation,
+                            map: map,
+                            title: '{{ offer.entreprise }}'
+                        });
+
                     } else {
                         $('.map').remove();
                     }
