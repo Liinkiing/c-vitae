@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Offer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Swift_Attachment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +36,7 @@ class OfferController extends Controller
             $this->addFlash("danger", "L'offre n'a pas encore été approuvé, veuillez patienter !");
             return $this->redirectToRoute("offers_index");
         }
-        return $this->render('offer/show.html.twig', ['offer' => $offer]);
+        return $this->render('offer/show.html.twig', ['offer' => $offer, 'hasCV' => ($currentStudent->getCv() != null) ? 'true' : 'false']);
     }
 
     /**
@@ -54,10 +55,7 @@ class OfferController extends Controller
             $this->addFlash("danger", "Vous avez déjà postulé à cette offre !");
             return $this->redirectToRoute("offer_show", ['id' => $offer->getId()]);
         }
-        $studentsPostulated = $offer->getStudentsPostuled();
-        array_push($studentsPostulated, $currentUser->getUsername());
-        $offer->setStudentsPostuled($studentsPostulated);
-        $this->getDoctrine()->getEntityManager()->flush();
+
         $parsedown = new \Parsedown();
         $personnalMessage = $this->get('app.utilities')->setNullIfStringEmpty($parsedown->text($request->get('aboutme')));
         $message = \Swift_Message::newInstance();
@@ -66,7 +64,15 @@ class OfferController extends Controller
             ->setTo($offer->getContact())
             ->setBody($this->renderView('mails/apply.html.twig', ['offer' => $offer, 'student' => $currentUser, 'personnalMessage' => $personnalMessage]), 'text/html')
             ->addPart('texte brut en version text', 'text/plain');
+        if($currentUser->getCv()){
+            $url = $this->get('twig')->getGlobals()['base_upload_url'] . $this->get('vich_uploader.templating.helper.uploader_helper')->asset($currentUser, 'cvFile');
+            $message->attach(Swift_Attachment::fromPath($url));
+        }
         $this->get('mailer')->send($message);
+        $studentsPostulated = $offer->getStudentsPostuled();
+        array_push($studentsPostulated, $currentUser->getUsername());
+        $offer->setStudentsPostuled($studentsPostulated);
+        $this->getDoctrine()->getEntityManager()->flush();
         $this->addFlash("success", "Vous avez bien postulé à l'offre !");
         return $this->redirectToRoute("offer_show", ['id' => $offer->getId()]);
     }

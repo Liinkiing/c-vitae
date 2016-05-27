@@ -26,14 +26,15 @@
 
                     {% endautoescape %}
 
-                    <div class="ui modal">
+                    <div id="applyModal" class="ui modal">
                         <i class="close icon"></i>
                         <div class="header">
                             Un petit message à faire passer ?
                         </div>
                         <div class="image content">
                             <div class="description">
-                                <p>Envoyer un message personnalisé vous fera vous démarquer du lot, <strong>ne l'oubliez pas !</strong></p>
+                                <p>Envoyer un message personnalisé vous fera vous démarquer du lot, <strong>ne l'oubliez
+                                        pas !</strong></p>
                                 <form action="{{ path('offer_apply', {'id': offer.id }) }}" method="post"
                                       id="formOffer">
                                     <textarea name="aboutme" id="aboutMe" cols="30" rows="10"></textarea>
@@ -42,17 +43,19 @@
                             </div>
                         </div>
                         <div class="actions">
-                            <div class="ui black deny button" onclick="handleForm()">
+                            <div class="ui black deny button" onclick="handleForm(false, {{ hasCV|e('js') }})">
                                 Non merci
                             </div>
-                            <div onclick="$('#formOffer').submit()"
+                            <div onclick="handleForm(true, {{ hasCV|e('js') }})"
                                  class="ui positive right labeled icon button">
                                 Envoyer
                                 <i class="checkmark icon"></i>
                             </div>
                         </div>
                     </div>
-
+                    <div id="uploadingModal" class="ui basic modal uploading">
+                        <div class="ui text loader">Upload de votre CV en cours...</div>
+                    </div>
 
                     <div class="ui grid">
                         <div class="four wide column">
@@ -72,7 +75,9 @@
                                     <li><strong><i class="fa fa-envelope">&nbsp;&nbsp;</i> </strong><a
                                                 href="mailto:{{ offer.contact }}">{{ offer.contact }}</a></li>
                                     <li><strong><i class="fa fa-map-marker">&nbsp;&nbsp;</i>
-                                        </strong><a href="https://www.google.com/maps?q={{ offer.localisation|url_encode }}">{{ offer.localisation }}</a></li>
+                                        </strong><a
+                                                href="https://www.google.com/maps?q={{ offer.localisation|url_encode }}">{{ offer.localisation }}</a>
+                                    </li>
                                     <li><strong><i class="fa fa-calendar">&nbsp;&nbsp;</i>
                                         </strong>{{ offer.publishedAt|date('d/m/Y') }}</li>
 
@@ -115,6 +120,7 @@
                                         </li>
                                     {% endfor %}
                                 </ul>
+
                             {% else %}
                                 <h3>Aucun élève n'a encore postulé pour cette offre</h3>
                             {% endif %}
@@ -160,16 +166,22 @@
 
                 });
 
-
                 $('#applyOffer').click(function (e) {
                     e.preventDefault();
-                    $('.ui.modal').modal('show');
+                    $('#applyModal').modal('show');
                 });
 
-                function handleForm() {
-                    simplemde.value('');
+                function handleForm(hasMessage, hasCV) {
+                    if(!hasMessage){
+                        simplemde.value('');
+                    }
                     $('#formOffer').submit();
+                    if(hasCV){
+                        $('#uploadingModal').modal('setting', 'closable', false).modal('show')
+                    }
                 }
+
+                $(document).ready();
             </script>
         {% endif %}
     {% endblock %}

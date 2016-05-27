@@ -16,7 +16,8 @@
                     <table style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
                             <td style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
                                 <h1 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 36px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">{{ student.fullName }} est intéressé{% if student.gender == "female" %}e{% endif %} par votre offre</h1>
-                                <p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">Votre offre « <strong style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">{{ offer.title }}</strong> » intéresse {{ student.firstName }}</p>
+                                <p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">Votre offre « <strong style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">{{ offer.title }}</strong> » intéresse {{ student.firstName }}. {% if student.cv %}De plus,
+                                        {% if student.gender == "male" %}il{% else %}elle{% endif %} possède un CV. N'hésitez pas à le télécharger ! (disponible en <strong>pièce jointe</strong>){% endif %}</p>
                                 {% if student.description %}
                                     <h2 style="font-family: 'Lato', 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 28px; line-height: 1.2em; color: #111111; font-weight: 500; margin: 40px 0 10px; padding: 0;">Comment je me décrirai ?</h2>
                                     <p style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">&laquo; {{ student.description }}  &raquo;</p>
@@ -72,6 +73,7 @@
                                 {% if student.linkedin or student.viadeo %}
                                     {% if student.gender == "male" %}Le{% else %}La{% endif %} suivre sur {% if student.linkedin %}<a href="{{ student.linkedin }}" target="_blank"  style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; color: #348eda; margin: 0; padding: 0;">LinkedIn</a>{% endif %} {% if student.viadeo %}<a href="{{ student.viadeo }}" target="_blank"  style="font-family: 'Lato', 'Robot', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; color: #348eda; margin: 0; padding: 0;">Viadeo</a>{% endif %}
                                 {% endif %}
+
 
                             </td>
                         </tr></table>
