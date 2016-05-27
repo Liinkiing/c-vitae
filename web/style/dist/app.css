@@ -39097,6 +39097,13 @@ p.subtitle {
   transition: all 0.6s;
 }
 
+#map {
+  margin: 0 0 40px 0;
+  width: 100%;
+  height: 600px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.24);
+}
+
 .generic-card {
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.26);
