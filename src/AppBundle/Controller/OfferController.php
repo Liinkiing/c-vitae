@@ -85,7 +85,6 @@ class OfferController extends Controller
      */
     public function offerAddAction(Request $request)
     {
-        if ($this->getUser() != null && !in_array('ROLE_ADMIN', $this->getUser()->getRoles())) throw new AccessDeniedException();
         if ($request->getMethod() == "GET") {
             if (!$this->getUser()) $this->addFlash("info", "Votre offre ne sera pas instantanément disponible. Elle sera soumise à approbation");
             return $this->render('offer/add.html.twig');
@@ -116,10 +115,14 @@ class OfferController extends Controller
             $em->persist($offer);
             $em->flush();
             if (!$offer->getIsActive()) {
+                $adminMails = [];
+                foreach($this->getDoctrine()->getRepository('AppBundle:Student')->findAllAdmins() as $student){
+                    array_push($adminMails, $student->getProfessionalMail());
+                }
                 $message = \Swift_Message::newInstance();
                 $message->setSubject("Approbation d'une nouvelle offre !")
                     ->setFrom([$this->get('twig')->getGlobals()['contact_mail'] => $this->get('twig')->getGlobals()['site_name']])
-                    ->setTo("omar.jbara2@gmail.com")
+                    ->setTo($adminMails)
                     ->setBody($this->renderView("mails/validate_offer.html.twig", ['offer' => $offer, 'ip' => $request->getClientIp()]), 'text/html');
                 $this->get('mailer')->send($message);
                 $this->addFlash('success', "L'offre a été ajouté et est en cours d'approbation. Un mail vous préviendra lorsque celle ci aura été accepté !");

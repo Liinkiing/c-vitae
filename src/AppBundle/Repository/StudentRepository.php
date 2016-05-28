@@ -13,6 +13,23 @@ use AppBundle\Entity\Student;
 class StudentRepository extends \Doctrine\ORM\EntityRepository
 {
 
+
+    /**
+     * @return Student[]
+     */
+    public function findAllAdmins(){
+        $adminRole = $this->getEntityManager()->getRepository('AppBundle:Role')->findOneBy(['role' => 'ROLE_ADMIN']);
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        return $qb->select('student')
+            ->from('AppBundle:Student', 'student')
+            ->where(':role MEMBER OF student.roles')->setParameter(':role', $adminRole->getId())
+            ->orderBy('student.lastName')
+            ->getQuery()
+            ->getResult();
+        
+
+    }
+
     /**
      * @return Student[]
      */
