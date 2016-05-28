@@ -180,6 +180,10 @@ class OfferController extends Controller
     public function activateOfferAction(Request $request, Offer $offer)
     {
         if (!$offer) throw new NotFoundHttpException();
+        if($offer->getIsActive()){
+            $this->addFlash("info", "L'offre a déjà été activé !");
+            return $this->redirectToRoute('offers_index');
+        }
         $offer->setIsActive(true);
         $this->getDoctrine()->getManager()->flush();
         $message = \Swift_Message::newInstance();
