@@ -1,4 +1,4 @@
-{% embed 'base.html.twig' with {'title': offer.title, 'subtitle': offer.entreprise,
+{% embed 'base.html.twig' with {'title': offer.entreprise, 'subtitle': offer.title,
 'isFullscreen': 1, 'randomHeaderColors': 1} %}
 
     {% block stylesheets %}
@@ -98,10 +98,10 @@
                             </div>
                         </div>
                         <div class="twelve wide column">
-                            <div class="map">
-                                <div id="map"></div>
-                                <hr>
-                            </div>
+                            {#<div class="map">#}
+                                {#<div id="map"></div>#}
+                                {#<hr>#}
+                            {#</div>#}
                             {{ offer.description|raw }}
                         </div>
                     </div>
@@ -160,7 +160,6 @@
                 async defer></script>
         <script>
             function initMap() {
-                var mapDiv = document.getElementById('map');
                 var latitude, longitude = 0;
                 var json = $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address={{ offer.localisation }}", null, function(data){
                     if(data.results.length > 0){
@@ -169,7 +168,9 @@
                         longitude = data.results[0].geometry.location.lng;
                         console.log(latitude);
                         var offerLocalisation = {lat: latitude, lng: longitude};
-
+                        $('.generic-card').children('header').after('<div id="map"></div>');
+                        $('.generic-card').children('header').remove();
+                        var mapDiv = document.getElementById('map');
                         var map = new google.maps.Map(mapDiv, {
                             center: offerLocalisation,
                             disableDoubleClickZoom: true,
@@ -178,7 +179,9 @@
                             maxZoom: 18,
                             zoom: 18
                         });
-
+                        $('.before-scroll').addClass('map-nav');
+                        var html = '<div class="map-header"><h1>{{ offer.entreprise }}</h1><p class="subtitle">{{ offer.title }}</p></div>';
+                        $('#map').prepend(html);
                         var marker = new google.maps.Marker({
                             animation: google.maps.Animation.DROP,
                             position: offerLocalisation,
@@ -186,8 +189,6 @@
                             title: '{{ offer.entreprise }}'
                         });
 
-                    } else {
-                        $('.map').remove();
                     }
 
                 })

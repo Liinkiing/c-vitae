@@ -53,13 +53,13 @@
         var scrollPos = $(window).scrollTop();
 
         var navbar = $('nav.nav');
-        var limitElem = $('.greetings, .generic-card.fullscreen > header');
+        var limitElem = $('.greetings, .generic-card.fullscreen > header, #map');
         var limit = limitElem.offset().top + limitElem.outerHeight();
         var position = Math.round($(window).scrollTop());
 
         if(position < limit - 65)
         {
-            $('.greetings header, .generic-card.fullscreen > header > div').css({
+            $('.greetings header, .generic-card.fullscreen > header > div, .map-header').css({
                 'position': 'relative',
                 'left': 0,
                 'top': (scrollPos * 0.55) + "px",

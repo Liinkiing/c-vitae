@@ -287,7 +287,6 @@ p.subtitle {
     height: $nav-height;
 }
 
-
 .features {
 
     & header {
@@ -330,10 +329,7 @@ p.subtitle {
             z-index: 1;
         }
 
-
     }
-
-
 
     .content {
         background-color: $dark-color;
@@ -374,7 +370,6 @@ p.subtitle {
 }
 
 #map {
-    margin: 0 0 40px 0;
     width: 100%;
     height: 600px;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.24);
@@ -509,6 +504,10 @@ pre:not(.CodeMirror-line) {
         border-bottom: none;
         background: transparent;
         box-shadow: none;
+        &.map-nav {
+            background: rgba(0, 0, 0, 0.34);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
         & div.brand-image {
             background: url('../img/logo.png');
             height: 70px;
@@ -791,7 +790,6 @@ a.student-link:hover {
     margin-bottom: 20px;
 }
 
-
 .buttons {
     float: right;
 }
@@ -918,7 +916,6 @@ section.information > .row-flex:first-of-type {
 .ui.modal p {
     color: black;
 }
-
 
 form {
     & .group {
@@ -1094,9 +1091,6 @@ form {
     }
 }
 
-
-
-
 .subtitle.search {
     background-color: rgba(0, 0, 0, 0.5);
     width: 700px;
@@ -1172,4 +1166,21 @@ ul.datas, ul.students {
     border-right: 1px solid #434b55;
     padding-right: 20px;
 
+}
+
+#map {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.map-header {
+    margin: 0 auto;
+    position: relative;
+    z-index: 50;
+    padding: 40px;
+    width: 500px;
+    background-color: rgba(0, 0, 0, 0.38);
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
 }
