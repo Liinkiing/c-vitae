@@ -181,7 +181,7 @@ class OfferController extends Controller
     {
         if (!$offer) throw new NotFoundHttpException();
         if($offer->getIsActive()){
-            $this->addFlash("info", "L'offre a déjà été activé !");
+            $this->addFlash("info", "L'offre a déjà été activée !");
             return $this->redirectToRoute('offers_index');
         }
         $offer->setIsActive(true);
