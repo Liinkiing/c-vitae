@@ -1,4 +1,4 @@
-{% embed 'base.html.twig' with {'title': 'Erreur 404', 'subtitle': 'Page not fou... non wallah je suis pas une erreur traditionnel jsuis anticonformiste', 'isFullscreen': 1} %}
+{% embed 'base.html.twig' with {'title': 'Erreur 404', 'subtitle': 'Page indisponible', 'isFullscreen': 1} %}
 
 {% block body %}
     <div class="container fullscreen">
@@ -10,7 +10,7 @@
             </header>
             <div class="content-site fullscreen">
 
-                Tu t'es perdu parce que la page n'existe pas, désolé de te décevoir. Choqué et déçu de ton comportement.
+                La page à laquelle vous essayez d'accéder n'existe pas !
                 <a href="{{ path('homepage') }}" class="btn btn-alt btn-medium"><i class="fa fa-home">&nbsp;&nbsp;</i> Retourner à l'accueil</a>
             </div>
 

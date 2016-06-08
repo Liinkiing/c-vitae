@@ -1,4 +1,4 @@
-{% embed 'base.html.twig' with {'title': 'Erreur 403', 'subtitle': "T'a vraiment cru t'avais accès à cette page petit coquin ?", 'isFullscreen': 1} %}
+{% embed 'base.html.twig' with {'title': 'Erreur 403', 'subtitle': "Accès refusé", 'isFullscreen': 1} %}
 
 {% block body %}
     <div class="container fullscreen">
@@ -10,7 +10,7 @@
             </header>
             <div class="content-site fullscreen">
 
-                Tu n'as pas les droits requis pour accéder à cette page (tu vois, les permissions ça sert à un truc). Je te conseillerai qu'une chose : 
+                Vous ne disposez pas des droits requis pour accéder à cette page
                 <a href="{{ path('homepage') }}" class="btn btn-alt btn-medium"><i class="fa fa-home">&nbsp;&nbsp;</i> Retourner à l'accueil</a>
             </div>
 
