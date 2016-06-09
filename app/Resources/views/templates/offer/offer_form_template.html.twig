@@ -13,7 +13,6 @@
             <input accept="image/*" type="file" name="offer[image]" id="image">
             {% if editMode and offer.imageUrl %}
                 <form class="no-margin" action="{{ path('admin_delete_offer_image', {'id': offer.id }) }}" method="post">
-                    <input type="hidden" name="p" value="{{ app.request.get('p') }}">
                 <button type="submit" class="btn btn-danger btn-medium">Supprimer
                     l'image</button>
                 </form>

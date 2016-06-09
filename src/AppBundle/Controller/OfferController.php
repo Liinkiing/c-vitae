@@ -249,6 +249,6 @@ class OfferController extends Controller
         $offer->setImageUrl(null);
         $this->getDoctrine()->getEntityManager()->flush();
         $this->addFlash("success", "L'image a bien été supprimé !");
-        return $this->redirectToRoute("admin_offer_edit", ['id' => $offer->getId(), 'p' => $request->get('p')]);
+        return $this->redirectToRoute("offers_index");
     }
 }
