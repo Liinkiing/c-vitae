@@ -99,8 +99,8 @@
                         </div>
                         <div class="twelve wide column">
                             {#<div class="map">#}
-                                {#<div id="map"></div>#}
-                                {#<hr>#}
+                            {#<div id="map"></div>#}
+                            {#<hr>#}
                             {#</div>#}
                             {{ offer.description|raw }}
                         </div>
@@ -108,28 +108,38 @@
 
                     {% if app.user and is_granted('ROLE_ADMIN') %}
 
-                    <hr>
-                    <div class="buttons">
-                        <a class="btn btn-info btn-medium" href="{{ path('admin_offer_edit', {'id': offer.id }) }}"><i
-                                    class="fa fa-edit">&nbsp;&nbsp;</i>Éditer l'offre</a>
-                    </div>
-                    <hr>
-                    <div class="ui grid">
-                        <div class="sixteen wide column">
-                            {% if offer.studentsPostuled|length > 0 %}
-                                <h3>Listes des élèves ayant postulés pour cette offre</h3>
-                                <ul class="students">
-                                    {% for student in offer.studentsPostuled %}
-                                        <li><a href="{{ path('profile', {'username': student }) }}">{{ student }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-
-                            {% else %}
-                                <h3>Aucun élève n'a encore postulé pour cette offre</h3>
-                            {% endif %}
+                        <hr>
+                        <div class="buttons">
+                            <a class="btn btn-info btn-medium" href="{{ path('admin_offer_edit', {'id': offer.id}) }}"><i
+                                        class="fa fa-edit">&nbsp;&nbsp;</i>Éditer l'offre</a>
                         </div>
-                        {% endif %}
+                        <hr>
+                        <div class="ui grid">
+                            <div class="sixteen wide column">
+                                {% if offer.studentsPostuled|length > 0 %}
+                                    <h3>Listes des élèves ayant postulés pour cette offre</h3>
+                                    <ul class="students">
+                                        {% for student in offer.studentsPostuled %}
+                                            <li><a href="{{ path('profile', {'username': student }) }}">{{ student }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+
+                                {% else %}
+                                    <h3>Aucun élève n'a encore postulé pour cette offre</h3>
+                                {% endif %}
+                            </div>
+
+                    {% elseif (app.user and not is_granted('ROLE_ADMIN')) or (not app.user) %}
+                        <hr>
+                        <div class="buttons">
+                            <form id="editOffer" action="{{ path('admin_offer_edit', {'id': offer.id}) }}" method="get">
+                                <input type="hidden" name="p" value="">
+                            <button class="btn btn-info btn-medium" type="submit"><i
+                                        class="fa fa-edit">&nbsp;&nbsp;</i>Éditer l'offre</button>
+                            </form>
+                        </div>
+                    {% endif %}
                     </div>
 
 
@@ -161,8 +171,8 @@
         <script>
             function initMap() {
                 var latitude, longitude = 0;
-                var json = $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address={{ offer.localisation }}", null, function(data){
-                    if(data.results.length > 0){
+                var json = $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address={{ offer.localisation }}", null, function (data) {
+                    if (data.results.length > 0) {
                         console.log(data.results[0].geometry.location);
                         latitude = data.results[0].geometry.location.lat;
                         longitude = data.results[0].geometry.location.lng;
@@ -194,6 +204,15 @@
                 })
             }
         </script>
+        <script>
+            $('#editOffer').submit(function(){
+                var password = window.prompt("Veuillez entrer le mot de passe de l'offre");
+                if(password == "" || password == undefined){
+                    return false;
+                }
+                $(this).find('input[name="p"]').val(password);
+            });
+        </script>
 
         {% if app.user and not offer.hasPostuled(app.user) %}
             <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
@@ -215,11 +234,11 @@
                 });
 
                 function handleForm(hasMessage, hasCV) {
-                    if(!hasMessage){
+                    if (!hasMessage) {
                         simplemde.value('');
                     }
                     $('#formOffer').submit();
-                    if(hasCV){
+                    if (hasCV) {
                         $('#uploadingModal').modal('setting', 'closable', false).modal('show')
                     }
                 }

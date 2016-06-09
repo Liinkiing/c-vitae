@@ -31,6 +31,9 @@
                     <form action="" method="post" enctype="multipart/form-data">
                        {% embed 'templates/offer/offer_form_template.html.twig' with {'editMode': true, 'offer': offer } %}{% endembed %}
                     </form>
+                    <form class="no-margin" action="{{ path('delete_offer', {'id': offer.id }) }}" method="post">
+                        <button type="submit" class="btn btn-danger btn-medium"><i class="fa fa-times">&nbsp;&nbsp;</i>Supprimer</button>
+                    </form>
 
                 </div>
             </div>

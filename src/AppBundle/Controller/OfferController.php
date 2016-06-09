@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Offer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Swift_Attachment;
@@ -116,7 +117,7 @@ class OfferController extends Controller
             $em->flush();
             if (!$offer->getIsActive()) {
                 $adminMails = [];
-                foreach($this->getDoctrine()->getRepository('AppBundle:Student')->findAllAdmins() as $student){
+                foreach ($this->getDoctrine()->getRepository('AppBundle:Student')->findAllAdmins() as $student) {
                     array_push($adminMails, $student->getProfessionalMail());
                 }
                 $message = \Swift_Message::newInstance();
@@ -134,16 +135,34 @@ class OfferController extends Controller
     }
 
 
+
     /**
-     * @Route("/admin/offers/edit/{id}", name="admin_offer_edit")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Route("/offers/edit/{id}", name="admin_offer_edit")
      */
     public function editOfferAction(Request $request, $id)
     {
+
         $offer = $this->getDoctrine()->getRepository('AppBundle:Offer')->find($id);
         if (!$offer) throw $this->createNotFoundException();
+        $student = $this->get('security.token_storage')->getToken()->getUser();
         if ($request->getMethod() == "GET") {
-            return $this->render('offer/edit.html.twig', ['offer' => $offer]);
+            if($offer->getIsActive() == false && ($student == "anon." || !$student->isGranted('ROLE_ADMIN'))){
+                $this->addFlash('danger', "L'offre n'a pas encore été approuvé ! Veuillez patienter.");
+                return $this->redirectToRoute('offers_index');
+            }
+            if($student == "anon." || !$student->isGranted('ROLE_ADMIN')){
+
+                if ($request->get('p') == $offer->getPassword()) {
+                    return $this->render('offer/edit.html.twig', ['offer' => $offer]);
+                } else {
+                    $this->addFlash('danger', 'Le mot de passe entrée ne correspond pas à celui de l\'offre !');
+                    return $this->redirectToRoute('offer_show', ['id' => $offer->getId()]);
+
+                }
+            } else {
+                return $this->render('offer/edit.html.twig', ['offer' => $offer]);
+
+            }
         } else {
             $parsedown = new \Parsedown();
             $offer->setTitle($request->get('offer')['title']);
@@ -171,6 +190,7 @@ class OfferController extends Controller
             $this->addFlash("success", "L'offre a bien été mise à jour !");
             return $this->redirectToRoute('offer_show', ['id' => $offer->getId()]);
         }
+
     }
 
     /**
@@ -180,17 +200,20 @@ class OfferController extends Controller
     public function activateOfferAction(Request $request, Offer $offer)
     {
         if (!$offer) throw new NotFoundHttpException();
-        if($offer->getIsActive()){
+        if ($offer->getIsActive()) {
             $this->addFlash("info", "L'offre a déjà été activée !");
             return $this->redirectToRoute('offers_index');
         }
         $offer->setIsActive(true);
+        $password = $this->get('app.utilities')->generateRandomString(60);
+        $offer->setPassword($password);
         $this->getDoctrine()->getManager()->flush();
+
         $message = \Swift_Message::newInstance();
         $message->setSubject("Votre offre a été approuvé !")
             ->setFrom([$this->get('twig')->getGlobals()['contact_mail'] => $this->get('twig')->getGlobals()['site_name']])
             ->setTo($offer->getContact())
-            ->setBody($this->renderView("mails/offer_validated.html.twig", ['offer' => $offer]), 'text/html');
+            ->setBody($this->renderView("mails/offer_validated.html.twig", ['offer' => $offer, 'password' => $password]), 'text/html');
         $this->get('mailer')->send($message);
         $this->addFlash('success', "L'offre n°" . $offer->getId() . " a bien été activé !");
         return $this->redirectToRoute("offers_index");
@@ -198,7 +221,7 @@ class OfferController extends Controller
 
     /**
      * @Route("/offers/delete/{id}", name="delete_offer")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Method({"POST"})
      */
     public function deleteOfferAction(Request $request, Offer $offer)
     {
@@ -206,7 +229,12 @@ class OfferController extends Controller
         $this->getDoctrine()->getManager()->remove($offer);
         $this->getDoctrine()->getManager()->flush();
         $this->addFlash("success", "L'offre a bien été supprimé !");
-        return $this->redirectToRoute("admin_offer_index");
+        $student = $this->get('security.token_storage')->getToken()->getUser();
+        if($student != "anon." && $student->isGranted('ROLE_ADMIN')){
+            return $this->redirectToRoute("admin_offer_index");
+        } else {
+            return $this->redirectToRoute('offers_index');
+        }
     }
 
     /**

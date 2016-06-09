@@ -52,6 +52,11 @@ class Offer implements NamerInterface
     private $imageFile;
 
     /**
+     * @ORM\Column(name="password", type="string", length=60, nullable=true)
+     */
+    private $password;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="published_at", type="datetime")
@@ -514,5 +519,21 @@ class Offer implements NamerInterface
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 }

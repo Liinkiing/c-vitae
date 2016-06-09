@@ -1166,6 +1166,9 @@ ul.datas, ul.students {
   flex-direction: column;
   justify-content: center; }
 
+.no-margin {
+  margin: 0; }
+
 .map-header {
   margin: 0 auto;
   position: relative;
@@ -1175,5 +1178,8 @@ ul.datas, ul.students {
   background-color: rgba(0, 0, 0, 0.38);
   border-radius: 5px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.35); }
+
+td .inline-form {
+  margin: 0; }
 
 /*# sourceMappingURL=app.css.map */

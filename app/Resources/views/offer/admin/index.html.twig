@@ -42,7 +42,10 @@
                                             href="{{ path('activate_offer', {'id': offer.id }) }}">Activer</a>){% endif %}</td>
                                 <td class="actions">
                                     <a class="btn btn-info" href="{{ path('admin_offer_edit', {'id': offer.id }) }}"><i class="fa fa-edit">&nbsp;&nbsp;</i>Éditer</a>
-                                    <a class="btn btn-danger" href="{{ path('delete_offer', {'id': offer.id }) }}"><i class="fa fa-times">&nbsp;&nbsp;</i>Supprimer</a></td>
+                                    <form class="inline-form" action="{{ path('delete_offer', {'id': offer.id }) }}" method="post">
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-times">&nbsp;&nbsp;</i>Supprimer</button>
+                                    </form>
+                                </td>
                                 </tr>
                             {% endfor %}
                         {% endif %}
