@@ -11,7 +11,7 @@
         <div class="eight wide column centered">
             <label for="image">Choissisez une image</label>
             <input accept="image/*" type="file" name="offer[image]" id="image">
-            {% if is_granted('ROLE_ADMIN') editMode and offer.imageUrl %}
+            {% if is_granted('ROLE_ADMIN') and editMode and offer.imageUrl %}
                 <a class="btn btn-danger btn-medium" href="{{ path('admin_delete_offer_image', {'id': offer.id }) }}">Supprimer
                     l'image</a>
             {% endif %}
