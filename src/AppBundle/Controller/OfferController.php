@@ -101,6 +101,7 @@ class OfferController extends Controller
             $offer->setRemuneration($request->get('offer')['remuneration']);
             $offer->setTypeContrat($request->get('offer')['type_contrat']);
             $offer->setLocalisation($request->get('offer')['localisation']);
+            $offer->setPassword($this->get('app.utilities')->generateRandomString(60));
             $offer->setContact($request->get('offer')['contact']);
             if (array_key_exists('is_active', $request->get('offer'))) $offer->setIsActive($request->get('offer')['is_active']);
             $offer->setEntreprise($request->get('offer')['entreprise']);
