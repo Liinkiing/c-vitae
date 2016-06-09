@@ -12,10 +12,8 @@
             <label for="image">Choissisez une image</label>
             <input accept="image/*" type="file" name="offer[image]" id="image">
             {% if editMode and offer.imageUrl %}
-                <form class="no-margin" action="{{ path('admin_delete_offer_image', {'id': offer.id }) }}" method="post">
-                <button type="submit" class="btn btn-danger btn-medium">Supprimer
-                    l'image</button>
-                </form>
+                <a class="btn btn-danger btn-medium" href="{{ path('admin_delete_offer_image', {'id': offer.id }) }}">Supprimer
+                    l'image</a>
             {% endif %}
         </div>
 

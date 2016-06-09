@@ -240,7 +240,7 @@ class OfferController extends Controller
 
     /**
      * @Route("/offers/delete/image/{id}", name="admin_delete_offer_image")
-     * @Method({"POST"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteOfferImageAction(Request $request, Offer $offer)
     {
