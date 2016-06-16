@@ -28,7 +28,7 @@
                     <div class="feature">
                         <div class="icon-container"><i class="fa fa-2x fa-{{ feature.icon }}"></i></div>
                         <h3>{{ feature.name }}</h3>
-                        <p>{{ feature.content }}</p>
+                        <p>{{ feature.content|raw }}</p>
                     </div>
 
                 {% endfor %}
