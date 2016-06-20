@@ -9,39 +9,39 @@
             <div class="generic-card {% if isFullscreen %} fullscreen {% endif %}">
                 <header>
                     <div><h1>{{ title }}</h1>
-                    <p class="subtitle {% if search|default(false) %}search{% endif %}">
-                        {% if search|default(false) %}
-                            Résultat de votre recherche ({{ students|length }} étudiant{% if students|length > 1 %}s{% endif %})
-                            <br/>
-                            {% if app.request.get('gender') and app.request.get('gender') != 'both' %}<br><span
-                                    class="bold">Sexe</span> : {{ app.request.get('gender')|str_replace('female', 'Féminin')|str_replace('male', 'Masculin') }} {% endif %}
-                            {% if app.request.get('age') %}<br><span
-                                    class="bold">Âge</span> : {{ app.request.get('age') }} ans {% endif %}
-                            {% if app.request.get('bac') %}<br><span
-                                    class="bold">Bac</span> : {{ app.request.get('bac')|join(', ') }} {% endif %}
-                            {% if app.request.get('group') %}<br><span
-                                    class="bold">Groupe de TP</span> : {{ app.request.get('group')|join(', ') }} {% endif %}
-                            {% if app.request.get('role') %}<br><span
-                                    class="bold">Rôle</span> : {{ app.request.get('role')|join(', ') }} {% endif %}
-                            {% if app.request.get('prog_lang') %}<br><span
-                                    class="bold">Langages informatique</span> : {{ app.request.get('prog_lang')|join(', ') }} {% endif %}
-                            {% if app.request.get('langs') %}<br><span
-                                    class="bold">Langues maîtrisés</span> : {{ app.request.get('langs')|join(', ') }} {% endif %}
-                            {% if app.request.get('cv') or app.request.get('linkedin') or app.request.get('viadeo') %}
-                                <br><span
-                                    class="bold">Possédant</span>{% if app.request.get('cv') %} un CV {% endif %}{% if app.request.get('linkedin') %}
-                                <i class="fa fa-linkedin"></i> {% endif %}
-                                {% if app.request.get('viadeo') %}  <i class="fa fa-viadeo"></i> {% endif %}
-                            {% endif %}
-                            {% if app.request.get('sort') or app.request.get('by') %}<br>Tri <span
-                                    class="bold">{{ app.request.get('sort')|str_replace('asc', 'croissant')|str_replace('desc', 'décroissant') }}</span> selon
-                                <span class="bold">{{ app.request.get('by')|default('le nom de famille')
-                                    |str_replace('lastName', 'le nom de famille')|str_replace('age', "l'âge")|str_replace('firstName', 'le prénom')|str_replace('birthday', 'la date de naissance')|
-                                    str_replace('groupeTp', 'le groupe de TP')|join(', ') }}</span> {% endif %}
+                        <p class="subtitle {% if search|default(false) %}search{% endif %}">
+                            {% if search|default(false) %}
+                                Résultat de votre recherche ({{ students|length }} étudiant{% if students|length > 1 %}s{% endif %})
+                                <br/>
+                                {% if app.request.get('gender') and app.request.get('gender') != 'both' %}<br><span
+                                        class="bold">Sexe</span> : {{ app.request.get('gender')|str_replace('female', 'Féminin')|str_replace('male', 'Masculin') }} {% endif %}
+                                {% if app.request.get('age') %}<br><span
+                                        class="bold">Âge</span> : {{ app.request.get('age') }} ans {% endif %}
+                                {% if app.request.get('bac') %}<br><span
+                                        class="bold">Bac</span> : {{ app.request.get('bac')|join(', ') }} {% endif %}
+                                {% if app.request.get('group') %}<br><span
+                                        class="bold">Groupe de TP</span> : {{ app.request.get('group')|join(', ') }} {% endif %}
+                                {% if app.request.get('role') %}<br><span
+                                        class="bold">Rôle</span> : {{ app.request.get('role')|join(', ') }} {% endif %}
+                                {% if app.request.get('prog_lang') %}<br><span
+                                        class="bold">Langages informatique</span> : {{ app.request.get('prog_lang')|join(', ') }} {% endif %}
+                                {% if app.request.get('langs') %}<br><span
+                                        class="bold">Langues maîtrisés</span> : {{ app.request.get('langs')|join(', ') }} {% endif %}
+                                {% if app.request.get('cv') or app.request.get('linkedin') or app.request.get('viadeo') %}
+                                    <br><span
+                                        class="bold">Possédant</span>{% if app.request.get('cv') %} un CV {% endif %}{% if app.request.get('linkedin') %}
+                                    <i class="fa fa-linkedin"></i> {% endif %}
+                                    {% if app.request.get('viadeo') %}  <i class="fa fa-viadeo"></i> {% endif %}
+                                {% endif %}
+                                {% if app.request.get('sort') or app.request.get('by') %}<br>Tri <span
+                                        class="bold">{{ app.request.get('sort')|str_replace('asc', 'croissant')|str_replace('desc', 'décroissant') }}</span> selon
+                                    <span class="bold">{{ app.request.get('by')|default('le nom de famille')
+                                        |str_replace('lastName', 'le nom de famille')|str_replace('age', "l'âge")|str_replace('firstName', 'le prénom')|str_replace('birthday', 'la date de naissance')|
+                                        str_replace('groupeTp', 'le groupe de TP')|join(', ') }}</span> {% endif %}
 
-                        {% else %}
-                            {{ subtitle }}
-                        {% endif %}</p></div>
+                            {% else %}
+                                {{ subtitle }}
+                            {% endif %}</p></div>
                 </header>
                 <div class="content-site {% if isFullscreen %} fullscreen {% endif %}student-list">
                     {% autoescape false %}
@@ -220,18 +220,19 @@
                         </div>
                     </div>
                     {% if students|length != 0 %}
-                        {% for student in students %}
-                            {% if loop.index0 % studentPerRow == 0 %}<div class="row"><div class="ui special cards">{% endif %}
-                            {% embed 'templates/student/student_card.html.twig' with {'student': student} %}{% endembed %}
-                            {% if loop.index % studentPerRow == 0 %}</div></div>{% endif %}
-                        {% endfor %}
-                    {% else %}
-                        <h1 style="text-align: center;">La recherche n'a donné aucun résultat ! Veuillez réessayer avec
-                            d'autres critères.</h1>
-                    {% endif %}
+                    {% for student in students %}
+                        {% if loop.index0 % studentPerRow == 0 %}<div class="row"><div class="ui special cards">{% endif %}
+                        {% embed 'templates/student/student_card.html.twig' with {'student': student} %}{% endembed %}
+                        {% if loop.index % studentPerRow == 0 %}</div></div>{% endif %}
+                    {% endfor %}
                 </div>
+                {% else %}
+                    <h1 style="text-align: center;">La recherche n'a donné aucun résultat ! Veuillez réessayer avec
+                        d'autres critères.</h1>
+                {% endif %}
             </div>
-
+        </div>
+        </div>
         </div>
 
 
@@ -285,7 +286,8 @@
             <style>
                 .generic-card header {
                     background: url("{{ asset('img/overlay.png') }}"), url("{{ asset('img/svg/header-bg.svg') }}"), linear-gradient(45deg, {{ generateColor() }} 20%, {{ generateColor() }} 80%) center, center, center;
-                    {% if isFullscreen|default(false) %} background-attachment: fixed; {% endif %}
+                {% if isFullscreen|default(false) %} background-attachment: fixed;
+                {% endif %}
 
                 }
 
