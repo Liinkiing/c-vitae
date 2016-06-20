@@ -4,7 +4,7 @@
     {% if editMode and offer.imageUrl %}
 <div class="offer-picture">
     <img src="{{ base_upload_url }}{{ vich_uploader_asset(offer, "imageFile") }}" alt="">
-
+</div>
     {% endif %}
     <div class="ui grid">
 
@@ -63,13 +63,13 @@
 
         <div class="six wide column">
             <div class="group">
-                <select name="offer[type_contrat]" type="text" required>
+                <select name="offer[type_contrat]" required>
                     <option value="Stage conventionné"
                             {% if editMode and offer.typeContrat == "Stage conventionné" %}selected{% endif %}>Stage
                         conventionné
                     </option>
                     <option value="Contrat à durée déterminé"
-                            {% if editMode and offer.typeContrat == "Contrat à durée déterminé" %}selected{% endif %}">
+                            {% if editMode and offer.typeContrat == "Contrat à durée déterminé" %}selected{% endif %}>
                         Contrat à durée déterminé
                     </option>
                     <option value="Contrat à durée indeterminé"
