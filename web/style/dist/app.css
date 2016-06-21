@@ -39919,6 +39919,10 @@ ul.students li:last-of-type {
   padding-right: 20px;
 }
 
+span.red {
+  color: #c03535;
+}
+
 #map {
   display: flex;
   flex-direction: column;

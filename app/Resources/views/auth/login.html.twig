@@ -19,6 +19,9 @@
                             <div class="alert alert-success">{{ message_success }}</div>
                         {% endfor %}
                     {% endautoescape %}
+                    <div class="alert alert-info">Par défaut, le nom d'utilisateur correspond à la première lettre de votre prénom, suivi des 7 autres lettres de votre
+                        nom de famille. Lors de votre première connexion, le mot de passe est le même que votre nom d'utilisateur.
+                        <br><span class="red">Modifiez-le après votre connexion</span></div>
                     <form action="{{ path('login') }}" method="post">
                         <input type="hidden" name="_target_path" value="{{ path('my_profile') }}"/>
                         <input type="hidden" name="_csrf_token"
