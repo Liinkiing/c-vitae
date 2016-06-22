@@ -93,13 +93,13 @@ class AdminController extends Controller
                 $student->removeRole($role);
             }
             if($this->get('security.token_storage')->getToken()->getUsername() != 'ojbara' && $student->getUsername() == 'ojbara'){
-                $this->addFlash('danger', 'Vous ne pouvez pas modifier les permissions du grand Omar. Seul Omar le peut. Dsl de te déçevoir');
+                $this->addFlash('danger', 'Vous ne pouvez pas modifier les permissions d'Omar. Seul Omar le peut.');
                 return $this->redirectToRoute('edit_profile', ['username' => $student->getUsername()]);
             }
             foreach ($rolesId as $roleId) {
                 $tempRole = $this->getDoctrine()->getRepository(Role::class)->find($roleId);
                 if ($tempRole->getName() == "L'admashallah" && !$canBeAdmashallah) {
-                    $this->addFlash('danger', "Si tu ne sais pas lire, y'a que Omar (ojbara) qui peut devenir Admashallah. FDP lis mieux la prochaine fois");
+                    $this->addFlash('danger', "Seul Omar peut devenir Admashallah");
                     return $this->redirectToRoute('edit_profile', ['username' => $student->getUsername()]);
                 }
                 $student->addRole($tempRole);
