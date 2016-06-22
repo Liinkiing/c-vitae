@@ -93,7 +93,7 @@ class AdminController extends Controller
                 $student->removeRole($role);
             }
             if($this->get('security.token_storage')->getToken()->getUsername() != 'ojbara' && $student->getUsername() == 'ojbara'){
-                $this->addFlash('danger', 'Vous ne pouvez pas modifier les permissions d'Omar. Seul Omar le peut.');
+                $this->addFlash('danger', "Vous ne pouvez pas modifier les permissions d'Omar. Seul Omar le peut.");
                 return $this->redirectToRoute('edit_profile', ['username' => $student->getUsername()]);
             }
             foreach ($rolesId as $roleId) {
